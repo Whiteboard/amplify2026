@@ -386,6 +386,11 @@ body.comment-mode #cm-banner{display:flex}
 // Notifications email to the address configured on the Formspree form.
 var FORMSPREE_ID = 'mvzdaroe';
 
+// Google Apps Script web app endpoint — shared comments store.
+// Every browser POSTs new comments here and GETs all comments on load,
+// so all reviewers see all pins. Paste the deployed script URL.
+var SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxZq7Fh4bzMZu86jlaEIrzLnf1u-JPyqyamXlNuSKM9zUo2dx2_q_yI-1pxTLjoFH0W/exec';
+
 /* ==============================================================
    STATE
    ============================================================== */
@@ -542,6 +547,12 @@ function onIframeLoad(){
     var target = state.pendingScrollTo;
     state.pendingScrollTo = null;
     setTimeout(function(){ scrollToPin(target); }, 200);
+  }
+
+  // First iframe load — pull the shared comments from the sheet
+  if(!state.sheetLoaded){
+    state.sheetLoaded = true;
+    loadCommentsFromSheet();
   }
 }
 
@@ -743,8 +754,9 @@ cmForm.addEventListener('submit', function(e){
   updateCommentCount();
   renderPanel();
 
-  // POST to Formspree (if configured)
+  // POST to Formspree (email notification) + Google Sheets (shared store)
   submitToFormspree(comment);
+  submitToSheet(comment);
 
   closeModal();
 });
@@ -774,6 +786,69 @@ function submitToFormspree(comment){
   }).catch(function(err){
     console.warn('[WB Review] Formspree submit failed:', err);
   });
+}
+
+/* ==============================================================
+   GOOGLE SHEETS SYNC — shared comments store
+   ============================================================== */
+// Apps Script requires a "simple request" (no CORS preflight), so POSTs
+// use Content-Type: text/plain and send the JSON body as a raw string.
+function submitToSheet(comment){
+  if(!SHEETS_ENDPOINT) return;
+  fetch(SHEETS_ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({
+      id: comment.id,
+      page: comment.page,
+      type: comment.type,
+      text: comment.text,
+      name: comment.name || '',
+      selector: comment.selector,
+      xInEl: comment.xInEl,
+      yInEl: comment.yInEl,
+      created: comment.created
+    }),
+    redirect: 'follow'
+  }).catch(function(err){
+    console.warn('[WB Review] Sheet submit failed:', err);
+  });
+}
+
+function deleteFromSheet(id){
+  if(!SHEETS_ENDPOINT || !id) return;
+  fetch(SHEETS_ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({action:'delete', id: id}),
+    redirect: 'follow'
+  }).catch(function(err){
+    console.warn('[WB Review] Sheet delete failed:', err);
+  });
+}
+
+function loadCommentsFromSheet(){
+  if(!SHEETS_ENDPOINT) return Promise.resolve();
+  return fetch(SHEETS_ENDPOINT, {method:'GET', redirect:'follow'})
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var list = (data && data.comments) || [];
+      var grouped = {};
+      list.forEach(function(c){
+        if(!c || !c.page) return;
+        if(!grouped[c.page]) grouped[c.page] = [];
+        grouped[c.page].push(c);
+      });
+      // Sheet is source of truth — replace local state
+      state.allComments = grouped;
+      saveComments();
+      renderPins();
+      updateCommentCount();
+      renderPanel();
+    })
+    .catch(function(err){
+      console.warn('[WB Review] Sheet load failed, falling back to localStorage:', err);
+    });
 }
 
 function buildDeepLink(comment){
@@ -929,6 +1004,8 @@ function deleteComment(page, id){
   renderPins();
   updateCommentCount();
   renderPanel();
+  // Also remove from shared sheet
+  deleteFromSheet(id);
 }
 
 function goToComment(comment){
@@ -983,7 +1060,7 @@ function highlightPanelItem(id){
 }
 
 /* Panel open/close */
-function openPanel(){cpanel.classList.add('show')}
+function openPanel(){cpanel.classList.add('show'); loadCommentsFromSheet();}
 function closePanel(){cpanel.classList.remove('show')}
 cpClose.addEventListener('click', closePanel);
 
