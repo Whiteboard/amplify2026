@@ -1,0 +1,584 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:#46435D;min-height:100vh}
+
+/* SITE */
+#site{display:block}
+
+/* UTILITY BAR */
+.utility-bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;height:56px;background:white;border-bottom:0.5px solid #e8e8e8;position:sticky;top:0;z-index:300}
+.util-left{display:flex;align-items:center;gap:16px}
+.util-link{font-size:12px;color:#888;cursor:pointer;transition:color 0.1s;text-decoration:none}
+.util-link:hover{color:#46435D}
+.util-center{display:flex;align-items:center;justify-content:center;gap:10px}
+.logo-wordmark{font-size:24px;font-weight:700;color:#46435D;letter-spacing:-0.02em}
+.util-right{display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.util-sep{color:#ddd;font-size:10px}
+.search-field{display:flex;align-items:center;gap:6px;cursor:text}
+.search-icon{color:#bbb;font-size:14px}
+.search-placeholder{font-size:12px;color:#bbb}
+
+/* NAV */
+.nav-stage{display:flex;justify-content:center;align-items:center;padding:14px 32px;position:sticky;top:56px;z-index:200;pointer-events:none}
+.nav-group{display:inline-flex;align-items:center;gap:10px;position:relative;pointer-events:all}
+.island{background:white;border:0.5px solid #e0e0e0;border-radius:999px;display:inline-flex;align-items:center;gap:2px;padding:5px 8px;box-shadow:0 2px 16px rgba(0,0,0,0.08)}
+.nav-btn{background:none;border:none;padding:9px 18px;font-size:14px;color:#666;cursor:pointer;border-radius:999px;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:all 0.12s}
+.nav-btn:hover,.nav-btn.open{color:#46435D;background:#f5f4f8}
+.chevron{font-size:8px;color:#ccc;transition:transform 0.15s}
+.nav-btn.open .chevron{transform:rotate(180deg)}
+.demo-island{background:#46435D;border-radius:999px;padding:10px 22px;box-shadow:0 2px 16px rgba(70,67,93,0.25);cursor:pointer;transition:background 0.12s}
+.demo-island:hover{background:#5a576e}
+.demo-label{font-size:13px;font-weight:500;color:white}
+
+/* MEGA MENU */
+.mega{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:white;border:0.5px solid #e0e0e0;z-index:200;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.1);overflow:hidden;min-width:860px}
+.mega.show{display:block}
+.mega-inner{display:grid;grid-template-columns:1fr 2fr;min-height:380px}
+.left-panel{background:#f7f7f6;border-right:0.5px solid #ebebeb;padding:18px 0}
+.left-label{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;padding:0 16px 12px}
+.outcome-item{display:flex;align-items:center;justify-content:space-between;padding:9px 16px;cursor:pointer;font-size:14px;color:#666;border-left:2px solid transparent;transition:all 0.1s;line-height:1.3}
+.outcome-item:hover{color:#46435D;background:#f0efed;border-left-color:#ccc}
+.outcome-item.active{color:#46435D;background:white;border-left-color:#46435D;font-weight:600}
+.outcome-item .arr{font-size:11px;opacity:0;flex-shrink:0;margin-left:8px}
+.outcome-item.active .arr,.outcome-item:hover .arr{opacity:0.5}
+.outcome-item.active .arr{opacity:1}
+.left-divider{border:none;border-top:0.5px solid #ebebeb;margin:10px 0}
+.platform-btn{margin:0 12px 4px;padding:10px 14px;border:0.5px solid #e0e0e0;border-radius:10px;cursor:pointer;text-align:left;background:white;width:calc(100% - 24px);display:block;transition:all 0.12s}
+.platform-btn:hover{border-color:#46435D}
+.platform-btn-label{font-size:12px;font-weight:500;color:#46435D;display:block}
+.platform-btn-sub{font-size:11px;color:#aaa;margin-top:2px;display:block}
+.right-panel{padding:20px 22px;display:flex;flex-direction:column}
+.right-header{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+.outcome-desc{font-size:14px;color:#777;margin-bottom:14px;line-height:1.5;padding-bottom:14px;border-bottom:0.5px solid #f0f0f0}
+.bundle-banner{display:flex;align-items:center;gap:14px;padding:14px 18px;margin-bottom:14px;background:#eeedf4;border:0.5px solid #d8d6e6;border-radius:12px;cursor:pointer;transition:all 0.12s}
+.bundle-banner:hover{border-color:#46435D;box-shadow:0 4px 12px rgba(70,67,93,0.1)}
+.bundle-icon{width:36px;height:36px;border-radius:8px;background:#46435D;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;flex-shrink:0}
+.bundle-body{flex:1;min-width:0}
+.bundle-name{font-size:13px;font-weight:700;color:#46435D;margin-bottom:2px}
+.bundle-tagline{font-size:11px;color:#888;line-height:1.4}
+.bundle-cta{font-size:11px;font-weight:600;color:#46435D;white-space:nowrap;flex-shrink:0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.products-grid.all-grid{grid-template-columns:repeat(4,1fr)}
+.product-card{border:0.5px solid #ebebeb;border-radius:12px;padding:14px;cursor:pointer;transition:all 0.12s;background:white;display:flex;flex-direction:column}
+.product-card:hover{border-color:#46435D;transform:translateY(-2px);box-shadow:0 4px 12px rgba(70,67,93,0.1)}
+.product-icon{width:30px;height:30px;border-radius:7px;background:#f0f0f0;margin-bottom:9px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#999}
+.product-name{font-size:13px;font-weight:600;color:#46435D;margin-bottom:3px}
+.product-desc{font-size:11px;color:#aaa;line-height:1.4}
+.right-footer{margin-top:16px;padding-top:12px;border-top:0.5px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+.rf-label{font-size:12px;color:#aaa}
+.rf-link{font-size:12px;color:#46435D;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+.simple-panel{padding:20px 24px;min-width:260px}
+.s-section{margin-bottom:16px}
+.s-category{display:flex;align-items:center;justify-content:center;gap:8px;padding:6px 0;margin-bottom:4px}
+.s-cat-icon{width:26px;height:26px;border-radius:6px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.s-cat-label{font-size:14px;font-weight:700;color:#46435D}
+.s-item{font-size:14px;color:#666;padding:7px 0;cursor:pointer;border-bottom:0.5px solid #f5f5f5;transition:color 0.1s;display:block;text-align:center}
+.s-item:hover{color:#46435D}
+.s-item:last-child{border-bottom:none}
+
+/* LAYOUT */
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:72px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f7f6}
+.section.dark{background:#46435D}
+.section-center{text-align:center;max-width:600px;margin:0 auto 48px}
+.section-eyebrow{font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
+.section-eyebrow.light{color:rgba(255,255,255,0.5)}
+.section-h2{font-size:32px;font-weight:700;color:#1a1a1a;line-height:1.2;letter-spacing:-0.02em;margin-bottom:12px}
+.section-h2.light{color:white}
+.section-sub{font-size:16px;color:#888;line-height:1.6}
+.section-sub.light{color:rgba(255,255,255,0.6)}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 28px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;white-space:nowrap}
+.btn-white{background:white;color:#46435D}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.3)}.btn-ghost:hover{border-color:rgba(255,255,255,0.6);color:white}
+.btn-dark{background:#46435D;color:white}.btn-dark:hover{background:#5a576e}
+.btn-outline{background:transparent;color:#46435D;border:1px solid #c0bdd4}.btn-outline:hover{border-color:#46435D}
+
+/* SEARCH-SPECIFIC */
+.search-hero{background:#46435D;padding:48px 0 56px}
+.search-bar-wrap{max-width:720px;margin:0 auto}
+.search-bar{display:flex;align-items:center;background:white;border-radius:16px;padding:6px 6px 6px 24px;box-shadow:0 8px 40px rgba(0,0,0,0.2);gap:12px}
+.search-input{flex:1;border:none;outline:none;font-size:18px;font-family:'DM Sans',sans-serif;color:#1a1a1a;background:transparent;padding:12px 0}
+.search-input::placeholder{color:#bbb}
+.search-submit{background:#46435D;color:white;border:none;border-radius:12px;padding:14px 28px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s}
+.search-submit:hover{background:#5a576e}
+.search-meta{max-width:720px;margin:16px auto 0;font-size:13px;color:rgba(255,255,255,0.5)}
+.search-filters{display:flex;align-items:center;gap:8px;padding:20px 0;border-bottom:0.5px solid #e8e8e8}
+.filter-chip{padding:8px 16px;border-radius:999px;font-size:13px;color:#666;border:0.5px solid #e0e0e0;cursor:pointer;background:white;transition:all 0.12s;font-family:'DM Sans',sans-serif}
+.filter-chip:hover{border-color:#46435D;color:#46435D}
+.filter-chip.active{background:#46435D;color:white;border-color:#46435D}
+.result-list{display:flex;flex-direction:column;gap:0}
+.result-item{padding:24px 0;border-bottom:0.5px solid #f0f0f0;display:block;text-decoration:none;color:inherit;transition:background 0.1s}
+.result-item:hover{background:#fafafa}
+.result-item:hover .result-title{color:#46435D}
+.result-breadcrumb{font-size:12px;color:#888;margin-bottom:4px;display:flex;align-items:center;gap:4px}
+.result-breadcrumb span{color:#aaa}
+.result-title{font-size:18px;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:6px;transition:color 0.1s}
+.result-excerpt{font-size:14px;color:#888;line-height:1.6}
+.result-excerpt mark{background:#eeedf4;color:#46435D;padding:1px 3px;border-radius:3px;font-weight:500}
+.result-tag{display:inline-block;font-size:11px;font-weight:600;color:#46435D;background:#eeedf4;padding:3px 10px;border-radius:999px;margin-top:8px}
+.result-sidebar{display:flex;flex-direction:column;gap:16px}
+.sidebar-card{background:#f7f7f6;border:0.5px solid #e8e8e8;border-radius:12px;padding:20px}
+.sidebar-card-title{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:12px}
+.sidebar-link{display:block;font-size:13px;color:#666;padding:6px 0;border-bottom:0.5px solid #f0f0f0;text-decoration:none;transition:color 0.1s}
+.sidebar-link:hover{color:#46435D}
+.sidebar-link:last-child{border-bottom:none}
+.no-results{text-align:center;padding:64px 0}
+.pagination{display:flex;align-items:center;justify-content:center;gap:4px;padding:32px 0}
+.page-btn{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#666;cursor:pointer;border:0.5px solid #e8e8e8;background:white;transition:all 0.12s;font-family:'DM Sans',sans-serif}
+.page-btn:hover{border-color:#46435D;color:#46435D}
+.page-btn.active{background:#46435D;color:white;border-color:#46435D}
+.page-btn.disabled{opacity:0.3;pointer-events:none}
+
+/* ANNOTATION SYSTEM */
+.anno{position:relative;z-index:50;margin:0 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);max-width:380px;transition:opacity 0.25s,transform 0.25s;transform:translateY(16px);pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}
+.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-move{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.anno-move::before{content:'✅ SECTION MOVED';color:#2E7D32}
+.anno-gap{background:#FFF3E0;border-color:#FFB74D;color:#E65100}
+.anno-gap::before{content:'⚠️ GAP IDENTIFIED';color:#E65100}
+.anno-persona{background:#F3E5F5;border-color:#CE93D8;color:#4A148C}
+.anno-persona::before{content:'👤 PERSONA FOCUS';color:#7B1FA2}
+.anno strong{font-weight:700}
+.anno em{font-style:italic;color:inherit;opacity:0.75}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#46435D;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(70,67,93,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#5a576e}
+body.anno-hidden .anno{display:none}
+</style>
+
+<!-- SITE CONTENT -->
+<div id="site">
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="util-left">
+    <a href="index.html" class="util-link">Company</a><a href="hq.html" class="util-link">Amplify+ HQ</a>
+  </div>
+  <div class="util-center">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <svg width="32" height="32" viewBox="0 0 32 32"><rect width="16" height="16" fill="#c8c8c8"/><rect x="16" width="16" height="16" fill="#e4e4e4"/><rect y="16" width="16" height="16" fill="#e4e4e4"/><rect x="16" y="16" width="16" height="16" fill="#c8c8c8"/></svg>
+      <span class="logo-wordmark">Amplify</span>
+    </a>
+  </div>
+  <div class="util-right">
+    <a href="search-results.html" class="search-field" style="text-decoration:none"><span class="search-icon">&#x2315;</span><span class="search-placeholder">Search</span></a>
+    <span class="util-sep">|</span>
+    <span class="util-link">Login</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-stage">
+  <div class="nav-group">
+    <div class="island" id="primaryNav">
+      <button class="nav-btn" onmouseenter="openMenu('who',this)" onclick="openMenu('who',this)">Who We Serve <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="openMenu('solutions',this)" onclick="window.location.href='platform-overview.html'">Solutions <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="openMenu('services',this)" onclick="window.location.href='services-overview.html'">Services <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='healthy-church-hub.html'">Healthy Church Hub</button>
+      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='partners.html'">Partners</button>
+    </div>
+    <a href="request-demo.html" class="demo-island" style="text-decoration:none"><span class="demo-label">Request Demo</span></a>
+    <div class="mega" id="megaMenu"></div>
+  </div>
+</div>
+
+<!-- ANNOTATION: Page strategy -->
+<div style="background:white;padding:16px 0 0">
+  <div class="w">
+    <div class="anno anno-page" style="margin:0 0 0 auto">
+      <strong>Search Results Page</strong> — Utility page that surfaces all site content through a single search bar. Biased toward a large, prominent search input at the top to encourage exploration. Filters let users narrow by content type. Sidebar promotes popular destinations for users who aren't sure what to search for. <em>Every page's search icon in the utility bar should link here.</em>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH HERO — Big search bar -->
+<div class="search-hero">
+  <div class="w" style="padding:0 48px">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px">Search Amplify</div>
+      <div style="font-size:36px;font-weight:700;color:white;letter-spacing:-0.02em;line-height:1.2">How can we help?</div>
+    </div>
+    <div class="search-bar-wrap">
+      <div class="search-bar">
+        <span style="font-size:20px;color:#bbb;flex-shrink:0">&#x2315;</span>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search products, resources, topics..." value="online giving" autofocus>
+        <button class="search-submit" onclick="doSearch()">Search</button>
+      </div>
+      <div class="search-meta" id="searchMeta">Showing <strong style="color:rgba(255,255,255,0.8)">12 results</strong> for "<strong style="color:rgba(255,255,255,0.8)">online giving</strong>"</div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS BODY -->
+<div style="background:white;min-height:60vh">
+  <div class="w">
+
+    <!-- FILTERS -->
+    <div class="search-filters">
+      <span style="font-size:12px;color:#aaa;margin-right:8px">Filter:</span>
+      <button class="filter-chip active" onclick="filterResults('all',this)">All</button>
+      <button class="filter-chip" onclick="filterResults('product',this)">Products</button>
+      <button class="filter-chip" onclick="filterResults('bundle',this)">Bundles</button>
+      <button class="filter-chip" onclick="filterResults('resource',this)">Resources</button>
+      <button class="filter-chip" onclick="filterResults('support',this)">Support</button>
+      <button class="filter-chip" onclick="filterResults('page',this)">Pages</button>
+    </div>
+
+    <!-- RESULTS + SIDEBAR GRID -->
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:48px;padding:8px 0 48px">
+
+      <!-- RESULT LIST -->
+      <div class="result-list" id="resultList">
+
+        <!-- Result 1: Product -->
+        <a href="giving.html" class="result-item" data-type="product">
+          <div class="result-breadcrumb">Solutions <span>&#x203A;</span> Products <span>&#x203A;</span> Giving</div>
+          <div class="result-title">Online Giving — Accept Donations Anytime, Anywhere</div>
+          <div class="result-excerpt">Make it easy for your congregation to give with <mark>online giving</mark>, text-to-give, mobile app donations, and recurring gift management. Process one-time and scheduled gifts securely with industry-leading tools.</div>
+          <span class="result-tag">Product</span>
+        </a>
+
+        <!-- Result 2: Bundle -->
+        <a href="generosity-bundle.html" class="result-item" data-type="bundle">
+          <div class="result-breadcrumb">Solutions <span>&#x203A;</span> Generosity Bundle</div>
+          <div class="result-title">Generosity Bundle — Grow Giving & Simplify Finances</div>
+          <div class="result-excerpt">Everything your church needs to increase <mark>online giving</mark>, manage donors, and maintain accurate financial records — Giving, Accounting, Mobile App, and Communications working together.</div>
+          <span class="result-tag">Bundle</span>
+        </a>
+
+        <!-- Result 3: Resource / eBook -->
+        <a href="#" class="result-item" data-type="resource">
+          <div class="result-breadcrumb">Healthy Church Hub <span>&#x203A;</span> eBooks</div>
+          <div class="result-title">The Complete Guide to Church Online Giving in 2026</div>
+          <div class="result-excerpt">Learn how to set up and optimize <mark>online giving</mark> for your church. Covers recurring gifts, text-to-give, giving kiosks, and strategies to increase generosity year-round.</div>
+          <span class="result-tag">eBook</span>
+        </a>
+
+        <!-- Result 4: Product -->
+        <a href="mobile-app.html" class="result-item" data-type="product">
+          <div class="result-breadcrumb">Solutions <span>&#x203A;</span> Products <span>&#x203A;</span> Mobile App</div>
+          <div class="result-title">Mobile App — Your Church in Their Pocket</div>
+          <div class="result-excerpt">Enable mobile <mark>giving</mark> right from your branded church app. Members can set up recurring gifts, view their <mark>giving</mark> history, and get push notifications about generosity campaigns.</div>
+          <span class="result-tag">Product</span>
+        </a>
+
+        <!-- Result 5: Support -->
+        <a href="#" class="result-item" data-type="support">
+          <div class="result-breadcrumb">Support <span>&#x203A;</span> Knowledge Base</div>
+          <div class="result-title">How to Set Up Online Giving for Your Church</div>
+          <div class="result-excerpt">Step-by-step guide to configuring <mark>online giving</mark> in your Amplify dashboard. Includes payment processor setup, recurring gift options, and giving form customization.</div>
+          <span class="result-tag">Support</span>
+        </a>
+
+        <!-- Result 6: Resource / Webinar -->
+        <a href="#" class="result-item" data-type="resource">
+          <div class="result-breadcrumb">Healthy Church Hub <span>&#x203A;</span> Webinars</div>
+          <div class="result-title">Webinar: 5 Ways to Increase Online Giving This Quarter</div>
+          <div class="result-excerpt">Join our team for a live walkthrough of proven strategies to boost <mark>online giving</mark> participation. See real examples from churches that doubled their digital donations.</div>
+          <span class="result-tag">Webinar</span>
+        </a>
+
+        <!-- Result 7: Bundle -->
+        <a href="financial-bundle.html" class="result-item" data-type="bundle">
+          <div class="result-breadcrumb">Solutions <span>&#x203A;</span> Financial Bundle</div>
+          <div class="result-title">Financial Bundle — Stewardship Made Simple</div>
+          <div class="result-excerpt">Pair <mark>Giving</mark> with Accounting for complete financial stewardship. Every <mark>online</mark> donation flows directly into your books — no manual entry, no reconciliation headaches.</div>
+          <span class="result-tag">Bundle</span>
+        </a>
+
+        <!-- Result 8: Page -->
+        <a href="platform-overview.html" class="result-item" data-type="page">
+          <div class="result-breadcrumb">Solutions <span>&#x203A;</span> Platform Overview</div>
+          <div class="result-title">Amplify Platform Overview — One Connected System</div>
+          <div class="result-excerpt">See how <mark>Giving</mark> connects with every other Amplify tool. When a member makes an <mark>online</mark> donation, it syncs with Accounting, People, Communications, and your Mobile App automatically.</div>
+          <span class="result-tag">Page</span>
+        </a>
+
+        <!-- Result 9: Resource / Blog -->
+        <a href="#" class="result-item" data-type="resource">
+          <div class="result-breadcrumb">Healthy Church Hub <span>&#x203A;</span> Blog</div>
+          <div class="result-title">Why Your Church Should Rethink Its Online Giving Strategy</div>
+          <div class="result-excerpt">Most churches leave money on the table with their <mark>online giving</mark> setup. Here are 7 common mistakes — and how to fix them before your next generosity campaign.</div>
+          <span class="result-tag">Blog</span>
+        </a>
+
+        <!-- Result 10: Resource / Customer Story -->
+        <a href="#" class="result-item" data-type="resource">
+          <div class="result-breadcrumb">Healthy Church Hub <span>&#x203A;</span> Customer Stories</div>
+          <div class="result-title">How Grace Community Increased Online Giving by 140% in 6 Months</div>
+          <div class="result-excerpt">Grace Community Church switched to Amplify's <mark>online giving</mark> platform and saw immediate results. Their finance team shares what changed and why recurring <mark>giving</mark> was the key.</div>
+          <span class="result-tag">Customer Story</span>
+        </a>
+
+        <!-- Result 11: Resource / Podcast -->
+        <a href="#" class="result-item" data-type="resource">
+          <div class="result-breadcrumb">Healthy Church Hub <span>&#x203A;</span> Podcasts</div>
+          <div class="result-title">Episode 42: The Psychology of Online Giving — What Actually Moves People to Give</div>
+          <div class="result-excerpt">We sit down with behavioral researcher Dr. Sarah Kim to explore why people give <mark>online</mark>, what friction kills <mark>giving</mark>, and how your church can create a seamless generosity experience.</div>
+          <span class="result-tag">Podcast</span>
+        </a>
+
+        <!-- Result 12: Resource / Virtual Event -->
+        <a href="#" class="result-item" data-type="resource">
+          <div class="result-breadcrumb">Healthy Church Hub <span>&#x203A;</span> Virtual Events</div>
+          <div class="result-title">Healthy Church Summit: The Future of Digital Generosity</div>
+          <div class="result-excerpt">Join church leaders from across the country for a half-day virtual event on <mark>online giving</mark> trends, donor engagement, and building a year-round culture of generosity. May 13, 2026.</div>
+          <span class="result-tag">Virtual Event</span>
+        </a>
+
+        <!-- PAGINATION -->
+        <div class="pagination">
+          <button class="page-btn disabled">&larr;</button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">&rarr;</button>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="result-sidebar">
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Popular Searches</div>
+          <a href="#" class="sidebar-link" onclick="setSearch('giving')">Giving</a>
+          <a href="#" class="sidebar-link" onclick="setSearch('church management')">Church Management</a>
+          <a href="#" class="sidebar-link" onclick="setSearch('streaming')">Streaming</a>
+          <a href="#" class="sidebar-link" onclick="setSearch('accounting')">Accounting</a>
+          <a href="#" class="sidebar-link" onclick="setSearch('mobile app')">Mobile App</a>
+          <a href="#" class="sidebar-link" onclick="setSearch('background checks')">Background Checks</a>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Browse by Product</div>
+          <a href="giving.html" class="sidebar-link">$ Giving</a>
+          <a href="accounting.html" class="sidebar-link">= Accounting</a>
+          <a href="people.html" class="sidebar-link">P People (ChMS)</a>
+          <a href="websites.html" class="sidebar-link">W Websites</a>
+          <a href="mobile-app.html" class="sidebar-link">M Mobile App</a>
+          <a href="communications.html" class="sidebar-link">@ Communications</a>
+          <a href="streaming.html" class="sidebar-link">&#x25B6; Streaming</a>
+          <a href="service-planning.html" class="sidebar-link">&#x2713; Service Planning</a>
+          <a href="media.html" class="sidebar-link">&#x25C9; Media</a>
+          <a href="safety.html" class="sidebar-link">S Safety</a>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Quick Links</div>
+          <a href="request-demo.html" class="sidebar-link">Request a Demo</a>
+          <a href="platform-overview.html" class="sidebar-link">Platform Overview</a>
+          <a href="complete-bundle.html" class="sidebar-link">Compare Bundles</a>
+          <a href="#" class="sidebar-link">Contact Support</a>
+          <a href="#" class="sidebar-link">Healthy Church Hub</a>
+        </div>
+
+        <!-- Annotation -->
+        <div class="anno">
+          <strong>Sidebar intent:</strong> For users who arrive at search without a specific query. Popular searches seed discovery. Product browse gives a direct escape hatch. Quick links cover high-intent conversion paths.
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPLORE SECTION — for empty/broad searches -->
+<div class="section alt" id="exploreSection" style="display:none">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Explore Amplify</div>
+      <div class="section-h2">Not Sure Where to Start?</div>
+      <div class="section-sub">Browse by what you're trying to accomplish</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+      <a href="giving.html" style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:24px;text-align:center;text-decoration:none;transition:all 0.15s;cursor:pointer" onmouseover="this.style.borderColor='#c0bdd4';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#e8e8e8';this.style.transform='none'">
+        <div style="width:48px;height:48px;border-radius:12px;background:#eeedf4;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:20px">$</div>
+        <div style="font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px">Increase Giving</div>
+        <div style="font-size:13px;color:#888">Grow generosity with online, mobile & recurring gifts</div>
+      </a>
+      <a href="people.html" style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:24px;text-align:center;text-decoration:none;transition:all 0.15s;cursor:pointer" onmouseover="this.style.borderColor='#c0bdd4';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#e8e8e8';this.style.transform='none'">
+        <div style="width:48px;height:48px;border-radius:12px;background:#eeedf4;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:20px">P</div>
+        <div style="font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px">Manage Your People</div>
+        <div style="font-size:13px;color:#888">Member records, groups & volunteer coordination</div>
+      </a>
+      <a href="streaming.html" style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:24px;text-align:center;text-decoration:none;transition:all 0.15s;cursor:pointer" onmouseover="this.style.borderColor='#c0bdd4';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#e8e8e8';this.style.transform='none'">
+        <div style="width:48px;height:48px;border-radius:12px;background:#eeedf4;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:20px">&#x25B6;</div>
+        <div style="font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px">Go Digital</div>
+        <div style="font-size:13px;color:#888">Stream services, build your site & launch your app</div>
+      </a>
+      <a href="platform-overview.html" style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:24px;text-align:center;text-decoration:none;transition:all 0.15s;cursor:pointer" onmouseover="this.style.borderColor='#c0bdd4';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#e8e8e8';this.style.transform='none'">
+        <div style="width:48px;height:48px;border-radius:12px;background:#eeedf4;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:20px">&#x2B21;</div>
+        <div style="font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px">See Everything</div>
+        <div style="font-size:13px;color:#888">Explore the full platform & all 10 connected tools</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="section dark">
+  <div class="w">
+    <div style="text-align:center">
+      <div class="section-eyebrow light">Can't find what you need?</div>
+      <div class="section-h2 light" style="margin-bottom:8px">Talk to Our Team</div>
+      <div class="section-sub light" style="max-width:480px;margin:0 auto 28px">We're here to help you find the right solution for your church. Schedule a personalized demo or call us directly.</div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="request-demo.html" class="btn btn-white" style="text-decoration:none">Request Demo</a>
+        <a href="tel:8653296192" class="btn btn-ghost" style="text-decoration:none">Call 865-329-6192</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#1a1a1a;padding:64px 0 32px">
+  <div class="w">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+          <svg width="28" height="28" viewBox="0 0 32 32"><rect width="16" height="16" fill="rgba(255,255,255,0.4)"/><rect x="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect y="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect x="16" y="16" width="16" height="16" fill="rgba(255,255,255,0.4)"/></svg>
+          <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">Amplify</span>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:240px">Church management software built to help 55,000+ ministries thrive.</div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Solutions</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Increase Giving</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Engage Community</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Grow Attendance</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Streamline Ops</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Financial Stewardship</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Volunteer Teams</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Products</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="giving.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Giving</a>
+          <a href="accounting.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Accounting</a>
+          <a href="people.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">People (ChMS)</a>
+          <a href="websites.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Websites</a>
+          <a href="mobile-app.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Mobile App</a>
+          <a href="service-planning.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Service Planning</a>
+          <a href="safety.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Safety</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Resources</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Healthy Church Hub</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Webinars</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">eBooks</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Podcasts</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Blog</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Customer Stories</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Company</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">About</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Leadership</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Careers</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Partners</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Contact</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Press</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Ministry Brands. All rights reserved.</div>
+      <div style="display:flex;gap:24px">
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Privacy Policy</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Terms of Service</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Cookie Settings</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ANNOTATION TOGGLE -->
+<div class="anno-legend-wrap">
+  <div class="anno-legend">
+    <div class="anno-legend-title">Annotation Legend</div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div>
+  </div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'">
+    <span style="font-size:16px">&#x1F4DD;</span>
+    <span class="anno-label">Show Annotations</span>
+  </button>
+</div>
+
+</div><!-- end #site -->
+
+<script>
+document.body.classList.add("anno-hidden");
+var icons={"Giving":"$","Accounting":"=","People (ChMS)":"P","Websites":"W","Mobile App":"M","Communications":"@","Streaming":"&#x25B6;","Service Planning":"&#x2713;","Media":"&#x25C9;","Safety":"S"};
+var allProducts=[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"People (ChMS)",desc:"Member records & group management"},{name:"Websites",desc:"Your digital front door"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Media",desc:"Sermon content & distribution"},{name:"Safety",desc:"Check-in, background checks & protocols"}];
+var productUrls={"Giving":"giving.html","Accounting":"accounting.html","People (ChMS)":"people.html","Websites":"websites.html","Mobile App":"mobile-app.html","Communications":"communications.html","Streaming":"streaming.html","Service Planning":"service-planning.html","Media":"media.html","Safety":"safety.html"};
+var bundleUrls={"Complete Bundle":"complete-bundle.html","Generosity Bundle":"generosity-bundle.html","Financial Bundle":"financial-bundle.html","Digital Bundle":"digital-bundle.html"};
+var outcomes={
+  all:{desc:"The full Amplify platform \u2014 every tool working together as one connected system.",products:allProducts,gridClass:"all-grid",bundle:{name:"Complete Bundle",tagline:"Every tool, one price \u2014 the full Amplify platform for your entire church.",cta:"Explore the Complete Bundle \u2192"}},
+  giving:{desc:"Tools that invite generosity and give your finance team full visibility.",products:[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"Mobile App",desc:"Give from anywhere, anytime"},{name:"Communications",desc:"Generosity campaigns & appeals"}],bundle:{name:"Generosity Bundle",tagline:"All the giving & finance tools your church needs \u2014 packaged together.",cta:"Explore the Generosity Bundle \u2192"}},
+  engage:{desc:"Keep your congregation connected and actively participating between Sundays.",products:[{name:"People (ChMS)",desc:"Member records & group management"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Websites",desc:"Your digital front door"}]},
+  grow:{desc:"Expand your reach, convert first-time visitors, and retain the people who find you.",products:[{name:"Websites",desc:"First impression that converts"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Media",desc:"Sermon content & distribution"},{name:"Mobile App",desc:"Retain & re-engage members"}]},
+  streamline:{desc:"Replace fragmented tools with one connected system so nothing falls through the cracks.",products:[{name:"People (ChMS)",desc:"One database for your whole church"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Safety",desc:"Check-in & safety protocols"},{name:"Communications",desc:"Automated workflows & scheduling"}]},
+  financial:{desc:"Accurate books, clean audits, and board-ready reporting \u2014 without the late nights.",products:[{name:"Accounting",desc:"Fund accounting & compliance"},{name:"Giving",desc:"Donor management & statements"}],bundle:{name:"Financial Bundle",tagline:"Accounting, giving, and reporting \u2014 everything for financial stewardship.",cta:"Explore the Financial Bundle \u2192"}},
+  volunteer:{desc:"Your team shows up prepared, on time, knowing exactly what\u2019s expected.",products:[{name:"Service Planning",desc:"Scheduling & role assignment"},{name:"People (ChMS)",desc:"Volunteer profiles & history"},{name:"Communications",desc:"Automated reminders & confirmations"},{name:"Mobile App",desc:"Volunteers manage availability on the go"}]},
+  digital:{desc:"Meet your congregation \u2014 and reach new ones \u2014 wherever they spend their time.",products:[{name:"Streaming",desc:"Broadcast live or on-demand"},{name:"Websites",desc:"A site that works as hard as you do"},{name:"Mobile App",desc:"Your branded church app"},{name:"Media",desc:"Manage & distribute content at scale"}],bundle:{name:"Digital Bundle",tagline:"Streaming, websites, app, and media \u2014 launch your digital ministry.",cta:"Explore the Digital Bundle \u2192"}}
+};
+var simpleMenus={
+  who:{sections:[{icon:"\uD83D\uDC64",label:"By Role",items:[{n:"Executive / Senior Pastor",h:"senior-pastor.html"},{n:"Associate Pastor",h:"associate-pastor.html"},{n:"Finance Leader / Treasurer",h:"finance-treasurer.html"},{n:"Communications Director",h:"communications-director.html"},{n:"Worship Pastor",h:"worship-pastor.html"}]},{icon:"\u26EA",label:"By Church Type",items:[{n:"Multi-site Churches",h:"multi-site.html"},{n:"Denominations & Networks",h:"denominations.html"},{n:"Large Churches",h:"large-churches.html"},{n:"Growing Churches",h:"growing-churches.html"},{n:"Small Churches",h:"small-churches.html"},{n:"Church Plants",h:"church-plants.html"},{n:"Digital / Online Churches",h:"digital-churches.html"}]}]},
+  services:{sections:[{icon:"\uD83D\uDEE0",label:"Support & Delivery",items:[{n:"Services Overview",h:"services-overview.html"},{n:"Implementation & Onboarding",h:"service-detail.html"},{n:"Strategy & Consulting",h:"service-detail.html"},{n:"Data Migration",h:"service-detail.html"},{n:"Support & Training",h:"service-detail.html"}]}]}
+};
+function renderRight(k){var o=outcomes[k],gc=o.gridClass||'';var cards=o.products.map(function(p){return'<a href="'+(productUrls[p.name]||'#')+'" class="product-card" style="text-decoration:none;color:inherit"><div class="product-icon">'+(icons[p.name]||'\u00B7')+'</div><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.desc+'</div></a>';}).join('');var bh='';if(o.bundle){bh='<a href="'+(bundleUrls[o.bundle.name]||'#')+'" class="bundle-banner" style="text-decoration:none;color:inherit"><div class="bundle-icon">\u2B21</div><div class="bundle-body"><div class="bundle-name">'+o.bundle.name+'</div><div class="bundle-tagline">'+o.bundle.tagline+'</div></div><span class="bundle-cta">'+o.bundle.cta+'</span></a>';}document.getElementById('rPanel').innerHTML='<div class="right-header">Relevant tools</div><div class="outcome-desc">'+o.desc+'</div>'+bh+'<div class="products-grid '+gc+'">'+cards+'</div><div class="right-footer"><span class="rf-label">Not sure where to start?</span><span class="rf-link">Take the Healthy Church Assessment \u2192</span></div>';}
+function buildSolutions(){var defs=[{k:'all',label:'All Solutions'},{k:'giving',label:'Increase Giving & Generosity'},{k:'engage',label:'Engage Your Church Community'},{k:'grow',label:'Grow Attendance & Reach'},{k:'streamline',label:'Streamline Church Operations'},{k:'financial',label:'Improve Financial Stewardship'},{k:'volunteer',label:'Strengthen Volunteer & Staff Effectiveness'},{k:'digital',label:'Launch & Scale Digital Ministry'}];var rows=defs.map(function(d,i){return'<div class="outcome-item'+(i===0?' active':'')+'" data-k="'+d.k+'">'+d.label+' <span class="arr">\u203A</span></div>';}).join('');return'<div class="mega-inner"><div class="left-panel"><div class="left-label">What do you want to do?</div>'+rows+'<div class="left-divider"></div><a href="platform-overview.html" class="platform-btn" style="text-decoration:none;color:inherit"><span class="platform-btn-label">Platform Overview \u2192</span><span class="platform-btn-sub">How Amplify works as one system</span></a></div><div class="right-panel" id="rPanel"></div></div>';}
+function buildSimple(k){return'<div class="simple-panel">'+simpleMenus[k].sections.map(function(s){return'<div class="s-section"><div class="s-category"><div class="s-cat-icon">'+s.icon+'</div><span class="s-cat-label">'+s.label+'</span></div>'+s.items.map(function(i){return'<a href="'+i.h+'" class="s-item">'+i.n+'</a>';}).join('')+'</div>';}).join('')+'</div>';}
+var cur=null,curBtn=null;
+function closeMenu(){if(curBtn)curBtn.classList.remove('open');var m=document.getElementById('megaMenu');if(m)m.classList.remove('show');cur=null;curBtn=null;}
+function openMenu(key,btn){closeMenu();cur=key;curBtn=btn;btn.classList.add('open');var m=document.getElementById('megaMenu');if(key==='solutions'){m.innerHTML=buildSolutions();m.querySelectorAll('.outcome-item').forEach(function(el){el.addEventListener('mouseenter',function(){m.querySelectorAll('.outcome-item').forEach(function(i){i.classList.remove('active')});this.classList.add('active');renderRight(this.dataset.k);});});renderRight('all');}else{m.innerHTML=buildSimple(key);}m.classList.add('show');}
+document.addEventListener('click',function(e){if(!e.target.closest('#primaryNav')&&!e.target.closest('.utility-bar'))closeMenu();});
+
+/* SEARCH PAGE JS */
+function filterResults(type,btn){
+  document.querySelectorAll('.filter-chip').forEach(function(c){c.classList.remove('active')});
+  btn.classList.add('active');
+  var items=document.querySelectorAll('.result-item');
+  var count=0;
+  items.forEach(function(item){
+    if(type==='all'||item.dataset.type===type){
+      item.style.display='block';count++;
+    }else{
+      item.style.display='none';
+    }
+  });
+  document.getElementById('searchMeta').innerHTML='Showing <strong style="color:rgba(255,255,255,0.8)">'+count+' result'+(count!==1?'s':'')+'</strong> for "<strong style="color:rgba(255,255,255,0.8)">'+document.getElementById('searchInput').value+'</strong>"';
+}
+function setSearch(term){
+  document.getElementById('searchInput').value=term;
+  document.getElementById('searchInput').focus();
+  return false;
+}
+function doSearch(){
+  var val=document.getElementById('searchInput').value.trim();
+  if(!val)return;
+  /* Wireframe: just update the meta text */
+  document.getElementById('searchMeta').innerHTML='Showing <strong style="color:rgba(255,255,255,0.8)">12 results</strong> for "<strong style="color:rgba(255,255,255,0.8)">'+val+'</strong>"';
+}
+document.getElementById('searchInput').addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
+</script>

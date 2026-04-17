@@ -1,0 +1,151 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:#46435D;min-height:100vh}
+#site{display:block}
+
+/* UTILITY BAR */
+.utility-bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;height:56px;background:white;border-bottom:0.5px solid #e8e8e8;position:sticky;top:0;z-index:300}
+.util-left{display:flex;align-items:center;gap:16px}
+.util-link{font-size:12px;color:#888;cursor:pointer;transition:color 0.1s;text-decoration:none}
+.util-link:hover{color:#46435D}
+.util-center{display:flex;align-items:center;justify-content:center;gap:10px}
+.logo-wordmark{font-size:24px;font-weight:700;color:#46435D;letter-spacing:-0.02em}
+.util-right{display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.util-sep{color:#ddd;font-size:10px}
+.search-field{display:flex;align-items:center;gap:6px;cursor:text;text-decoration:none}
+.search-icon{color:#bbb;font-size:14px}
+.search-placeholder{font-size:12px;color:#bbb}
+
+/* LOGIN */
+.login-wrap{min-height:calc(100vh - 56px);display:grid;grid-template-columns:1fr 1fr;background:linear-gradient(160deg,#46435D 0%,#2e2c3e 100%)}
+.login-left{display:flex;align-items:center;justify-content:center;padding:48px 24px}
+.login-card{background:white;border-radius:20px;padding:48px 40px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+.login-right{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#e0dfe8}
+.login-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(135deg,#e0dfe8 0%,#c8c6d8 50%,#e0dfe8 100%);position:relative}
+.login-img-placeholder::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2346435D' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.login-img-overlay{position:absolute;bottom:0;left:0;right:0;padding:40px;background:linear-gradient(to top,rgba(70,67,93,0.85) 0%,transparent 100%)}
+.login-img-quote{font-size:18px;color:white;font-weight:500;line-height:1.5;font-style:italic;margin-bottom:12px}
+.login-img-attr{font-size:13px;color:rgba(255,255,255,0.6)}
+.login-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:32px}
+.login-logo svg{flex-shrink:0}
+.login-logo span{font-size:28px;font-weight:700;color:#46435D;letter-spacing:-0.02em}
+.login-heading{font-size:22px;font-weight:700;color:#1a1a1a;text-align:center;margin-bottom:4px}
+.login-sub{font-size:14px;color:#888;text-align:center;margin-bottom:28px}
+.form-group{margin-bottom:18px}
+.form-label{display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px}
+.form-input{width:100%;padding:12px 14px;border:0.5px solid #ddd;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1a1a1a;background:#fafafa;transition:border-color 0.15s,box-shadow 0.15s;outline:none}
+.form-input:focus{border-color:#46435D;box-shadow:0 0 0 3px rgba(70,67,93,0.1);background:white}
+.form-input::placeholder{color:#bbb}
+.form-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.remember{display:flex;align-items:center;gap:8px;cursor:pointer}
+.remember input{width:16px;height:16px;accent-color:#46435D;cursor:pointer}
+.remember span{font-size:13px;color:#666}
+.forgot{font-size:13px;color:#46435D;text-decoration:none;font-weight:500;transition:color 0.1s}
+.forgot:hover{color:#5a576e;text-decoration:underline;text-underline-offset:3px}
+.login-btn{width:100%;padding:14px;background:#46435D;color:white;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s}
+.login-btn:hover{background:#5a576e}
+.divider{display:flex;align-items:center;gap:12px;margin:24px 0}
+.divider-line{flex:1;height:0.5px;background:#e8e8e8}
+.divider-text{font-size:12px;color:#bbb;white-space:nowrap}
+.sso-btn{width:100%;padding:12px;background:white;border:0.5px solid #ddd;border-radius:10px;font-size:14px;font-weight:500;color:#555;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:8px}
+.sso-btn:hover{border-color:#46435D;color:#46435D}
+.login-footer{text-align:center;margin-top:24px;padding-top:20px;border-top:0.5px solid #f0f0f0}
+.login-footer-text{font-size:13px;color:#888}
+.login-footer-text a{color:#46435D;font-weight:600;text-decoration:none;transition:color 0.1s}
+.login-footer-text a:hover{text-decoration:underline;text-underline-offset:3px}
+.login-help{text-align:center;margin-top:24px}
+.login-help a{font-size:12px;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.1s}
+.login-help a:hover{color:rgba(255,255,255,0.7)}
+</style>
+
+<div id="site">
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="util-left">
+    <a href="index.html" class="util-link">Company</a><a href="hq.html" class="util-link">Amplify+ HQ</a>
+  </div>
+  <div class="util-center">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <svg width="32" height="32" viewBox="0 0 32 32"><rect width="16" height="16" fill="#c8c8c8"/><rect x="16" width="16" height="16" fill="#e4e4e4"/><rect y="16" width="16" height="16" fill="#e4e4e4"/><rect x="16" y="16" width="16" height="16" fill="#c8c8c8"/></svg>
+      <span class="logo-wordmark">Amplify</span>
+    </a>
+  </div>
+  <div class="util-right">
+    <a href="search-results.html" class="search-field"><span class="search-icon">&#x2315;</span><span class="search-placeholder">Search</span></a>
+    <span class="util-sep">|</span>
+    <span class="util-link" style="color:#46435D;font-weight:600">Login</span>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="login-wrap">
+  <div class="login-left">
+  <div>
+    <div class="login-card">
+      <div class="login-logo">
+        <svg width="36" height="36" viewBox="0 0 32 32"><rect width="16" height="16" fill="#c8c8c8"/><rect x="16" width="16" height="16" fill="#e4e4e4"/><rect y="16" width="16" height="16" fill="#e4e4e4"/><rect x="16" y="16" width="16" height="16" fill="#c8c8c8"/></svg>
+        <span>Amplify</span>
+      </div>
+      <div class="login-heading">Welcome back</div>
+      <div class="login-sub">Sign in to your church's Amplify account</div>
+
+      <form onsubmit="return false;">
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input type="email" class="form-input" placeholder="you@yourchurch.org">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" placeholder="Enter your password">
+        </div>
+        <div class="form-row">
+          <label class="remember">
+            <input type="checkbox">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot">Forgot password?</a>
+        </div>
+        <button type="submit" class="login-btn">Sign In</button>
+      </form>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <span class="divider-text">or continue with</span>
+        <div class="divider-line"></div>
+      </div>
+
+      <button class="sso-btn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="2" fill="#f0f0f0"/><text x="4" y="12" font-size="10" fill="#888">G</text></svg>
+        Sign in with Google
+      </button>
+
+      <div class="login-footer">
+        <div class="login-footer-text">Don't have an account? <a href="request-demo.html">Request a Demo</a></div>
+      </div>
+    </div>
+
+    <div class="login-help">
+      <a href="#">Need help signing in? Contact support</a>
+    </div>
+  </div>
+  </div>
+
+  <!-- RIGHT: Image panel -->
+  <div class="login-right">
+    <div class="login-img-placeholder">
+      <div style="text-align:center;position:relative;z-index:1">
+        <div style="width:80px;height:80px;border-radius:20px;background:rgba(70,67,93,0.08);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#46435D">&#x1F3DB;</div>
+        <div style="font-size:14px;color:#888;font-weight:500">Hero Image Placeholder</div>
+        <div style="font-size:12px;color:#bbb;margin-top:4px">1200 &times; 900</div>
+      </div>
+      <div class="login-img-overlay">
+        <div class="login-img-quote">"Amplify brought all our tools into one place. Sunday mornings went from stressful to seamless."</div>
+        <div class="login-img-attr">Pastor David Chen — Grace Community Church</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

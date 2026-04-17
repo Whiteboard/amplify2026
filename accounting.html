@@ -1,0 +1,843 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:#46435D;min-height:100vh}
+
+/* SITE */
+#site{display:block}
+
+/* UTILITY BAR */
+.utility-bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;height:56px;background:white;border-bottom:0.5px solid #e8e8e8;position:sticky;top:0;z-index:300}
+.util-left{display:flex;align-items:center;gap:16px}
+.util-link{font-size:12px;color:#888;cursor:pointer;transition:color 0.1s;text-decoration:none}
+.util-link:hover{color:#46435D}
+.util-center{display:flex;align-items:center;justify-content:center;gap:10px}
+.logo-wordmark{font-size:24px;font-weight:700;color:#46435D;letter-spacing:-0.02em}
+.util-right{display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.util-sep{color:#ddd;font-size:10px}
+.search-field{display:flex;align-items:center;gap:6px;cursor:text}
+.search-icon{color:#bbb;font-size:14px}
+.search-placeholder{font-size:12px;color:#bbb}
+
+/* NAV */
+.nav-stage{display:flex;justify-content:center;align-items:center;padding:14px 32px;position:sticky;top:56px;z-index:200;pointer-events:none}
+.nav-group{display:inline-flex;align-items:center;gap:10px;position:relative;pointer-events:all}
+.island{background:white;border:0.5px solid #e0e0e0;border-radius:999px;display:inline-flex;align-items:center;gap:2px;padding:5px 8px;box-shadow:0 2px 16px rgba(0,0,0,0.08)}
+.nav-btn{background:none;border:none;padding:9px 18px;font-size:14px;color:#666;cursor:pointer;border-radius:999px;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:all 0.12s}
+.nav-btn:hover,.nav-btn.open{color:#46435D;background:#f5f4f8}
+.chevron{font-size:8px;color:#ccc;transition:transform 0.15s}
+.nav-btn.open .chevron{transform:rotate(180deg)}
+.demo-island{background:#46435D;border-radius:999px;padding:10px 22px;box-shadow:0 2px 16px rgba(70,67,93,0.25);cursor:pointer;transition:background 0.12s}
+.demo-island:hover{background:#5a576e}
+.demo-label{font-size:13px;font-weight:500;color:white}
+
+/* MEGA MENU */
+.mega{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:white;border:0.5px solid #e0e0e0;z-index:200;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.1);overflow:hidden;min-width:860px}
+.mega.show{display:block}
+.mega-inner{display:grid;grid-template-columns:1fr 2fr;min-height:380px}
+.left-panel{background:#f7f7f6;border-right:0.5px solid #ebebeb;padding:18px 0}
+.left-label{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;padding:0 16px 12px}
+.outcome-item{display:flex;align-items:center;justify-content:space-between;padding:9px 16px;cursor:pointer;font-size:14px;color:#666;border-left:2px solid transparent;transition:all 0.1s;line-height:1.3}
+.outcome-item:hover{color:#46435D;background:#f0efed;border-left-color:#ccc}
+.outcome-item.active{color:#46435D;background:white;border-left-color:#46435D;font-weight:600}
+.outcome-item .arr{font-size:11px;opacity:0;flex-shrink:0;margin-left:8px}
+.outcome-item.active .arr,.outcome-item:hover .arr{opacity:0.5}
+.outcome-item.active .arr{opacity:1}
+.left-divider{border:none;border-top:0.5px solid #ebebeb;margin:10px 0}
+.platform-btn{margin:0 12px 4px;padding:10px 14px;border:0.5px solid #e0e0e0;border-radius:10px;cursor:pointer;text-align:left;background:white;width:calc(100% - 24px);display:block;transition:all 0.12s}
+.platform-btn:hover{border-color:#46435D}
+.platform-btn-label{font-size:12px;font-weight:500;color:#46435D;display:block}
+.platform-btn-sub{font-size:11px;color:#aaa;margin-top:2px;display:block}
+.right-panel{padding:20px 22px;display:flex;flex-direction:column}
+.right-header{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+.outcome-desc{font-size:14px;color:#777;margin-bottom:14px;line-height:1.5;padding-bottom:14px;border-bottom:0.5px solid #f0f0f0}
+.bundle-banner{display:flex;align-items:center;gap:14px;padding:14px 18px;margin-bottom:14px;background:#eeedf4;border:0.5px solid #d8d6e6;border-radius:12px;cursor:pointer;transition:all 0.12s}
+.bundle-banner:hover{border-color:#46435D;box-shadow:0 4px 12px rgba(70,67,93,0.1)}
+.bundle-icon{width:36px;height:36px;border-radius:8px;background:#46435D;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;flex-shrink:0}
+.bundle-body{flex:1;min-width:0}
+.bundle-name{font-size:13px;font-weight:700;color:#46435D;margin-bottom:2px}
+.bundle-tagline{font-size:11px;color:#888;line-height:1.4}
+.bundle-cta{font-size:11px;font-weight:600;color:#46435D;white-space:nowrap;flex-shrink:0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.products-grid.all-grid{grid-template-columns:repeat(4,1fr)}
+.product-card{border:0.5px solid #ebebeb;border-radius:12px;padding:14px;cursor:pointer;transition:all 0.12s;background:white;display:flex;flex-direction:column}
+.product-card:hover{border-color:#46435D;transform:translateY(-2px);box-shadow:0 4px 12px rgba(70,67,93,0.1)}
+.product-icon{width:30px;height:30px;border-radius:7px;background:#f0f0f0;margin-bottom:9px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#999}
+.product-name{font-size:13px;font-weight:600;color:#46435D;margin-bottom:3px}
+.product-desc{font-size:11px;color:#aaa;line-height:1.4}
+.right-footer{margin-top:16px;padding-top:12px;border-top:0.5px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+.rf-label{font-size:12px;color:#aaa}
+.rf-link{font-size:12px;color:#46435D;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+.simple-panel{padding:20px 24px;min-width:260px}
+.s-section{margin-bottom:16px}
+.s-category{display:flex;align-items:center;justify-content:center;gap:8px;padding:6px 0;margin-bottom:4px}
+.s-cat-icon{width:26px;height:26px;border-radius:6px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.s-cat-label{font-size:14px;font-weight:700;color:#46435D}
+.s-item{font-size:14px;color:#666;padding:7px 0;cursor:pointer;border-bottom:0.5px solid #f5f5f5;transition:color 0.1s;display:block;text-align:center}
+.s-item:hover{color:#46435D}
+.s-item:last-child{border-bottom:none}
+
+/* LAYOUT */
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:72px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f7f6}
+.section.dark{background:#46435D}
+.section-center{text-align:center;max-width:600px;margin:0 auto 48px}
+.section-eyebrow{font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
+.section-eyebrow.light{color:rgba(255,255,255,0.5)}
+.section-h2{font-size:32px;font-weight:700;color:#1a1a1a;line-height:1.2;letter-spacing:-0.02em;margin-bottom:12px}
+.section-h2.light{color:white}
+.section-sub{font-size:16px;color:#888;line-height:1.6}
+.section-sub.light{color:rgba(255,255,255,0.6)}
+.hero{background:#46435D;padding:80px 0}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 28px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;white-space:nowrap}
+.btn-white{background:white;color:#46435D}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.3)}.btn-ghost:hover{border-color:rgba(255,255,255,0.6);color:white}
+.btn-dark{background:#46435D;color:white}.btn-dark:hover{background:#5a576e}
+.btn-outline{background:transparent;color:#46435D;border:1px solid #c0bdd4}.btn-outline:hover{border-color:#46435D}
+
+/* GRIDS & CARDS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px;transition:all 0.15s;cursor:pointer}
+.card:hover{border-color:#c0bdd4;box-shadow:0 4px 20px rgba(70,67,93,0.08);transform:translateY(-2px)}
+.card-icon{width:44px;height:44px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
+.card-title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:6px}
+.card-body{font-size:14px;color:#888;line-height:1.6}
+.tcard{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px}
+.tquote{font-size:15px;color:#444;line-height:1.7;margin-bottom:20px;font-style:italic}
+.tavatar{width:40px;height:40px;border-radius:50%;background:#e0dfe8;flex-shrink:0}
+.tname{font-size:14px;font-weight:600;color:#1a1a1a}
+.trole{font-size:12px;color:#aaa;margin-top:2px}
+
+/* PRODUCT PAGE SPECIFIC */
+.breadcrumb{display:flex;align-items:center;gap:8px;padding:16px 0;font-size:12px;color:#aaa}
+.breadcrumb a{color:#888;text-decoration:none;transition:color 0.1s}
+.breadcrumb a:hover{color:#46435D}
+.breadcrumb .sep{color:#ccc}
+.stat-row{display:flex;align-items:center;justify-content:center;gap:48px;padding:32px 0}
+.stat-item{text-align:center}
+.stat-num{font-size:36px;font-weight:700;color:#46435D;letter-spacing:-0.02em}
+.stat-label{font-size:13px;color:#aaa;margin-top:4px}
+.feature-row{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:48px 0}
+.feature-row:not(:last-child){border-bottom:0.5px solid #f0f0f0}
+.feature-row.reverse{direction:rtl}
+.feature-row.reverse > *{direction:ltr}
+.feature-img{background:#e0dfe8;border-radius:14px;height:300px}
+.feature-eyebrow{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px}
+.feature-title{font-size:22px;font-weight:700;color:#1a1a1a;line-height:1.2;letter-spacing:-0.01em;margin-bottom:10px}
+.feature-body{font-size:14px;color:#888;line-height:1.7;margin-bottom:20px}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.feature-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#666;line-height:1.5}
+.feature-list li::before{content:"\2713";display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#eeedf4;color:#46435D;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+.connect-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.connect-card{border:0.5px solid #e8e8e8;border-radius:12px;padding:20px;text-align:center;transition:all 0.12s;cursor:pointer}
+.connect-card:hover{border-color:#c0bdd4;box-shadow:0 4px 12px rgba(70,67,93,0.06)}
+.connect-icon{width:40px;height:40px;border-radius:10px;background:#f0f0f0;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#999}
+.connect-name{font-size:13px;font-weight:600;color:#46435D;margin-bottom:3px}
+.connect-desc{font-size:11px;color:#aaa;line-height:1.4}
+
+/* MINI CARD (lower hierarchy related products) */
+.mini-card{display:flex;align-items:center;gap:10px;padding:12px 16px;border:0.5px solid #ebebeb;border-radius:10px;cursor:pointer;transition:all 0.12s}
+.mini-card:hover{border-color:#c0bdd4}
+.mini-icon{width:28px;height:28px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:11px;color:#aaa;flex-shrink:0}
+.mini-name{font-size:12px;font-weight:600;color:#888}
+
+/* ANNOTATION SYSTEM — floating cards */
+.anno{position:relative;z-index:50;margin:0 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);max-width:380px;transition:opacity 0.25s,transform 0.25s;transform:translateY(16px);pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}
+.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-move{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.anno-move::before{content:'✅ SECTION MOVED';color:#2E7D32}
+.anno-gap{background:#FFF3E0;border-color:#FFB74D;color:#E65100}
+.anno-gap::before{content:'⚠️ GAP IDENTIFIED';color:#E65100}
+.anno-persona{background:#F3E5F5;border-color:#CE93D8;color:#4A148C}
+.anno-persona::before{content:'👤 PERSONA FOCUS';color:#7B1FA2}
+.anno strong{font-weight:700}
+.anno em{font-style:italic;color:inherit;opacity:0.75}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#46435D;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(70,67,93,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#5a576e}
+body.anno-hidden .anno{display:none}
+/* Annotation positioning — float alongside sections */
+.anno-anchor{position:relative}
+.anno-anchor .anno{position:absolute;top:24px;right:-20px;transform:translateX(0);margin:0;z-index:60}
+.anno-anchor .anno-page{position:relative;right:auto;top:auto;margin:16px 48px;float:right;clear:both}
+
+/* MOSAIC FEATURES */
+.mosaic{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.mosaic-tile{background:#f7f7f6;border:0.5px solid #e8e8e8;border-radius:16px;overflow:hidden;transition:all 0.2s;display:flex;flex-direction:column}
+.mosaic-tile:hover{border-color:#c0bdd4;box-shadow:0 6px 24px rgba(70,67,93,0.08)}
+.mosaic-tile.span-7{grid-column:span 7}
+.mosaic-tile.span-5{grid-column:span 5}
+.mosaic-tile.span-6{grid-column:span 6}
+.mosaic-tile.span-4{grid-column:span 4}
+.mosaic-tile.span-8{grid-column:span 8}
+.mosaic-visual{height:200px;background:#e0dfe8;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.mosaic-visual .overlay-icon{width:48px;height:48px;border-radius:12px;background:rgba(70,67,93,0.12);display:flex;align-items:center;justify-content:center;font-size:20px;color:#46435D}
+.mosaic-content{padding:24px;flex:1;display:flex;flex-direction:column}
+.mosaic-eyebrow{font-size:10px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;opacity:0.5}
+.mosaic-title{font-size:18px;font-weight:700;color:#1a1a1a;line-height:1.2;letter-spacing:-0.01em;margin-bottom:8px}
+.mosaic-body{font-size:13px;color:#888;line-height:1.6;margin-bottom:16px}
+.mosaic-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:auto}
+.mosaic-list li{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#666;line-height:1.4}
+.mosaic-list li::before{content:"\2713";display:flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#eeedf4;color:#46435D;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px}
+.mosaic-connector{font-size:10px;font-weight:700;color:#46435D;letter-spacing:0.08em;text-transform:uppercase;text-align:center;padding:8px 0;opacity:0.3}
+
+/* TESTIMONIAL VIDEO */
+.testimonial-video{position:relative;background:#1a1a1a;border-radius:16px;overflow:hidden;min-height:400px;display:flex;flex-direction:column}
+.testimonial-video-bg{flex:1;background:#2a2838;display:flex;align-items:center;justify-content:center}
+.testimonial-video-play{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s}
+.testimonial-video-play:hover{background:rgba(255,255,255,0.25);transform:scale(1.08)}
+.testimonial-video-info{padding:20px 24px;display:flex;align-items:center;gap:14px;background:rgba(0,0,0,0.4)}
+.testimonial-video-info .tavatar{border:2px solid rgba(255,255,255,0.2)}
+.testimonial-video-info .tname{color:white}
+.testimonial-video-info .trole{color:rgba(255,255,255,0.5)}
+</style>
+
+<!-- SITE CONTENT -->
+<div id="site">
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="util-left">
+    <a href="index.html" class="util-link">Company</a><a href="hq.html" class="util-link">Amplify+ HQ</a>
+  </div>
+  <div class="util-center">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <svg width="32" height="32" viewBox="0 0 32 32"><rect width="16" height="16" fill="#c8c8c8"/><rect x="16" width="16" height="16" fill="#e4e4e4"/><rect y="16" width="16" height="16" fill="#e4e4e4"/><rect x="16" y="16" width="16" height="16" fill="#c8c8c8"/></svg>
+      <span class="logo-wordmark">Amplify</span>
+    </a>
+  </div>
+  <div class="util-right">
+    <a href="search-results.html" class="search-field" style="text-decoration:none"><span class="search-icon">&#x2315;</span><span class="search-placeholder">Search</span></a>
+    <span class="util-sep">|</span>
+    <a href="login.html" class="util-link" style="text-decoration:none">Login</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-stage">
+  <div class="nav-group">
+    <div class="island" id="primaryNav">
+      <button class="nav-btn" onmouseenter="openMenu('who',this)" onclick="openMenu('who',this)">Who We Serve <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="openMenu('solutions',this)" onclick="window.location.href='platform-overview.html'">Solutions <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="openMenu('services',this)" onclick="window.location.href='services-overview.html'">Services <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='healthy-church-hub.html'">Healthy Church Hub</button>
+      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='partners.html'">Partners</button>
+    </div>
+    <a href="request-demo.html" class="demo-island" style="text-decoration:none"><span class="demo-label">Request Demo</span></a>
+    <div class="mega" id="megaMenu"></div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div style="background:white;border-bottom:0.5px solid #f0f0f0">
+  <div class="w">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">&#x203A;</span>
+      <a href="platform-overview.html">Platform Overview</a>
+      <span class="sep">&#x203A;</span>
+      <span style="color:#46435D;font-weight:500">Accounting</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero" style="padding:64px 0 80px;position:relative">
+  <div class="anno anno-persona" style="position:absolute;top:16px;right:48px;margin:0;z-index:70">
+    <strong>Finance Treasurer</strong> &mdash; Anxiety about compliance/audit. Needs giving-accounting sync, accurate books, clergy payroll. Emotional driver: faithful stewardship, sleeping at night. <em>Secondary: Senior Pastor (board-ready reporting).</em>
+  </div>
+  <div class="anno anno-page" style="position:absolute;top:140px;right:48px;margin:0;z-index:60">
+    <strong>Finance Treasurer Architecture:</strong> Hero &rarr; Support (migration fear inoculation) &rarr; Stats &rarr; Testimonial (moved up) &rarr; Features (mosaic) &rarr; Integrations &rarr; Bundle (moved down) &rarr; Related (tiered) &rarr; FAQ (objection-heavy) &rarr; Resource &rarr; CTA. Structure mirrors Finance Treasurer's compliance-first emotional journey. <em>JTBD: "When I'm preparing for an audit, I want confidence that every number is right so the board trusts me."</em>
+  </div>
+  <div class="anno" style="position:absolute;bottom:20px;right:48px;margin:0;z-index:60">
+    <strong>Hero:</strong> Headline names the pain directly &mdash; complexity. Subtext immediately validates restricted funds, clergy payroll, and ministry reporting as core (not afterthoughts). Dual CTAs: "Book a Meeting" (high intent) and "Watch Overview" (low intent). <em>JTBD: Finance Treasurer needs to feel understood before evaluating features.</em>
+  </div>
+  <div class="w">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,255,255,0.1);border-radius:999px;margin-bottom:20px;border:0.5px solid rgba(255,255,255,0.15)">
+          <span style="font-size:14px">=</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.6);font-weight:500">Accounting</span>
+        </div>
+        <div style="font-size:44px;font-weight:700;color:white;letter-spacing:-0.025em;line-height:1.08;margin-bottom:16px">Church Finances Are Complex Enough. Your Software Shouldn't Be.</div>
+        <div style="font-size:16px;color:rgba(255,255,255,0.6);line-height:1.65;margin-bottom:32px">Restricted funds, clergy payroll, and ministry reporting are core functions of church accounting. Amplify Accounting handles all of these in one system built specifically for how churches operate.</div>
+        <div style="display:flex;gap:12px">
+          <a href="request-demo.html" class="btn btn-white" style="text-decoration:none">Book a Meeting</a>
+          <button class="btn btn-ghost">Watch Overview</button>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border-radius:14px;height:360px;border:0.5px solid rgba(255,255,255,0.12);display:flex;flex-direction:column;overflow:hidden">
+        <!-- Image area with accounting dashboard placeholder -->
+        <div style="flex:1;background:linear-gradient(135deg,rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.08) 100%);display:flex;align-items:center;justify-content:center;position:relative">
+          <div style="position:absolute;top:16px;left:16px;display:flex;gap:8px">
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.12)"></div>
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1)"></div>
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08)"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+            <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:20px;color:white;border:0.5px solid rgba(255,255,255,0.15)">&#x25B6;</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.06em;text-transform:uppercase;font-weight:600">Product demo</div>
+          </div>
+          <div style="position:absolute;bottom:16px;right:16px;font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:0.05em;text-transform:uppercase">Accounting dashboard imagery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEDICATED SUPPORT -->
+<div class="section" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Support at #2 &mdash; Intentional:</strong> "Fear of switching from QuickBooks" is the #1 pain for Finance Treasurers. Placing support above features performs objection inoculation. Three pillars map to migration steps: Migrate data, Configure accounts, Get ongoing help. <em>JTBD: "I can't afford to lose a single transaction during migration."</em>
+  </div>
+  <div class="w">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-bottom:48px">
+      <div>
+        <div class="section-eyebrow">Dedicated support with every step</div>
+        <div style="font-size:32px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.02em">Service, then Software</div>
+      </div>
+      <div style="padding-top:24px">
+        <div style="font-size:15px;color:#888;line-height:1.7">40+ years of church finance expertise. Live phone support, not ticket queues. Whether you're migrating from QuickBooks, setting up your chart of accounts, or running your first payroll &mdash; our team of real accounting experts walks alongside you from day one.</div>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">&#x1F680;</div>
+        <div class="card-title">Guided Implementation</div>
+        <div class="card-body">Migrating from QuickBooks, Sage, or another system? We handle the heavy lifting &mdash; chart of accounts mapping, historical data transfer, and parallel-run validation so nothing gets lost in transition.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#x1F4A1;</div>
+        <div class="card-title">Financial Consultation</div>
+        <div class="card-body">Our team helps you set up your chart of accounts, configure fund structures, and establish reporting templates that match your church's unique ministry structure and denominational requirements.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#x1F3A7;</div>
+        <div class="card-title">Live Support</div>
+        <div class="card-body">Real accounting experts who understand church finance &mdash; not generic help desk agents reading scripts. Call us during payroll, before an audit, or whenever you need a knowledgeable human on the line.</div>
+      </div>
+    </div>
+    <!-- Support team imagery -->
+    <div style="margin-top:40px;display:flex;align-items:center;gap:24px;justify-content:center">
+      <div style="display:flex;align-items:center;gap:-8px">
+        <div style="width:48px;height:48px;border-radius:50%;background:#d4d1e0;border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:16px;color:#46435D;margin-right:-12px;z-index:3">&#x1F468;</div>
+        <div style="width:48px;height:48px;border-radius:50%;background:#c8d7c5;border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:16px;color:#46435D;margin-right:-12px;z-index:2">&#x1F469;</div>
+        <div style="width:48px;height:48px;border-radius:50%;background:#d4d1e0;border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:16px;color:#46435D;z-index:1">&#x1F468;</div>
+      </div>
+      <div style="font-size:15px;color:#777;line-height:1.6;max-width:480px">With Amplify, you're not going it alone. You get a support team that knows church accounting inside and out &mdash; restricted funds, clergy payroll, audit prep &mdash; and is ready to help every step of the way.</div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="section alt" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;left:48px;margin:0;z-index:60">
+    <strong>Social Proof:</strong> Finance Treasurers are evidence-driven. "40+ years" = institutional credibility. "99% reduction" = concrete ROI. "0 workarounds" directly attacks QuickBooks class-tracking pain. Six stats create density of proof for the audit-minded persona. <em>JTBD: "I need to justify this purchase to the board with real numbers."</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Built for church finance</div>
+      <div class="section-h2">The Numbers Behind Amplify Accounting</div>
+      <div class="section-sub">Validated by thousands of churches who replaced workarounds with purpose-built tools. These are real results from real finance teams.</div>
+    </div>
+    <div class="grid-3" style="margin-bottom:32px">
+      <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:32px;text-align:center">
+        <div class="stat-num">40+</div>
+        <div class="stat-label">years of church finance expertise</div>
+      </div>
+      <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:32px;text-align:center">
+        <div class="stat-num">99%</div>
+        <div class="stat-label">reduction in payroll processing time</div>
+      </div>
+      <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:32px;text-align:center">
+        <div class="stat-num">55K+</div>
+        <div class="stat-label">churches on the Amplify platform</div>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:32px;text-align:center">
+        <div class="stat-num">0</div>
+        <div class="stat-label">workarounds needed &mdash; native fund accounting</div>
+      </div>
+      <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:32px;text-align:center">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">of clergy payroll edge cases handled natively</div>
+      </div>
+      <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:32px;text-align:center">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">audit-ready records &mdash; always current, always compliant</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIAL (MOVED UP — with video) -->
+<div class="section" style="position:relative">
+  <div class="anno anno-move" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Testimonial &mdash; Moved Up:</strong> Lee Ann validates the support promise before features. Her quote hits every Finance Treasurer pain point: reports for committees, auditors, payroll. "99% reduction" is the highest-impact number on the page. <em>JTBD: Real user language is more credible than feature copy &mdash; especially for compliance-anxious personas.</em>
+  </div>
+  <div class="w">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch">
+      <!-- Video side -->
+      <div class="testimonial-video">
+        <div class="testimonial-video-bg">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div class="testimonial-video-play">
+              <span style="font-size:22px;color:white;margin-left:3px">&#x25B6;</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.08em;font-weight:600">Watch Lee Ann's Story</div>
+          </div>
+        </div>
+        <div class="testimonial-video-info">
+          <div class="tavatar"></div>
+          <div>
+            <div class="tname">Lee Ann</div>
+            <div class="trole">Finance Administrator</div>
+          </div>
+        </div>
+      </div>
+      <!-- Quote + stat side -->
+      <div style="display:flex;flex-direction:column;justify-content:center">
+        <div class="section-eyebrow">Built for the people who keep the books</div>
+        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:24px">
+          <div style="font-size:64px;font-weight:700;color:#46435D;letter-spacing:-0.03em;line-height:1">99%</div>
+          <div style="font-size:15px;color:#888;line-height:1.5;max-width:280px">reduction in payroll processing time</div>
+        </div>
+        <div style="font-size:18px;color:#444;line-height:1.7;font-style:italic;margin-bottom:20px;border-left:3px solid #46435D;padding-left:20px">"I would not attempt to work in the finance office without Ministry Brands Accounting. Reports for committees and the auditors can be made as simple or complex as needed. It no longer takes all day to run payroll."</div>
+        <div style="font-size:12px;color:#aaa;text-transform:uppercase;letter-spacing:0.06em;font-weight:600">Lee Ann, Finance Administrator</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CORE FEATURES — MOSAIC GRID -->
+<div class="section alt" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Features &mdash; Mosaic Grid:</strong> Four pillars (Automate/Track/Handle/Report) as interlocking tiles convey "integrated whole." Maps to 4 Finance Treasurer anxieties: manual AP, fund tracking chaos, payroll complexity, audit readiness. <em>JTBD: "Recognition rather than recall" &mdash; scannable checklists reduce cognitive load for overwhelmed treasurers.</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Features</div>
+      <div class="section-h2">Stop Managing Workarounds. Start Running Finance.</div>
+      <div class="section-sub">Because church accounting isn't generic accounting. These tools reflect how churches actually manage funds, handle payroll, and prepare for audits.</div>
+    </div>
+
+    <div class="mosaic">
+      <!-- Tile 1: Automate Payments — large (span-7) -->
+      <div class="mosaic-tile span-7">
+        <div class="mosaic-visual">
+          <div class="overlay-icon">&#x1F4B3;</div>
+        </div>
+        <div class="mosaic-content">
+          <div class="mosaic-eyebrow">Automate payments</div>
+          <div class="mosaic-title">Stop Cutting Checks by Hand</div>
+          <div class="mosaic-body">AvidXchange-powered AP automation eliminates manual invoice processing and paper checks &mdash; reducing fraud risk and freeing your team for ministry.</div>
+          <ul class="mosaic-list">
+            <li>Automated invoice-to-payment workflow</li>
+            <li>Approval routing with audit trail</li>
+            <li>No more paper checks or envelopes</li>
+            <li>Fraud risk reduction</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tile 2: Track Ministry Funds — medium (span-5) -->
+      <div class="mosaic-tile span-5">
+        <div class="mosaic-visual" style="height:160px">
+          <div class="overlay-icon">&#x1F4CA;</div>
+        </div>
+        <div class="mosaic-content">
+          <div class="mosaic-eyebrow">Track ministry funds</div>
+          <div class="mosaic-title">Fund Accounting the Way Churches Actually Work</div>
+          <div class="mosaic-body">No more class-tracking hacks. Native fund accounting gives you real visibility into restricted and unrestricted funds.</div>
+          <ul class="mosaic-list">
+            <li>Native fund accounting (not class-tracking hacks)</li>
+            <li>Restricted vs unrestricted fund visibility</li>
+            <li>Designated gift tracking</li>
+            <li>Scales from single-site to multi-campus</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tile 3: Handle Clergy Payroll — medium (span-5) -->
+      <div class="mosaic-tile span-5">
+        <div class="mosaic-visual" style="height:160px">
+          <div class="overlay-icon">&#x1F4B0;</div>
+        </div>
+        <div class="mosaic-content">
+          <div class="mosaic-eyebrow">Handle clergy payroll</div>
+          <div class="mosaic-title">Sleep Soundly Knowing Payroll Is Handled</div>
+          <div class="mosaic-body">Clergy payroll is uniquely complex. Amplify handles housing allowances, dual-status calculations, and denominational requirements natively.</div>
+          <ul class="mosaic-list">
+            <li>Housing allowance and dual-status support</li>
+            <li>W-2 and 1099 processing</li>
+            <li>Church Law and Tax compliant</li>
+            <li>Social security opt-out handling</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tile 4: Report with Confidence — large (span-7) -->
+      <div class="mosaic-tile span-7">
+        <div class="mosaic-visual">
+          <div class="overlay-icon">&#x1F4CB;</div>
+        </div>
+        <div class="mosaic-content">
+          <div class="mosaic-eyebrow">Report with confidence</div>
+          <div class="mosaic-title">Walk Into Finance Meetings Prepared</div>
+          <div class="mosaic-body">Pre-built church-specific templates and audit-ready trails mean you're always prepared &mdash; whether it's a board meeting, an audit, or a denominational review.</div>
+          <ul class="mosaic-list">
+            <li>Pre-built church-specific report templates</li>
+            <li>Auditor-ready audit trails</li>
+            <li>Custom reporting structures</li>
+            <li>Board-ready financial summaries</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INTEGRATIONS -->
+<div class="section" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;left:48px;margin:0;z-index:60">
+    <strong>Integrations:</strong> This is the "finally in one place" moment for Finance Treasurers who've been manually exporting CSVs between systems. Giving &rarr; GL auto-sync eliminates the #1 reconciliation headache. People integration closes the donor-to-financials loop. <em>JTBD: "When I'm reconciling at month-end, I want data to flow automatically so I don't lose a weekend."</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Smart connections</div>
+      <div class="section-h2">Your Giving, People, and Accounting Data &mdash; Finally in One Place</div>
+      <div class="section-sub">No more exporting CSVs between systems. Amplify Accounting connects natively to your giving and people data so everything reconciles automatically.</div>
+    </div>
+    <div class="grid-2">
+      <div style="background:#f7f7f6;border:0.5px solid #e8e8e8;border-radius:16px;overflow:hidden">
+        <div style="background:#e0dfe8;height:200px;display:flex;align-items:center;justify-content:center">
+          <div style="font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.06em;text-transform:uppercase">Giving &rarr; GL Flow</div>
+        </div>
+        <div style="padding:24px">
+          <div style="font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">Giving Integration</div>
+          <div style="font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:8px;line-height:1.3">Donations flow into your general ledger automatically</div>
+          <div style="font-size:13px;color:#888;line-height:1.6">Every online gift, text donation, and recurring contribution posts to the correct fund in your GL without manual entry. Reconciliation happens in minutes, not hours.</div>
+        </div>
+      </div>
+      <div style="background:#f7f7f6;border:0.5px solid #e8e8e8;border-radius:16px;overflow:hidden">
+        <div style="background:#e0dfe8;height:200px;display:flex;align-items:center;justify-content:center">
+          <div style="font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.06em;text-transform:uppercase">People &rarr; Finance Link</div>
+        </div>
+        <div style="padding:24px">
+          <div style="font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">People Integration</div>
+          <div style="font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:8px;line-height:1.3">Donor profiles linked to financial records</div>
+          <div style="font-size:13px;color:#888;line-height:1.6">Member and donor data syncs bidirectionally between People and Accounting. Year-end statements, giving history, and contribution records stay perfectly aligned.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BUNDLE UPSELL (MOVED DOWN) -->
+<div class="section alt" style="position:relative">
+  <div class="anno anno-move" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Bundle &mdash; Moved Down:</strong> Now after Features + Integrations so visitor understands the product before expanding. "Financial Bundle" serves the Finance Treasurer's "complete stewardship" trigger. Also references Generosity Bundle for cross-sell. <em>JTBD: "When I present to the board, I want to show one integrated solution, not a patchwork of tools."</em>
+  </div>
+  <div class="w">
+    <div style="background:#46435D;border-radius:16px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px">Financial Bundle</div>
+        <div style="font-size:28px;font-weight:700;color:white;line-height:1.15;letter-spacing:-0.02em;margin-bottom:12px">Complete financial stewardship &mdash; one price, zero friction</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.65;margin-bottom:24px">The Financial Bundle pairs Accounting with Giving so your finance team has everything they need &mdash; from donation processing to board-ready reporting &mdash; in one connected system.</div>
+        <div style="display:flex;gap:12px">
+          <button class="btn btn-white">Explore the Bundle</button>
+          <button class="btn btn-ghost">Compare Plans</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.12);border-radius:12px;padding:18px">
+          <div style="font-size:20px;margin-bottom:8px">=</div>
+          <div style="font-size:14px;font-weight:600;color:white;margin-bottom:3px">Accounting</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.45)">Fund accounting & compliance</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.12);border-radius:12px;padding:18px">
+          <div style="font-size:20px;margin-bottom:8px">$</div>
+          <div style="font-size:14px;font-weight:600;color:white;margin-bottom:3px">Giving</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.45)">Online, text & recurring</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RELATED SOLUTIONS (TIERED) -->
+<div class="section" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Related Solutions &mdash; Tiered:</strong> Top 4 products (Giving, People, Safety, Communications) at full prominence &mdash; these are the Finance Treasurer's most frequent cross-functional touchpoints. Bottom 5 at reduced hierarchy for completeness without visual noise. <em>JTBD: Finance Treasurer sees Giving + People as essential; Safety and Communications as operational allies.</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">The pathway to healthy church operations</div>
+      <div class="section-h2">Financial stewardship is only the beginning</div>
+      <div class="section-sub">Integrated tooling solutions is the amplifier to healthy church operations. See how Amplify can help you fuel all areas of your ministry.</div>
+    </div>
+    <!-- Primary: 4 most connected products -->
+    <div class="grid-4" style="margin-bottom:20px">
+      <div class="card">
+        <div class="card-icon">$</div>
+        <div class="card-title">Giving</div>
+        <div class="card-body">Online, text, and recurring giving that syncs directly into your general ledger &mdash; no manual exports.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">P</div>
+        <div class="card-title">People</div>
+        <div class="card-body">Member records, donor profiles, and contribution history linked to your financial data in one system.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">S</div>
+        <div class="card-title">Safety</div>
+        <div class="card-body">Background checks, check-in protocols, and safety compliance &mdash; protect your people and your organization.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">@</div>
+        <div class="card-title">Communications</div>
+        <div class="card-body">Email, text, and push notifications to keep your congregation informed about stewardship and giving campaigns.</div>
+      </div>
+    </div>
+    <!-- Secondary: remaining products at reduced hierarchy -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <div class="mini-card">
+        <div class="mini-icon">W</div>
+        <div class="mini-name">Websites</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-icon">M</div>
+        <div class="mini-name">Mobile App</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-icon">&#x25B6;</div>
+        <div class="mini-name">Streaming</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-icon">&#x2713;</div>
+        <div class="mini-name">Service Planning</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-icon">&#x25C9;</div>
+        <div class="mini-name">Media</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ (EXPANDED with migration/objection questions) -->
+<div class="section alt" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;left:48px;margin:0;z-index:60">
+    <strong>FAQ &mdash; Objection-Heavy:</strong> 7 questions designed to defuse the Finance Treasurer's top objections: QuickBooks loyalty, switching cost fear, "if it ain't broke" inertia, size concerns, migration anxiety, payroll questions, and multi-campus complexity. Each question mirrors real buyer language from sales calls. <em>JTBD: "Help and documentation" &mdash; reduce decision anxiety at the point of highest friction.</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Common questions</div>
+      <div class="section-h2">Accounting FAQ</div>
+    </div>
+    <div style="max-width:680px;margin:0 auto">
+      <div style="padding:20px 0;border-bottom:0.5px solid #e8e8e8">
+        <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+          <div style="font-size:15px;font-weight:600;color:#1a1a1a">We already use QuickBooks. Why switch?</div>
+          <div style="font-size:14px;color:#ccc">+</div>
+        </div>
+      </div>
+      <div style="padding:20px 0;border-bottom:0.5px solid #e8e8e8">
+        <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+          <div style="font-size:15px;font-weight:600;color:#1a1a1a">How much does it really cost to switch accounting systems?</div>
+          <div style="font-size:14px;color:#ccc">+</div>
+        </div>
+      </div>
+      <div style="padding:20px 0;border-bottom:0.5px solid #e8e8e8">
+        <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+          <div style="font-size:15px;font-weight:600;color:#1a1a1a">Our current system works fine. Why fix what isn't broken?</div>
+          <div style="font-size:14px;color:#ccc">+</div>
+        </div>
+      </div>
+      <div style="padding:20px 0;border-bottom:0.5px solid #e8e8e8">
+        <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+          <div style="font-size:15px;font-weight:600;color:#1a1a1a">Aren't we too small to need dedicated church accounting software?</div>
+          <div style="font-size:14px;color:#ccc">+</div>
+        </div>
+      </div>
+      <div style="padding:20px 0;border-bottom:0.5px solid #e8e8e8">
+        <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+          <div style="font-size:15px;font-weight:600;color:#1a1a1a">How hard is it to switch accounting solutions?</div>
+          <div style="font-size:14px;color:#ccc">+</div>
+        </div>
+      </div>
+      <div style="padding:20px 0;border-bottom:0.5px solid #e8e8e8">
+        <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+          <div style="font-size:15px;font-weight:600;color:#1a1a1a">Is payroll built into Amplify's church accounting solution?</div>
+          <div style="font-size:14px;color:#ccc">+</div>
+        </div>
+      </div>
+      <div style="padding:20px 0">
+        <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer">
+          <div style="font-size:15px;font-weight:600;color:#1a1a1a">Can Amplify handle multi-campus financial reporting?</div>
+          <div style="font-size:14px;color:#ccc">+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESOURCE CALLOUT -->
+<div class="section" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Resource:</strong> Nurture path for non-buyers. Finance Treasurers who scrolled the full page but didn't convert get a tangible takeaway. Positions Amplify as a thought leader in church accounting, not just a vendor. <em>JTBD: "I want to improve our processes even if I'm not ready to buy today."</em>
+  </div>
+  <div class="w">
+    <div style="background:#eeedf4;border-radius:16px;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px">
+      <div>
+        <div style="font-size:22px;font-weight:700;color:#46435D;margin-bottom:8px">Master Church Financial Stewardship</div>
+        <div style="font-size:15px;color:#777;line-height:1.6;max-width:480px">The Blueprint for Church Accounting &mdash; a free guide covering fund accounting best practices, audit preparation checklists, clergy payroll compliance, and board reporting templates.</div>
+      </div>
+      <button class="btn btn-dark" style="flex-shrink:0">Download the Guide</button>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="section dark" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Final CTA:</strong> "See What Clarity Feels Like" echoes the hero's complexity-to-simplicity promise. "Someone who understands faith-based accounting" counters the fear of being sold to by generic software reps. Dual CTAs mirror Hero pattern. <em>JTBD: "When I finally decide to evaluate, I want to talk to someone who already understands my world."</em>
+  </div>
+  <div class="w" style="text-align:center">
+    <div style="font-size:38px;font-weight:700;color:white;letter-spacing:-0.02em;margin-bottom:12px">See What Clarity Feels Like</div>
+    <div style="font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto">Schedule a strategy session with someone who understands faith-based accounting &mdash; restricted funds, clergy payroll, audit prep, and everything in between.</div>
+    <div style="display:flex;gap:12px;justify-content:center">
+      <a href="request-demo.html" class="btn btn-white" style="text-decoration:none">Book a Demo</a>
+      <a href="request-demo.html" class="btn btn-ghost" style="text-decoration:none">Talk to Sales</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#1a1a1a;padding:64px 0 32px">
+  <div class="w">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+          <svg width="28" height="28" viewBox="0 0 32 32"><rect width="16" height="16" fill="rgba(255,255,255,0.4)"/><rect x="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect y="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect x="16" y="16" width="16" height="16" fill="rgba(255,255,255,0.4)"/></svg>
+          <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">Amplify</span>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:240px">Church management software built to help 55,000+ ministries thrive.</div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Solutions</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Increase Giving</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Engage Community</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Grow Attendance</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Streamline Ops</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Financial Stewardship</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Volunteer Teams</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Products</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="giving.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Giving</a>
+          <a href="accounting.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Accounting</a>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">People (ChMS)</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Websites</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Mobile App</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Service Planning</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Safety</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Resources</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Healthy Church Hub</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Webinars</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">eBooks</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Podcasts</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Blog</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Customer Stories</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Company</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">About</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Leadership</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Careers</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Partners</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Contact</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Press</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Ministry Brands. All rights reserved.</div>
+      <div style="display:flex;gap:24px">
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Privacy Policy</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Terms of Service</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Cookie Settings</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ANNOTATION TOGGLE -->
+<div class="anno-legend-wrap">
+  <div class="anno-legend">
+    <div class="anno-legend-title">Annotation Legend</div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div>
+  </div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'">
+    <span style="font-size:16px">&#x1F4DD;</span>
+    <span class="anno-label">Show Annotations</span>
+  </button>
+</div>
+
+</div><!-- end #site -->
+
+<script>
+document.body.classList.add("anno-hidden");
+var icons={"Giving":"$","Accounting":"=","People (ChMS)":"P","Websites":"W","Mobile App":"M","Communications":"@","Streaming":"&#x25B6;","Service Planning":"&#x2713;","Media":"&#x25C9;","Safety":"S"};
+var allProducts=[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"People (ChMS)",desc:"Member records & group management"},{name:"Websites",desc:"Your digital front door"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Media",desc:"Sermon content & distribution"},{name:"Safety",desc:"Check-in, background checks & protocols"}];
+var productUrls={"Giving":"giving.html","Accounting":"accounting.html","People (ChMS)":"people.html","Websites":"websites.html","Mobile App":"mobile-app.html","Communications":"communications.html","Streaming":"streaming.html","Service Planning":"service-planning.html","Media":"media.html","Safety":"safety.html"};
+var bundleUrls={"Complete Bundle":"complete-bundle.html","Generosity Bundle":"generosity-bundle.html","Financial Bundle":"financial-bundle.html","Digital Bundle":"digital-bundle.html"};
+var outcomes={
+  all:{desc:"The full Amplify platform \u2014 every tool working together as one connected system.",products:allProducts,gridClass:"all-grid",bundle:{name:"Complete Bundle",tagline:"Every tool, one price \u2014 the full Amplify platform for your entire church.",cta:"Explore the Complete Bundle \u2192"}},
+  giving:{desc:"Tools that invite generosity and give your finance team full visibility.",products:[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"Mobile App",desc:"Give from anywhere, anytime"},{name:"Communications",desc:"Generosity campaigns & appeals"}],bundle:{name:"Generosity Bundle",tagline:"All the giving & finance tools your church needs \u2014 packaged together.",cta:"Explore the Generosity Bundle \u2192"}},
+  engage:{desc:"Keep your congregation connected and actively participating between Sundays.",products:[{name:"People (ChMS)",desc:"Member records & group management"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Websites",desc:"Your digital front door"}]},
+  grow:{desc:"Expand your reach, convert first-time visitors, and retain the people who find you.",products:[{name:"Websites",desc:"First impression that converts"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Media",desc:"Sermon content & distribution"},{name:"Mobile App",desc:"Retain & re-engage members"}]},
+  streamline:{desc:"Replace fragmented tools with one connected system so nothing falls through the cracks.",products:[{name:"People (ChMS)",desc:"One database for your whole church"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Safety",desc:"Check-in & safety protocols"},{name:"Communications",desc:"Automated workflows & scheduling"}]},
+  financial:{desc:"Accurate books, clean audits, and board-ready reporting \u2014 without the late nights.",products:[{name:"Accounting",desc:"Fund accounting & compliance"},{name:"Giving",desc:"Donor management & statements"}],bundle:{name:"Financial Bundle",tagline:"Accounting, giving, and reporting \u2014 everything for financial stewardship.",cta:"Explore the Financial Bundle \u2192"}},
+  volunteer:{desc:"Your team shows up prepared, on time, knowing exactly what\u2019s expected.",products:[{name:"Service Planning",desc:"Scheduling & role assignment"},{name:"People (ChMS)",desc:"Volunteer profiles & history"},{name:"Communications",desc:"Automated reminders & confirmations"},{name:"Mobile App",desc:"Volunteers manage availability on the go"}]},
+  digital:{desc:"Meet your congregation \u2014 and reach new ones \u2014 wherever they spend their time.",products:[{name:"Streaming",desc:"Broadcast live or on-demand"},{name:"Websites",desc:"A site that works as hard as you do"},{name:"Mobile App",desc:"Your branded church app"},{name:"Media",desc:"Manage & distribute content at scale"}],bundle:{name:"Digital Bundle",tagline:"Streaming, websites, app, and media \u2014 launch your digital ministry.",cta:"Explore the Digital Bundle \u2192"}}
+};
+var simpleMenus={
+  who:{sections:[{icon:"👤",label:"By Role",items:[{n:"Executive / Senior Pastor",h:"senior-pastor.html"},{n:"Associate Pastor",h:"associate-pastor.html"},{n:"Finance Leader / Treasurer",h:"finance-treasurer.html"},{n:"Communications Director",h:"communications-director.html"},{n:"Worship Pastor",h:"worship-pastor.html"}]},{icon:"⛪",label:"By Church Type",items:[{n:"Multi-site Churches",h:"multi-site.html"},{n:"Denominations & Networks",h:"denominations.html"},{n:"Large Churches",h:"large-churches.html"},{n:"Growing Churches",h:"growing-churches.html"},{n:"Small Churches",h:"small-churches.html"},{n:"Church Plants",h:"church-plants.html"},{n:"Digital / Online Churches",h:"digital-churches.html"}]}]},
+  services:{sections:[{icon:"🛠",label:"Support & Delivery",items:[{n:"Services Overview",h:"services-overview.html"},{n:"Implementation & Onboarding",h:"service-detail.html"},{n:"Strategy & Consulting",h:"service-detail.html"},{n:"Data Migration",h:"service-detail.html"},{n:"Support & Training",h:"service-detail.html"}]}]}
+};
+function renderRight(k){var o=outcomes[k],gc=o.gridClass||'';var cards=o.products.map(function(p){return'<a href="'+(productUrls[p.name]||'#')+'" class="product-card" style="text-decoration:none;color:inherit"><div class="product-icon">'+(icons[p.name]||'\u00B7')+'</div><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.desc+'</div></a>';}).join('');var bh='';if(o.bundle){bh='<a href="'+(bundleUrls[o.bundle.name]||'#')+'" class="bundle-banner" style="text-decoration:none;color:inherit"><div class="bundle-icon">\u2B21</div><div class="bundle-body"><div class="bundle-name">'+o.bundle.name+'</div><div class="bundle-tagline">'+o.bundle.tagline+'</div></div><span class="bundle-cta">'+o.bundle.cta+'</span></a>';}document.getElementById('rPanel').innerHTML='<div class="right-header">Relevant tools</div><div class="outcome-desc">'+o.desc+'</div>'+bh+'<div class="products-grid '+gc+'">'+cards+'</div><div class="right-footer"><span class="rf-label">Not sure where to start?</span><span class="rf-link">Take the Healthy Church Assessment \u2192</span></div>';}
+function buildSolutions(){var defs=[{k:'all',label:'All Solutions'},{k:'giving',label:'Increase Giving & Generosity'},{k:'engage',label:'Engage Your Church Community'},{k:'grow',label:'Grow Attendance & Reach'},{k:'streamline',label:'Streamline Church Operations'},{k:'financial',label:'Improve Financial Stewardship'},{k:'volunteer',label:'Strengthen Volunteer & Staff Effectiveness'},{k:'digital',label:'Launch & Scale Digital Ministry'}];var rows=defs.map(function(d,i){return'<div class="outcome-item'+(i===0?' active':'')+'" data-k="'+d.k+'">'+d.label+' <span class="arr">\u203A</span></div>';}).join('');return'<div class="mega-inner"><div class="left-panel"><div class="left-label">What do you want to do?</div>'+rows+'<div class="left-divider"></div><a href="platform-overview.html" class="platform-btn" style="text-decoration:none;color:inherit"><span class="platform-btn-label">Platform Overview \u2192</span><span class="platform-btn-sub">How Amplify works as one system</span></a></div><div class="right-panel" id="rPanel"></div></div>';}
+function buildSimple(k){return'<div class="simple-panel">'+simpleMenus[k].sections.map(function(s){return'<div class="s-section"><div class="s-category"><div class="s-cat-icon">'+s.icon+'</div><span class="s-cat-label">'+s.label+'</span></div>'+s.items.map(function(i){return'<a href="'+i.h+'" class="s-item">'+i.n+'</a>';}).join('')+'</div>';}).join('')+'</div>';}
+var cur=null,curBtn=null;
+function closeMenu(){if(curBtn)curBtn.classList.remove('open');var m=document.getElementById('megaMenu');if(m)m.classList.remove('show');cur=null;curBtn=null;}
+function openMenu(key,btn){closeMenu();cur=key;curBtn=btn;btn.classList.add('open');var m=document.getElementById('megaMenu');if(key==='solutions'){m.innerHTML=buildSolutions();m.querySelectorAll('.outcome-item').forEach(function(el){el.addEventListener('mouseenter',function(){m.querySelectorAll('.outcome-item').forEach(function(i){i.classList.remove('active')});this.classList.add('active');renderRight(this.dataset.k);});});renderRight('all');}else{m.innerHTML=buildSimple(key);}m.classList.add('show');}
+document.addEventListener('click',function(e){if(!e.target.closest('#primaryNav')&&!e.target.closest('.utility-bar'))closeMenu();});
+</script>

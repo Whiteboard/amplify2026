@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creating a Hybrid Worship Experience | Amplify Blog</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:#46435D;min-height:100vh}
+#site{display:block}
+.utility-bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;height:56px;background:white;border-bottom:0.5px solid #e8e8e8;position:sticky;top:0;z-index:300}
+.util-left{display:flex;align-items:center;gap:16px}
+.util-link{font-size:12px;color:#888;cursor:pointer;transition:color 0.1s;text-decoration:none}
+.util-link:hover{color:#46435D}
+.util-center{display:flex;align-items:center;justify-content:center;gap:10px}
+.logo-wordmark{font-size:24px;font-weight:700;color:#46435D;letter-spacing:-0.02em}
+.util-right{display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.util-sep{color:#ddd;font-size:10px}
+.search-field{display:flex;align-items:center;gap:6px;cursor:text}
+.search-icon{color:#bbb;font-size:14px}
+.search-placeholder{font-size:12px;color:#bbb}
+.nav-stage{display:flex;justify-content:center;align-items:center;padding:14px 32px;position:sticky;top:56px;z-index:200;pointer-events:none}
+.nav-group{display:inline-flex;align-items:center;gap:10px;position:relative;pointer-events:all}
+.island{background:white;border:0.5px solid #e0e0e0;border-radius:999px;display:inline-flex;align-items:center;gap:2px;padding:5px 8px;box-shadow:0 2px 16px rgba(0,0,0,0.08)}
+.nav-btn{background:none;border:none;padding:9px 18px;font-size:14px;color:#666;cursor:pointer;border-radius:999px;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:all 0.12s}
+.nav-btn:hover,.nav-btn.open{color:#46435D;background:#f5f4f8}
+.chevron{font-size:8px;color:#ccc;transition:transform 0.15s}
+.nav-btn.open .chevron{transform:rotate(180deg)}
+.demo-island{background:#46435D;border-radius:999px;padding:10px 22px;box-shadow:0 2px 16px rgba(70,67,93,0.25);cursor:pointer;transition:background 0.12s}
+.demo-island:hover{background:#5a576e}
+.demo-label{font-size:13px;font-weight:500;color:white}
+.mega{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:white;border:0.5px solid #e0e0e0;z-index:200;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.1);overflow:hidden;min-width:860px}
+.mega.show{display:block}
+.mega-inner{display:grid;grid-template-columns:1fr 2fr;min-height:380px}
+.left-panel{background:#f7f7f6;border-right:0.5px solid #ebebeb;padding:18px 0}
+.left-label{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;padding:0 16px 12px}
+.outcome-item{display:flex;align-items:center;justify-content:space-between;padding:9px 16px;cursor:pointer;font-size:14px;color:#666;border-left:2px solid transparent;transition:all 0.1s;line-height:1.3}
+.outcome-item:hover{color:#46435D;background:#f0efed;border-left-color:#ccc}
+.outcome-item.active{color:#46435D;background:white;border-left-color:#46435D;font-weight:600}
+.outcome-item .arr{font-size:11px;opacity:0;flex-shrink:0;margin-left:8px}
+.outcome-item.active .arr,.outcome-item:hover .arr{opacity:0.5}
+.outcome-item.active .arr{opacity:1}
+.left-divider{border:none;border-top:0.5px solid #ebebeb;margin:10px 0}
+.platform-btn{margin:0 12px 4px;padding:10px 14px;border:0.5px solid #e0e0e0;border-radius:10px;cursor:pointer;text-align:left;background:white;width:calc(100% - 24px);display:block;transition:all 0.12s}
+.platform-btn:hover{border-color:#46435D}
+.platform-btn-label{font-size:12px;font-weight:500;color:#46435D;display:block}
+.platform-btn-sub{font-size:11px;color:#aaa;margin-top:2px;display:block}
+.right-panel{padding:20px 22px;display:flex;flex-direction:column}
+.right-header{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+.outcome-desc{font-size:14px;color:#777;margin-bottom:14px;line-height:1.5;padding-bottom:14px;border-bottom:0.5px solid #f0f0f0}
+.bundle-banner{display:flex;align-items:center;gap:14px;padding:14px 18px;margin-bottom:14px;background:#eeedf4;border:0.5px solid #d8d6e6;border-radius:12px;cursor:pointer;transition:all 0.12s}
+.bundle-banner:hover{border-color:#46435D;box-shadow:0 4px 12px rgba(70,67,93,0.1)}
+.bundle-icon{width:36px;height:36px;border-radius:8px;background:#46435D;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;flex-shrink:0}
+.bundle-body{flex:1;min-width:0}
+.bundle-name{font-size:13px;font-weight:700;color:#46435D;margin-bottom:2px}
+.bundle-tagline{font-size:11px;color:#888;line-height:1.4}
+.bundle-cta{font-size:11px;font-weight:600;color:#46435D;white-space:nowrap;flex-shrink:0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.products-grid.all-grid{grid-template-columns:repeat(4,1fr)}
+.product-card{border:0.5px solid #ebebeb;border-radius:12px;padding:14px;cursor:pointer;transition:all 0.12s;background:white;display:flex;flex-direction:column}
+.product-card:hover{border-color:#46435D;transform:translateY(-2px);box-shadow:0 4px 12px rgba(70,67,93,0.1)}
+.product-icon{width:30px;height:30px;border-radius:7px;background:#f0f0f0;margin-bottom:9px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#999}
+.product-name{font-size:13px;font-weight:600;color:#46435D;margin-bottom:3px}
+.product-desc{font-size:11px;color:#aaa;line-height:1.4}
+.right-footer{margin-top:16px;padding-top:12px;border-top:0.5px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+.rf-label{font-size:12px;color:#aaa}
+.rf-link{font-size:12px;color:#46435D;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+.simple-panel{padding:20px 24px;min-width:260px}
+.s-section{margin-bottom:16px}
+.s-category{display:flex;align-items:center;justify-content:center;gap:8px;padding:6px 0;margin-bottom:4px}
+.s-cat-icon{width:26px;height:26px;border-radius:6px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.s-cat-label{font-size:14px;font-weight:700;color:#46435D}
+.s-item{font-size:14px;color:#666;padding:7px 0;cursor:pointer;border-bottom:0.5px solid #f5f5f5;transition:color 0.1s;display:block;text-align:center}
+.s-item:hover{color:#46435D}
+.s-item:last-child{border-bottom:none}
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:72px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f7f6}
+.section.dark{background:#46435D}
+.breadcrumb{display:flex;align-items:center;gap:8px;padding:16px 0;font-size:12px;color:#aaa}
+.breadcrumb a{color:#888;text-decoration:none;transition:color 0.1s}
+.breadcrumb a:hover{color:#46435D}
+.breadcrumb .sep{color:#ccc}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 28px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;white-space:nowrap}
+.btn-white{background:white;color:#46435D}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.3)}.btn-ghost:hover{border-color:rgba(255,255,255,0.6);color:white}
+.btn-dark{background:#46435D;color:white}.btn-dark:hover{background:#5a576e}
+.anno{position:relative;z-index:50;margin:0 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);max-width:380px;transition:opacity 0.25s,transform 0.25s;transform:translateY(16px);pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}
+.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-persona{background:#F3E5F5;border-color:#CE93D8;color:#4A148C}
+.anno-persona::before{content:'👤 PERSONA FOCUS';color:#7B1FA2}
+.anno-gap{background:#FFF3E0;border-color:#FFB74D;color:#E65100}
+.anno-gap::before{content:'⚠️ GAP IDENTIFIED';color:#E65100}
+.anno-move{background:#E8F5E9;border-color:#81C784;color:#1B5E20}
+.anno-move::before{content:'✅ SECTION MOVED';color:#2E7D32}
+.anno strong{font-weight:700}
+.anno em{font-style:italic;color:inherit;opacity:0.75}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#46435D;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(70,67,93,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#5a576e}
+body.anno-hidden .anno{display:none}
+
+/* BLOG POST SPECIFIC STYLES */
+.article-hero-img{width:100%;height:400px;background:#e0dfe8;display:flex;align-items:center;justify-content:center;font-size:14px;color:#999;letter-spacing:0.02em}
+.article-header{max-width:720px;margin:0 auto;padding:40px 24px 0}
+.tag-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.tag-pill{display:inline-block;padding:5px 14px;background:#eeedf4;border-radius:999px;font-size:12px;font-weight:500;color:#46435D}
+.article-title{font-size:38px;font-weight:700;color:#1a1a1a;letter-spacing:-0.02em;line-height:1.2;margin-bottom:16px}
+.article-meta{font-size:14px;color:#999;margin-bottom:0}
+.article-body{max-width:720px;margin:0 auto;padding:48px 24px 0}
+.article-body p{font-size:16px;color:#444;line-height:1.8;margin-bottom:24px}
+.article-body h2{font-size:26px;font-weight:700;color:#1a1a1a;letter-spacing:-0.01em;margin:48px 0 16px}
+.article-body h3{font-size:20px;font-weight:600;color:#1a1a1a;margin:32px 0 12px}
+.article-body ol,.article-body ul{margin:0 0 24px 24px}
+.article-body li{font-size:16px;color:#444;line-height:1.8;margin-bottom:12px}
+.article-body li strong{color:#1a1a1a}
+.share-bar{max-width:720px;margin:0 auto;padding:40px 24px 0;display:flex;align-items:center;gap:16px;border-top:0.5px solid #e8e8e8;padding-top:32px}
+.share-label{font-size:13px;font-weight:600;color:#666}
+.share-icons{display:flex;gap:10px}
+.share-icon{width:38px;height:38px;border-radius:10px;border:0.5px solid #e0e0e0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#888;cursor:pointer;transition:all 0.12s;background:white}
+.share-icon:hover{border-color:#46435D;color:#46435D}
+.author-box{max-width:720px;margin:0 auto;padding:32px 24px 0}
+.author-card{display:flex;align-items:center;gap:20px;padding:24px;background:#f7f7f6;border:0.5px solid #e8e8e8;border-radius:16px}
+.author-avatar{width:56px;height:56px;border-radius:50%;background:#e0dfe8;display:flex;align-items:center;justify-content:center;font-size:20px;color:#999;flex-shrink:0}
+.author-info{flex:1}
+.author-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
+.author-role{font-size:13px;color:#888;margin-bottom:6px}
+.author-bio{font-size:13px;color:#999;line-height:1.5}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.blog-card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.15s}
+.blog-card:hover{border-color:#46435D;transform:translateY(-3px);box-shadow:0 8px 24px rgba(70,67,93,0.1)}
+.blog-card-img{width:100%;height:180px;background:#e0dfe8;display:flex;align-items:center;justify-content:center;font-size:12px;color:#bbb}
+.blog-card-body{padding:20px}
+.blog-card-tag{display:inline-block;padding:4px 10px;background:#eeedf4;border-radius:999px;font-size:11px;font-weight:500;color:#46435D;margin-bottom:12px}
+.blog-card-title{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.35;margin-bottom:12px;letter-spacing:-0.01em}
+.blog-card-meta{font-size:12px;color:#aaa}
+</style>
+</head>
+<body>
+<div id="site">
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="util-left">
+    <a href="index.html" class="util-link">Company</a><a href="hq.html" class="util-link">Amplify+ HQ</a>
+  </div>
+  <div class="util-center">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <svg width="32" height="32" viewBox="0 0 32 32"><rect width="16" height="16" fill="#c8c8c8"/><rect x="16" width="16" height="16" fill="#e4e4e4"/><rect y="16" width="16" height="16" fill="#e4e4e4"/><rect x="16" y="16" width="16" height="16" fill="#c8c8c8"/></svg>
+      <span class="logo-wordmark">Amplify</span>
+    </a>
+  </div>
+  <div class="util-right">
+    <a href="search-results.html" class="search-field" style="text-decoration:none"><span class="search-icon">&#x2315;</span><span class="search-placeholder">Search</span></a>
+    <span class="util-sep">|</span>
+    <a href="login.html" class="util-link" style="text-decoration:none">Login</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-stage">
+  <div class="nav-group">
+    <div class="island" id="primaryNav">
+      <button class="nav-btn" onmouseenter="openMenu('who',this)" onclick="openMenu('who',this)">Who We Serve <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="openMenu('solutions',this)" onclick="window.location.href='platform-overview.html'">Solutions <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="openMenu('services',this)" onclick="window.location.href='services-overview.html'">Services <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='healthy-church-hub.html'">Healthy Church Hub</button>
+      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='partners.html'">Partners</button>
+    </div>
+    <a href="request-demo.html" class="demo-island" style="text-decoration:none"><span class="demo-label">Request Demo</span></a>
+    <div class="mega" id="megaMenu"></div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div style="background:white;border-bottom:0.5px solid #f0f0f0">
+  <div class="w">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span class="sep">/</span>
+      <a href="healthy-church-hub.html">Healthy Church Hub</a><span class="sep">/</span>
+      <span style="color:#46435D;font-weight:500">Blog</span>
+    </div>
+  </div>
+</div>
+
+<!-- ANNOTATION: PAGE STRATEGY -->
+<div class="anno anno-page" style="margin:16px 48px"><strong>Content Hub Strategy:</strong> Blog posts serve as organic SEO entry points and nurture content. Layout prioritizes readability (720px max-width, 16px body text). Share bar + related posts create internal linking loops. Author box builds trust and brand voice. <em>Key metric: time on page, scroll depth, related-post click-through.</em></div>
+
+<!-- ARTICLE HERO IMAGE -->
+<div style="background:white">
+  <div class="article-hero-img">Featured Image &middot; 1200 &times; 400 &middot; Hybrid Worship</div>
+</div>
+
+<!-- ANNOTATION: PERSONA FOCUS -->
+<div class="anno anno-persona" style="margin:16px 48px"><strong>Communications Director</strong> — Needs shareable content to distribute to congregation. Blog posts give them ammunition for newsletters, social posts, and bulletin inserts. <em>Secondary: Senior Pastor seeking thought leadership positioning.</em></div>
+
+<!-- ARTICLE HEADER -->
+<div style="background:white;padding-bottom:0">
+  <div class="article-header">
+    <div class="tag-row">
+      <span class="tag-pill">Worship</span>
+      <span class="tag-pill">Streaming</span>
+      <span class="tag-pill">Media &amp; Tech</span>
+    </div>
+    <h1 class="article-title">Creating a Hybrid Worship Experience: Blending In-Person and Online Services</h1>
+    <p class="article-meta">April 7, 2026 &middot; 7 min read</p>
+  </div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div style="background:white;padding-bottom:56px">
+  <div class="article-body">
+
+    <p>The pandemic fundamentally changed how churches connect with their congregations. What started as a temporary pivot to online services has become a permanent expectation for many members. Today, the most effective churches aren't choosing between in-person and digital &mdash; they're building worship experiences that embrace both.</p>
+
+    <h2>What Is Hybrid Worship?</h2>
+    <p>Hybrid worship is a ministry model that intentionally serves both in-person and online attendees during the same service. Rather than simply livestreaming a camera feed of a Sunday service, a true hybrid approach designs the experience so that remote participants feel welcomed, engaged, and spiritually nourished &mdash; just as much as those sitting in the pews. It means thinking about camera angles, on-screen graphics, chat interaction, and even how the pastor addresses the online audience directly.</p>
+
+    <h2>Why It Matters in 2026</h2>
+    <ol>
+      <li><strong>Congregation expectations have shifted.</strong> Members who discovered online church during 2020&ndash;2021 haven't fully returned to in-person attendance. Research shows that 30&ndash;40% of previously in-person attendees now prefer a hybrid or fully online option at least part of the time.</li>
+      <li><strong>Reach extends beyond your zip code.</strong> A hybrid model lets you serve college students away at school, traveling families, homebound seniors, and curious visitors who aren't ready to walk through your doors yet. Your "congregation" is no longer limited by geography.</li>
+      <li><strong>It's a discipleship accelerator.</strong> When worship content is available on-demand alongside live services, members can revisit sermons, share clips with friends, and engage with small-group discussion guides throughout the week &mdash; deepening the impact of every message.</li>
+    </ol>
+
+    <h2>6 Strategies for a Seamless Hybrid Experience</h2>
+
+    <h3>1. Invest in Production Quality (Not Perfection)</h3>
+    <p>You don't need a Hollywood studio, but you do need clear audio, stable video, and intentional camera work. A single high-quality PTZ camera with a dedicated audio feed often outperforms a multi-camera setup that's poorly managed. Start with what you can execute well and improve over time.</p>
+
+    <h3>2. Speak to Both Audiences</h3>
+    <p>Train your worship leaders and pastors to acknowledge the online audience by name. Simple phrases like "Whether you're here in the room or joining us from home" create inclusion. Consider placing a monitor near the stage showing the live chat so the speaker can reference online participants naturally.</p>
+
+    <h3>3. Create Interactive Moments</h3>
+    <p>Use live polls, prayer request forms, and real-time chat to give online attendees a way to participate &mdash; not just observe. Assign a dedicated "online host" who welcomes newcomers in the chat, answers questions, and relays prayer requests to the pastoral team.</p>
+
+    <h3>4. Design Your Service Order with Both Formats in Mind</h3>
+    <p>Some elements that work beautifully in person &mdash; like a five-minute greeting time &mdash; can feel awkward online. Build your service order so that every segment has a digital equivalent: in-person greeting becomes a chat prompt, the offering moment includes a text-to-give reminder, and announcements feature on-screen graphics alongside the spoken word.</p>
+
+    <h3>5. Leverage On-Demand Content</h3>
+    <p>The live service is just the beginning. Repurpose sermon clips into social media content, create devotional follow-ups, and publish discussion guides that small groups can use during the week. A robust media library turns a single Sunday message into a week's worth of discipleship touchpoints.</p>
+
+    <h3>6. Measure What Matters</h3>
+    <p>Track more than just viewer counts. Look at average watch time, chat engagement, prayer requests submitted, and online-to-in-person conversion rates. These metrics tell you whether your hybrid strategy is building community &mdash; not just broadcasting content.</p>
+
+    <h2>Common Challenges</h2>
+    <p>Hybrid worship isn't without its hurdles. Volunteer burnout is real &mdash; running a production team alongside a traditional worship team requires more hands on deck. Technical issues like audio sync problems, streaming lag, and inconsistent internet can frustrate online viewers. And there's always the tension of resource allocation: how much of your budget goes to the room vs. the stream? The key is to start small, iterate based on feedback, and remember that imperfect hospitality still beats no hospitality at all.</p>
+
+    <h2>Final Thoughts</h2>
+    <p>Hybrid worship isn't a trend &mdash; it's the new baseline for churches that want to meet people where they are. The good news is that you don't have to figure it all out overnight. Start with one intentional improvement each month: better audio this month, an online host next month, a post-service discussion guide the month after. Over time, these incremental steps add up to a worship experience that truly serves your entire congregation &mdash; wherever they are.</p>
+
+  </div>
+
+  <!-- SHARE BAR -->
+  <div class="share-bar">
+    <span class="share-label">Share this article</span>
+    <div class="share-icons">
+      <div class="share-icon" title="Twitter / X">X</div>
+      <div class="share-icon" title="Facebook">f</div>
+      <div class="share-icon" title="LinkedIn">in</div>
+      <div class="share-icon" title="Copy Link">&#x1F517;</div>
+    </div>
+  </div>
+
+  <!-- AUTHOR BOX -->
+  <div class="author-box">
+    <div class="author-card">
+      <div class="author-avatar">MB</div>
+      <div class="author-info">
+        <div class="author-name">Ministry Brands Team</div>
+        <div class="author-role">Content Team</div>
+        <div class="author-bio">The Ministry Brands content team writes about church growth, leadership, technology, and the strategies that help ministries thrive.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ANNOTATION: RELATED POSTS DESIGN NOTE -->
+<div class="anno" style="margin:16px 48px"><strong>Related Posts:</strong> Algorithm would surface posts by matching topic tags + recency. 3-card grid creates browse momentum without overwhelming. Each card mirrors the HCH resource card pattern for consistency.</div>
+
+<!-- RELATED POSTS -->
+<div class="section alt">
+  <div class="w">
+    <div style="text-align:center;margin-bottom:40px">
+      <div style="font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px">Keep Reading</div>
+      <div style="font-size:32px;font-weight:700;color:#1a1a1a;letter-spacing:-0.02em">More from the Blog</div>
+    </div>
+    <div class="related-grid">
+      <!-- Card 1 -->
+      <div class="blog-card">
+        <div class="blog-card-img">Image Placeholder &middot; 600 &times; 360</div>
+        <div class="blog-card-body">
+          <span class="blog-card-tag">Generosity</span>
+          <div class="blog-card-title">5 Ways to Increase Year-End Giving at Your Church</div>
+          <div class="blog-card-meta">March 22, 2026 &middot; 5 min read</div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="blog-card">
+        <div class="blog-card-img">Image Placeholder &middot; 600 &times; 360</div>
+        <div class="blog-card-body">
+          <span class="blog-card-tag">Leadership</span>
+          <div class="blog-card-title">Building a Volunteer Culture That Lasts Beyond Launch Day</div>
+          <div class="blog-card-meta">March 15, 2026 &middot; 6 min read</div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="blog-card">
+        <div class="blog-card-img">Image Placeholder &middot; 600 &times; 360</div>
+        <div class="blog-card-body">
+          <span class="blog-card-tag">Communications</span>
+          <div class="blog-card-title">Email Open Rates Are Declining &mdash; Here's What to Do Instead</div>
+          <div class="blog-card-meta">March 8, 2026 &middot; 4 min read</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER SIGNUP -->
+<div style="background:white;padding:0 0 72px">
+  <div class="w">
+    <div style="background:#f7f7f6;border:0.5px solid #e8e8e8;border-radius:20px;padding:56px 64px;display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center;margin-top:72px">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px">Newsletter</div>
+        <div style="font-size:32px;font-weight:700;color:#1a1a1a;letter-spacing:-0.02em;line-height:1.2;margin-bottom:12px">Subscribe to our Newsletter</div>
+        <div style="font-size:15px;color:#888;line-height:1.7">Receive a biweekly newsletter full of thought leadership, product news, events and tips on nurturing a healthy church.</div>
+      </div>
+      <div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+          <input type="text" placeholder="First Name" style="padding:14px 16px;border:0.5px solid #ddd;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:white;outline:none;color:#1a1a1a">
+          <input type="email" placeholder="Email Address" style="padding:14px 16px;border:0.5px solid #ddd;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:white;outline:none;color:#1a1a1a">
+        </div>
+        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-bottom:20px">
+          <input type="checkbox" style="width:18px;height:18px;accent-color:#46435D;margin-top:2px;flex-shrink:0;cursor:pointer">
+          <span style="font-size:12px;color:#888;line-height:1.5">I acknowledge that Ministry Brands will use my information to contact me about relevant content, products and services and that I can unsubscribe from these emails at any time.</span>
+        </label>
+        <button style="width:100%;padding:16px;background:#46435D;color:white;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s" onmouseover="this.style.background='#5a576e'" onmouseout="this.style.background='#46435D'">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA SECTION -->
+<div class="section dark">
+  <div class="w">
+    <div style="text-align:center">
+      <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px">Ready to go deeper?</div>
+      <div style="font-size:32px;font-weight:700;color:white;letter-spacing:-0.02em;margin-bottom:8px">See Amplify in Action</div>
+      <div style="font-size:16px;color:rgba(255,255,255,0.55);max-width:480px;margin:0 auto 28px;line-height:1.6">Get a personalized demo and see how Amplify can help your church thrive.</div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="request-demo.html" class="btn btn-white" style="text-decoration:none">Request Demo</a>
+        <a href="tel:8653296192" class="btn btn-ghost" style="text-decoration:none">Call 865-329-6192</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#1a1a1a;padding:64px 0 32px">
+  <div class="w">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+          <svg width="28" height="28" viewBox="0 0 32 32"><rect width="16" height="16" fill="rgba(255,255,255,0.4)"/><rect x="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect y="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect x="16" y="16" width="16" height="16" fill="rgba(255,255,255,0.4)"/></svg>
+          <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">Amplify</span>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:240px">Church management software built to help 55,000+ ministries thrive.</div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Solutions</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Increase Giving</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Engage Community</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Grow Attendance</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Streamline Ops</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Financial Stewardship</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Volunteer Teams</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Products</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="giving.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Giving</a>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Accounting</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">People (ChMS)</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Websites</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Mobile App</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Service Planning</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Safety</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Resources</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Healthy Church Hub</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Webinars</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">eBooks</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Podcasts</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Blog</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Customer Stories</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Company</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">About</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Leadership</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Careers</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Partners</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Contact</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Press</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Ministry Brands. All rights reserved.</div>
+      <div style="display:flex;gap:24px">
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Privacy Policy</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Terms of Service</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Cookie Settings</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ANNOTATION TOGGLE -->
+<div class="anno-legend-wrap">
+  <div class="anno-legend">
+    <div class="anno-legend-title">Annotation Legend</div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div>
+  </div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'">
+    <span style="font-size:16px">&#x1F4DD;</span>
+    <span class="anno-label">Show Annotations</span>
+  </button>
+</div>
+
+</div><!-- end #site -->
+
+<script>
+document.body.classList.add("anno-hidden");
+var icons={"Giving":"$","Accounting":"=","People (ChMS)":"P","Websites":"W","Mobile App":"M","Communications":"@","Streaming":"&#x25B6;","Service Planning":"&#x2713;","Media":"&#x25C9;","Safety":"S"};
+var allProducts=[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"People (ChMS)",desc:"Member records & group management"},{name:"Websites",desc:"Your digital front door"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Media",desc:"Sermon content & distribution"},{name:"Safety",desc:"Check-in, background checks & protocols"}];
+var productUrls={"Giving":"giving.html","Accounting":"accounting.html","People (ChMS)":"people.html","Websites":"websites.html","Mobile App":"mobile-app.html","Communications":"communications.html","Streaming":"streaming.html","Service Planning":"service-planning.html","Media":"media.html","Safety":"safety.html"};
+var bundleUrls={"Complete Bundle":"complete-bundle.html","Generosity Bundle":"generosity-bundle.html","Financial Bundle":"financial-bundle.html","Digital Bundle":"digital-bundle.html"};
+var outcomes={
+  all:{desc:"The full Amplify platform \u2014 every tool working together as one connected system.",products:allProducts,gridClass:"all-grid",bundle:{name:"Complete Bundle",tagline:"Every tool, one price \u2014 the full Amplify platform for your entire church.",cta:"Explore the Complete Bundle \u2192"}},
+  giving:{desc:"Tools that invite generosity and give your finance team full visibility.",products:[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"Mobile App",desc:"Give from anywhere, anytime"},{name:"Communications",desc:"Generosity campaigns & appeals"}],bundle:{name:"Generosity Bundle",tagline:"All the giving & finance tools your church needs \u2014 packaged together.",cta:"Explore the Generosity Bundle \u2192"}},
+  engage:{desc:"Keep your congregation connected and actively participating between Sundays.",products:[{name:"People (ChMS)",desc:"Member records & group management"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Websites",desc:"Your digital front door"}]},
+  grow:{desc:"Expand your reach, convert first-time visitors, and retain the people who find you.",products:[{name:"Websites",desc:"First impression that converts"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Media",desc:"Sermon content & distribution"},{name:"Mobile App",desc:"Retain & re-engage members"}]},
+  streamline:{desc:"Replace fragmented tools with one connected system so nothing falls through the cracks.",products:[{name:"People (ChMS)",desc:"One database for your whole church"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Safety",desc:"Check-in & safety protocols"},{name:"Communications",desc:"Automated workflows & scheduling"}]},
+  financial:{desc:"Accurate books, clean audits, and board-ready reporting \u2014 without the late nights.",products:[{name:"Accounting",desc:"Fund accounting & compliance"},{name:"Giving",desc:"Donor management & statements"}],bundle:{name:"Financial Bundle",tagline:"Accounting, giving, and reporting \u2014 everything for financial stewardship.",cta:"Explore the Financial Bundle \u2192"}},
+  volunteer:{desc:"Your team shows up prepared, on time, knowing exactly what\u2019s expected.",products:[{name:"Service Planning",desc:"Scheduling & role assignment"},{name:"People (ChMS)",desc:"Volunteer profiles & history"},{name:"Communications",desc:"Automated reminders & confirmations"},{name:"Mobile App",desc:"Volunteers manage availability on the go"}]},
+  digital:{desc:"Meet your congregation \u2014 and reach new ones \u2014 wherever they spend their time.",products:[{name:"Streaming",desc:"Broadcast live or on-demand"},{name:"Websites",desc:"A site that works as hard as you do"},{name:"Mobile App",desc:"Your branded church app"},{name:"Media",desc:"Manage & distribute content at scale"}],bundle:{name:"Digital Bundle",tagline:"Streaming, websites, app, and media \u2014 launch your digital ministry.",cta:"Explore the Digital Bundle \u2192"}}
+};
+var simpleMenus={
+  who:{sections:[{icon:"\uD83D\uDC64",label:"By Role",items:[{n:"Executive / Senior Pastor",h:"senior-pastor.html"},{n:"Associate Pastor",h:"associate-pastor.html"},{n:"Finance Leader / Treasurer",h:"finance-treasurer.html"},{n:"Communications Director",h:"communications-director.html"},{n:"Worship Pastor",h:"worship-pastor.html"}]},{icon:"\u26EA",label:"By Church Type",items:[{n:"Multi-site Churches",h:"multi-site.html"},{n:"Denominations & Networks",h:"denominations.html"},{n:"Large Churches",h:"large-churches.html"},{n:"Growing Churches",h:"growing-churches.html"},{n:"Small Churches",h:"small-churches.html"},{n:"Church Plants",h:"church-plants.html"},{n:"Digital / Online Churches",h:"digital-churches.html"}]}]},
+  services:{sections:[{icon:"\uD83D\uDEE0",label:"Support & Delivery",items:[{n:"Services Overview",h:"services-overview.html"},{n:"Implementation & Onboarding",h:"service-detail.html"},{n:"Strategy & Consulting",h:"service-detail.html"},{n:"Data Migration",h:"service-detail.html"},{n:"Support & Training",h:"service-detail.html"}]}]}
+};
+function renderRight(k){var o=outcomes[k],gc=o.gridClass||'';var cards=o.products.map(function(p){return'<a href="'+(productUrls[p.name]||'#')+'" class="product-card" style="text-decoration:none;color:inherit"><div class="product-icon">'+(icons[p.name]||'\u00B7')+'</div><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.desc+'</div></a>';}).join('');var bh='';if(o.bundle){bh='<a href="'+(bundleUrls[o.bundle.name]||'#')+'" class="bundle-banner" style="text-decoration:none;color:inherit"><div class="bundle-icon">\u2B21</div><div class="bundle-body"><div class="bundle-name">'+o.bundle.name+'</div><div class="bundle-tagline">'+o.bundle.tagline+'</div></div><span class="bundle-cta">'+o.bundle.cta+'</span></a>';}document.getElementById('rPanel').innerHTML='<div class="right-header">Relevant tools</div><div class="outcome-desc">'+o.desc+'</div>'+bh+'<div class="products-grid '+gc+'">'+cards+'</div><div class="right-footer"><span class="rf-label">Not sure where to start?</span><span class="rf-link">Take the Healthy Church Assessment \u2192</span></div>';}
+function buildSolutions(){var defs=[{k:'all',label:'All Solutions'},{k:'giving',label:'Increase Giving & Generosity'},{k:'engage',label:'Engage Your Church Community'},{k:'grow',label:'Grow Attendance & Reach'},{k:'streamline',label:'Streamline Church Operations'},{k:'financial',label:'Improve Financial Stewardship'},{k:'volunteer',label:'Strengthen Volunteer & Staff Effectiveness'},{k:'digital',label:'Launch & Scale Digital Ministry'}];var rows=defs.map(function(d,i){return'<div class="outcome-item'+(i===0?' active':'')+'" data-k="'+d.k+'">'+d.label+' <span class="arr">\u203A</span></div>';}).join('');return'<div class="mega-inner"><div class="left-panel"><div class="left-label">What do you want to do?</div>'+rows+'<div class="left-divider"></div><a href="platform-overview.html" class="platform-btn" style="text-decoration:none;color:inherit"><span class="platform-btn-label">Platform Overview \u2192</span><span class="platform-btn-sub">How Amplify works as one system</span></a></div><div class="right-panel" id="rPanel"></div></div>';}
+function buildSimple(k){return'<div class="simple-panel">'+simpleMenus[k].sections.map(function(s){return'<div class="s-section"><div class="s-category"><div class="s-cat-icon">'+s.icon+'</div><span class="s-cat-label">'+s.label+'</span></div>'+s.items.map(function(i){return'<a href="'+i.h+'" class="s-item">'+i.n+'</a>';}).join('')+'</div>';}).join('')+'</div>';}
+var cur=null,curBtn=null;
+function closeMenu(){if(curBtn)curBtn.classList.remove('open');var m=document.getElementById('megaMenu');if(m)m.classList.remove('show');cur=null;curBtn=null;}
+function openMenu(key,btn){closeMenu();cur=key;curBtn=btn;btn.classList.add('open');var m=document.getElementById('megaMenu');if(key==='solutions'){m.innerHTML=buildSolutions();m.querySelectorAll('.outcome-item').forEach(function(el){el.addEventListener('mouseenter',function(){m.querySelectorAll('.outcome-item').forEach(function(i){i.classList.remove('active')});this.classList.add('active');renderRight(this.dataset.k);});});renderRight('all');}else{m.innerHTML=buildSimple(key);}m.classList.add('show');}
+document.addEventListener('click',function(e){var m=document.getElementById('megaMenu');var n=document.getElementById('primaryNav');if(m&&!m.contains(e.target)&&!n.contains(e.target))closeMenu();});
+</script>
+</body>
+</html>

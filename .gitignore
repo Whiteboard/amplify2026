@@ -1,0 +1,39 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*~
+
+# Node (in case anyone adds tooling later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Claude Code — keep shared config, ignore user-specific
+.claude/settings.local.json
+.claude/memory/
+.claude/sessions/
+
+# Logs & temp
+*.log
+*.tmp
+.cache/
+
+# OS / shell
+.env
+.env.local

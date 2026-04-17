@@ -1,0 +1,798 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:#46435D;min-height:100vh}
+#site{display:block}
+
+/* UTILITY BAR */
+.utility-bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;height:56px;background:white;border-bottom:0.5px solid #e8e8e8;position:sticky;top:0;z-index:300}
+.util-left{display:flex;align-items:center;gap:16px}
+.util-link{font-size:12px;color:#888;cursor:pointer;transition:color 0.1s;text-decoration:none}
+.util-link:hover{color:#46435D}
+.util-center{display:flex;align-items:center;justify-content:center;gap:10px}
+.logo-wordmark{font-size:24px;font-weight:700;color:#46435D;letter-spacing:-0.02em}
+.util-right{display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.util-sep{color:#ddd;font-size:10px}
+.search-field{display:flex;align-items:center;gap:6px;cursor:text;text-decoration:none}
+.search-icon{color:#bbb;font-size:14px}
+.search-placeholder{font-size:12px;color:#bbb}
+
+/* NAV */
+.nav-stage{display:flex;justify-content:center;align-items:center;padding:14px 32px;position:sticky;top:56px;z-index:200;pointer-events:none}
+.nav-group{display:inline-flex;align-items:center;gap:10px;position:relative;pointer-events:all}
+.island{background:white;border:0.5px solid #e0e0e0;border-radius:999px;display:inline-flex;align-items:center;gap:2px;padding:5px 8px;box-shadow:0 2px 16px rgba(0,0,0,0.08)}
+.nav-btn{background:none;border:none;padding:9px 18px;font-size:14px;color:#666;cursor:pointer;border-radius:999px;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:all 0.12s}
+.nav-btn:hover,.nav-btn.open{color:#46435D;background:#f5f4f8}
+.chevron{font-size:8px;color:#ccc;transition:transform 0.15s}
+.nav-btn.open .chevron{transform:rotate(180deg)}
+.demo-island{background:#46435D;border-radius:999px;padding:10px 22px;box-shadow:0 2px 16px rgba(70,67,93,0.25);cursor:pointer;transition:background 0.12s}
+.demo-island:hover{background:#5a576e}
+.demo-label{font-size:13px;font-weight:500;color:white}
+
+/* MEGA MENU */
+.mega{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:white;border:0.5px solid #e0e0e0;z-index:200;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.1);overflow:hidden;min-width:860px}
+.mega.show{display:block}
+.mega-inner{display:grid;grid-template-columns:1fr 2fr;min-height:380px}
+.left-panel{background:#f7f7f6;border-right:0.5px solid #ebebeb;padding:18px 0}
+.left-label{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;padding:0 16px 12px}
+.outcome-item{display:flex;align-items:center;justify-content:space-between;padding:9px 16px;cursor:pointer;font-size:14px;color:#666;border-left:2px solid transparent;transition:all 0.1s;line-height:1.3}
+.outcome-item:hover{color:#46435D;background:#f0efed;border-left-color:#ccc}
+.outcome-item.active{color:#46435D;background:white;border-left-color:#46435D;font-weight:600}
+.outcome-item .arr{font-size:11px;opacity:0;flex-shrink:0;margin-left:8px}
+.outcome-item.active .arr,.outcome-item:hover .arr{opacity:0.5}
+.outcome-item.active .arr{opacity:1}
+.left-divider{border:none;border-top:0.5px solid #ebebeb;margin:10px 0}
+.platform-btn{margin:0 12px 4px;padding:10px 14px;border:0.5px solid #e0e0e0;border-radius:10px;cursor:pointer;text-align:left;background:white;width:calc(100% - 24px);display:block;transition:all 0.12s}
+.platform-btn:hover{border-color:#46435D}
+.platform-btn-label{font-size:12px;font-weight:500;color:#46435D;display:block}
+.platform-btn-sub{font-size:11px;color:#aaa;margin-top:2px;display:block}
+.right-panel{padding:20px 22px;display:flex;flex-direction:column}
+.right-header{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+.outcome-desc{font-size:14px;color:#777;margin-bottom:14px;line-height:1.5;padding-bottom:14px;border-bottom:0.5px solid #f0f0f0}
+.bundle-banner{display:flex;align-items:center;gap:14px;padding:14px 18px;margin-bottom:14px;background:#eeedf4;border:0.5px solid #d8d6e6;border-radius:12px;cursor:pointer;transition:all 0.12s}
+.bundle-banner:hover{border-color:#46435D;box-shadow:0 4px 12px rgba(70,67,93,0.1)}
+.bundle-icon{width:36px;height:36px;border-radius:8px;background:#46435D;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;flex-shrink:0}
+.bundle-body{flex:1;min-width:0}
+.bundle-name{font-size:13px;font-weight:700;color:#46435D;margin-bottom:2px}
+.bundle-tagline{font-size:11px;color:#888;line-height:1.4}
+.bundle-cta{font-size:11px;font-weight:600;color:#46435D;white-space:nowrap;flex-shrink:0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.products-grid.all-grid{grid-template-columns:repeat(4,1fr)}
+.product-card{border:0.5px solid #ebebeb;border-radius:12px;padding:14px;cursor:pointer;transition:all 0.12s;background:white;display:flex;flex-direction:column}
+.product-card:hover{border-color:#46435D;transform:translateY(-2px);box-shadow:0 4px 12px rgba(70,67,93,0.1)}
+.product-icon{width:30px;height:30px;border-radius:7px;background:#f0f0f0;margin-bottom:9px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#999}
+.product-name{font-size:13px;font-weight:600;color:#46435D;margin-bottom:3px}
+.product-desc{font-size:11px;color:#aaa;line-height:1.4}
+.right-footer{margin-top:16px;padding-top:12px;border-top:0.5px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+.rf-label{font-size:12px;color:#aaa}
+.rf-link{font-size:12px;color:#46435D;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+.simple-panel{padding:20px 24px;min-width:260px}
+.s-section{margin-bottom:16px}
+.s-category{display:flex;align-items:center;justify-content:center;gap:8px;padding:6px 0;margin-bottom:4px}
+.s-cat-icon{width:26px;height:26px;border-radius:6px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.s-cat-label{font-size:14px;font-weight:700;color:#46435D}
+.s-item{font-size:14px;color:#666;padding:7px 0;cursor:pointer;border-bottom:0.5px solid #f5f5f5;transition:color 0.1s;display:block;text-align:center}
+.s-item:hover{color:#46435D}
+.s-item:last-child{border-bottom:none}
+
+/* LAYOUT */
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:72px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f7f6}
+.section.dark{background:#46435D}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 28px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;white-space:nowrap}
+.btn-white{background:white;color:#46435D}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.3)}.btn-ghost:hover{border-color:rgba(255,255,255,0.6);color:white}
+.btn-dark{background:#46435D;color:white}.btn-dark:hover{background:#5a576e}
+.btn-outline{background:transparent;color:#46435D;border:1px solid #c0bdd4}.btn-outline:hover{border-color:#46435D}
+.breadcrumb{display:flex;align-items:center;gap:8px;padding:16px 0;font-size:12px;color:#aaa}
+.breadcrumb a{color:#888;text-decoration:none;transition:color 0.1s}
+.breadcrumb a:hover{color:#46435D}
+.breadcrumb .sep{color:#ccc}
+
+/* HCH HERO */
+.hch-hero{background:#46435D;padding:48px 0 56px}
+.hch-search{max-width:640px;margin:0 auto}
+.hch-search-bar{display:flex;align-items:center;background:white;border-radius:14px;padding:5px 5px 5px 20px;box-shadow:0 8px 40px rgba(0,0,0,0.2);gap:10px}
+.hch-search-input{flex:1;border:none;outline:none;font-size:16px;font-family:'DM Sans',sans-serif;color:#1a1a1a;background:transparent;padding:10px 0}
+.hch-search-input::placeholder{color:#bbb}
+.hch-search-btn{background:#46435D;color:white;border:none;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s}
+.hch-search-btn:hover{background:#5a576e}
+
+/* FILTER BAR */
+.filter-bar{display:flex;align-items:center;gap:8px;padding:20px 0;border-bottom:0.5px solid #e8e8e8;flex-wrap:wrap}
+.filter-group{display:flex;align-items:center;gap:6px}
+.filter-label{font-size:12px;color:#aaa;font-weight:600;margin-right:2px}
+.f-chip{padding:7px 14px;border-radius:999px;font-size:12px;font-weight:500;color:#666;border:0.5px solid #e0e0e0;cursor:pointer;background:white;transition:all 0.12s;font-family:'DM Sans',sans-serif}
+.f-chip:hover{border-color:#46435D;color:#46435D}
+.f-chip.active{background:#46435D;color:white;border-color:#46435D}
+.f-chip .count{font-size:10px;color:#aaa;margin-left:4px;font-weight:400}
+.f-chip.active .count{color:rgba(255,255,255,0.6)}
+.f-divider{width:1px;height:20px;background:#e8e8e8;margin:0 6px}
+.clear-btn{font-size:12px;color:#46435D;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;font-weight:500;padding:7px 12px;border-radius:999px;transition:background 0.1s}
+.clear-btn:hover{background:#f5f4f8}
+
+/* RESOURCE CARDS */
+.resource-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:32px 0}
+.r-card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;overflow:hidden;transition:all 0.15s;cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+.r-card:hover{border-color:#c0bdd4;box-shadow:0 6px 24px rgba(70,67,93,0.08);transform:translateY(-2px)}
+.r-card-img{height:180px;background:#e0dfe8;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.r-card-img .r-type-badge{position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600;color:white;background:rgba(70,67,93,0.75);backdrop-filter:blur(4px)}
+.r-card-body{padding:20px;flex:1;display:flex;flex-direction:column}
+.r-card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.r-topic-tag{font-size:11px;color:#46435D;background:#eeedf4;padding:3px 8px;border-radius:999px;font-weight:500}
+.r-card-title{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:8px}
+.r-card-excerpt{font-size:13px;color:#888;line-height:1.6;margin-bottom:12px;flex:1}
+.r-card-meta{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#aaa;padding-top:12px;border-top:0.5px solid #f0f0f0}
+.r-card-type{font-weight:600;color:#46435D}
+.r-card-duration{color:#bbb}
+
+/* FEATURED STRIP */
+.featured-strip{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:32px 0;border-bottom:0.5px solid #e8e8e8}
+.featured-card{display:flex;gap:20px;background:white;border:0.5px solid #e8e8e8;border-radius:16px;overflow:hidden;transition:all 0.15s;cursor:pointer;text-decoration:none;color:inherit}
+.featured-card:hover{border-color:#c0bdd4;box-shadow:0 6px 24px rgba(70,67,93,0.08)}
+.featured-img{width:200px;flex-shrink:0;background:#e0dfe8;display:flex;align-items:center;justify-content:center}
+.featured-body{padding:20px;display:flex;flex-direction:column;justify-content:center}
+.featured-eyebrow{font-size:11px;font-weight:600;color:#46435D;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px}
+.featured-title{font-size:18px;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:6px}
+.featured-sub{font-size:13px;color:#888;line-height:1.5}
+
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:center;gap:4px;padding:32px 0}
+.page-btn{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#666;cursor:pointer;border:0.5px solid #e8e8e8;background:white;transition:all 0.12s;font-family:'DM Sans',sans-serif}
+.page-btn:hover{border-color:#46435D;color:#46435D}
+.page-btn.active{background:#46435D;color:white;border-color:#46435D}
+
+/* RESULTS META */
+.results-meta{display:flex;align-items:center;justify-content:space-between;padding-top:20px}
+.results-count{font-size:13px;color:#888}
+.results-count strong{color:#1a1a1a}
+.sort-select{font-size:12px;color:#666;border:0.5px solid #e0e0e0;border-radius:8px;padding:6px 12px;background:white;font-family:'DM Sans',sans-serif;cursor:pointer}
+
+/* ANNOTATION SYSTEM */
+.anno{position:relative;z-index:50;margin:0 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);max-width:380px;transition:opacity 0.25s,transform 0.25s;transform:translateY(16px);pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}
+.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-gap{background:#FFF3E0;border-color:#FFB74D;color:#E65100}
+.anno-gap::before{content:'⚠️ GAP IDENTIFIED';color:#E65100}
+.anno strong{font-weight:700}
+.anno em{font-style:italic;color:inherit;opacity:0.75}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#46435D;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(70,67,93,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#5a576e}
+body.anno-hidden .anno{display:none}
+</style>
+
+<div id="site">
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="util-left">
+    <a href="index.html" class="util-link">Company</a><a href="hq.html" class="util-link">Amplify+ HQ</a>
+  </div>
+  <div class="util-center">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <svg width="32" height="32" viewBox="0 0 32 32"><rect width="16" height="16" fill="#c8c8c8"/><rect x="16" width="16" height="16" fill="#e4e4e4"/><rect y="16" width="16" height="16" fill="#e4e4e4"/><rect x="16" y="16" width="16" height="16" fill="#c8c8c8"/></svg>
+      <span class="logo-wordmark">Amplify</span>
+    </a>
+  </div>
+  <div class="util-right">
+    <a href="search-results.html" class="search-field" style="text-decoration:none"><span class="search-icon">&#x2315;</span><span class="search-placeholder">Search</span></a>
+    <span class="util-sep">|</span>
+    <a href="login.html" class="util-link" style="text-decoration:none">Login</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-stage">
+  <div class="nav-group">
+    <div class="island" id="primaryNav">
+      <button class="nav-btn" onmouseenter="openMenu('who',this)" onclick="openMenu('who',this)">Who We Serve <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="openMenu('solutions',this)" onclick="window.location.href='platform-overview.html'">Solutions <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="openMenu('services',this)" onclick="window.location.href='services-overview.html'">Services <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="closeMenu()" style="color:#46435D;font-weight:600">Healthy Church Hub</button>
+      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='partners.html'">Partners</button>
+    </div>
+    <a href="request-demo.html" class="demo-island" style="text-decoration:none"><span class="demo-label">Request Demo</span></a>
+    <div class="mega" id="megaMenu"></div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div style="background:white;border-bottom:0.5px solid #f0f0f0">
+  <div class="w">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">&#x203A;</span>
+      <span style="color:#46435D;font-weight:500">Healthy Church Hub</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- HERO — Full-bleed image with text directly overlaid -->
+<div style="position:relative;overflow:hidden;background:#2c2a3d">
+  <!-- Placeholder background -->
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#46435D 0%,#2c2a3d 50%,#3a3750 100%)"></div>
+  <!-- Content directly on image -->
+  <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:100px 48px 96px;text-align:center">
+    <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:18px">Healthy Church Hub</div>
+    <h1 style="font-size:52px;font-weight:700;color:#fff;letter-spacing:-0.03em;line-height:1.1;margin:0 auto 18px;max-width:740px">Your one-stop hub for<br>church growth resources</h1>
+    <p style="font-size:17px;color:rgba(255,255,255,0.78);line-height:1.7;max-width:580px;margin:0 auto 36px">Explore blogs, podcasts, webinars, eBooks, and customer stories designed to help your church thrive — all in one place.</p>
+    <div style="max-width:560px;margin:0 auto">
+      <div class="hch-search-bar" style="box-shadow:0 8px 32px rgba(0,0,0,0.25);border:none;background:rgba(255,255,255,0.97)">
+        <span style="font-size:18px;color:#bbb;flex-shrink:0">&#x2315;</span>
+        <input type="text" class="hch-search-input" placeholder="Search resources, topics, authors..." id="hchSearch">
+        <button class="hch-search-btn">Search</button>
+      </div>
+    </div>
+    <!-- Placeholder label -->
+    <div style="position:absolute;top:16px;right:24px;font-size:9px;color:rgba(255,255,255,0.25);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;font-family:'DM Sans',sans-serif">Hero Image &bull; 1440 &times; 600 &bull; Community / People</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div style="background:white;min-height:60vh">
+  <div class="w">
+
+    <!-- FEATURED RESOURCES -->
+    <div class="featured-strip">
+      <a href="ebook-landing.html" class="featured-card">
+        <div class="featured-img">
+          <div style="text-align:center">
+            <div style="font-size:28px;margin-bottom:4px">&#x1F4CA;</div>
+            <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.05em">eBook</div>
+          </div>
+        </div>
+        <div class="featured-body">
+          <div class="featured-eyebrow">Featured eBook</div>
+          <div class="featured-title">2026 Annual Church Giving Report</div>
+          <div class="featured-sub">Data-driven insights on giving trends, donor behavior, and generosity benchmarks across 55,000+ churches.</div>
+        </div>
+      </a>
+      <a href="webinar-registration.html" class="featured-card">
+        <div class="featured-img" style="background:#eeedf4">
+          <div style="text-align:center">
+            <div style="font-size:28px;margin-bottom:4px">&#x1F3A5;</div>
+            <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.05em">Webinar</div>
+          </div>
+        </div>
+        <div class="featured-body">
+          <div class="featured-eyebrow">Upcoming Webinar &bull; May 22</div>
+          <div class="featured-title">Amplify Your Church's Digital Reach in 2026</div>
+          <div class="featured-sub">Free 60-minute session on building a digital strategy that actually grows your congregation. Live + recording available.</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar" id="filterBar">
+      <div class="filter-group">
+        <span class="filter-label">Type:</span>
+        <button class="f-chip active" data-filter="type" data-value="all" onclick="toggleFilter(this)">All</button>
+        <button class="f-chip" data-filter="type" data-value="blog" onclick="toggleFilter(this)">Blog <span class="count">171</span></button>
+        <button class="f-chip" data-filter="type" data-value="podcast" onclick="toggleFilter(this)">Podcast <span class="count">100</span></button>
+        <button class="f-chip" data-filter="type" data-value="webinar" onclick="toggleFilter(this)">Webinar <span class="count">39</span></button>
+        <button class="f-chip" data-filter="type" data-value="ebook" onclick="toggleFilter(this)">eBook <span class="count">20</span></button>
+        <button class="f-chip" data-filter="type" data-value="customer-story" onclick="toggleFilter(this)">Customer Story <span class="count">21</span></button>
+      </div>
+      <div class="f-divider"></div>
+      <div class="filter-group" style="flex-wrap:wrap">
+        <span class="filter-label">Topic:</span>
+        <button class="f-chip" data-filter="topic" data-value="generosity" onclick="toggleFilter(this)">Generosity <span class="count">65</span></button>
+        <button class="f-chip" data-filter="topic" data-value="leadership" onclick="toggleFilter(this)">Leadership <span class="count">99</span></button>
+        <button class="f-chip" data-filter="topic" data-value="communications" onclick="toggleFilter(this)">Communications <span class="count">78</span></button>
+        <button class="f-chip" data-filter="topic" data-value="media-tech" onclick="toggleFilter(this)">Media & Tech <span class="count">46</span></button>
+        <button class="f-chip" data-filter="topic" data-value="seasonal" onclick="toggleFilter(this)">Seasonal <span class="count">72</span></button>
+        <button class="f-chip" data-filter="topic" data-value="service-planning" onclick="toggleFilter(this)">Service Planning <span class="count">52</span></button>
+        <button class="f-chip" data-filter="topic" data-value="staff-volunteers" onclick="toggleFilter(this)">Staff & Volunteers <span class="count">70</span></button>
+        <button class="f-chip" data-filter="topic" data-value="websites-apps" onclick="toggleFilter(this)">Websites & Apps <span class="count">40</span></button>
+      </div>
+      <button class="clear-btn" onclick="clearAllFilters()">Clear All</button>
+    </div>
+
+    <!-- RESULTS META -->
+    <div class="results-meta">
+      <div class="results-count" id="resultsCount">Showing <strong>18</strong> resources</div>
+      <select class="sort-select">
+        <option>Most Recent</option>
+        <option>Most Popular</option>
+        <option>Alphabetical</option>
+      </select>
+    </div>
+
+    <!-- RESOURCE GRID -->
+    <div class="resource-grid" id="resourceGrid">
+
+      <!-- 1 Blog / Seasonal -->
+      <a href="blog-post.html" class="r-card" data-type="blog" data-topic="seasonal">
+        <div class="r-card-img">
+          <span class="r-type-badge">Blog</span>
+          <div style="font-size:40px">&#x1F490;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Seasonal</span><span class="r-topic-tag">Hospitality</span></div>
+          <div class="r-card-title">10 Mother's Day Church Service Ideas to Celebrate Moms in 2026</div>
+          <div class="r-card-excerpt">Creative ways to honor moms this May — from service elements to social media templates your team can use today.</div>
+          <div class="r-card-meta"><span class="r-card-type">Blog</span><span class="r-card-duration">6 min read</span></div>
+        </div>
+      </a>
+
+      <!-- 2 Podcast / Media & Tech -->
+      <a href="podcast-episode.html" class="r-card" data-type="podcast" data-topic="media-tech">
+        <div class="r-card-img" style="background:#2a2838">
+          <span class="r-type-badge">Podcast</span>
+          <div style="font-size:40px">&#x1F3A7;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Media & Tech</span><span class="r-topic-tag">Streaming</span></div>
+          <div class="r-card-title">Ep. 166 | Toby Walters: Balancing Modern Church Tech With Sacred Spaces</div>
+          <div class="r-card-excerpt">How to embrace technology without losing the warmth and authenticity of your worship experience.</div>
+          <div class="r-card-meta"><span class="r-card-type">Podcast</span><span class="r-card-duration">42 min</span></div>
+        </div>
+      </a>
+
+      <!-- 3 Podcast / Leadership -->
+      <a href="podcast-episode.html" class="r-card" data-type="podcast" data-topic="leadership">
+        <div class="r-card-img" style="background:#2a2838">
+          <span class="r-type-badge">Podcast</span>
+          <div style="font-size:40px">&#x1F399;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Leadership</span><span class="r-topic-tag">Teams</span></div>
+          <div class="r-card-title">Ep. 165 | Tim Stevens: Long-Term Leadership Lessons in Ministry</div>
+          <div class="r-card-excerpt">Practical wisdom from decades of church leadership on building teams, navigating change, and staying the course.</div>
+          <div class="r-card-meta"><span class="r-card-type">Podcast</span><span class="r-card-duration">38 min</span></div>
+        </div>
+      </a>
+
+      <!-- 4 Blog / Staff & Volunteers -->
+      <a href="blog-post.html" class="r-card" data-type="blog" data-topic="staff-volunteers">
+        <div class="r-card-img">
+          <span class="r-type-badge">Blog</span>
+          <div style="font-size:40px">&#x1F91D;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Staff & Volunteers</span><span class="r-topic-tag">Engagement</span></div>
+          <div class="r-card-title">How to Build a Volunteer Culture That Lasts Beyond Sunday</div>
+          <div class="r-card-excerpt">Retention strategies that turn one-time helpers into committed ministry partners year-round.</div>
+          <div class="r-card-meta"><span class="r-card-type">Blog</span><span class="r-card-duration">8 min read</span></div>
+        </div>
+      </a>
+
+      <!-- 5 Webinar / Leadership -->
+      <a href="webinar-registration.html" class="r-card" data-type="webinar" data-topic="leadership">
+        <div class="r-card-img" style="background:#eeedf4">
+          <span class="r-type-badge">Webinar</span>
+          <div style="font-size:40px">&#x1F3A5;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Leadership</span></div>
+          <div class="r-card-title">Amplify Your Church's Digital Reach in 2026</div>
+          <div class="r-card-excerpt">Free 60-minute webinar — May 22. Build a digital strategy that actually grows your congregation.</div>
+          <div class="r-card-meta"><span class="r-card-type">Webinar</span><span class="r-card-duration">May 22, 2026</span></div>
+        </div>
+      </a>
+
+      <!-- 6 Webinar / Generosity -->
+      <a href="webinar-registration.html" class="r-card" data-type="webinar" data-topic="generosity">
+        <div class="r-card-img" style="background:#f5f4f8">
+          <span class="r-type-badge">Webinar</span>
+          <div style="font-size:40px">&#x1F4BB;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Generosity</span><span class="r-topic-tag">Giving</span></div>
+          <div class="r-card-title">5 Ways to Increase Online Giving This Quarter</div>
+          <div class="r-card-excerpt">Live walkthrough of proven strategies to boost giving participation. Real examples from churches that doubled digital donations.</div>
+          <div class="r-card-meta"><span class="r-card-type">Webinar</span><span class="r-card-duration">45 min</span></div>
+        </div>
+      </a>
+
+      <!-- 7 eBook / Generosity -->
+      <a href="ebook-landing.html" class="r-card" data-type="ebook" data-topic="generosity">
+        <div class="r-card-img" style="background:#f0eff5">
+          <span class="r-type-badge">eBook</span>
+          <div style="font-size:40px">&#x1F4D6;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Generosity</span></div>
+          <div class="r-card-title">2026 Annual Church Giving Report</div>
+          <div class="r-card-excerpt">Data-driven insights on giving trends, donor behavior, and generosity benchmarks across 55,000+ churches.</div>
+          <div class="r-card-meta"><span class="r-card-type">eBook</span><span class="r-card-duration">32 pages</span></div>
+        </div>
+      </a>
+
+      <!-- 8 Customer Story / Communications -->
+      <a href="customer-story.html" class="r-card" data-type="customer-story" data-topic="communications">
+        <div class="r-card-img" style="background:#e8f5e9">
+          <span class="r-type-badge">Customer Story</span>
+          <div style="font-size:40px">&#x1F3DB;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Communications</span><span class="r-topic-tag">Engagement</span></div>
+          <div class="r-card-title">How Grace Community Doubled Weekend Attendance With One Platform</div>
+          <div class="r-card-excerpt">Grace Community Church consolidated 5 tools into Amplify and saw 2x attendance growth in 18 months.</div>
+          <div class="r-card-meta"><span class="r-card-type">Customer Story</span><span class="r-card-duration">5 min read</span></div>
+        </div>
+      </a>
+
+      <!-- 9 Blog / Websites & Apps -->
+      <a href="blog-post.html" class="r-card" data-type="blog" data-topic="websites-apps">
+        <div class="r-card-img">
+          <span class="r-type-badge">Blog</span>
+          <div style="font-size:40px">&#x1F4F1;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Websites & Apps</span></div>
+          <div class="r-card-title">Your Church Website Is Your New Front Door — Is It Open?</div>
+          <div class="r-card-excerpt">80% of first-time visitors check your website before visiting in person. Here's what they need to see.</div>
+          <div class="r-card-meta"><span class="r-card-type">Blog</span><span class="r-card-duration">5 min read</span></div>
+        </div>
+      </a>
+
+      <!-- 10 Webinar / Service Planning -->
+      <a href="webinar-registration.html" class="r-card" data-type="webinar" data-topic="service-planning">
+        <div class="r-card-img" style="background:#f5f4f8">
+          <span class="r-type-badge">Webinar</span>
+          <div style="font-size:40px">&#x1F3B5;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Service Planning</span><span class="r-topic-tag">Worship</span></div>
+          <div class="r-card-title">Worship Planning That Doesn't Burn Out Your Team</div>
+          <div class="r-card-excerpt">Streamline your service planning workflow so your worship team can focus on leading, not coordinating logistics.</div>
+          <div class="r-card-meta"><span class="r-card-type">Webinar</span><span class="r-card-duration">50 min</span></div>
+        </div>
+      </a>
+
+      <!-- 11 Podcast / Communications -->
+      <a href="podcast-episode.html" class="r-card" data-type="podcast" data-topic="communications">
+        <div class="r-card-img" style="background:#2a2838">
+          <span class="r-type-badge">Podcast</span>
+          <div style="font-size:40px">&#x1F3A4;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Communications</span></div>
+          <div class="r-card-title">Ep. 160 | Church Comms in 2026: What's Working and What's Not</div>
+          <div class="r-card-excerpt">Email open rates are declining but text engagement is up 3x. Here's how leading churches are adapting their strategy.</div>
+          <div class="r-card-meta"><span class="r-card-type">Podcast</span><span class="r-card-duration">35 min</span></div>
+        </div>
+      </a>
+
+      <!-- 12 eBook / Leadership -->
+      <a href="ebook-landing.html" class="r-card" data-type="ebook" data-topic="leadership">
+        <div class="r-card-img" style="background:#f0eff5">
+          <span class="r-type-badge">eBook</span>
+          <div style="font-size:40px">&#x1F4DA;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Leadership</span><span class="r-topic-tag">Growth</span></div>
+          <div class="r-card-title">The Pastor's Guide to Sustainable Church Growth</div>
+          <div class="r-card-excerpt">A practical framework for growing your church without growing your burnout. Covers staffing, systems, and self-care.</div>
+          <div class="r-card-meta"><span class="r-card-type">eBook</span><span class="r-card-duration">48 pages</span></div>
+        </div>
+      </a>
+
+      <!-- 13 Blog / Generosity -->
+      <a href="blog-post.html" class="r-card" data-type="blog" data-topic="generosity">
+        <div class="r-card-img">
+          <span class="r-type-badge">Blog</span>
+          <div style="font-size:40px">&#x1F4B0;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Generosity</span></div>
+          <div class="r-card-title">Why Recurring Giving Is the Key to Financial Stability</div>
+          <div class="r-card-excerpt">Churches with 40%+ recurring givers see 2.5x more predictable budgets. Here's how to get there.</div>
+          <div class="r-card-meta"><span class="r-card-type">Blog</span><span class="r-card-duration">4 min read</span></div>
+        </div>
+      </a>
+
+      <!-- 14 Customer Story / Generosity -->
+      <a href="customer-story.html" class="r-card" data-type="customer-story" data-topic="generosity">
+        <div class="r-card-img" style="background:#e8f5e9">
+          <span class="r-type-badge">Customer Story</span>
+          <div style="font-size:40px">&#x2B50;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Generosity</span><span class="r-topic-tag">Customer Story</span></div>
+          <div class="r-card-title">How Thrive Church Enabled First-Time Givers With Amplify</div>
+          <div class="r-card-excerpt">"Ministry Brands' solutions allowed us to have people give who have never given before." — Ed Grant, Thrive Church</div>
+          <div class="r-card-meta"><span class="r-card-type">Customer Story</span><span class="r-card-duration">4 min read</span></div>
+        </div>
+      </a>
+
+      <!-- 15 Blog / Seasonal -->
+      <a href="blog-post.html" class="r-card" data-type="blog" data-topic="seasonal">
+        <div class="r-card-img">
+          <span class="r-type-badge">Blog</span>
+          <div style="font-size:40px">&#x2744;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Seasonal</span><span class="r-topic-tag">Easter</span></div>
+          <div class="r-card-title">A Special Message From Our Team for Holy Week 2026</div>
+          <div class="r-card-excerpt">Reflections and resources to help your church make the most of the Easter season this year.</div>
+          <div class="r-card-meta"><span class="r-card-type">Blog</span><span class="r-card-duration">3 min read</span></div>
+        </div>
+      </a>
+
+      <!-- 16 Webinar / Staff & Volunteers -->
+      <a href="webinar-registration.html" class="r-card" data-type="webinar" data-topic="staff-volunteers">
+        <div class="r-card-img" style="background:#f5f4f8">
+          <span class="r-type-badge">Webinar</span>
+          <div style="font-size:40px">&#x1F465;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Staff & Volunteers</span></div>
+          <div class="r-card-title">Onboarding Volunteers in 2026: Systems That Scale</div>
+          <div class="r-card-excerpt">How to create a repeatable volunteer onboarding process that grows with your church — without adding admin overhead.</div>
+          <div class="r-card-meta"><span class="r-card-type">Webinar</span><span class="r-card-duration">40 min</span></div>
+        </div>
+      </a>
+
+      <!-- 17 Podcast / Seasonal -->
+      <a href="podcast-episode.html" class="r-card" data-type="podcast" data-topic="seasonal">
+        <div class="r-card-img" style="background:#2a2838">
+          <span class="r-type-badge">Podcast</span>
+          <div style="font-size:40px">&#x1F3A7;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Seasonal</span><span class="r-topic-tag">Spring</span></div>
+          <div class="r-card-title">Ep. 164 | Spring Campaigns That Actually Move the Needle</div>
+          <div class="r-card-excerpt">What the data says about spring giving campaigns and how to plan yours for maximum impact.</div>
+          <div class="r-card-meta"><span class="r-card-type">Podcast</span><span class="r-card-duration">30 min</span></div>
+        </div>
+      </a>
+
+      <!-- 18 eBook / Media & Tech -->
+      <a href="ebook-landing.html" class="r-card" data-type="ebook" data-topic="media-tech">
+        <div class="r-card-img" style="background:#f0eff5">
+          <span class="r-type-badge">eBook</span>
+          <div style="font-size:40px">&#x1F4F9;</div>
+        </div>
+        <div class="r-card-body">
+          <div class="r-card-tags"><span class="r-topic-tag">Media & Tech</span><span class="r-topic-tag">Streaming</span></div>
+          <div class="r-card-title">The Church Streaming Playbook: From Setup to Scale</div>
+          <div class="r-card-excerpt">Everything you need to launch or level up your live streaming ministry — gear, software, and strategy.</div>
+          <div class="r-card-meta"><span class="r-card-type">eBook</span><span class="r-card-duration">28 pages</span></div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <button class="page-btn" style="opacity:0.3">&larr;</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">...</button>
+      <button class="page-btn">29</button>
+      <button class="page-btn">&rarr;</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- NEWSLETTER SIGNUP -->
+<div style="background:white;padding:0 0 72px">
+  <div class="w">
+    <div style="background:#f7f7f6;border:0.5px solid #e8e8e8;border-radius:20px;padding:56px 64px;display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px">Newsletter</div>
+        <div style="font-size:32px;font-weight:700;color:#1a1a1a;letter-spacing:-0.02em;line-height:1.2;margin-bottom:12px">Subscribe to our Newsletter</div>
+        <div style="font-size:15px;color:#888;line-height:1.7">Receive a biweekly newsletter full of thought leadership, product news, events and tips on nurturing a healthy church.</div>
+      </div>
+      <div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+          <input type="text" placeholder="First Name" style="padding:14px 16px;border:0.5px solid #ddd;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:white;outline:none;color:#1a1a1a">
+          <input type="email" placeholder="Email Address" style="padding:14px 16px;border:0.5px solid #ddd;border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:white;outline:none;color:#1a1a1a">
+        </div>
+        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-bottom:20px">
+          <input type="checkbox" style="width:18px;height:18px;accent-color:#46435D;margin-top:2px;flex-shrink:0;cursor:pointer">
+          <span style="font-size:12px;color:#888;line-height:1.5">I acknowledge that Ministry Brands will use my information to contact me about relevant content, products and services and that I can unsubscribe from these emails at any time.</span>
+        </label>
+        <button style="width:100%;padding:16px;background:#46435D;color:white;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s" onmouseover="this.style.background='#5a576e'" onmouseout="this.style.background='#46435D'">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA SECTION -->
+<div class="section dark">
+  <div class="w">
+    <div style="text-align:center">
+      <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px">Ready to go deeper?</div>
+      <div style="font-size:32px;font-weight:700;color:white;letter-spacing:-0.02em;margin-bottom:8px">See Amplify in Action</div>
+      <div style="font-size:16px;color:rgba(255,255,255,0.55);max-width:480px;margin:0 auto 28px;line-height:1.6">Get a personalized demo and see how Amplify can help your church thrive.</div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="request-demo.html" class="btn btn-white" style="text-decoration:none">Request Demo</a>
+        <a href="tel:8653296192" class="btn btn-ghost" style="text-decoration:none">Call 865-329-6192</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#1a1a1a;padding:64px 0 32px">
+  <div class="w">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+          <svg width="28" height="28" viewBox="0 0 32 32"><rect width="16" height="16" fill="rgba(255,255,255,0.4)"/><rect x="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect y="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect x="16" y="16" width="16" height="16" fill="rgba(255,255,255,0.4)"/></svg>
+          <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">Amplify</span>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:240px">Church management software built to help 55,000+ ministries thrive.</div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Solutions</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="platform-overview.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Platform Overview</a>
+          <a href="generosity-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Generosity Bundle</a>
+          <a href="financial-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Financial Bundle</a>
+          <a href="digital-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Digital Bundle</a>
+          <a href="complete-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Complete Bundle</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Products</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="giving.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Giving</a>
+          <a href="accounting.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Accounting</a>
+          <a href="people.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">People (ChMS)</a>
+          <a href="websites.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Websites</a>
+          <a href="mobile-app.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Mobile App</a>
+          <a href="streaming.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Streaming</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Resources</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="healthy-church-hub.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Healthy Church Hub</a>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55)">Webinars</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55)">eBooks</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55)">Podcasts</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55)">Blog</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55)">Customer Stories</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Company</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55)">About</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55)">Leadership</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55)">Careers</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55)">Partners</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55)">Contact</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Ministry Brands. All rights reserved.</div>
+      <div style="display:flex;gap:24px">
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Privacy Policy</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Terms of Service</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Cookie Settings</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ANNOTATION TOGGLE -->
+<div class="anno-legend-wrap">
+  <div class="anno-legend">
+    <div class="anno-legend-title">Annotation Legend</div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div>
+  </div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'">
+    <span style="font-size:16px">&#x1F4DD;</span>
+    <span class="anno-label">Show Annotations</span>
+  </button>
+</div>
+
+</div>
+
+<script>
+document.body.classList.add("anno-hidden");
+/* MEGA MENU JS */
+var icons={"Giving":"$","Accounting":"=","People (ChMS)":"P","Websites":"W","Mobile App":"M","Communications":"@","Streaming":"&#x25B6;","Service Planning":"&#x2713;","Media":"&#x25C9;","Safety":"S"};
+var allProducts=[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"People (ChMS)",desc:"Member records & group management"},{name:"Websites",desc:"Your digital front door"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Media",desc:"Sermon content & distribution"},{name:"Safety",desc:"Check-in, background checks & protocols"}];
+var productUrls={"Giving":"giving.html","Accounting":"accounting.html","People (ChMS)":"people.html","Websites":"websites.html","Mobile App":"mobile-app.html","Communications":"communications.html","Streaming":"streaming.html","Service Planning":"service-planning.html","Media":"media.html","Safety":"safety.html"};
+var bundleUrls={"Complete Bundle":"complete-bundle.html","Generosity Bundle":"generosity-bundle.html","Financial Bundle":"financial-bundle.html","Digital Bundle":"digital-bundle.html"};
+var outcomes={
+  all:{desc:"The full Amplify platform.",products:allProducts,gridClass:"all-grid",bundle:{name:"Complete Bundle",tagline:"Every tool, one price.",cta:"Explore \u2192"}},
+  giving:{desc:"Tools that invite generosity.",products:[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"Mobile App",desc:"Give from anywhere"},{name:"Communications",desc:"Generosity campaigns"}],bundle:{name:"Generosity Bundle",tagline:"All giving & finance tools.",cta:"Explore \u2192"}},
+  engage:{desc:"Keep your congregation connected.",products:[{name:"People (ChMS)",desc:"Member records & groups"},{name:"Communications",desc:"Email, text & push"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Websites",desc:"Your digital front door"}]},
+  grow:{desc:"Expand your reach.",products:[{name:"Websites",desc:"First impression that converts"},{name:"Streaming",desc:"Live & on-demand"},{name:"Media",desc:"Sermon content"},{name:"Mobile App",desc:"Retain & re-engage"}]},
+  streamline:{desc:"One connected system.",products:[{name:"People (ChMS)",desc:"One database"},{name:"Service Planning",desc:"Plan every service"},{name:"Safety",desc:"Check-in & safety"},{name:"Communications",desc:"Automated workflows"}]},
+  financial:{desc:"Accurate books, clean audits.",products:[{name:"Accounting",desc:"Fund accounting"},{name:"Giving",desc:"Donor management"}],bundle:{name:"Financial Bundle",tagline:"Everything for financial stewardship.",cta:"Explore \u2192"}},
+  volunteer:{desc:"Your team shows up prepared.",products:[{name:"Service Planning",desc:"Scheduling"},{name:"People (ChMS)",desc:"Volunteer profiles"},{name:"Communications",desc:"Reminders"},{name:"Mobile App",desc:"Manage availability"}]},
+  digital:{desc:"Meet your congregation online.",products:[{name:"Streaming",desc:"Broadcast live"},{name:"Websites",desc:"A site that works"},{name:"Mobile App",desc:"Your branded app"},{name:"Media",desc:"Content at scale"}],bundle:{name:"Digital Bundle",tagline:"Launch your digital ministry.",cta:"Explore \u2192"}}
+};
+var simpleMenus={
+  who:{sections:[{icon:"\uD83D\uDC64",label:"By Role",items:[{n:"Executive / Senior Pastor",h:"senior-pastor.html"},{n:"Associate Pastor",h:"associate-pastor.html"},{n:"Finance Leader / Treasurer",h:"finance-treasurer.html"},{n:"Communications Director",h:"communications-director.html"},{n:"Worship Pastor",h:"worship-pastor.html"}]},{icon:"\u26EA",label:"By Church Type",items:[{n:"Multi-site Churches",h:"multi-site.html"},{n:"Denominations & Networks",h:"denominations.html"},{n:"Large Churches",h:"large-churches.html"},{n:"Growing Churches",h:"growing-churches.html"},{n:"Small Churches",h:"small-churches.html"},{n:"Church Plants",h:"church-plants.html"},{n:"Digital / Online Churches",h:"digital-churches.html"}]}]},
+  services:{sections:[{icon:"\uD83D\uDEE0",label:"Support & Delivery",items:[{n:"Services Overview",h:"services-overview.html"},{n:"Implementation & Onboarding",h:"service-detail.html"},{n:"Strategy & Consulting",h:"service-detail.html"},{n:"Data Migration",h:"service-detail.html"},{n:"Support & Training",h:"service-detail.html"}]}]}
+};
+function renderRight(k){var o=outcomes[k],gc=o.gridClass||'';var cards=o.products.map(function(p){return'<a href="'+(productUrls[p.name]||'#')+'" class="product-card" style="text-decoration:none;color:inherit"><div class="product-icon">'+(icons[p.name]||'\u00B7')+'</div><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.desc+'</div></a>';}).join('');var bh='';if(o.bundle){bh='<a href="'+(bundleUrls[o.bundle.name]||'#')+'" class="bundle-banner" style="text-decoration:none;color:inherit"><div class="bundle-icon">\u2B21</div><div class="bundle-body"><div class="bundle-name">'+o.bundle.name+'</div><div class="bundle-tagline">'+o.bundle.tagline+'</div></div><span class="bundle-cta">'+o.bundle.cta+'</span></a>';}document.getElementById('rPanel').innerHTML='<div class="right-header">Relevant tools</div><div class="outcome-desc">'+o.desc+'</div>'+bh+'<div class="products-grid '+gc+'">'+cards+'</div><div class="right-footer"><span class="rf-label">Not sure where to start?</span><span class="rf-link">Take the Healthy Church Assessment \u2192</span></div>';}
+function buildSolutions(){var defs=[{k:'all',label:'All Solutions'},{k:'giving',label:'Increase Giving & Generosity'},{k:'engage',label:'Engage Your Church Community'},{k:'grow',label:'Grow Attendance & Reach'},{k:'streamline',label:'Streamline Church Operations'},{k:'financial',label:'Improve Financial Stewardship'},{k:'volunteer',label:'Strengthen Volunteer & Staff Effectiveness'},{k:'digital',label:'Launch & Scale Digital Ministry'}];var rows=defs.map(function(d,i){return'<div class="outcome-item'+(i===0?' active':'')+'" data-k="'+d.k+'">'+d.label+' <span class="arr">\u203A</span></div>';}).join('');return'<div class="mega-inner"><div class="left-panel"><div class="left-label">What do you want to do?</div>'+rows+'<div class="left-divider"></div><a href="platform-overview.html" class="platform-btn" style="text-decoration:none;color:inherit"><span class="platform-btn-label">Platform Overview \u2192</span><span class="platform-btn-sub">How Amplify works as one system</span></a></div><div class="right-panel" id="rPanel"></div></div>';}
+function buildSimple(k){return'<div class="simple-panel">'+simpleMenus[k].sections.map(function(s){return'<div class="s-section"><div class="s-category"><div class="s-cat-icon">'+s.icon+'</div><span class="s-cat-label">'+s.label+'</span></div>'+s.items.map(function(i){return'<a href="'+i.h+'" class="s-item">'+i.n+'</a>';}).join('')+'</div>';}).join('')+'</div>';}
+var cur=null,curBtn=null;
+function closeMenu(){if(curBtn)curBtn.classList.remove('open');var m=document.getElementById('megaMenu');if(m)m.classList.remove('show');cur=null;curBtn=null;}
+function openMenu(key,btn){closeMenu();cur=key;curBtn=btn;btn.classList.add('open');var m=document.getElementById('megaMenu');if(key==='solutions'){m.innerHTML=buildSolutions();m.querySelectorAll('.outcome-item').forEach(function(el){el.addEventListener('mouseenter',function(){m.querySelectorAll('.outcome-item').forEach(function(i){i.classList.remove('active')});this.classList.add('active');renderRight(this.dataset.k);});});renderRight('all');}else{m.innerHTML=buildSimple(key);}m.classList.add('show');}
+document.addEventListener('click',function(e){if(!e.target.closest('#primaryNav')&&!e.target.closest('.utility-bar'))closeMenu();});
+
+/* FILTER JS — multi-select for both type and topic */
+var activeTypes=new Set();  // empty = all types
+var activeTopics=new Set(); // empty = all topics
+
+function toggleFilter(chip){
+  var filterKind=chip.dataset.filter;
+  var value=chip.dataset.value;
+
+  if(filterKind==='type'){
+    if(value==='all'){
+      // "All" clears type selection
+      activeTypes.clear();
+      document.querySelectorAll('.f-chip[data-filter="type"]').forEach(function(c){c.classList.remove('active')});
+      chip.classList.add('active');
+    } else {
+      // Remove "All" active state
+      var allChip=document.querySelector('.f-chip[data-value="all"]');
+      if(allChip) allChip.classList.remove('active');
+      // Toggle this type
+      if(chip.classList.contains('active')){
+        chip.classList.remove('active');
+        activeTypes.delete(value);
+        // If none selected, reactivate "All"
+        if(activeTypes.size===0 && allChip) allChip.classList.add('active');
+      } else {
+        chip.classList.add('active');
+        activeTypes.add(value);
+      }
+    }
+  } else if(filterKind==='topic'){
+    // Toggle this topic (multi-select)
+    if(chip.classList.contains('active')){
+      chip.classList.remove('active');
+      activeTopics.delete(value);
+    } else {
+      chip.classList.add('active');
+      activeTopics.add(value);
+    }
+  }
+  applyFilters();
+}
+
+function clearAllFilters(){
+  document.querySelectorAll('.f-chip').forEach(function(c){c.classList.remove('active')});
+  document.querySelector('.f-chip[data-value="all"]').classList.add('active');
+  activeTypes.clear();
+  activeTopics.clear();
+  applyFilters();
+}
+
+function applyFilters(){
+  var cards=document.querySelectorAll('.r-card');
+  var count=0;
+  cards.forEach(function(card){
+    var typeMatch=(activeTypes.size===0||activeTypes.has(card.dataset.type));
+    var topicMatch=(activeTopics.size===0||activeTopics.has(card.dataset.topic));
+    if(typeMatch && topicMatch){
+      card.style.display='flex';
+      count++;
+    } else {
+      card.style.display='none';
+    }
+  });
+  document.getElementById('resultsCount').innerHTML='Showing <strong>'+count+'</strong> resource'+(count!==1?'s':'');
+}
+</script>

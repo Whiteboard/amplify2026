@@ -1,0 +1,735 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:#46435D;min-height:100vh}
+
+/* SITE */
+#site{display:block}
+
+/* UTILITY BAR */
+.utility-bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;height:56px;background:white;border-bottom:0.5px solid #e8e8e8;position:sticky;top:0;z-index:300}
+.util-left{display:flex;align-items:center;gap:16px}
+.util-link{font-size:12px;color:#888;cursor:pointer;transition:color 0.1s;text-decoration:none}
+.util-link:hover{color:#46435D}
+.util-center{display:flex;align-items:center;justify-content:center;gap:10px}
+.logo-wordmark{font-size:24px;font-weight:700;color:#46435D;letter-spacing:-0.02em}
+.util-right{display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.util-sep{color:#ddd;font-size:10px}
+.search-field{display:flex;align-items:center;gap:6px;cursor:text}
+.search-icon{color:#bbb;font-size:14px}
+.search-placeholder{font-size:12px;color:#bbb}
+
+/* NAV */
+.nav-stage{display:flex;justify-content:center;align-items:center;padding:14px 32px;position:sticky;top:56px;z-index:200;pointer-events:none}
+.nav-group{display:inline-flex;align-items:center;gap:10px;position:relative;pointer-events:all}
+.island{background:white;border:0.5px solid #e0e0e0;border-radius:999px;display:inline-flex;align-items:center;gap:2px;padding:5px 8px;box-shadow:0 2px 16px rgba(0,0,0,0.08)}
+.nav-btn{background:none;border:none;padding:9px 18px;font-size:14px;color:#666;cursor:pointer;border-radius:999px;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:all 0.12s}
+.nav-btn:hover,.nav-btn.open{color:#46435D;background:#f5f4f8}
+.chevron{font-size:8px;color:#ccc;transition:transform 0.15s}
+.nav-btn.open .chevron{transform:rotate(180deg)}
+.demo-island{background:#46435D;border-radius:999px;padding:10px 22px;box-shadow:0 2px 16px rgba(70,67,93,0.25);cursor:pointer;transition:background 0.12s}
+.demo-island:hover{background:#5a576e}
+.demo-label{font-size:13px;font-weight:500;color:white}
+
+/* MEGA MENU */
+.mega{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:white;border:0.5px solid #e0e0e0;z-index:200;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.1);overflow:hidden;min-width:860px}
+.mega.show{display:block}
+.mega-inner{display:grid;grid-template-columns:1fr 2fr;min-height:380px}
+.left-panel{background:#f7f7f6;border-right:0.5px solid #ebebeb;padding:18px 0}
+.left-label{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;padding:0 16px 12px}
+.outcome-item{display:flex;align-items:center;justify-content:space-between;padding:9px 16px;cursor:pointer;font-size:14px;color:#666;border-left:2px solid transparent;transition:all 0.1s;line-height:1.3}
+.outcome-item:hover{color:#46435D;background:#f0efed;border-left-color:#ccc}
+.outcome-item.active{color:#46435D;background:white;border-left-color:#46435D;font-weight:600}
+.outcome-item .arr{font-size:11px;opacity:0;flex-shrink:0;margin-left:8px}
+.outcome-item.active .arr,.outcome-item:hover .arr{opacity:0.5}
+.outcome-item.active .arr{opacity:1}
+.left-divider{border:none;border-top:0.5px solid #ebebeb;margin:10px 0}
+.platform-btn{margin:0 12px 4px;padding:10px 14px;border:0.5px solid #e0e0e0;border-radius:10px;cursor:pointer;text-align:left;background:white;width:calc(100% - 24px);display:block;transition:all 0.12s}
+.platform-btn:hover{border-color:#46435D}
+.platform-btn-label{font-size:12px;font-weight:500;color:#46435D;display:block}
+.platform-btn-sub{font-size:11px;color:#aaa;margin-top:2px;display:block}
+.right-panel{padding:20px 22px;display:flex;flex-direction:column}
+.right-header{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+.outcome-desc{font-size:14px;color:#777;margin-bottom:14px;line-height:1.5;padding-bottom:14px;border-bottom:0.5px solid #f0f0f0}
+.bundle-banner{display:flex;align-items:center;gap:14px;padding:14px 18px;margin-bottom:14px;background:#eeedf4;border:0.5px solid #d8d6e6;border-radius:12px;cursor:pointer;transition:all 0.12s}
+.bundle-banner:hover{border-color:#46435D;box-shadow:0 4px 12px rgba(70,67,93,0.1)}
+.bundle-icon{width:36px;height:36px;border-radius:8px;background:#46435D;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;flex-shrink:0}
+.bundle-body{flex:1;min-width:0}
+.bundle-name{font-size:13px;font-weight:700;color:#46435D;margin-bottom:2px}
+.bundle-tagline{font-size:11px;color:#888;line-height:1.4}
+.bundle-cta{font-size:11px;font-weight:600;color:#46435D;white-space:nowrap;flex-shrink:0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.products-grid.all-grid{grid-template-columns:repeat(4,1fr)}
+.product-card{border:0.5px solid #ebebeb;border-radius:12px;padding:14px;cursor:pointer;transition:all 0.12s;background:white;display:flex;flex-direction:column}
+.product-card:hover{border-color:#46435D;transform:translateY(-2px);box-shadow:0 4px 12px rgba(70,67,93,0.1)}
+.product-icon{width:30px;height:30px;border-radius:7px;background:#f0f0f0;margin-bottom:9px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#999}
+.product-name{font-size:13px;font-weight:600;color:#46435D;margin-bottom:3px}
+.product-desc{font-size:11px;color:#aaa;line-height:1.4}
+.right-footer{margin-top:16px;padding-top:12px;border-top:0.5px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+.rf-label{font-size:12px;color:#aaa}
+.rf-link{font-size:12px;color:#46435D;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+.simple-panel{padding:20px 24px;min-width:260px}
+.s-section{margin-bottom:16px}
+.s-category{display:flex;align-items:center;justify-content:center;gap:8px;padding:6px 0;margin-bottom:4px}
+.s-cat-icon{width:26px;height:26px;border-radius:6px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.s-cat-label{font-size:14px;font-weight:700;color:#46435D}
+.s-item{font-size:14px;color:#666;padding:7px 0;cursor:pointer;border-bottom:0.5px solid #f5f5f5;transition:color 0.1s;display:block;text-align:center}
+.s-item:hover{color:#46435D}
+.s-item:last-child{border-bottom:none}
+
+/* LAYOUT */
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:72px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f7f6}
+.section.dark{background:#46435D}
+.section-center{text-align:center;max-width:600px;margin:0 auto 48px}
+.section-eyebrow{font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
+.section-eyebrow.light{color:rgba(255,255,255,0.5)}
+.section-h2{font-size:32px;font-weight:700;color:#1a1a1a;line-height:1.2;letter-spacing:-0.02em;margin-bottom:12px}
+.section-h2.light{color:white}
+.section-sub{font-size:16px;color:#888;line-height:1.6}
+.section-sub.light{color:rgba(255,255,255,0.6)}
+.hero{background:#46435D;padding:80px 0}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 28px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;white-space:nowrap}
+.btn-white{background:white;color:#46435D}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.3)}.btn-ghost:hover{border-color:rgba(255,255,255,0.6);color:white}
+.btn-dark{background:#46435D;color:white}.btn-dark:hover{background:#5a576e}
+.btn-outline{background:transparent;color:#46435D;border:1px solid #c0bdd4}.btn-outline:hover{border-color:#46435D}
+
+/* GRIDS & CARDS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px;transition:all 0.15s;cursor:pointer}
+.card:hover{border-color:#c0bdd4;box-shadow:0 4px 20px rgba(70,67,93,0.08);transform:translateY(-2px)}
+.card-icon{width:44px;height:44px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
+.card-title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:6px}
+.card-body{font-size:14px;color:#888;line-height:1.6}
+.tcard{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px}
+.tquote{font-size:15px;color:#444;line-height:1.7;margin-bottom:20px;font-style:italic}
+.tavatar{width:40px;height:40px;border-radius:50%;background:#e0dfe8;flex-shrink:0}
+.tname{font-size:14px;font-weight:600;color:#1a1a1a}
+.trole{font-size:12px;color:#aaa;margin-top:2px}
+
+/* ROLE PAGE SPECIFIC */
+.breadcrumb{display:flex;align-items:center;gap:8px;padding:16px 0;font-size:12px;color:#aaa}
+.breadcrumb a{color:#888;text-decoration:none;transition:color 0.1s}
+.breadcrumb a:hover{color:#46435D}
+.breadcrumb .sep{color:#ccc}
+
+/* CHALLENGE CARDS */
+.challenge-card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:32px;position:relative;overflow:hidden}
+.challenge-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:#46435D;opacity:0.15}
+.challenge-num{font-size:48px;font-weight:700;color:#46435D;opacity:0.08;position:absolute;top:12px;right:20px;line-height:1}
+.challenge-icon{width:44px;height:44px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
+.challenge-title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:8px;line-height:1.3}
+.challenge-body{font-size:14px;color:#888;line-height:1.6}
+
+/* TOOLKIT MOSAIC */
+.mosaic{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.mosaic-tile{background:#f7f7f6;border:0.5px solid #e8e8e8;border-radius:16px;overflow:hidden;transition:all 0.2s;display:flex;flex-direction:column;text-decoration:none}
+.mosaic-tile:hover{border-color:#c0bdd4;box-shadow:0 6px 24px rgba(70,67,93,0.08)}
+.mosaic-tile.span-7{grid-column:span 7}
+.mosaic-tile.span-5{grid-column:span 5}
+.mosaic-tile.span-6{grid-column:span 6}
+.mosaic-tile.span-4{grid-column:span 4}
+.mosaic-tile.span-8{grid-column:span 8}
+.mosaic-visual{height:200px;background:#e0dfe8;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.mosaic-visual .overlay-icon{width:48px;height:48px;border-radius:12px;background:rgba(70,67,93,0.12);display:flex;align-items:center;justify-content:center;font-size:20px;color:#46435D}
+.mosaic-content{padding:24px;flex:1;display:flex;flex-direction:column}
+.mosaic-eyebrow{font-size:10px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;opacity:0.5}
+.mosaic-title{font-size:18px;font-weight:700;color:#1a1a1a;line-height:1.2;letter-spacing:-0.01em;margin-bottom:8px}
+.mosaic-body{font-size:13px;color:#888;line-height:1.6;margin-bottom:16px}
+.mosaic-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:auto}
+.mosaic-list li{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#666;line-height:1.4}
+.mosaic-list li::before{content:"\2713";display:flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#eeedf4;color:#46435D;font-size:9px;font-weight:700;flex-shrink:0;margin-top:1px}
+.mosaic-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#46435D;margin-top:12px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+
+/* DAY IN THE LIFE TIMELINE */
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:#e8e8e8}
+.timeline-item{position:relative;padding:0 0 40px 24px}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-dot{position:absolute;left:-25px;top:4px;width:14px;height:14px;border-radius:50%;background:#46435D;border:3px solid white;box-shadow:0 0 0 2px #e8e8e8}
+.timeline-time{font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px}
+.timeline-title{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.timeline-body{font-size:13px;color:#888;line-height:1.6}
+.timeline-product{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:4px 12px;background:#eeedf4;border-radius:999px;font-size:11px;font-weight:600;color:#46435D}
+
+/* TESTIMONIAL VIDEO */
+.testimonial-video{position:relative;background:#1a1a1a;border-radius:16px;overflow:hidden;min-height:400px;display:flex;flex-direction:column}
+.testimonial-video-bg{flex:1;background:#2a2838;display:flex;align-items:center;justify-content:center}
+.testimonial-video-play{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s}
+.testimonial-video-play:hover{background:rgba(255,255,255,0.25);transform:scale(1.08)}
+.testimonial-video-info{padding:20px 24px;display:flex;align-items:center;gap:14px;background:rgba(0,0,0,0.4)}
+.testimonial-video-info .tavatar{border:2px solid rgba(255,255,255,0.2)}
+.testimonial-video-info .tname{color:white}
+.testimonial-video-info .trole{color:rgba(255,255,255,0.5)}
+
+/* ROLE NAVIGATION */
+.role-card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:24px;transition:all 0.15s;cursor:pointer;text-align:center;text-decoration:none;display:block}
+.role-card:hover{border-color:#c0bdd4;box-shadow:0 4px 20px rgba(70,67,93,0.08);transform:translateY(-2px)}
+.role-card.current{border-color:#46435D;background:#f8f7fc}
+.role-avatar{width:56px;height:56px;border-radius:50%;background:#eeedf4;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.role-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.role-desc{font-size:12px;color:#aaa;line-height:1.5}
+
+/* MINI CARD */
+.mini-card{display:flex;align-items:center;gap:10px;padding:12px 16px;border:0.5px solid #ebebeb;border-radius:10px;cursor:pointer;transition:all 0.12s}
+.mini-card:hover{border-color:#c0bdd4}
+.mini-icon{width:28px;height:28px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:11px;color:#aaa;flex-shrink:0}
+.mini-name{font-size:12px;font-weight:600;color:#888}
+
+/* CONNECT GRID (for product recommendations) */
+.connect-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.connect-card{border:0.5px solid #e8e8e8;border-radius:12px;padding:20px;text-align:center;transition:all 0.12s;cursor:pointer}
+.connect-card:hover{border-color:#c0bdd4;box-shadow:0 4px 12px rgba(70,67,93,0.06)}
+.connect-icon{width:40px;height:40px;border-radius:10px;background:#f0f0f0;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#999}
+.connect-name{font-size:13px;font-weight:600;color:#46435D;margin-bottom:3px}
+.connect-desc{font-size:11px;color:#aaa;line-height:1.4}
+
+/* ANNOTATION SYSTEM — floating cards */
+.anno{position:relative;z-index:50;margin:0 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);max-width:380px;transition:opacity 0.25s,transform 0.25s;transform:translateY(16px);pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}
+.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-move{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.anno-move::before{content:'✅ SECTION MOVED';color:#2E7D32}
+.anno-gap{background:#FFF3E0;border-color:#FFB74D;color:#E65100}
+.anno-gap::before{content:'⚠️ GAP IDENTIFIED';color:#E65100}
+.anno-persona{background:#F3E5F5;border-color:#CE93D8;color:#4A148C}
+.anno-persona::before{content:'👤 PERSONA FOCUS';color:#7B1FA2}
+.anno strong{font-weight:700}
+.anno em{font-style:italic;color:inherit;opacity:0.75}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#46435D;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(70,67,93,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#5a576e}
+body.anno-hidden .anno{display:none}
+</style>
+
+<!-- SITE CONTENT -->
+<div id="site">
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="util-left">
+    <a href="index.html" class="util-link">Company</a><a href="hq.html" class="util-link">Amplify+ HQ</a>
+  </div>
+  <div class="util-center">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <svg width="32" height="32" viewBox="0 0 32 32"><rect width="16" height="16" fill="#c8c8c8"/><rect x="16" width="16" height="16" fill="#e4e4e4"/><rect y="16" width="16" height="16" fill="#e4e4e4"/><rect x="16" y="16" width="16" height="16" fill="#c8c8c8"/></svg>
+      <span class="logo-wordmark">Amplify</span>
+    </a>
+  </div>
+  <div class="util-right">
+    <a href="search-results.html" class="search-field" style="text-decoration:none"><span class="search-icon">&#x2315;</span><span class="search-placeholder">Search</span></a>
+    <span class="util-sep">|</span>
+    <a href="login.html" class="util-link" style="text-decoration:none">Login</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-stage">
+  <div class="nav-group">
+    <div class="island" id="primaryNav">
+      <button class="nav-btn" onmouseenter="openMenu('who',this)" onclick="openMenu('who',this)">Who We Serve <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="openMenu('solutions',this)" onclick="window.location.href='platform-overview.html'">Solutions <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="openMenu('services',this)" onclick="window.location.href='services-overview.html'">Services <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='healthy-church-hub.html'">Healthy Church Hub</button>
+      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='partners.html'">Partners</button>
+    </div>
+    <a href="request-demo.html" class="demo-island" style="text-decoration:none"><span class="demo-label">Request Demo</span></a>
+    <div class="mega" id="megaMenu"></div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div style="background:white;border-bottom:0.5px solid #f0f0f0">
+  <div class="w">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">&#x203A;</span>
+      <a href="#">Who We Serve</a>
+      <span class="sep">&#x203A;</span>
+      <span style="color:#46435D;font-weight:500">Worship Pastor</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero" style="padding:64px 0 80px;position:relative">
+  <div class="anno anno-persona" style="position:absolute;top:16px;right:48px;margin:0;z-index:70">
+    <strong>Worship Pastor / Minister of Music</strong> &mdash; Weekly high-stakes performance pressure. Needs mobile scheduling, volunteer management. Emotional driver: preparedness and confidence every Sunday. <em>Secondary: Associate Pastor (coordinates with).</em>
+  </div>
+  <div class="anno anno-page" style="position:absolute;top:140px;right:48px;margin:0;z-index:60">
+    <strong>Role Page Architecture:</strong> Hero (empathy) &rarr; Challenges (pain validation) &rarr; Toolkit (product mapping) &rarr; Day in Life (workflow proof) &rarr; Testimonial &rarr; All Products &rarr; Other Roles &rarr; CTA. <em>Structure follows "feel seen &rarr; see solution &rarr; envision yourself" arc.</em>
+  </div>
+  <div class="anno" style="position:absolute;bottom:20px;right:48px;margin:0;z-index:60">
+    <strong>Hero:</strong> Full-width empathy headline. No video &mdash; role pages lead with understanding. "Prepared, Not Panicked" validates the Saturday-night anxiety. <em>NN/g: "Match between system and real world."</em>
+  </div>
+  <div class="w">
+    <div style="max-width:720px">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,255,255,0.1);border-radius:999px;margin-bottom:20px;border:0.5px solid rgba(255,255,255,0.15)">
+        <span style="font-size:14px">&#x1F3B5;</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.6);font-weight:500">Worship Pastor</span>
+      </div>
+      <div style="font-size:48px;font-weight:700;color:white;letter-spacing:-0.025em;line-height:1.08;margin-bottom:16px">Walk Into Sunday Prepared, Not Panicked.</div>
+      <div style="font-size:17px;color:rgba(255,255,255,0.6);line-height:1.65;margin-bottom:32px">Every week, you pull off a worship experience that moves people &mdash; coordinating volunteers, cueing media, managing the live stream, and leading from the stage. Amplify gives you the confidence that every detail is handled before you ever pick up the mic.</div>
+      <div style="display:flex;gap:12px">
+        <a href="request-demo.html" class="btn btn-white" style="text-decoration:none">Book a Meeting</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WE SEE YOU -->
+<div class="section" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>We See You:</strong> Empathy-first framing. Each card pairs understanding with a concrete Amplify capability for the Worship Pastor. Tone is warm and validating. <em>NN/g: "Recognition rather than recall" &mdash; worship pastors feel seen, then see the path forward.</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">We see you</div>
+      <div class="section-h2">Every Sunday Is High-Stakes. That Pressure Is Real.</div>
+      <div class="section-sub">Leading worship means high-stakes preparation on a weekly deadline. We&rsquo;ve built Amplify so you walk in ready, not scrambling.</div>
+    </div>
+    <div class="grid-4">
+      <div class="challenge-card">
+        <div class="challenge-num">1</div>
+        <div class="challenge-icon">&#x1F4F1;</div>
+        <div class="challenge-title">Your Team, Confirmed and Ready</div>
+        <div class="challenge-body">Automated scheduling with reminders and one-tap confirmations. When someone can&rsquo;t make it, the system finds a sub &mdash; no more Saturday night group texts.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">2</div>
+        <div class="challenge-icon">&#x1F4CB;</div>
+        <div class="challenge-title">One Service Plan, One Truth</div>
+        <div class="challenge-body">Your entire worship flow &mdash; songs, cues, notes, and assignments &mdash; in one shared plan everyone can access. No more Google Docs and text threads.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">3</div>
+        <div class="challenge-icon">&#x1F3B6;</div>
+        <div class="challenge-title">Every Song in One Library</div>
+        <div class="challenge-body">CCLI, chord charts, backing tracks, and lyrics &mdash; all in one searchable library. Find what you need in seconds, attach it to this week&rsquo;s plan, and share with the band.</div>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-num">4</div>
+        <div class="challenge-icon">&#x1F4F9;</div>
+        <div class="challenge-title">Stream Without the Stress</div>
+        <div class="challenge-body">Multi-platform streaming that runs alongside your service plan. Your tech team manages the broadcast while you lead worship &mdash; each doing what they do best.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- YOUR TOOLKIT: PRODUCTS MAPPED TO CHALLENGES -->
+<div class="section alt" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Toolkit Mosaic:</strong> Products presented as solutions to worship-leader challenges. Service Planning and Streaming are the hero products; Media and Communications round out the toolkit. Each tile links to the full product page. <em>NN/g: "Flexibility and efficiency of use."</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Your Amplify Toolkit</div>
+      <div class="section-h2">Everything You Need to Lead with Confidence</div>
+      <div class="section-sub">Service plans, volunteer scheduling, song libraries, and live streaming &mdash; all connected in one platform so nothing falls through the cracks.</div>
+    </div>
+
+    <div class="mosaic">
+      <!-- Tile 1: Service Planning — large -->
+      <a class="mosaic-tile span-7" href="service-planning.html" style="text-decoration:none">
+        <div class="mosaic-visual">
+          <div class="overlay-icon">&#x2713;</div>
+        </div>
+        <div class="mosaic-content">
+          <div class="mosaic-eyebrow">Service Planning</div>
+          <div class="mosaic-title">Plan Every Moment</div>
+          <div class="mosaic-body">Build your worship flow from scratch or from templates. Drag and drop songs, readings, cues, and transitions &mdash; then share the live plan with your entire team.</div>
+          <ul class="mosaic-list">
+            <li>Worship flow editor with drag-and-drop service items</li>
+            <li>Volunteer scheduling with automated reminders</li>
+            <li>Central song library with CCLI integration</li>
+          </ul>
+          <span class="mosaic-link">Explore Service Planning &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Tile 2: Streaming — medium -->
+      <a class="mosaic-tile span-5" href="streaming.html" style="text-decoration:none">
+        <div class="mosaic-visual" style="height:160px">
+          <div class="overlay-icon">&#x25B6;</div>
+        </div>
+        <div class="mosaic-content">
+          <div class="mosaic-eyebrow">Streaming</div>
+          <div class="mosaic-title">Go Live with Confidence</div>
+          <div class="mosaic-body">Stream to YouTube, Facebook, and your website simultaneously. Monitor real-time engagement so you know your online congregation is connected.</div>
+          <ul class="mosaic-list">
+            <li>Multi-platform streaming from one dashboard</li>
+            <li>Real-time chat and engagement metrics</li>
+            <li>Scheduled broadcasts with pre-service countdowns</li>
+          </ul>
+          <span class="mosaic-link">Explore Streaming &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Tile 3: Media — medium -->
+      <a class="mosaic-tile span-5" href="media.html" style="text-decoration:none">
+        <div class="mosaic-visual" style="height:160px">
+          <div class="overlay-icon">&#x25C9;</div>
+        </div>
+        <div class="mosaic-content">
+          <div class="mosaic-eyebrow">Media</div>
+          <div class="mosaic-title">Worship Media at Your Fingertips</div>
+          <div class="mosaic-body">Backgrounds, motion graphics, social clips, and kids ministry media &mdash; all organized and ready to drop into your service plan or social channels.</div>
+          <ul class="mosaic-list">
+            <li>Worship backgrounds and motion graphics library</li>
+            <li>Social media clip creation and scheduling</li>
+            <li>Kids ministry and special event media</li>
+          </ul>
+          <span class="mosaic-link">Explore Media &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Tile 4: Communications — large -->
+      <a class="mosaic-tile span-7" href="communications.html" style="text-decoration:none">
+        <div class="mosaic-visual">
+          <div class="overlay-icon">@</div>
+        </div>
+        <div class="mosaic-content">
+          <div class="mosaic-eyebrow">Communications</div>
+          <div class="mosaic-title">Coordinate Your Team</div>
+          <div class="mosaic-body">Automated volunteer reminders, schedule confirmations, and team-wide updates. Stop chasing people down &mdash; let the system handle the coordination so you can focus on worship.</div>
+          <ul class="mosaic-list">
+            <li>Automated volunteer reminders and confirmations</li>
+            <li>Schedule change notifications via text and email</li>
+            <li>Team-wide announcements from one dashboard</li>
+          </ul>
+          <span class="mosaic-link">Explore Communications &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- DAY IN THE LIFE -->
+<div class="section" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Day in the Life:</strong> Workflow proof &mdash; shows how Amplify fits the actual weekly rhythm of worship preparation. Monday through Sunday arc mirrors real planning cycle. <em>NN/g: "Match between system and the real world" &mdash; concrete scenarios beat abstract features.</em>
+  </div>
+  <div class="w">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+      <div>
+        <div class="section-eyebrow">A week in your life with Amplify</div>
+        <div style="font-size:32px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.02em;margin-bottom:12px">From Monday Planning to Sunday Morning Peace</div>
+        <div style="font-size:15px;color:#888;line-height:1.7;margin-bottom:32px">Here's what it looks like when your worship tools actually work together. No frantic group texts. No missing chord charts. Just a team that shows up prepared.</div>
+        <!-- Service plan mockup placeholder -->
+        <div style="background:#f7f7f6;border:0.5px solid #e8e8e8;border-radius:14px;height:260px;display:flex;align-items:center;justify-content:center">
+          <div style="text-align:center">
+            <div style="font-size:11px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">Worship Service Plan</div>
+            <div style="font-size:13px;color:#aaa">Songs, cues, volunteers, and media in one view</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">Monday 9:00 AM &mdash; Build the Plan</div>
+            <div class="timeline-title">Build this Sunday's service order with songs, readings, and cues</div>
+            <div class="timeline-body">Open the worship flow editor, drop in songs from your library, add scripture readings, and set transition cues. The whole service takes shape in minutes.</div>
+            <div class="timeline-product">&#x2713; Service Planning</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">Wednesday 11:00 AM &mdash; Confirm the Team</div>
+            <div class="timeline-title">Confirm volunteer team &mdash; auto-reminders sent, see who accepted</div>
+            <div class="timeline-body">Automated reminders went out Monday. By Wednesday you see green checkmarks next to every role &mdash; vocalists, sound tech, projector operator. One slot open? Send a targeted request.</div>
+            <div class="timeline-product">@ Communications + &#x2713; Service Planning</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">Thursday 3:00 PM &mdash; Finalize Arrangements</div>
+            <div class="timeline-title">Finalize song arrangements, attach chord charts and tracks</div>
+            <div class="timeline-body">Attach chord charts, lyric sheets, and backing tracks directly to each song in the service plan. Your band can pull them up on their phones at rehearsal.</div>
+            <div class="timeline-product">&#x2713; Service Planning + &#x25C9; Media</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">Saturday 10:00 AM &mdash; Tech Rehearsal</div>
+            <div class="timeline-title">Run tech rehearsal, live stream test</div>
+            <div class="timeline-body">Walk through the service plan with your tech team. Test the live stream, check audio levels, and confirm every media cue is loaded. No surprises tomorrow.</div>
+            <div class="timeline-product">&#x25B6; Streaming + &#x25C9; Media</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-time">Sunday 7:00 AM &mdash; Ready to Lead</div>
+            <div class="timeline-title">Open the service plan on your phone &mdash; everything is there, everyone is confirmed</div>
+            <div class="timeline-body">Pull up the plan on your phone. Every song, every cue, every volunteer &mdash; confirmed and ready. Walk into the building knowing Sunday is handled.</div>
+            <div class="timeline-product">&#x2713; Service Planning + M Mobile App</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIAL -->
+<div class="section alt" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Testimonial:</strong> Peer validation from a worship leader who uses Service Planning. Video format creates trust through real human connection. The quote addresses the "preparedness" need directly.
+  </div>
+  <div class="w">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch">
+      <div class="testimonial-video">
+        <div class="testimonial-video-bg">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div class="testimonial-video-play">
+              <span style="font-size:22px;color:white;margin-left:3px">&#x25B6;</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.08em;font-weight:600">Watch Eric's Story</div>
+          </div>
+        </div>
+        <div class="testimonial-video-info">
+          <div class="tavatar"></div>
+          <div>
+            <div class="tname">Eric Zolner</div>
+            <div class="trole">Worship Pastor &mdash; Service Planning User</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center">
+        <div class="section-eyebrow">From a fellow Worship Pastor</div>
+        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:24px">
+          <div style="font-size:64px;font-weight:700;color:#46435D;letter-spacing:-0.03em;line-height:1">Zero</div>
+          <div style="font-size:15px;color:#888;line-height:1.5;max-width:280px">last-minute scrambles since switching to Amplify Service Planning</div>
+        </div>
+        <div style="font-size:18px;color:#444;line-height:1.7;font-style:italic;margin-bottom:20px;border-left:3px solid #46435D;padding-left:20px">"Service Planning completely transformed how our team prepares. We used to spend Saturday nights texting volunteers and hunting for chord charts. Now everything is in one place &mdash; the service order, the team schedule, the media. I walk into Sunday morning actually ready to lead worship, not just survive it."</div>
+        <div style="font-size:12px;color:#aaa;text-transform:uppercase;letter-spacing:0.06em;font-weight:600">Eric Zolner &mdash; Worship Pastor</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ALL PRODUCTS — FULL GRID -->
+<div class="section" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;left:48px;margin:0;z-index:60">
+    <strong>Full Product Grid:</strong> Worship Pastor's primary tools (Service Planning, Streaming, Media, Communications) in the top row. Bottom row shows the rest of the platform &mdash; these products still connect to the worship workflow. <em>NN/g: "Aesthetic and minimalist design."</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">The complete Amplify platform</div>
+      <div class="section-h2">Your Core Tools &mdash; Plus Everything Else</div>
+      <div class="section-sub">As Worship Pastor, these four products are your daily drivers. But the full Amplify ecosystem connects your work to every other ministry area.</div>
+    </div>
+    <!-- Primary: 4 core products for Worship Pastor -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px">
+      <a href="service-planning.html" class="card" style="text-decoration:none">
+        <div class="card-icon">&#x2713;</div>
+        <div class="card-title">Service Planning</div>
+        <div class="card-body">Worship flow editor, volunteer scheduling, and song library.</div>
+      </a>
+      <a href="streaming.html" class="card" style="text-decoration:none">
+        <div class="card-icon">&#x25B6;</div>
+        <div class="card-title">Streaming</div>
+        <div class="card-body">Multi-platform live streaming with engagement tools.</div>
+      </a>
+      <a href="media.html" class="card" style="text-decoration:none">
+        <div class="card-icon">&#x25C9;</div>
+        <div class="card-title">Media</div>
+        <div class="card-body">Worship backgrounds, social clips, and content management.</div>
+      </a>
+      <a href="communications.html" class="card" style="text-decoration:none">
+        <div class="card-icon">@</div>
+        <div class="card-title">Communications</div>
+        <div class="card-body">Automated volunteer reminders and team coordination.</div>
+      </a>
+    </div>
+    <!-- Secondary -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <a href="people.html" class="mini-card" style="text-decoration:none"><div class="mini-icon">P</div><div class="mini-name">People</div></a>
+      <a href="giving.html" class="mini-card" style="text-decoration:none"><div class="mini-icon">$</div><div class="mini-name">Giving</div></a>
+      <a href="accounting.html" class="mini-card" style="text-decoration:none"><div class="mini-icon">=</div><div class="mini-name">Accounting</div></a>
+      <a href="websites.html" class="mini-card" style="text-decoration:none"><div class="mini-icon">W</div><div class="mini-name">Websites</div></a>
+      <a href="mobile-app.html" class="mini-card" style="text-decoration:none"><div class="mini-icon">M</div><div class="mini-name">Mobile App</div></a>
+      <a href="safety.html" class="mini-card" style="text-decoration:none"><div class="mini-icon">S</div><div class="mini-name">Safety</div></a>
+    </div>
+  </div>
+</div>
+
+<!-- OTHER ROLES -->
+<div class="section alt" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Other Roles:</strong> Cross-linking to related personas. Worship Pastor often coordinates with Associate Pastor and Comms Director &mdash; these links enable team sharing. <em>NN/g: "Flexibility and efficiency of use."</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Who else on your team?</div>
+      <div class="section-h2">Built for Every Leader in Your Church</div>
+      <div class="section-sub">Share these pages with your staff. Every role has a tailored view of how Amplify fits their world.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px">
+      <a href="senior-pastor.html" class="role-card">
+        <div class="role-avatar">&#x1F468;&#x200D;&#x2696;&#xFE0F;</div>
+        <div class="role-name">Senior Pastor</div>
+        <div class="role-desc">Unified visibility and confident leadership</div>
+      </a>
+      <a href="associate-pastor.html" class="role-card">
+        <div class="role-avatar">&#x1F91D;</div>
+        <div class="role-name">Associate Pastor</div>
+        <div class="role-desc">Smooth execution without being the bottleneck</div>
+      </a>
+      <a href="finance-treasurer.html" class="role-card">
+        <div class="role-avatar">&#x1F4B0;</div>
+        <div class="role-name">Finance Leader</div>
+        <div class="role-desc">Accurate books and faithful stewardship</div>
+      </a>
+      <a href="communications-director.html" class="role-card">
+        <div class="role-avatar">&#x1F4E3;</div>
+        <div class="role-name">Comms Director</div>
+        <div class="role-desc">Messages that land with the right people</div>
+      </a>
+      <div class="role-card current">
+        <div class="role-avatar">&#x1F3B5;</div>
+        <div class="role-name">Worship Pastor</div>
+        <div class="role-desc">Prepared and confident every Sunday</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="section dark" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Final CTA:</strong> Echoes Hero's empathy-first tone. "Walk Into Sunday Confident" mirrors the persona's core emotional driver &mdash; preparedness. Dual CTAs for high/low intent.
+  </div>
+  <div class="w" style="text-align:center">
+    <div style="font-size:38px;font-weight:700;color:white;letter-spacing:-0.02em;margin-bottom:12px">Walk Into Sunday Confident</div>
+    <div style="font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto">See how Amplify brings your worship team, service plans, and live stream together in one connected platform. Schedule your personalized demo today.</div>
+    <div style="display:flex;gap:12px;justify-content:center">
+      <a href="request-demo.html" class="btn btn-white" style="text-decoration:none">Book a Demo</a>
+      <a href="request-demo.html" class="btn btn-ghost" style="text-decoration:none">Talk to Sales</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#1a1a1a;padding:64px 0 32px">
+  <div class="w">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+          <svg width="28" height="28" viewBox="0 0 32 32"><rect width="16" height="16" fill="rgba(255,255,255,0.4)"/><rect x="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect y="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect x="16" y="16" width="16" height="16" fill="rgba(255,255,255,0.4)"/></svg>
+          <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">Amplify</span>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:240px">Church management software built to help 55,000+ ministries thrive.</div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Solutions</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Increase Giving</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Engage Community</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Grow Attendance</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Streamline Ops</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Financial Stewardship</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Volunteer Teams</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Products</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="giving.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Giving</a>
+          <a href="accounting.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Accounting</a>
+          <a href="people.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">People (ChMS)</a>
+          <a href="websites.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Websites</a>
+          <a href="mobile-app.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Mobile App</a>
+          <a href="service-planning.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Service Planning</a>
+          <a href="safety.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Safety</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Resources</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Healthy Church Hub</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Webinars</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">eBooks</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Podcasts</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Blog</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Customer Stories</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Company</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">About</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Leadership</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Careers</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Partners</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Contact</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Press</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Ministry Brands. All rights reserved.</div>
+      <div style="display:flex;gap:24px">
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Privacy Policy</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Terms of Service</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Cookie Settings</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ANNOTATION TOGGLE -->
+<div class="anno-legend-wrap">
+  <div class="anno-legend">
+    <div class="anno-legend-title">Annotation Legend</div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div>
+  </div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'">
+    <span style="font-size:16px">&#x1F4DD;</span>
+    <span class="anno-label">Show Annotations</span>
+  </button>
+</div>
+
+</div><!-- end #site -->
+
+<script>
+document.body.classList.add("anno-hidden");
+var icons={"Giving":"$","Accounting":"=","People (ChMS)":"P","Websites":"W","Mobile App":"M","Communications":"@","Streaming":"&#x25B6;","Service Planning":"&#x2713;","Media":"&#x25C9;","Safety":"S"};
+var allProducts=[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"People (ChMS)",desc:"Member records & group management"},{name:"Websites",desc:"Your digital front door"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Media",desc:"Sermon content & distribution"},{name:"Safety",desc:"Check-in, background checks & protocols"}];
+var productUrls={"Giving":"giving.html","Accounting":"accounting.html","People (ChMS)":"people.html","Websites":"websites.html","Mobile App":"mobile-app.html","Communications":"communications.html","Streaming":"streaming.html","Service Planning":"service-planning.html","Media":"media.html","Safety":"safety.html"};
+var bundleUrls={"Complete Bundle":"complete-bundle.html","Generosity Bundle":"generosity-bundle.html","Financial Bundle":"financial-bundle.html","Digital Bundle":"digital-bundle.html"};
+var outcomes={
+  all:{desc:"The full Amplify platform \u2014 every tool working together as one connected system.",products:allProducts,gridClass:"all-grid",bundle:{name:"Complete Bundle",tagline:"Every tool, one price \u2014 the full Amplify platform for your entire church.",cta:"Explore the Complete Bundle \u2192"}},
+  giving:{desc:"Tools that invite generosity and give your finance team full visibility.",products:[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"Mobile App",desc:"Give from anywhere, anytime"},{name:"Communications",desc:"Generosity campaigns & appeals"}],bundle:{name:"Generosity Bundle",tagline:"All the giving & finance tools your church needs \u2014 packaged together.",cta:"Explore the Generosity Bundle \u2192"}},
+  engage:{desc:"Keep your congregation connected and actively participating between Sundays.",products:[{name:"People (ChMS)",desc:"Member records & group management"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Websites",desc:"Your digital front door"}]},
+  grow:{desc:"Expand your reach, convert first-time visitors, and retain the people who find you.",products:[{name:"Websites",desc:"First impression that converts"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Media",desc:"Sermon content & distribution"},{name:"Mobile App",desc:"Retain & re-engage members"}]},
+  streamline:{desc:"Replace fragmented tools with one connected system so nothing falls through the cracks.",products:[{name:"People (ChMS)",desc:"One database for your whole church"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Safety",desc:"Check-in & safety protocols"},{name:"Communications",desc:"Automated workflows & scheduling"}]},
+  financial:{desc:"Accurate books, clean audits, and board-ready reporting \u2014 without the late nights.",products:[{name:"Accounting",desc:"Fund accounting & compliance"},{name:"Giving",desc:"Donor management & statements"}],bundle:{name:"Financial Bundle",tagline:"Accounting, giving, and reporting \u2014 everything for financial stewardship.",cta:"Explore the Financial Bundle \u2192"}},
+  volunteer:{desc:"Your team shows up prepared, on time, knowing exactly what\u2019s expected.",products:[{name:"Service Planning",desc:"Scheduling & role assignment"},{name:"People (ChMS)",desc:"Volunteer profiles & history"},{name:"Communications",desc:"Automated reminders & confirmations"},{name:"Mobile App",desc:"Volunteers manage availability on the go"}]},
+  digital:{desc:"Meet your congregation \u2014 and reach new ones \u2014 wherever they spend their time.",products:[{name:"Streaming",desc:"Broadcast live or on-demand"},{name:"Websites",desc:"A site that works as hard as you do"},{name:"Mobile App",desc:"Your branded church app"},{name:"Media",desc:"Manage & distribute content at scale"}],bundle:{name:"Digital Bundle",tagline:"Streaming, websites, app, and media \u2014 launch your digital ministry.",cta:"Explore the Digital Bundle \u2192"}}
+};
+var simpleMenus={
+  who:{sections:[{icon:"👤",label:"By Role",items:[{n:"Executive / Senior Pastor",h:"senior-pastor.html"},{n:"Associate Pastor",h:"associate-pastor.html"},{n:"Finance Leader / Treasurer",h:"finance-treasurer.html"},{n:"Communications Director",h:"communications-director.html"},{n:"Worship Pastor",h:"worship-pastor.html"}]},{icon:"⛪",label:"By Church Type",items:[{n:"Multi-site Churches",h:"multi-site.html"},{n:"Denominations & Networks",h:"denominations.html"},{n:"Large Churches",h:"large-churches.html"},{n:"Growing Churches",h:"growing-churches.html"},{n:"Small Churches",h:"small-churches.html"},{n:"Church Plants",h:"church-plants.html"},{n:"Digital / Online Churches",h:"digital-churches.html"}]}]},
+  services:{sections:[{icon:"🛠",label:"Support & Delivery",items:[{n:"Services Overview",h:"services-overview.html"},{n:"Implementation & Onboarding",h:"service-detail.html"},{n:"Strategy & Consulting",h:"service-detail.html"},{n:"Data Migration",h:"service-detail.html"},{n:"Support & Training",h:"service-detail.html"}]}]}
+};
+function renderRight(k){var o=outcomes[k],gc=o.gridClass||'';var cards=o.products.map(function(p){return'<a href="'+(productUrls[p.name]||'#')+'" class="product-card" style="text-decoration:none;color:inherit"><div class="product-icon">'+(icons[p.name]||'\u00B7')+'</div><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.desc+'</div></a>';}).join('');var bh='';if(o.bundle){bh='<a href="'+(bundleUrls[o.bundle.name]||'#')+'" class="bundle-banner" style="text-decoration:none;color:inherit"><div class="bundle-icon">\u2B21</div><div class="bundle-body"><div class="bundle-name">'+o.bundle.name+'</div><div class="bundle-tagline">'+o.bundle.tagline+'</div></div><span class="bundle-cta">'+o.bundle.cta+'</span></a>';}document.getElementById('rPanel').innerHTML='<div class="right-header">Relevant tools</div><div class="outcome-desc">'+o.desc+'</div>'+bh+'<div class="products-grid '+gc+'">'+cards+'</div><div class="right-footer"><span class="rf-label">Not sure where to start?</span><span class="rf-link">Take the Healthy Church Assessment \u2192</span></div>';}
+function buildSolutions(){var defs=[{k:'all',label:'All Solutions'},{k:'giving',label:'Increase Giving & Generosity'},{k:'engage',label:'Engage Your Church Community'},{k:'grow',label:'Grow Attendance & Reach'},{k:'streamline',label:'Streamline Church Operations'},{k:'financial',label:'Improve Financial Stewardship'},{k:'volunteer',label:'Strengthen Volunteer & Staff Effectiveness'},{k:'digital',label:'Launch & Scale Digital Ministry'}];var rows=defs.map(function(d,i){return'<div class="outcome-item'+(i===0?' active':'')+'" data-k="'+d.k+'">'+d.label+' <span class="arr">\u203A</span></div>';}).join('');return'<div class="mega-inner"><div class="left-panel"><div class="left-label">What do you want to do?</div>'+rows+'<div class="left-divider"></div><a href="platform-overview.html" class="platform-btn" style="text-decoration:none;color:inherit"><span class="platform-btn-label">Platform Overview \u2192</span><span class="platform-btn-sub">How Amplify works as one system</span></a></div><div class="right-panel" id="rPanel"></div></div>';}
+function buildSimple(k){return'<div class="simple-panel">'+simpleMenus[k].sections.map(function(s){return'<div class="s-section"><div class="s-category"><div class="s-cat-icon">'+s.icon+'</div><span class="s-cat-label">'+s.label+'</span></div>'+s.items.map(function(i){return'<a href="'+i.h+'" class="s-item">'+i.n+'</a>';}).join('')+'</div>';}).join('')+'</div>';}
+var cur=null,curBtn=null;
+function closeMenu(){if(curBtn)curBtn.classList.remove('open');var m=document.getElementById('megaMenu');if(m)m.classList.remove('show');cur=null;curBtn=null;}
+function openMenu(key,btn){closeMenu();cur=key;curBtn=btn;btn.classList.add('open');var m=document.getElementById('megaMenu');if(key==='solutions'){m.innerHTML=buildSolutions();m.querySelectorAll('.outcome-item').forEach(function(el){el.addEventListener('mouseenter',function(){m.querySelectorAll('.outcome-item').forEach(function(i){i.classList.remove('active')});this.classList.add('active');renderRight(this.dataset.k);});});renderRight('all');}else{m.innerHTML=buildSimple(key);}m.classList.add('show');}
+document.addEventListener('click',function(e){if(!e.target.closest('#primaryNav')&&!e.target.closest('.utility-bar'))closeMenu();});
+</script>

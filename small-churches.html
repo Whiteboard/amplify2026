@@ -1,0 +1,611 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:#46435D;min-height:100vh}
+
+/* SITE */
+#site{display:block}
+
+/* UTILITY BAR */
+.utility-bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;height:56px;background:white;border-bottom:0.5px solid #e8e8e8;position:sticky;top:0;z-index:300}
+.util-left{display:flex;align-items:center;gap:16px}
+.util-link{font-size:12px;color:#888;cursor:pointer;transition:color 0.1s;text-decoration:none}
+.util-link:hover{color:#46435D}
+.util-center{display:flex;align-items:center;justify-content:center;gap:10px}
+.logo-wordmark{font-size:24px;font-weight:700;color:#46435D;letter-spacing:-0.02em}
+.util-right{display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.util-sep{color:#ddd;font-size:10px}
+.search-field{display:flex;align-items:center;gap:6px;cursor:text}
+.search-icon{color:#bbb;font-size:14px}
+.search-placeholder{font-size:12px;color:#bbb}
+
+/* NAV */
+.nav-stage{display:flex;justify-content:center;align-items:center;padding:14px 32px;position:sticky;top:56px;z-index:200;pointer-events:none}
+.nav-group{display:inline-flex;align-items:center;gap:10px;position:relative;pointer-events:all}
+.island{background:white;border:0.5px solid #e0e0e0;border-radius:999px;display:inline-flex;align-items:center;gap:2px;padding:5px 8px;box-shadow:0 2px 16px rgba(0,0,0,0.08)}
+.nav-btn{background:none;border:none;padding:9px 18px;font-size:14px;color:#666;cursor:pointer;border-radius:999px;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:all 0.12s}
+.nav-btn:hover,.nav-btn.open{color:#46435D;background:#f5f4f8}
+.chevron{font-size:8px;color:#ccc;transition:transform 0.15s}
+.nav-btn.open .chevron{transform:rotate(180deg)}
+.demo-island{background:#46435D;border-radius:999px;padding:10px 22px;box-shadow:0 2px 16px rgba(70,67,93,0.25);cursor:pointer;transition:background 0.12s}
+.demo-island:hover{background:#5a576e}
+.demo-label{font-size:13px;font-weight:500;color:white}
+
+/* MEGA MENU */
+.mega{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:white;border:0.5px solid #e0e0e0;z-index:200;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.1);overflow:hidden;min-width:860px}
+.mega.show{display:block}
+.mega-inner{display:grid;grid-template-columns:1fr 2fr;min-height:380px}
+.left-panel{background:#f7f7f6;border-right:0.5px solid #ebebeb;padding:18px 0}
+.left-label{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;padding:0 16px 12px}
+.outcome-item{display:flex;align-items:center;justify-content:space-between;padding:9px 16px;cursor:pointer;font-size:14px;color:#666;border-left:2px solid transparent;transition:all 0.1s;line-height:1.3}
+.outcome-item:hover{color:#46435D;background:#f0efed;border-left-color:#ccc}
+.outcome-item.active{color:#46435D;background:white;border-left-color:#46435D;font-weight:600}
+.outcome-item .arr{font-size:11px;opacity:0;flex-shrink:0;margin-left:8px}
+.outcome-item.active .arr,.outcome-item:hover .arr{opacity:0.5}
+.outcome-item.active .arr{opacity:1}
+.left-divider{border:none;border-top:0.5px solid #ebebeb;margin:10px 0}
+.platform-btn{margin:0 12px 4px;padding:10px 14px;border:0.5px solid #e0e0e0;border-radius:10px;cursor:pointer;text-align:left;background:white;width:calc(100% - 24px);display:block;transition:all 0.12s}
+.platform-btn:hover{border-color:#46435D}
+.platform-btn-label{font-size:12px;font-weight:500;color:#46435D;display:block}
+.platform-btn-sub{font-size:11px;color:#aaa;margin-top:2px;display:block}
+.right-panel{padding:20px 22px;display:flex;flex-direction:column}
+.right-header{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+.outcome-desc{font-size:14px;color:#777;margin-bottom:14px;line-height:1.5;padding-bottom:14px;border-bottom:0.5px solid #f0f0f0}
+.bundle-banner{display:flex;align-items:center;gap:14px;padding:14px 18px;margin-bottom:14px;background:#eeedf4;border:0.5px solid #d8d6e6;border-radius:12px;cursor:pointer;transition:all 0.12s}
+.bundle-banner:hover{border-color:#46435D;box-shadow:0 4px 12px rgba(70,67,93,0.1)}
+.bundle-icon{width:36px;height:36px;border-radius:8px;background:#46435D;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;flex-shrink:0}
+.bundle-body{flex:1;min-width:0}
+.bundle-name{font-size:13px;font-weight:700;color:#46435D;margin-bottom:2px}
+.bundle-tagline{font-size:11px;color:#888;line-height:1.4}
+.bundle-cta{font-size:11px;font-weight:600;color:#46435D;white-space:nowrap;flex-shrink:0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.products-grid.all-grid{grid-template-columns:repeat(4,1fr)}
+.product-card{border:0.5px solid #ebebeb;border-radius:12px;padding:14px;cursor:pointer;transition:all 0.12s;background:white;display:flex;flex-direction:column}
+.product-card:hover{border-color:#46435D;transform:translateY(-2px);box-shadow:0 4px 12px rgba(70,67,93,0.1)}
+.product-icon{width:30px;height:30px;border-radius:7px;background:#f0f0f0;margin-bottom:9px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#999}
+.product-name{font-size:13px;font-weight:600;color:#46435D;margin-bottom:3px}
+.product-desc{font-size:11px;color:#aaa;line-height:1.4}
+.right-footer{margin-top:16px;padding-top:12px;border-top:0.5px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+.rf-label{font-size:12px;color:#aaa}
+.rf-link{font-size:12px;color:#46435D;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+.simple-panel{padding:20px 24px;min-width:260px}
+.s-section{margin-bottom:16px}
+.s-category{display:flex;align-items:center;justify-content:center;gap:8px;padding:6px 0;margin-bottom:4px}
+.s-cat-icon{width:26px;height:26px;border-radius:6px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.s-cat-label{font-size:14px;font-weight:700;color:#46435D}
+.s-item{font-size:14px;color:#666;padding:7px 0;cursor:pointer;border-bottom:0.5px solid #f5f5f5;transition:color 0.1s;display:block;text-align:center}
+.s-item:hover{color:#46435D}
+.s-item:last-child{border-bottom:none}
+
+/* LAYOUT */
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:72px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f7f6}
+.section.dark{background:#46435D}
+.section-center{text-align:center;max-width:600px;margin:0 auto 48px}
+.section-eyebrow{font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
+.section-eyebrow.light{color:rgba(255,255,255,0.5)}
+.section-h2{font-size:32px;font-weight:700;color:#1a1a1a;line-height:1.2;letter-spacing:-0.02em;margin-bottom:12px}
+.section-h2.light{color:white}
+.section-sub{font-size:16px;color:#888;line-height:1.6}
+.section-sub.light{color:rgba(255,255,255,0.6)}
+.hero{background:#46435D;padding:80px 0}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 28px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;white-space:nowrap}
+.btn-white{background:white;color:#46435D}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.3)}.btn-ghost:hover{border-color:rgba(255,255,255,0.6);color:white}
+.btn-dark{background:#46435D;color:white}.btn-dark:hover{background:#5a576e}
+.btn-outline{background:transparent;color:#46435D;border:1px solid #c0bdd4}.btn-outline:hover{border-color:#46435D}
+
+/* GRIDS & CARDS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px;transition:all 0.15s;cursor:pointer}
+.card:hover{border-color:#c0bdd4;box-shadow:0 4px 20px rgba(70,67,93,0.08);transform:translateY(-2px)}
+.card-icon{width:44px;height:44px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
+.card-title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:6px}
+.card-body{font-size:14px;color:#888;line-height:1.6}
+
+/* CHURCH TYPE SPECIFIC */
+.breadcrumb{display:flex;align-items:center;gap:8px;padding:16px 0;font-size:12px;color:#aaa}
+.breadcrumb a{color:#888;text-decoration:none;transition:color 0.1s}
+.breadcrumb a:hover{color:#46435D}
+.breadcrumb .sep{color:#ccc}
+
+/* NEED CARDS */
+.need-card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px;position:relative;overflow:hidden}
+.need-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:#46435D;opacity:0.15}
+.need-icon{width:44px;height:44px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
+.need-title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:8px;line-height:1.3}
+.need-body{font-size:14px;color:#888;line-height:1.6;margin-bottom:12px}
+.need-product{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:#eeedf4;border-radius:999px;font-size:11px;font-weight:600;color:#46435D}
+
+/* STAT BANNER */
+.stat-banner{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.stat-card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:32px;text-align:center}
+.stat-num{font-size:36px;font-weight:700;color:#46435D;letter-spacing:-0.02em}
+.stat-label{font-size:13px;color:#aaa;margin-top:4px;line-height:1.5}
+
+/* PRODUCT RECOMMENDATION */
+.rec-card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px;transition:all 0.15s;cursor:pointer;text-decoration:none;display:block}
+.rec-card:hover{border-color:#c0bdd4;box-shadow:0 4px 20px rgba(70,67,93,0.08);transform:translateY(-2px)}
+.rec-icon{width:44px;height:44px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
+.rec-title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.rec-why{font-size:13px;color:#888;line-height:1.6;margin-bottom:12px}
+.rec-link{font-size:12px;font-weight:600;color:#46435D;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
+
+/* TESTIMONIAL VIDEO */
+.testimonial-video{position:relative;background:#1a1a1a;border-radius:16px;overflow:hidden;min-height:400px;display:flex;flex-direction:column}
+.testimonial-video-bg{flex:1;background:#2a2838;display:flex;align-items:center;justify-content:center}
+.testimonial-video-play{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s}
+.testimonial-video-play:hover{background:rgba(255,255,255,0.25);transform:scale(1.08)}
+.testimonial-video-info{padding:20px 24px;display:flex;align-items:center;gap:14px;background:rgba(0,0,0,0.4)}
+.tavatar{width:40px;height:40px;border-radius:50%;background:#e0dfe8;flex-shrink:0}
+.tname{font-size:14px;font-weight:600;color:#1a1a1a}
+.trole{font-size:12px;color:#aaa;margin-top:2px}
+.testimonial-video-info .tavatar{border:2px solid rgba(255,255,255,0.2)}
+.testimonial-video-info .tname{color:white}
+.testimonial-video-info .trole{color:rgba(255,255,255,0.5)}
+
+/* CHURCH TYPE NAV */
+.type-card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:20px;transition:all 0.15s;cursor:pointer;text-align:center;text-decoration:none;display:block}
+.type-card:hover{border-color:#c0bdd4;box-shadow:0 4px 20px rgba(70,67,93,0.08);transform:translateY(-2px)}
+.type-card.current{border-color:#46435D;background:#f8f7fc}
+.type-icon{width:48px;height:48px;border-radius:50%;background:#eeedf4;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.type-name{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:3px}
+.type-desc{font-size:11px;color:#aaa;line-height:1.4}
+
+/* MINI CARD */
+.mini-card{display:flex;align-items:center;gap:10px;padding:12px 16px;border:0.5px solid #ebebeb;border-radius:10px;cursor:pointer;transition:all 0.12s;text-decoration:none}
+.mini-card:hover{border-color:#c0bdd4}
+.mini-icon{width:28px;height:28px;border-radius:6px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:11px;color:#aaa;flex-shrink:0}
+.mini-name{font-size:12px;font-weight:600;color:#888}
+
+/* ANNOTATION SYSTEM */
+.anno{position:relative;z-index:50;margin:0 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);max-width:380px;transition:opacity 0.25s,transform 0.25s;transform:translateY(16px);pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}
+.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-move{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.anno-move::before{content:'✅ SECTION MOVED';color:#2E7D32}
+.anno-gap{background:#FFF3E0;border-color:#FFB74D;color:#E65100}
+.anno-gap::before{content:'⚠️ GAP IDENTIFIED';color:#E65100}
+.anno-persona{background:#F3E5F5;border-color:#CE93D8;color:#4A148C}
+.anno-persona::before{content:'👤 PERSONA FOCUS';color:#7B1FA2}
+.anno strong{font-weight:700}
+.anno em{font-style:italic;color:inherit;opacity:0.75}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#46435D;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(70,67,93,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#5a576e}
+body.anno-hidden .anno{display:none}
+</style>
+
+<!-- SITE CONTENT -->
+<div id="site">
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="util-left">
+    <a href="index.html" class="util-link">Company</a><a href="hq.html" class="util-link">Amplify+ HQ</a>
+  </div>
+  <div class="util-center">
+    <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <svg width="32" height="32" viewBox="0 0 32 32"><rect width="16" height="16" fill="#c8c8c8"/><rect x="16" width="16" height="16" fill="#e4e4e4"/><rect y="16" width="16" height="16" fill="#e4e4e4"/><rect x="16" y="16" width="16" height="16" fill="#c8c8c8"/></svg>
+      <span class="logo-wordmark">Amplify</span>
+    </a>
+  </div>
+  <div class="util-right">
+    <a href="search-results.html" class="search-field" style="text-decoration:none"><span class="search-icon">&#x2315;</span><span class="search-placeholder">Search</span></a>
+    <span class="util-sep">|</span>
+    <a href="login.html" class="util-link" style="text-decoration:none">Login</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-stage">
+  <div class="nav-group">
+    <div class="island" id="primaryNav">
+      <button class="nav-btn" onmouseenter="openMenu('who',this)" onclick="openMenu('who',this)">Who We Serve <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="openMenu('solutions',this)" onclick="window.location.href='platform-overview.html'">Solutions <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="openMenu('services',this)" onclick="window.location.href='services-overview.html'">Services <span class="chevron">&#x25BE;</span></button>
+      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='healthy-church-hub.html'">Healthy Church Hub</button>
+      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='partners.html'">Partners</button>
+    </div>
+    <a href="request-demo.html" class="demo-island" style="text-decoration:none"><span class="demo-label">Request Demo</span></a>
+    <div class="mega" id="megaMenu"></div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div style="background:white;border-bottom:0.5px solid #f0f0f0">
+  <div class="w">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">&#x203A;</span>
+      <a href="#">Who We Serve</a>
+      <span class="sep">&#x203A;</span>
+      <span style="color:#46435D;font-weight:500">Small Churches</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero" style="padding:64px 0 80px;position:relative">
+  <div class="anno anno-persona" style="position:absolute;top:16px;right:48px;margin:0;z-index:70">
+    <strong>Small Churches</strong> &mdash; Under 200 attendance, often bi-vocational staff. Need affordable, simple tools that punch above their weight. Key buyers: Senior Pastor (often the only decision-maker) who is also the admin. <em>Price-sensitive but quality-hungry segment.</em>
+  </div>
+  <div class="anno anno-page" style="position:absolute;top:160px;right:48px;margin:0;z-index:60">
+    <strong>Church Type Page Architecture:</strong> Hero (empathy) &rarr; We See You (needs + solutions) &rarr; Stats &rarr; Recommended Products &rarr; Testimonial &rarr; Other Church Types &rarr; CTA. <em>Lighter than role pages &mdash; routes to products rather than deep-diving features.</em>
+  </div>
+  <div class="anno" style="position:absolute;bottom:20px;right:48px;margin:0;z-index:60">
+    <strong>Hero:</strong> Full-width empathy headline. Validates that small churches deserve big-church quality tools &mdash; at a price and complexity that makes sense. <em>NN/g: "Match between system and real world."</em>
+  </div>
+  <div class="w">
+    <div style="max-width:720px">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,255,255,0.1);border-radius:999px;margin-bottom:20px;border:0.5px solid rgba(255,255,255,0.15)">
+        <span style="font-size:14px">&#x1F3E0;</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.6);font-weight:500">Small Churches</span>
+      </div>
+      <div style="font-size:48px;font-weight:700;color:white;letter-spacing:-0.025em;line-height:1.08;margin-bottom:16px">Small Church. Big Mission. The Right Tools.</div>
+      <div style="font-size:17px;color:rgba(255,255,255,0.6);line-height:1.65;margin-bottom:32px">Your church may be small in attendance, but your mission is anything but. You deserve the same quality tools as a megachurch &mdash; at a price and complexity level that makes sense. You don&rsquo;t need a tech team to run great software. Amplify gives you professional-grade church management that&rsquo;s simple enough for one person to run.</div>
+      <div style="display:flex;gap:12px">
+        <a href="request-demo.html" class="btn btn-white" style="text-decoration:none">Book a Meeting</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WE SEE YOU -->
+<div class="section" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>We See You:</strong> Empathy + solution cards. Each pairs a small church need with the Amplify capability that addresses it. Product pills show which tool delivers. <em>NN/g: "Recognition rather than recall."</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">We see you</div>
+      <div class="section-h2">Small Doesn&rsquo;t Mean Under-Equipped</div>
+      <div class="section-sub">You&rsquo;re doing the work of a full staff with a fraction of the resources. We built Amplify to give small churches everything they need &mdash; without the complexity they don&rsquo;t.</div>
+    </div>
+    <div class="grid-4">
+      <div class="need-card">
+        <div class="need-icon">&#x1F4B0;</div>
+        <div class="need-title">Professional Tools, Small Church Pricing</div>
+        <div class="need-body">Enterprise quality without enterprise cost. Amplify packages are built for your budget &mdash; so you get the full platform without stretching your finances.</div>
+        <div class="need-product">All Products</div>
+      </div>
+      <div class="need-card">
+        <div class="need-icon">&#x1F3A9;</div>
+        <div class="need-title">You Wear Every Hat. We Simplify Each One.</div>
+        <div class="need-body">One login for giving, communications, member management, and your website. No juggling five different tools with five different passwords.</div>
+        <div class="need-product">P People + $ Giving + W Websites</div>
+      </div>
+      <div class="need-card">
+        <div class="need-icon">&#x2728;</div>
+        <div class="need-title">Look Bigger Than You Are</div>
+        <div class="need-body">A branded mobile app, professional website, and polished communications make your church look as established as you are devoted.</div>
+        <div class="need-product">M Mobile App + @ Communications</div>
+      </div>
+      <div class="need-card">
+        <div class="need-icon">&#x1F91D;</div>
+        <div class="need-title">Support That Knows Your Name</div>
+        <div class="need-body">Not a ticket number &mdash; real humans who understand small church ministry. Get help from people who know what it&rsquo;s like to do it all.</div>
+        <div class="need-product">Support</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="section alt" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;left:48px;margin:0;z-index:60">
+    <strong>Social Proof:</strong> Small church specific stats reinforce affordability and simplicity. "55K+" includes thousands of small congregations. <em>NN/g: "Credibility and trust."</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Built for you</div>
+      <div class="section-h2">Trusted by Small Churches Everywhere</div>
+    </div>
+    <div class="stat-banner">
+      <div class="stat-card">
+        <div class="stat-num">55K+</div>
+        <div class="stat-label">churches including thousands of small congregations</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">Affordable</div>
+        <div class="stat-label">plans built for small church budgets</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1 Person</div>
+        <div class="stat-label">can manage the entire platform</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RECOMMENDED PRODUCTS -->
+<div class="section" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Recommended Products:</strong> Curated for small churches &mdash; not just a product list. Each card explains <em>why</em> this product matters for this church type. Links to full product pages. <em>NN/g: "Help users recognize, diagnose, and recover."</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Your small church toolkit</div>
+      <div class="section-h2">Big Church Tools at a Small Church Price</div>
+      <div class="section-sub">Every Amplify product is designed to be simple enough for one person to manage. Here are the ones small churches rely on most.</div>
+    </div>
+    <!-- Primary recommendations -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:20px">
+      <a href="people.html" class="rec-card">
+        <div class="rec-icon">P</div>
+        <div class="rec-title">People (ChMS)</div>
+        <div class="rec-why">Keep track of every member, visitor, and volunteer in one place. Simple enough to manage on your own &mdash; powerful enough to grow with you.</div>
+        <span class="rec-link">Explore People &rarr;</span>
+      </a>
+      <a href="giving.html" class="rec-card">
+        <div class="rec-icon">$</div>
+        <div class="rec-title">Giving</div>
+        <div class="rec-why">Make it easy for your congregation to give online, by text, or through your app. Affordable plans that don&rsquo;t eat into your tithes.</div>
+        <span class="rec-link">Explore Giving &rarr;</span>
+      </a>
+      <a href="websites.html" class="rec-card">
+        <div class="rec-icon">W</div>
+        <div class="rec-title">Websites</div>
+        <div class="rec-why">A professional, mobile-ready website that makes your church look as established as you are faithful. No developer required.</div>
+        <span class="rec-link">Explore Websites &rarr;</span>
+      </a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:20px">
+      <a href="mobile-app.html" class="rec-card">
+        <div class="rec-icon">M</div>
+        <div class="rec-title">Mobile App</div>
+        <div class="rec-why">Your own branded church app &mdash; just like the big churches have. Push notifications, giving, events, and sermon access in one tap.</div>
+        <span class="rec-link">Explore Mobile App &rarr;</span>
+      </a>
+      <a href="communications.html" class="rec-card">
+        <div class="rec-icon">@</div>
+        <div class="rec-title">Communications</div>
+        <div class="rec-why">Send beautiful emails, texts, and push notifications without a communications team. Automated workflows save you hours every week.</div>
+        <span class="rec-link">Explore Communications &rarr;</span>
+      </a>
+      <a href="accounting.html" class="rec-card">
+        <div class="rec-icon">=</div>
+        <div class="rec-title">Accounting</div>
+        <div class="rec-why">Church-specific fund accounting that keeps your books clean and your board happy. No accounting degree needed.</div>
+        <span class="rec-link">Explore Accounting &rarr;</span>
+      </a>
+    </div>
+    <!-- Secondary -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <a href="streaming.html" class="mini-card"><div class="mini-icon">&#x25B6;</div><div class="mini-name">Streaming</div></a>
+      <a href="service-planning.html" class="mini-card"><div class="mini-icon">&#x2713;</div><div class="mini-name">Service Planning</div></a>
+      <a href="media.html" class="mini-card"><div class="mini-icon">&#x25C9;</div><div class="mini-name">Media</div></a>
+      <a href="safety.html" class="mini-card"><div class="mini-icon">S</div><div class="mini-name">Safety</div></a>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIAL -->
+<div class="section alt" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Testimonial:</strong> Small church specific social proof. Video format creates trust. Quote addresses the "professional tools at an affordable price" need directly.
+  </div>
+  <div class="w">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch">
+      <div class="testimonial-video">
+        <div class="testimonial-video-bg">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div class="testimonial-video-play">
+              <span style="font-size:22px;color:white;margin-left:3px">&#x25B6;</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.08em;font-weight:600">Watch Their Story</div>
+          </div>
+        </div>
+        <div class="testimonial-video-info">
+          <div class="tavatar"></div>
+          <div>
+            <div class="tname">Small Church Pastor</div>
+            <div class="trole">150 Members &bull; Rural Midwest</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center">
+        <div class="section-eyebrow">From a small church</div>
+        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:24px">
+          <div style="font-size:64px;font-weight:700;color:#46435D;letter-spacing:-0.03em;line-height:1">150</div>
+          <div style="font-size:15px;color:#888;line-height:1.5;max-width:280px">member church running like a church of 1,000</div>
+        </div>
+        <div style="font-size:18px;color:#444;line-height:1.7;font-style:italic;margin-bottom:20px;border-left:3px solid #46435D;padding-left:20px">&ldquo;I&rsquo;m the pastor, the admin, and the IT department. Amplify gave us professional tools at a price we could actually afford. Our website looks amazing, giving went up 30%, and I manage everything from one login. People think we have a full staff &mdash; it&rsquo;s just me and Amplify.&rdquo;</div>
+        <div style="font-size:12px;color:#aaa;text-transform:uppercase;letter-spacing:0.06em;font-weight:600">Small Church &bull; Rural Midwest</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OTHER CHURCH TYPES -->
+<div class="section" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Other Church Types:</strong> Cross-linking for churches that don't quite fit, or for visitors exploring options. Current page highlighted. <em>NN/g: "Flexibility and efficiency of use."</em>
+  </div>
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Find your fit</div>
+      <div class="section-h2">Amplify Serves Every Kind of Church</div>
+      <div class="section-sub">Whether you're one campus or twenty, launching or established, Amplify scales to meet you where you are.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:12px">
+      <a href="multi-site.html" class="type-card">
+        <div class="type-icon">&#x1F3D7;</div>
+        <div class="type-name">Multi-site</div>
+        <div class="type-desc">Multiple locations, one church</div>
+      </a>
+      <a href="denominations.html" class="type-card">
+        <div class="type-icon">&#x1F310;</div>
+        <div class="type-name">Denominations</div>
+        <div class="type-desc">Networks &amp; affiliations</div>
+      </a>
+      <a href="large-churches.html" class="type-card">
+        <div class="type-icon">&#x1F3DB;</div>
+        <div class="type-name">Large</div>
+        <div class="type-desc">1,000+ attendance</div>
+      </a>
+      <a href="growing-churches.html" class="type-card">
+        <div class="type-icon">&#x1F331;</div>
+        <div class="type-name">Growing</div>
+        <div class="type-desc">Scaling up fast</div>
+      </a>
+      <div class="type-card current">
+        <div class="type-icon">&#x1F3E0;</div>
+        <div class="type-name">Small</div>
+        <div class="type-desc">Intimate &amp; mighty</div>
+      </div>
+      <a href="church-plants.html" class="type-card">
+        <div class="type-icon">&#x1F33F;</div>
+        <div class="type-name">Church Plants</div>
+        <div class="type-desc">Starting from scratch</div>
+      </a>
+      <a href="digital-churches.html" class="type-card">
+        <div class="type-icon">&#x1F4BB;</div>
+        <div class="type-name">Digital</div>
+        <div class="type-desc">Online-first ministry</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="section dark" style="position:relative">
+  <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
+    <strong>Final CTA:</strong> Echoes hero's "big mission" language. Small church specific: validates their mission and offers the tools to match.
+  </div>
+  <div class="w" style="text-align:center">
+    <div style="font-size:38px;font-weight:700;color:white;letter-spacing:-0.02em;margin-bottom:12px">Big Tools for Your Big Mission</div>
+    <div style="font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto">See how Amplify gives small churches professional-grade giving, member management, communications, and a branded app &mdash; at a price that respects your budget.</div>
+    <div style="display:flex;gap:12px;justify-content:center">
+      <a href="request-demo.html" class="btn btn-white" style="text-decoration:none">Book a Demo</a>
+      <a href="request-demo.html" class="btn btn-ghost" style="text-decoration:none">Talk to Sales</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#1a1a1a;padding:64px 0 32px">
+  <div class="w">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+          <svg width="28" height="28" viewBox="0 0 32 32"><rect width="16" height="16" fill="rgba(255,255,255,0.4)"/><rect x="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect y="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect x="16" y="16" width="16" height="16" fill="rgba(255,255,255,0.4)"/></svg>
+          <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">Amplify</span>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:240px">Church management software built to help 55,000+ ministries thrive.</div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Solutions</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Increase Giving</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Engage Community</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Grow Attendance</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Streamline Ops</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Financial Stewardship</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Volunteer Teams</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Products</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="giving.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Giving</a>
+          <a href="accounting.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Accounting</a>
+          <a href="people.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">People (ChMS)</a>
+          <a href="websites.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Websites</a>
+          <a href="mobile-app.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Mobile App</a>
+          <a href="service-planning.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Service Planning</a>
+          <a href="safety.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Safety</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Resources</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Healthy Church Hub</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Webinars</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">eBooks</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Podcasts</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Blog</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Customer Stories</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Company</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">About</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Leadership</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Careers</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Partners</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Contact</span>
+          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Press</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Ministry Brands. All rights reserved.</div>
+      <div style="display:flex;gap:24px">
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Privacy Policy</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Terms of Service</span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Cookie Settings</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ANNOTATION TOGGLE -->
+<div class="anno-legend-wrap">
+  <div class="anno-legend">
+    <div class="anno-legend-title">Annotation Legend</div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div>
+  </div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'">
+    <span style="font-size:16px">&#x1F4DD;</span>
+    <span class="anno-label">Show Annotations</span>
+  </button>
+</div>
+
+</div><!-- end #site -->
+
+<script>
+document.body.classList.add("anno-hidden");
+var icons={"Giving":"$","Accounting":"=","People (ChMS)":"P","Websites":"W","Mobile App":"M","Communications":"@","Streaming":"&#x25B6;","Service Planning":"&#x2713;","Media":"&#x25C9;","Safety":"S"};
+var allProducts=[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"People (ChMS)",desc:"Member records & group management"},{name:"Websites",desc:"Your digital front door"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Media",desc:"Sermon content & distribution"},{name:"Safety",desc:"Check-in, background checks & protocols"}];
+var productUrls={"Giving":"giving.html","Accounting":"accounting.html","People (ChMS)":"people.html","Websites":"websites.html","Mobile App":"mobile-app.html","Communications":"communications.html","Streaming":"streaming.html","Service Planning":"service-planning.html","Media":"media.html","Safety":"safety.html"};
+var bundleUrls={"Complete Bundle":"complete-bundle.html","Generosity Bundle":"generosity-bundle.html","Financial Bundle":"financial-bundle.html","Digital Bundle":"digital-bundle.html"};
+var outcomes={
+  all:{desc:"The full Amplify platform \u2014 every tool working together as one connected system.",products:allProducts,gridClass:"all-grid",bundle:{name:"Complete Bundle",tagline:"Every tool, one price \u2014 the full Amplify platform for your entire church.",cta:"Explore the Complete Bundle \u2192"}},
+  giving:{desc:"Tools that invite generosity and give your finance team full visibility.",products:[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"Mobile App",desc:"Give from anywhere, anytime"},{name:"Communications",desc:"Generosity campaigns & appeals"}],bundle:{name:"Generosity Bundle",tagline:"All the giving & finance tools your church needs \u2014 packaged together.",cta:"Explore the Generosity Bundle \u2192"}},
+  engage:{desc:"Keep your congregation connected and actively participating between Sundays.",products:[{name:"People (ChMS)",desc:"Member records & group management"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Websites",desc:"Your digital front door"}]},
+  grow:{desc:"Expand your reach, convert first-time visitors, and retain the people who find you.",products:[{name:"Websites",desc:"First impression that converts"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Media",desc:"Sermon content & distribution"},{name:"Mobile App",desc:"Retain & re-engage members"}]},
+  streamline:{desc:"Replace fragmented tools with one connected system so nothing falls through the cracks.",products:[{name:"People (ChMS)",desc:"One database for your whole church"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Safety",desc:"Check-in & safety protocols"},{name:"Communications",desc:"Automated workflows & scheduling"}]},
+  financial:{desc:"Accurate books, clean audits, and board-ready reporting \u2014 without the late nights.",products:[{name:"Accounting",desc:"Fund accounting & compliance"},{name:"Giving",desc:"Donor management & statements"}],bundle:{name:"Financial Bundle",tagline:"Accounting, giving, and reporting \u2014 everything for financial stewardship.",cta:"Explore the Financial Bundle \u2192"}},
+  volunteer:{desc:"Your team shows up prepared, on time, knowing exactly what\u2019s expected.",products:[{name:"Service Planning",desc:"Scheduling & role assignment"},{name:"People (ChMS)",desc:"Volunteer profiles & history"},{name:"Communications",desc:"Automated reminders & confirmations"},{name:"Mobile App",desc:"Volunteers manage availability on the go"}]},
+  digital:{desc:"Meet your congregation \u2014 and reach new ones \u2014 wherever they spend their time.",products:[{name:"Streaming",desc:"Broadcast live or on-demand"},{name:"Websites",desc:"A site that works as hard as you do"},{name:"Mobile App",desc:"Your branded church app"},{name:"Media",desc:"Manage & distribute content at scale"}],bundle:{name:"Digital Bundle",tagline:"Streaming, websites, app, and media \u2014 launch your digital ministry.",cta:"Explore the Digital Bundle \u2192"}}
+};
+var simpleMenus={
+  who:{sections:[{icon:"👤",label:"By Role",items:[{n:"Executive / Senior Pastor",h:"senior-pastor.html"},{n:"Associate Pastor",h:"associate-pastor.html"},{n:"Finance Leader / Treasurer",h:"finance-treasurer.html"},{n:"Communications Director",h:"communications-director.html"},{n:"Worship Pastor",h:"worship-pastor.html"}]},{icon:"⛪",label:"By Church Type",items:[{n:"Multi-site Churches",h:"multi-site.html"},{n:"Denominations & Networks",h:"denominations.html"},{n:"Large Churches",h:"large-churches.html"},{n:"Growing Churches",h:"growing-churches.html"},{n:"Small Churches",h:"small-churches.html"},{n:"Church Plants",h:"church-plants.html"},{n:"Digital / Online Churches",h:"digital-churches.html"}]}]},
+  services:{sections:[{icon:"🛠",label:"Support & Delivery",items:[{n:"Services Overview",h:"services-overview.html"},{n:"Implementation & Onboarding",h:"service-detail.html"},{n:"Strategy & Consulting",h:"service-detail.html"},{n:"Data Migration",h:"service-detail.html"},{n:"Support & Training",h:"service-detail.html"}]}]}
+};
+function renderRight(k){var o=outcomes[k],gc=o.gridClass||'';var cards=o.products.map(function(p){return'<a href="'+(productUrls[p.name]||'#')+'" class="product-card" style="text-decoration:none;color:inherit"><div class="product-icon">'+(icons[p.name]||'\u00B7')+'</div><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.desc+'</div></a>';}).join('');var bh='';if(o.bundle){bh='<a href="'+(bundleUrls[o.bundle.name]||'#')+'" class="bundle-banner" style="text-decoration:none;color:inherit"><div class="bundle-icon">\u2B21</div><div class="bundle-body"><div class="bundle-name">'+o.bundle.name+'</div><div class="bundle-tagline">'+o.bundle.tagline+'</div></div><span class="bundle-cta">'+o.bundle.cta+'</span></a>';}document.getElementById('rPanel').innerHTML='<div class="right-header">Relevant tools</div><div class="outcome-desc">'+o.desc+'</div>'+bh+'<div class="products-grid '+gc+'">'+cards+'</div><div class="right-footer"><span class="rf-label">Not sure where to start?</span><span class="rf-link">Take the Healthy Church Assessment \u2192</span></div>';}
+function buildSolutions(){var defs=[{k:'all',label:'All Solutions'},{k:'giving',label:'Increase Giving & Generosity'},{k:'engage',label:'Engage Your Church Community'},{k:'grow',label:'Grow Attendance & Reach'},{k:'streamline',label:'Streamline Church Operations'},{k:'financial',label:'Improve Financial Stewardship'},{k:'volunteer',label:'Strengthen Volunteer & Staff Effectiveness'},{k:'digital',label:'Launch & Scale Digital Ministry'}];var rows=defs.map(function(d,i){return'<div class="outcome-item'+(i===0?' active':'')+'" data-k="'+d.k+'">'+d.label+' <span class="arr">\u203A</span></div>';}).join('');return'<div class="mega-inner"><div class="left-panel"><div class="left-label">What do you want to do?</div>'+rows+'<div class="left-divider"></div><a href="platform-overview.html" class="platform-btn" style="text-decoration:none;color:inherit"><span class="platform-btn-label">Platform Overview \u2192</span><span class="platform-btn-sub">How Amplify works as one system</span></a></div><div class="right-panel" id="rPanel"></div></div>';}
+function buildSimple(k){return'<div class="simple-panel">'+simpleMenus[k].sections.map(function(s){return'<div class="s-section"><div class="s-category"><div class="s-cat-icon">'+s.icon+'</div><span class="s-cat-label">'+s.label+'</span></div>'+s.items.map(function(i){return'<a href="'+i.h+'" class="s-item">'+i.n+'</a>';}).join('')+'</div>';}).join('')+'</div>';}
+var cur=null,curBtn=null;
+function closeMenu(){if(curBtn)curBtn.classList.remove('open');var m=document.getElementById('megaMenu');if(m)m.classList.remove('show');cur=null;curBtn=null;}
+function openMenu(key,btn){closeMenu();cur=key;curBtn=btn;btn.classList.add('open');var m=document.getElementById('megaMenu');if(key==='solutions'){m.innerHTML=buildSolutions();m.querySelectorAll('.outcome-item').forEach(function(el){el.addEventListener('mouseenter',function(){m.querySelectorAll('.outcome-item').forEach(function(i){i.classList.remove('active')});this.classList.add('active');renderRight(this.dataset.k);});});renderRight('all');}else{m.innerHTML=buildSimple(key);}m.classList.add('show');}
+document.addEventListener('click',function(e){if(!e.target.closest('#primaryNav')&&!e.target.closest('.utility-bar'))closeMenu();});
+</script>
