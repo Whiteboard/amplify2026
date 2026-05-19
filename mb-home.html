@@ -74,21 +74,51 @@ body{background:white;min-height:100vh;color:#1a1a1a}
 .mb-stat-value{font-size:44px;font-weight:700;color:#1E3A5F;letter-spacing:-0.025em;line-height:1;margin-bottom:8px}
 .mb-stat-label{font-size:13px;color:#888;line-height:1.4}
 
-/* ===== 4-BRAND SHOWCASE ===== */
-.mb-brands{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.mb-brand-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:32px 26px;text-decoration:none;color:inherit;transition:all 0.15s;display:flex;flex-direction:column;cursor:pointer}
-.mb-brand-card:hover{border-color:#1E3A5F;transform:translateY(-3px);box-shadow:0 8px 24px rgba(30,58,95,0.08)}
-.mb-brand-logo{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;margin-bottom:20px}
-.mb-brand-logo.amplify{background:#46435D}
-.mb-brand-logo.parishsoft{background:#8b6f47}
-.mb-brand-logo.donordirect{background:#2a6e5a}
-.mb-brand-logo.protect{background:#a14040}
-.mb-brand-name{font-size:18px;font-weight:700;color:#1a1a1a;margin-bottom:6px;letter-spacing:-0.01em}
-.mb-brand-tag{font-size:12px;font-weight:600;color:#999;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:14px}
-.mb-brand-desc{font-size:14px;color:#666;line-height:1.6;margin-bottom:22px;flex:1}
-.mb-brand-link{font-size:13px;font-weight:600;color:#1E3A5F;text-decoration:none}
-.mb-brand-link:after{content:" →";transition:transform 0.12s;display:inline-block}
-.mb-brand-card:hover .mb-brand-link:after{transform:translateX(3px)}
+/* ===== LOGO REEL ===== */
+.mb-logos{background:white;padding:48px 0 56px;border-bottom:0.5px solid #f0f0f0}
+.mb-logos-label{font-size:11px;color:#999;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;text-align:center;margin-bottom:32px}
+.mb-logos-row{display:grid;grid-template-columns:repeat(7,1fr);gap:48px;align-items:center;max-width:1100px;margin:0 auto;padding:0 48px;opacity:0.7}
+.mb-logo-placeholder{height:32px;background:#d4d4d4;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#888;font-size:11px;font-weight:600;letter-spacing:0.04em}
+
+/* ===== FULL-WIDTH BRAND SECTIONS ===== */
+.mb-brand-section{padding:96px 0;border-bottom:0.5px solid #f0f0f0}
+.mb-brand-section.alt{background:#f7f8fa}
+.mb-brand-section-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;max-width:1200px;margin:0 auto;padding:0 48px}
+.mb-brand-section.reverse .mb-brand-section-inner{direction:rtl}
+.mb-brand-section.reverse .mb-brand-section-inner > *{direction:ltr}
+.mb-brand-section-badge{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px}
+.mb-brand-section-mark{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px}
+.mb-brand-section-mark.amplify{background:#46435D}
+.mb-brand-section-mark.parishsoft{background:#8b6f47}
+.mb-brand-section-mark.donordirect{background:#2a6e5a}
+.mb-brand-section-mark.protect{background:#a14040}
+.mb-brand-section-brand{font-size:14px;font-weight:700;color:#1a1a1a;letter-spacing:-0.01em}
+.mb-brand-section-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.mb-brand-section-eyebrow.amplify{color:#46435D}
+.mb-brand-section-eyebrow.parishsoft{color:#8b6f47}
+.mb-brand-section-eyebrow.donordirect{color:#2a6e5a}
+.mb-brand-section-eyebrow.protect{color:#a14040}
+.mb-brand-section h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:18px}
+.mb-brand-section-desc{font-size:17px;color:#666;line-height:1.65;margin-bottom:28px}
+.mb-brand-section-features{list-style:none;padding:0;margin:0 0 32px 0;display:flex;flex-direction:column;gap:12px}
+.mb-brand-section-features li{display:flex;align-items:flex-start;gap:11px;font-size:14px;color:#444;line-height:1.5}
+.mb-brand-section-check{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:700;margin-top:1px}
+.mb-brand-section-check.amplify{background:#46435D}
+.mb-brand-section-check.parishsoft{background:#8b6f47}
+.mb-brand-section-check.donordirect{background:#2a6e5a}
+.mb-brand-section-check.protect{background:#a14040}
+.mb-brand-section-cta{display:inline-flex;align-items:center;justify-content:center;padding:13px 24px;border-radius:8px;font-size:14px;font-weight:600;color:white;text-decoration:none;transition:all 0.15s}
+.mb-brand-section-cta.amplify{background:#46435D}.mb-brand-section-cta.amplify:hover{background:#5a576e}
+.mb-brand-section-cta.parishsoft{background:#8b6f47}.mb-brand-section-cta.parishsoft:hover{background:#a08555}
+.mb-brand-section-cta.donordirect{background:#2a6e5a}.mb-brand-section-cta.donordirect:hover{background:#358571}
+.mb-brand-section-cta.protect{background:#a14040}.mb-brand-section-cta.protect:hover{background:#b95050}
+.mb-brand-visual{aspect-ratio:4/3;border-radius:18px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 48px rgba(0,0,0,0.08)}
+.mb-brand-visual.amplify{background:linear-gradient(135deg,#46435D 0%,#2d2a44 100%)}
+.mb-brand-visual.parishsoft{background:linear-gradient(135deg,#8b6f47 0%,#5d4730 100%)}
+.mb-brand-visual.donordirect{background:linear-gradient(135deg,#2a6e5a 0%,#1c4a3d 100%)}
+.mb-brand-visual.protect{background:linear-gradient(135deg,#a14040 0%,#6f2a2a 100%)}
+.mb-brand-visual-stack{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:78%;height:78%}
+.mb-brand-visual-cell{background:rgba(255,255,255,0.12);border:0.5px solid rgba(255,255,255,0.18);border-radius:12px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.92);font-size:13px;font-weight:600;backdrop-filter:blur(4px)}
 
 /* ===== ONE PLATFORM ===== */
 .mb-platform{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
@@ -203,6 +233,20 @@ body.anno-hidden .anno{display:none}
 
 <div class="anno anno-page"><strong>Hero Strategy:</strong> Corporate tagline echoes Amplify's "amplifying generosity" while positioning Ministry Brands as the family of platforms. Stat (90K+ orgs) builds immediate credibility. Two clear paths: demo for high-intent, brands for research-mode.</div>
 
+<!-- ============ LOGO REEL ============ -->
+<div class="mb-logos">
+  <div class="mb-logos-label">Trusted by 90,000+ organizations across North America</div>
+  <div class="mb-logos-row">
+    <div class="mb-logo-placeholder">CHURCH&nbsp;A</div>
+    <div class="mb-logo-placeholder">DIOCESE&nbsp;B</div>
+    <div class="mb-logo-placeholder">MISSION&nbsp;C</div>
+    <div class="mb-logo-placeholder">FOUNDATION&nbsp;D</div>
+    <div class="mb-logo-placeholder">PARISH&nbsp;E</div>
+    <div class="mb-logo-placeholder">MINISTRY&nbsp;F</div>
+    <div class="mb-logo-placeholder">NONPROFIT&nbsp;G</div>
+  </div>
+</div>
+
 <!-- ============ STAT STRIP ============ -->
 <div class="mb-stats">
   <div class="mb-stat"><div class="mb-stat-value">90,000+</div><div class="mb-stat-label">Organizations served</div></div>
@@ -211,45 +255,128 @@ body.anno-hidden .anno{display:none}
   <div class="mb-stat"><div class="mb-stat-value">1.7M</div><div class="mb-stat-label">Background checks run</div></div>
 </div>
 
-<!-- ============ 4-BRAND SHOWCASE ============ -->
-<section class="section" id="brands">
-  <div class="w">
-    <div class="section-center">
-      <div class="section-eyebrow">Our Brands</div>
-      <div class="section-h2">Built for every kind of mission</div>
-      <div class="section-sub">Whichever path your organization is on — Ministry Brands has a purpose-built platform to support it.</div>
+<!-- Anchor target for the "Explore our Brands" hero CTA -->
+<div id="brands"></div>
+
+<!-- ============ AMPLIFY DEEP-DIVE ============ -->
+<section class="mb-brand-section">
+  <div class="mb-brand-section-inner">
+    <div>
+      <div class="mb-brand-section-badge">
+        <div class="mb-brand-section-mark amplify">A</div>
+        <span class="mb-brand-section-brand">Amplify</span>
+      </div>
+      <div class="mb-brand-section-eyebrow amplify">For Churches</div>
+      <h2>Run your church. Not the other way around.</h2>
+      <p class="mb-brand-section-desc">An end-to-end church management platform built for congregations of every size. Replace fragmented tools with one connected system for giving, people, communications, websites, and service planning.</p>
+      <ul class="mb-brand-section-features">
+        <li><span class="mb-brand-section-check amplify">✓</span><span><strong>Giving &amp; finance</strong> — online giving, recurring gifts, fund accounting, and donor stewardship</span></li>
+        <li><span class="mb-brand-section-check amplify">✓</span><span><strong>People &amp; engagement</strong> — member records, groups, attendance, and communications</span></li>
+        <li><span class="mb-brand-section-check amplify">✓</span><span><strong>Worship operations</strong> — service planning, volunteer scheduling, and check-in</span></li>
+        <li><span class="mb-brand-section-check amplify">✓</span><span><strong>Digital presence</strong> — church website, mobile app, and live streaming</span></li>
+      </ul>
+      <a href="home.html" class="mb-brand-section-cta amplify">Explore Amplify →</a>
     </div>
-    <div class="mb-brands">
-      <a href="home.html" class="mb-brand-card">
-        <div class="mb-brand-logo amplify">A</div>
-        <div class="mb-brand-name">Amplify</div>
-        <div class="mb-brand-tag">For Churches</div>
-        <div class="mb-brand-desc">An end-to-end church management platform: giving, websites, communications, planning, and more — all connected.</div>
-        <span class="mb-brand-link">Explore Amplify</span>
-      </a>
-      <a href="#" class="mb-brand-card">
-        <div class="mb-brand-logo parishsoft">P</div>
-        <div class="mb-brand-name">ParishSOFT</div>
-        <div class="mb-brand-tag">For Parishes &amp; Dioceses</div>
-        <div class="mb-brand-desc">Census, sacramental records, and contributions software trusted by Catholic parishes across North America.</div>
-        <span class="mb-brand-link">Explore ParishSOFT</span>
-      </a>
-      <a href="#" class="mb-brand-card">
-        <div class="mb-brand-logo donordirect">D</div>
-        <div class="mb-brand-name">DonorDirect</div>
-        <div class="mb-brand-tag">For Nonprofits</div>
-        <div class="mb-brand-desc">Donor relationship management built for mission-driven nonprofits with complex stewardship needs.</div>
-        <span class="mb-brand-link">Explore DonorDirect</span>
-      </a>
-      <a href="#" class="mb-brand-card">
-        <div class="mb-brand-logo protect">P</div>
-        <div class="mb-brand-name">Protect My Ministry</div>
-        <div class="mb-brand-tag">For Ministry Safety</div>
-        <div class="mb-brand-desc">Background screening, safety training, and check-in tools that protect the people you serve.</div>
-        <span class="mb-brand-link">Explore Protection</span>
-      </a>
+    <div class="mb-brand-visual amplify">
+      <div class="mb-brand-visual-stack">
+        <div class="mb-brand-visual-cell">Giving</div>
+        <div class="mb-brand-visual-cell">People</div>
+        <div class="mb-brand-visual-cell">Worship</div>
+        <div class="mb-brand-visual-cell">Communications</div>
+      </div>
     </div>
-    <div class="anno anno-persona"><strong>Audience-Routing:</strong> The 4-brand card grid is the primary navigation device. Visitors self-select by audience (Church / Parish / Nonprofit / Safety) which routes them to the appropriate brand site. Mirrors the audience-led top nav.</div>
+  </div>
+</section>
+
+<div class="anno anno-persona"><strong>Audience-Routing per Section:</strong> Each brand gets a dedicated full-width section (rather than equal-weight cards) so visitors can self-identify and explore deeply. Alternating left/right layout creates rhythm and equal visual weight across the 4 brands.</div>
+
+<!-- ============ PARISHSOFT DEEP-DIVE ============ -->
+<section class="mb-brand-section alt reverse">
+  <div class="mb-brand-section-inner">
+    <div>
+      <div class="mb-brand-section-badge">
+        <div class="mb-brand-section-mark parishsoft">P</div>
+        <span class="mb-brand-section-brand">ParishSOFT</span>
+      </div>
+      <div class="mb-brand-section-eyebrow parishsoft">For Parishes &amp; Dioceses</div>
+      <h2>Trusted by the Catholic church for 30+ years.</h2>
+      <p class="mb-brand-section-desc">Census, sacramental records, contributions, and diocesan reporting — all in one platform designed specifically for Catholic parishes and the dioceses they belong to.</p>
+      <ul class="mb-brand-section-features">
+        <li><span class="mb-brand-section-check parishsoft">✓</span><span><strong>Family census &amp; sacramental records</strong> — baptism, confirmation, marriage tracking</span></li>
+        <li><span class="mb-brand-section-check parishsoft">✓</span><span><strong>Online giving &amp; contributions</strong> — recurring offering, capital campaigns, e-statements</span></li>
+        <li><span class="mb-brand-section-check parishsoft">✓</span><span><strong>Diocesan-level reporting</strong> — roll-up reporting across all parishes in the diocese</span></li>
+        <li><span class="mb-brand-section-check parishsoft">✓</span><span><strong>Parish websites &amp; communications</strong> — bulletins, email, mobile-ready websites</span></li>
+      </ul>
+      <a href="#" class="mb-brand-section-cta parishsoft">Explore ParishSOFT →</a>
+    </div>
+    <div class="mb-brand-visual parishsoft">
+      <div class="mb-brand-visual-stack">
+        <div class="mb-brand-visual-cell">Census</div>
+        <div class="mb-brand-visual-cell">Sacraments</div>
+        <div class="mb-brand-visual-cell">Contributions</div>
+        <div class="mb-brand-visual-cell">Diocesan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DONORDIRECT DEEP-DIVE ============ -->
+<section class="mb-brand-section">
+  <div class="mb-brand-section-inner">
+    <div>
+      <div class="mb-brand-section-badge">
+        <div class="mb-brand-section-mark donordirect">D</div>
+        <span class="mb-brand-section-brand">DonorDirect</span>
+      </div>
+      <div class="mb-brand-section-eyebrow donordirect">For Nonprofits</div>
+      <h2>Built for the donor relationships that change lives.</h2>
+      <p class="mb-brand-section-desc">Mission-driven nonprofits need more than a database. DonorDirect is a complete donor relationship management platform built for the complex stewardship workflows that healthy nonprofits depend on.</p>
+      <ul class="mb-brand-section-features">
+        <li><span class="mb-brand-section-check donordirect">✓</span><span><strong>Donor 360°</strong> — gifts, communications, engagement, and lifetime value in one record</span></li>
+        <li><span class="mb-brand-section-check donordirect">✓</span><span><strong>Major-donor stewardship</strong> — moves management, cultivation pipelines, planned giving</span></li>
+        <li><span class="mb-brand-section-check donordirect">✓</span><span><strong>Campaign &amp; appeal tracking</strong> — multi-channel attribution and ROI reporting</span></li>
+        <li><span class="mb-brand-section-check donordirect">✓</span><span><strong>Integrations</strong> — connect with email, accounting, and outreach tools you already use</span></li>
+      </ul>
+      <a href="#" class="mb-brand-section-cta donordirect">Explore DonorDirect →</a>
+    </div>
+    <div class="mb-brand-visual donordirect">
+      <div class="mb-brand-visual-stack">
+        <div class="mb-brand-visual-cell">Donors</div>
+        <div class="mb-brand-visual-cell">Campaigns</div>
+        <div class="mb-brand-visual-cell">Stewardship</div>
+        <div class="mb-brand-visual-cell">Reporting</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROTECT MY MINISTRY DEEP-DIVE ============ -->
+<section class="mb-brand-section alt reverse">
+  <div class="mb-brand-section-inner">
+    <div>
+      <div class="mb-brand-section-badge">
+        <div class="mb-brand-section-mark protect">P</div>
+        <span class="mb-brand-section-brand">Protect My Ministry</span>
+      </div>
+      <div class="mb-brand-section-eyebrow protect">For Ministry Safety</div>
+      <h2>Keep the people in your care safe.</h2>
+      <p class="mb-brand-section-desc">Background checks, ongoing monitoring, and safety training built for the unique requirements of ministry settings. Trusted by churches, parishes, and nonprofits to protect the children, volunteers, and staff they serve.</p>
+      <ul class="mb-brand-section-features">
+        <li><span class="mb-brand-section-check protect">✓</span><span><strong>Background screening</strong> — criminal, sex offender, motor vehicle, and credit reports</span></li>
+        <li><span class="mb-brand-section-check protect">✓</span><span><strong>Ongoing monitoring</strong> — alerts on new offenses for your active volunteers</span></li>
+        <li><span class="mb-brand-section-check protect">✓</span><span><strong>Child &amp; volunteer safety training</strong> — abuse prevention, mandatory reporting</span></li>
+        <li><span class="mb-brand-section-check protect">✓</span><span><strong>Check-in &amp; access control</strong> — secure room check-in for kids and youth programs</span></li>
+      </ul>
+      <a href="#" class="mb-brand-section-cta protect">Explore Protection →</a>
+    </div>
+    <div class="mb-brand-visual protect">
+      <div class="mb-brand-visual-stack">
+        <div class="mb-brand-visual-cell">Screening</div>
+        <div class="mb-brand-visual-cell">Monitoring</div>
+        <div class="mb-brand-visual-cell">Training</div>
+        <div class="mb-brand-visual-cell">Check-In</div>
+      </div>
+    </div>
   </div>
 </section>
 
