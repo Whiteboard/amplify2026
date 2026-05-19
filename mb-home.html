@@ -228,11 +228,36 @@ body{background:white;min-height:100vh;color:#1a1a1a}
 .pm-mock-monitor-row{display:flex;align-items:center;gap:6px;font-size:9px;color:#666}
 .pm-mock-monitor-dot{width:6px;height:6px;border-radius:50%;background:#2a6e5a;flex-shrink:0}
 
-/* ===== ONE PLATFORM ===== */
-.mb-platform{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.mb-platform-visual{aspect-ratio:5/4;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);border-radius:16px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.mb-platform-visual-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:80%;height:80%}
-.mb-platform-cell{background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:600;font-size:13px;backdrop-filter:blur(4px)}
+/* ===== ONE FAMILY MANY SOLUTIONS — intro / brand navigator ===== */
+.mb-family{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.mb-family-h2{font-size:48px;font-weight:700;color:#1a1a1a;line-height:1.05;letter-spacing:-0.03em;margin-bottom:20px}
+.mb-family-desc{font-size:17px;color:#666;line-height:1.7;margin-bottom:32px;max-width:480px}
+.mb-family-meta{display:flex;gap:32px;margin-top:32px;padding-top:24px;border-top:0.5px solid #e0e3e8}
+.mb-family-meta-num{font-size:24px;font-weight:700;color:#1E3A5F;letter-spacing:-0.02em;line-height:1;margin-bottom:6px}
+.mb-family-meta-label{font-size:11px;color:#888;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+.mb-nav-card{background:white;border-radius:18px;box-shadow:0 12px 36px rgba(0,0,0,0.08),0 2px 8px rgba(0,0,0,0.04);overflow:hidden;border:0.5px solid #e8e8e8}
+.mb-nav-card-header{padding:18px 24px;background:#f7f8fa;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between}
+.mb-nav-card-title{font-size:11px;font-weight:700;color:#666;letter-spacing:0.12em;text-transform:uppercase}
+.mb-nav-card-count{font-size:11px;font-weight:700;color:#bbb}
+.mb-nav-row{display:flex;align-items:center;gap:18px;padding:20px 24px;border-bottom:0.5px solid #f0f0f0;text-decoration:none;color:inherit;cursor:pointer;position:relative;transition:background 0.15s,padding-left 0.18s ease;overflow:hidden}
+.mb-nav-row:last-child{border-bottom:none}
+.mb-nav-row:hover{background:#fafbfc;padding-left:30px}
+.mb-nav-row-stripe{position:absolute;left:0;top:0;bottom:0;width:5px}
+.mb-nav-row-stripe.amplify{background:#46435D}
+.mb-nav-row-stripe.parishsoft{background:#8b6f47}
+.mb-nav-row-stripe.donordirect{background:#2a6e5a}
+.mb-nav-row-stripe.protect{background:#a14040}
+.mb-nav-row-mark{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:15px;flex-shrink:0;transition:transform 0.18s ease}
+.mb-nav-row-mark.amplify{background:#46435D}
+.mb-nav-row-mark.parishsoft{background:#8b6f47}
+.mb-nav-row-mark.donordirect{background:#2a6e5a}
+.mb-nav-row-mark.protect{background:#a14040}
+.mb-nav-row:hover .mb-nav-row-mark{transform:scale(1.06)}
+.mb-nav-row-body{flex:1;min-width:0}
+.mb-nav-row-name{font-size:16px;font-weight:700;color:#1a1a1a;letter-spacing:-0.01em;margin-bottom:2px}
+.mb-nav-row-tag{font-size:12px;color:#888;font-weight:500}
+.mb-nav-row-arrow{font-size:16px;color:#c0c0c8;transition:transform 0.18s,color 0.18s}
+.mb-nav-row:hover .mb-nav-row-arrow{color:#1E3A5F;transform:translateX(4px)}
 
 /* ===== HCH TEASER ===== */
 .mb-hch{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
@@ -366,8 +391,79 @@ body.anno-hidden .anno{display:none}
 <!-- Anchor target for the "Explore our Brands" hero CTA -->
 <div id="brands"></div>
 
+<!-- ============ ONE FAMILY, MANY SOLUTIONS — intro / brand navigator ============ -->
+<section class="section alt" style="padding:88px 0">
+  <div class="w">
+    <div class="mb-family">
+      <div>
+        <div class="section-eyebrow">One Family, Many Solutions</div>
+        <h2 class="mb-family-h2">Four platforms.<br>One purpose.</h2>
+        <p class="mb-family-desc">Ministry Brands brings together four purpose-built software platforms under one parent — each engineered for a specific kind of mission, all sharing a foundation of security, support, and stewardship.</p>
+        <a href="mb-company.html" class="btn btn-navy">Learn About Ministry Brands →</a>
+        <div class="mb-family-meta">
+          <div>
+            <div class="mb-family-meta-num">40+ yrs</div>
+            <div class="mb-family-meta-label">In ministry tech</div>
+          </div>
+          <div>
+            <div class="mb-family-meta-num">4</div>
+            <div class="mb-family-meta-label">Purpose-built brands</div>
+          </div>
+          <div>
+            <div class="mb-family-meta-num">90K+</div>
+            <div class="mb-family-meta-label">Organizations served</div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-nav-card">
+        <div class="mb-nav-card-header">
+          <span class="mb-nav-card-title">Jump to a brand</span>
+          <span class="mb-nav-card-count">4 platforms</span>
+        </div>
+        <a href="#brand-amplify" class="mb-nav-row">
+          <span class="mb-nav-row-stripe amplify"></span>
+          <div class="mb-nav-row-mark amplify">A</div>
+          <div class="mb-nav-row-body">
+            <div class="mb-nav-row-name">Amplify</div>
+            <div class="mb-nav-row-tag">For Churches</div>
+          </div>
+          <span class="mb-nav-row-arrow">↓</span>
+        </a>
+        <a href="#brand-parishsoft" class="mb-nav-row">
+          <span class="mb-nav-row-stripe parishsoft"></span>
+          <div class="mb-nav-row-mark parishsoft">P</div>
+          <div class="mb-nav-row-body">
+            <div class="mb-nav-row-name">ParishSOFT</div>
+            <div class="mb-nav-row-tag">For Parishes &amp; Dioceses</div>
+          </div>
+          <span class="mb-nav-row-arrow">↓</span>
+        </a>
+        <a href="#brand-donordirect" class="mb-nav-row">
+          <span class="mb-nav-row-stripe donordirect"></span>
+          <div class="mb-nav-row-mark donordirect">D</div>
+          <div class="mb-nav-row-body">
+            <div class="mb-nav-row-name">DonorDirect</div>
+            <div class="mb-nav-row-tag">For Nonprofits</div>
+          </div>
+          <span class="mb-nav-row-arrow">↓</span>
+        </a>
+        <a href="#brand-protect" class="mb-nav-row">
+          <span class="mb-nav-row-stripe protect"></span>
+          <div class="mb-nav-row-mark protect">P</div>
+          <div class="mb-nav-row-body">
+            <div class="mb-nav-row-name">Protect My Ministry</div>
+            <div class="mb-nav-row-tag">For Ministry Safety</div>
+          </div>
+          <span class="mb-nav-row-arrow">↓</span>
+        </a>
+      </div>
+    </div>
+    <div class="anno anno-page"><strong>Family Intro Strategy:</strong> Positioned as the first thing visitors see after the stats strip. The right-side navigator card lets visitors jump straight to the brand they care about, doubling as a visual preview of all four. Each row's left-edge stripe color matches that brand's section below.</div>
+  </div>
+</section>
+
 <!-- ============ AMPLIFY DEEP-DIVE ============ -->
-<section class="mb-brand-section">
+<section class="mb-brand-section" id="brand-amplify">
   <div class="mb-brand-section-inner">
     <div>
       <div class="mb-brand-section-badge">
@@ -434,7 +530,7 @@ body.anno-hidden .anno{display:none}
 <div class="anno anno-persona"><strong>Audience-Routing per Section:</strong> Each brand gets a dedicated full-width section (rather than equal-weight cards) so visitors can self-identify and explore deeply. Alternating left/right layout creates rhythm and equal visual weight across the 4 brands.</div>
 
 <!-- ============ PARISHSOFT DEEP-DIVE ============ -->
-<section class="mb-brand-section alt reverse">
+<section class="mb-brand-section alt reverse" id="brand-parishsoft">
   <div class="mb-brand-section-inner">
     <div>
       <div class="mb-brand-section-badge">
@@ -504,7 +600,7 @@ body.anno-hidden .anno{display:none}
 </section>
 
 <!-- ============ DONORDIRECT DEEP-DIVE ============ -->
-<section class="mb-brand-section">
+<section class="mb-brand-section" id="brand-donordirect">
   <div class="mb-brand-section-inner">
     <div>
       <div class="mb-brand-section-badge">
@@ -570,7 +666,7 @@ body.anno-hidden .anno{display:none}
 </section>
 
 <!-- ============ PROTECT MY MINISTRY DEEP-DIVE ============ -->
-<section class="mb-brand-section alt reverse">
+<section class="mb-brand-section alt reverse" id="brand-protect">
   <div class="mb-brand-section-inner">
     <div>
       <div class="mb-brand-section-badge">
@@ -625,29 +721,6 @@ body.anno-hidden .anno{display:none}
           <div class="pm-mock-monitor-label">Active Monitoring</div>
           <div class="pm-mock-monitor-row"><div class="pm-mock-monitor-dot"></div><span>Last check 2 days ago</span></div>
           <div class="pm-mock-monitor-row"><div class="pm-mock-monitor-dot"></div><span>No new alerts</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ONE PLATFORM ============ -->
-<section class="section alt">
-  <div class="w">
-    <div class="mb-platform">
-      <div>
-        <div class="section-eyebrow">One Family, Many Solutions</div>
-        <div class="section-h2" style="margin-bottom:18px">Forty-plus years of building for mission</div>
-        <p class="section-sub" style="margin-bottom:20px">Ministry Brands started with a simple idea: that the software supporting churches, parishes, and nonprofits should be as committed to mission as the organizations it serves.</p>
-        <p class="section-sub" style="margin-bottom:28px">Today, four purpose-built platforms work together under one parent — each engineered for the unique workflows and people of its category, while sharing a foundation of security, support, and stewardship.</p>
-        <a href="mb-company.html" class="btn btn-navy">Learn About Ministry Brands →</a>
-      </div>
-      <div class="mb-platform-visual">
-        <div class="mb-platform-visual-grid">
-          <div class="mb-platform-cell">Amplify</div>
-          <div class="mb-platform-cell">ParishSOFT</div>
-          <div class="mb-platform-cell">DonorDirect</div>
-          <div class="mb-platform-cell">Protect My Ministry</div>
         </div>
       </div>
     </div>
