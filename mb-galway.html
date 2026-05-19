@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Galway, Ireland Hub — Ministry Brands</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:white;min-height:100vh;color:#1a1a1a}
+.mb-nav{position:sticky;top:0;z-index:200;background:white;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px}
+.mb-nav-left{display:flex;align-items:center;gap:10px}.mb-nav-mark svg{display:block;color:#1E3A5F}
+.mb-nav-brand{font-size:16px;font-weight:700;color:#1E3A5F;letter-spacing:-0.01em}
+.mb-nav-links{display:flex;align-items:center;gap:6px;margin:0 auto}
+.mb-nav-link{position:relative;padding:9px 14px;font-size:14px;font-weight:500;color:#444;cursor:pointer;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;font-family:inherit;transition:color 0.12s,background 0.12s}
+.mb-nav-link:hover{color:#1E3A5F;background:#f4f5f8}.mb-nav-link.active{color:#1E3A5F;font-weight:600}
+.mb-nav-chevron{font-size:8px;color:#bbb;transition:transform 0.15s}.mb-nav-link.open .mb-nav-chevron{transform:rotate(180deg)}
+.mb-nav-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:100}
+.mb-nav-link.open .mb-nav-dropdown{display:block}
+.mb-nav-dropdown a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}.mb-nav-dropdown a:hover{background:#f4f5f8;color:#1E3A5F}
+.mb-nav-right{display:flex;align-items:center;gap:14px}
+.mb-nav-login{font-size:13px;color:#666;text-decoration:none;font-weight:500;padding:8px 12px}.mb-nav-login:hover{color:#1E3A5F}
+.mb-nav-cta{background:#1E3A5F;color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s}.mb-nav-cta:hover{background:#2a4a73}
+
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f8fa}
+.section-eyebrow{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.section-h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px}
+.section-sub{font-size:17px;color:#777;line-height:1.6;max-width:560px}
+.section-center{text-align:center;max-width:680px;margin:0 auto 56px}.section-center .section-sub{margin:0 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
+.btn-navy{background:#1E3A5F;color:white}.btn-navy:hover{background:#2a4a73}
+.btn-white{background:white;color:#1E3A5F}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:#1E3A5F;border:1px solid #1E3A5F}.btn-ghost:hover{background:#1E3A5F;color:white}
+.btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
+.mb-page-hero{background:linear-gradient(180deg,#1E3A5F 0%,#162d4a 100%);color:white;padding:96px 0 88px;text-align:center}
+.mb-page-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px}
+.mb-page-hero h1{font-size:54px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:20px}
+.mb-page-hero p{font-size:17px;color:rgba(255,255,255,0.78);line-height:1.65;max-width:640px;margin:0 auto 32px}
+.mb-page-hero-ctas{display:flex;gap:12px;justify-content:center}
+.mb-breadcrumb{padding:18px 0;background:#fafbfc;border-bottom:0.5px solid #f0f0f0}
+.mb-breadcrumb-inner{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
+.mb-breadcrumb a{color:#888;text-decoration:none}.mb-breadcrumb a:hover{color:#1E3A5F}
+
+.mb-cta-strip{background:#1E3A5F;color:white;border-radius:16px;padding:48px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.mb-cta-strip h3{font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
+.mb-cta-strip p{color:rgba(255,255,255,0.7);font-size:15px;max-width:520px}
+
+/* Story 2-col */
+.story-row{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.story-row p{font-size:15px;color:#555;line-height:1.7;margin-bottom:14px}
+.story-photos{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.story-photo{aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%)}
+.story-photo.b{background:linear-gradient(135deg,#1E3A5F 0%,#162d4a 100%)}
+.story-photo.c{background:linear-gradient(135deg,#2a4a73 0%,#46435D 100%)}
+.story-photo.d{background:linear-gradient(135deg,#162d4a 0%,#46435D 100%)}
+
+/* Team spotlights */
+.spotlight-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.spotlight-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:24px 20px;text-align:center}
+.spotlight-photo{aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);margin-bottom:16px}
+.spotlight-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.spotlight-role{font-size:12px;color:#888}
+
+/* Life in Galway gallery */
+.life-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.life-tile{aspect-ratio:16/10;border-radius:14px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:24px;color:white}
+.life-tile.a{background:linear-gradient(135deg,#1E3A5F 0%,#46435D 100%)}
+.life-tile.b{background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%)}
+.life-tile.c{background:linear-gradient(135deg,#2a4a73 0%,#162d4a 100%)}
+.life-tile.d{background:linear-gradient(135deg,#162d4a 0%,#2a4a73 100%)}
+.life-caption{font-size:15px;font-weight:600;letter-spacing:-0.01em;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
+
+/* Roles list */
+.roles-list{max-width:880px;margin:0 auto;border:0.5px solid #e8e8e8;border-radius:14px;background:white;overflow:hidden}
+.role-row{display:grid;grid-template-columns:2fr 1.2fr auto;align-items:center;gap:20px;padding:22px 28px;border-bottom:0.5px solid #f0f0f0}
+.role-row:last-child{border-bottom:none}
+.role-title{font-size:16px;font-weight:600;color:#1a1a1a}
+.role-loc{font-size:13px;color:#888}
+.role-apply{font-size:13px;font-weight:600;color:#1E3A5F;text-decoration:none}.role-apply:hover{text-decoration:underline}
+
+footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 32px}
+.mb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.mb-footer-brand{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px;margin-top:14px}
+.mb-footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
+.mb-footer-col-link{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;transition:color 0.12s}.mb-footer-col-link:hover{color:white}
+.mb-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:0.5px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35)}
+
+/* Annotations */
+.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12);max-width:380px;pointer-events:auto}
+.anno::before{content:'\1F4CC DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}.anno-page::before{content:'\1F5FA\FE0F PAGE STRATEGY';color:#3949AB}
+.anno-persona{background:#F3E5F5;border-color:#CE93D8;color:#4A148C}.anno-persona::before{content:'\1F464 PERSONA FOCUS';color:#7B1FA2}
+.anno strong{font-weight:700}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#1E3A5F;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#2a4a73}
+body.anno-hidden .anno{display:none}
+</style>
+</head>
+<body>
+
+<nav class="mb-nav">
+  <div class="mb-nav-left"><span class="mb-nav-mark"><svg width="32" height="14" viewBox="0 0 48 20" fill="none"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg></span><a href="mb-home.html" style="text-decoration:none"><span class="mb-nav-brand">Ministry Brands</span></a></div>
+  <div class="mb-nav-links">
+    <a href="home.html" class="mb-nav-link">Churches</a><a href="#" class="mb-nav-link">Parishes</a><a href="#" class="mb-nav-link">Nonprofits</a><a href="#" class="mb-nav-link">Protection</a>
+    <button class="mb-nav-link active" id="navCompany" onclick="toggleDropdown(event,'navCompany')">Company <span class="mb-nav-chevron">&#9662;</span><div class="mb-nav-dropdown"><a href="mb-company.html">About</a><a href="mb-meet-team.html">Meet the Team</a><a href="mb-careers.html">Careers</a><a href="mb-press.html">Press</a><a href="mb-partners.html">Partners</a></div></button>
+    <a href="mb-contact.html" class="mb-nav-link">Contact</a>
+  </div>
+  <div class="mb-nav-right"><a href="login.html" class="mb-nav-login">Login</a><a href="request-demo.html" class="mb-nav-cta">Book a Demo</a></div>
+</nav>
+
+<div class="mb-breadcrumb"><div class="w mb-breadcrumb-inner"><a href="mb-home.html">Home</a> <span>&rsaquo;</span> <a href="mb-company.html">Company</a> <span>&rsaquo;</span> <a href="mb-careers.html">Careers</a> <span>&rsaquo;</span> <span>Galway</span></div></div>
+
+<section class="mb-page-hero">
+  <div class="w">
+    <div class="mb-page-hero-eyebrow">Galway, Ireland</div>
+    <h1>Where ministry tech meets the west coast of Ireland</h1>
+    <p>Our European R&amp;D Centre &mdash; building product and engineering for global customers from the heart of Ireland&rsquo;s tech scene.</p>
+    <div class="mb-page-hero-ctas"><a href="https://ministrybrands.wd1.myworkdayjobs.com" class="btn btn-white">See Galway Openings</a><a href="#story" class="btn btn-ghost-light">Our Story</a></div>
+  </div>
+</section>
+
+<div class="anno anno-page"><strong>Why a dedicated Galway page:</strong> The Galway centre is a real differentiator for engineering recruiting &mdash; Irish candidates won&rsquo;t apply to a US-headquartered company unless they see the local presence treated seriously. This page sells the city, the team, and the work without making them dig through a global careers funnel.</div>
+
+<!-- OUR STORY -->
+<section class="section" id="story">
+  <div class="w">
+    <div class="story-row">
+      <div>
+        <div class="section-eyebrow">Our Story in Galway</div>
+        <div class="section-h2" style="margin-bottom:18px">Built in Ireland, shipping worldwide</div>
+        <p>Ministry Brands opened its Galway centre in 2019, drawn by Ireland&rsquo;s deep talent pool in SaaS engineering, product design, and customer-facing roles. What started as a small platform team has grown into a multi-discipline hub of more than fifty people.</p>
+        <p>From Galway we build core pieces of our church, parish, and nonprofit platforms &mdash; including the giving infrastructure that processes hundreds of millions of dollars in donations each year and the data services that connect our four brands.</p>
+        <p>Our CTO is based here. So is platform engineering, a growing product and design team, and a site reliability function that keeps services running for customers in every US time zone and across Europe.</p>
+      </div>
+      <div class="story-photos">
+        <div class="story-photo"></div>
+        <div class="story-photo b"></div>
+        <div class="story-photo c"></div>
+        <div class="story-photo d"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE TEAM -->
+<section class="section alt">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">The Team in Galway</div>
+      <div class="section-h2">A few of the people building from here</div>
+    </div>
+    <div class="spotlight-row">
+      <div class="spotlight-card"><div class="spotlight-photo"></div><div class="spotlight-name">Aoife M.</div><div class="spotlight-role">Engineering Lead</div></div>
+      <div class="spotlight-card"><div class="spotlight-photo"></div><div class="spotlight-name">Conor P.</div><div class="spotlight-role">Senior Product Designer</div></div>
+      <div class="spotlight-card"><div class="spotlight-photo"></div><div class="spotlight-name">Niamh O.</div><div class="spotlight-role">Staff Software Engineer</div></div>
+      <div class="spotlight-card"><div class="spotlight-photo"></div><div class="spotlight-name">Liam W.</div><div class="spotlight-role">Engineering Manager</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="anno anno-persona"><strong>Persona focus:</strong> Irish senior engineers and designers compare us against Stripe, HubSpot, Workday, and Salesforce &mdash; all of whom have meaningful Galway/Dublin presence. The team grid and CTO-based-here detail aim to signal &ldquo;real engineering hub, not a sales office.&rdquo;</div>
+
+<!-- LIFE IN GALWAY -->
+<section class="section">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Life in Galway</div>
+      <div class="section-h2">A city worth building from</div>
+      <p class="section-sub">Galway sits on the Atlantic edge of Ireland &mdash; small enough to walk across, big enough to host one of Europe&rsquo;s liveliest arts and food scenes.</p>
+    </div>
+    <div class="life-grid">
+      <div class="life-tile a"><div class="life-caption">Latin Quarter walks at lunch</div></div>
+      <div class="life-tile b"><div class="life-caption">Salthill Promenade</div></div>
+      <div class="life-tile c"><div class="life-caption">Wild Atlantic Way on your doorstep</div></div>
+      <div class="life-tile d"><div class="life-caption">Galway International Arts Festival</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN ROLES -->
+<section class="section alt">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Open Roles</div>
+      <div class="section-h2">Hiring now in Galway</div>
+    </div>
+    <div class="roles-list">
+      <div class="role-row"><div class="role-title">Senior Frontend Engineer</div><div class="role-loc">Galway &middot; Hybrid</div><a href="https://ministrybrands.wd1.myworkdayjobs.com" class="role-apply">Apply &rarr;</a></div>
+      <div class="role-row"><div class="role-title">Product Designer</div><div class="role-loc">Galway &middot; Hybrid</div><a href="https://ministrybrands.wd1.myworkdayjobs.com" class="role-apply">Apply &rarr;</a></div>
+      <div class="role-row"><div class="role-title">Site Reliability Engineer</div><div class="role-loc">Galway &middot; Remote-eligible (Ireland)</div><a href="https://ministrybrands.wd1.myworkdayjobs.com" class="role-apply">Apply &rarr;</a></div>
+      <div class="role-row"><div class="role-title">Engineering Manager</div><div class="role-loc">Galway &middot; Hybrid</div><a href="https://ministrybrands.wd1.myworkdayjobs.com" class="role-apply">Apply &rarr;</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="section">
+  <div class="w">
+    <div class="mb-cta-strip">
+      <div><h3>Want to build from Galway?</h3><p>Engineering, design, product, and SRE roles across our European R&amp;D Centre &mdash; with hybrid and remote-eligible options.</p></div>
+      <a href="https://ministrybrands.wd1.myworkdayjobs.com" class="btn btn-white">See Galway Openings &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer class="mb-footer">
+  <div class="w">
+    <div class="mb-footer-grid">
+      <div><div style="display:flex;align-items:center;gap:10px"><svg width="32" height="14" viewBox="0 0 48 20" fill="none" style="color:rgba(255,255,255,0.75)"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg><span style="font-size:15px;font-weight:700;color:white">Ministry Brands</span></div><p class="mb-footer-brand">Technology built for the missions that hold communities together.</p></div>
+      <div><div class="mb-footer-col-title">Brands</div><a href="home.html" class="mb-footer-col-link">Amplify</a><a href="#" class="mb-footer-col-link">ParishSOFT</a><a href="#" class="mb-footer-col-link">DonorDirect</a><a href="#" class="mb-footer-col-link">Protect My Ministry</a></div>
+      <div><div class="mb-footer-col-title">Company</div><a href="mb-company.html" class="mb-footer-col-link">About</a><a href="mb-meet-team.html" class="mb-footer-col-link">Meet the Team</a><a href="mb-careers.html" class="mb-footer-col-link">Careers</a><a href="mb-press.html" class="mb-footer-col-link">Press</a></div>
+      <div><div class="mb-footer-col-title">Resources</div><a href="healthy-church-hub.html" class="mb-footer-col-link">Healthy Church Hub</a><a href="mb-partners.html" class="mb-footer-col-link">Partners</a><a href="mb-press.html" class="mb-footer-col-link">News</a></div>
+      <div><div class="mb-footer-col-title">Connect</div><a href="mb-contact.html" class="mb-footer-col-link">Contact</a><a href="login.html" class="mb-footer-col-link">Login</a><a href="request-demo.html" class="mb-footer-col-link">Book a Demo</a></div>
+    </div>
+    <div class="mb-footer-bottom"><span>&copy; 2026 Ministry Brands. All rights reserved.</span><span style="display:flex;gap:24px"><a href="#" class="mb-footer-col-link" style="margin:0">Privacy</a><a href="#" class="mb-footer-col-link" style="margin:0">Terms</a><a href="#" class="mb-footer-col-link" style="margin:0">Cookies</a></span></div>
+  </div>
+</footer>
+
+<div class="anno-legend-wrap">
+  <div class="anno-legend"><div class="anno-legend-title">Annotation Legend</div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div></div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'"><span style="font-size:16px">&#x1F4DD;</span><span class="anno-label">Show Annotations</span></button>
+</div>
+
+<script>
+document.body.classList.add("anno-hidden");
+function toggleDropdown(e,id){e.stopPropagation();var btn=document.getElementById(id);var isOpen=btn.classList.contains('open');document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open')});if(!isOpen)btn.classList.add('open')}
+document.addEventListener('click',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open')})});
+</script>
+</body>
+</html>

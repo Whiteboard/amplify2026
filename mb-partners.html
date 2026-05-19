@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Partners — Ministry Brands</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:white;min-height:100vh;color:#1a1a1a}
+
+/* MB NAV */
+.mb-nav{position:sticky;top:0;z-index:200;background:white;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px}
+.mb-nav-left{display:flex;align-items:center;gap:10px}.mb-nav-mark svg{display:block;color:#1E3A5F}
+.mb-nav-brand{font-size:16px;font-weight:700;color:#1E3A5F;letter-spacing:-0.01em}
+.mb-nav-links{display:flex;align-items:center;gap:6px;margin:0 auto}
+.mb-nav-link{position:relative;padding:9px 14px;font-size:14px;font-weight:500;color:#444;cursor:pointer;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;font-family:inherit;transition:color 0.12s,background 0.12s}
+.mb-nav-link:hover{color:#1E3A5F;background:#f4f5f8}.mb-nav-link.active{color:#1E3A5F;font-weight:600}
+.mb-nav-chevron{font-size:8px;color:#bbb;transition:transform 0.15s}.mb-nav-link.open .mb-nav-chevron{transform:rotate(180deg)}
+.mb-nav-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:100}
+.mb-nav-link.open .mb-nav-dropdown{display:block}
+.mb-nav-dropdown a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}.mb-nav-dropdown a:hover{background:#f4f5f8;color:#1E3A5F}
+.mb-nav-right{display:flex;align-items:center;gap:14px}
+.mb-nav-login{font-size:13px;color:#666;text-decoration:none;font-weight:500;padding:8px 12px}.mb-nav-login:hover{color:#1E3A5F}
+.mb-nav-cta{background:#1E3A5F;color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s}.mb-nav-cta:hover{background:#2a4a73}
+
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
+.btn-navy{background:#1E3A5F;color:white}.btn-navy:hover{background:#2a4a73}
+.btn-white{background:white;color:#1E3A5F}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:#1E3A5F;border:1px solid #1E3A5F}.btn-ghost:hover{background:#1E3A5F;color:white}
+.btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
+
+.mb-page-hero{background:linear-gradient(180deg,#1E3A5F 0%,#162d4a 100%);color:white;padding:88px 0 80px;text-align:center}
+.mb-page-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px}
+.mb-page-hero h1{font-size:50px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:18px;max-width:780px;margin-left:auto;margin-right:auto}
+.mb-page-hero p{font-size:17px;color:rgba(255,255,255,0.78);line-height:1.65;max-width:640px;margin:0 auto}
+
+.mb-breadcrumb{padding:18px 0;background:#fafbfc;border-bottom:0.5px solid #f0f0f0}
+.mb-breadcrumb-inner{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
+.mb-breadcrumb a{color:#888;text-decoration:none}.mb-breadcrumb a:hover{color:#1E3A5F}
+
+/* SIDEBAR + GRID LAYOUT */
+.partners-layout{display:grid;grid-template-columns:220px 1fr;gap:40px;padding:48px 0 64px;align-items:start}
+.filter-sidebar{position:sticky;top:96px}
+.filter-section{margin-bottom:28px}
+.filter-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.filter-section-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.clear-btn{font-size:12px;color:#1E3A5F;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;font-weight:500;padding:4px 10px;border-radius:999px;transition:background 0.1s}
+.clear-btn:hover{background:#eaf0f7}
+.filter-option{display:flex;align-items:center;gap:10px;padding:5px 0;cursor:pointer;transition:color 0.1s}
+.filter-option:hover{color:#1E3A5F}
+.filter-checkbox{width:16px;height:16px;accent-color:#1E3A5F;cursor:pointer;flex-shrink:0}
+.filter-option-label{font-size:14px;color:#444;flex:1}
+.filter-option-count{font-size:12px;color:#bbb;font-weight:500}
+
+.results-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.results-count{font-size:13px;color:#888}
+.results-count strong{color:#1a1a1a}
+
+.partner-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.p-card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:24px;transition:all 0.15s;display:flex;flex-direction:column;cursor:default}
+.p-card:hover{border-color:#a8b8ce;box-shadow:0 6px 24px rgba(30,58,95,0.08);transform:translateY(-2px)}
+.p-card-header{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.p-card-logo{width:80px;height:40px;background:#eaf0f7;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#aaa;flex-shrink:0;border:0.5px solid #d8e2ee}
+.p-card-name{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.2}
+.p-card-desc{font-size:13px;color:#888;line-height:1.6;margin-bottom:14px;flex:1}
+.p-card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.p-tag{font-size:11px;color:#1E3A5F;background:#eaf0f7;padding:3px 8px;border-radius:999px;font-weight:500}
+.p-card-badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.badge-preferred{font-size:11px;color:white;background:#1E3A5F;padding:3px 10px;border-radius:999px;font-weight:600}
+.badge-integration{font-size:11px;color:#2e7d32;background:#e8f5e9;padding:3px 10px;border-radius:999px;font-weight:600}
+.p-card-link{font-size:13px;color:#1E3A5F;font-weight:600;text-decoration:none;margin-top:auto;transition:color 0.1s}
+.p-card-link:hover{color:#2a4a73}
+
+/* CTA STRIP */
+.cta-strip-wrap{padding:24px 0 72px;background:white}
+.mb-cta-strip{background:#1E3A5F;color:white;border-radius:16px;padding:48px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.mb-cta-strip h3{font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
+.mb-cta-strip p{color:rgba(255,255,255,0.7);font-size:15px;max-width:520px;line-height:1.55}
+
+/* FOOTER */
+footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 32px}
+.mb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.mb-footer-brand{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px;margin-top:14px}
+.mb-footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
+.mb-footer-col-link{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;transition:color 0.12s}.mb-footer-col-link:hover{color:white}
+.mb-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:0.5px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35)}
+
+/* ANNOTATIONS */
+.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12);max-width:380px;pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-move{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}.anno-move::before{content:'✅ SECTION MOVED';color:#2E7D32}
+.anno strong{font-weight:700}.anno em{font-style:italic;opacity:0.75}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#1E3A5F;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#2a4a73}
+body.anno-hidden .anno{display:none}
+</style>
+</head>
+<body>
+
+<nav class="mb-nav">
+  <div class="mb-nav-left"><span class="mb-nav-mark"><svg width="32" height="14" viewBox="0 0 48 20" fill="none"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg></span><a href="mb-home.html" style="text-decoration:none"><span class="mb-nav-brand">Ministry Brands</span></a></div>
+  <div class="mb-nav-links">
+    <a href="home.html" class="mb-nav-link">Churches</a><a href="#" class="mb-nav-link">Parishes</a><a href="#" class="mb-nav-link">Nonprofits</a><a href="#" class="mb-nav-link">Protection</a>
+    <button class="mb-nav-link active" id="navCompany" onclick="toggleDropdown(event,'navCompany')">Company <span class="mb-nav-chevron">▾</span><div class="mb-nav-dropdown"><a href="mb-company.html">About</a><a href="mb-meet-team.html">Meet the Team</a><a href="mb-careers.html">Careers</a><a href="mb-press.html">Press</a><a href="mb-partners.html">Partners</a></div></button>
+    <a href="mb-contact.html" class="mb-nav-link">Contact</a>
+  </div>
+  <div class="mb-nav-right"><a href="login.html" class="mb-nav-login">Login</a><a href="request-demo.html" class="mb-nav-cta">Book a Demo</a></div>
+</nav>
+
+<div class="mb-breadcrumb"><div class="w mb-breadcrumb-inner"><a href="mb-home.html">Home</a> <span>›</span> <a href="mb-company.html">Company</a> <span>›</span> <span>Partners</span></div></div>
+
+<section class="mb-page-hero">
+  <div class="w">
+    <div class="mb-page-hero-eyebrow">Our Partners</div>
+    <h1>Trusted partners across the Ministry Brands ecosystem</h1>
+    <p>100+ integration and solution partners who extend Ministry Brands beyond what one company could build alone.</p>
+  </div>
+</section>
+
+<div class="anno anno-page"><strong>Partner Ecosystem Strategy:</strong> Sidebar checkbox filters replicate the proven pattern from the existing MB site. Three filter dimensions (Solution, Brand, Integration) let users drill down by need, existing tech stack, or integration requirement. <em>Key change: filters by parent brand across all four MB brands, not just Amplify.</em></div>
+
+<!-- MAIN CONTENT -->
+<div style="background:white">
+  <div class="w">
+    <div class="partners-layout">
+
+      <!-- LEFT SIDEBAR FILTERS -->
+      <div class="filter-sidebar">
+        <div class="filter-section">
+          <div class="filter-section-header">
+            <div class="filter-section-title">Solution</div>
+            <button class="clear-btn" onclick="clearGroup('solution')">Clear</button>
+          </div>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="solution" data-value="accounting" onchange="toggleFilter(this)"><span class="filter-option-label">Accounting</span><span class="filter-option-count">5</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="solution" data-value="chms" onchange="toggleFilter(this)"><span class="filter-option-label">ChMS</span><span class="filter-option-count">6</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="solution" data-value="denominational" onchange="toggleFilter(this)"><span class="filter-option-label">Denominational</span><span class="filter-option-count">1</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="solution" data-value="digital" onchange="toggleFilter(this)"><span class="filter-option-label">Digital</span><span class="filter-option-count">4</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="solution" data-value="donor" onchange="toggleFilter(this)"><span class="filter-option-label">Donor</span><span class="filter-option-count">2</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="solution" data-value="giving" onchange="toggleFilter(this)"><span class="filter-option-label">Giving</span><span class="filter-option-count">7</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="solution" data-value="media" onchange="toggleFilter(this)"><span class="filter-option-label">Media</span><span class="filter-option-count">3</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="solution" data-value="payment" onchange="toggleFilter(this)"><span class="filter-option-label">Payment</span><span class="filter-option-count">3</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="solution" data-value="preferred" onchange="toggleFilter(this)"><span class="filter-option-label">Preferred</span><span class="filter-option-count">5</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="solution" data-value="protection" onchange="toggleFilter(this)"><span class="filter-option-label">Protection</span><span class="filter-option-count">2</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="solution" data-value="websites" onchange="toggleFilter(this)"><span class="filter-option-label">Websites</span><span class="filter-option-count">2</span></label>
+        </div>
+
+        <div class="filter-section">
+          <div class="filter-section-header">
+            <div class="filter-section-title">Brand</div>
+            <button class="clear-btn" onclick="clearGroup('brand')">Clear</button>
+          </div>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="brand" data-value="amplify" onchange="toggleFilter(this)"><span class="filter-option-label">Amplify</span><span class="filter-option-count">5</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="brand" data-value="donordirect" onchange="toggleFilter(this)"><span class="filter-option-label">DonorDirect</span><span class="filter-option-count">2</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="brand" data-value="easytithe" onchange="toggleFilter(this)"><span class="filter-option-label">EasyTithe</span><span class="filter-option-count">1</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="brand" data-value="fellowshipone" onchange="toggleFilter(this)"><span class="filter-option-label">FellowshipOne</span><span class="filter-option-count">1</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="brand" data-value="highground" onchange="toggleFilter(this)"><span class="filter-option-label">High Ground Solutions</span><span class="filter-option-count">1</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="brand" data-value="ministrybrands" onchange="toggleFilter(this)"><span class="filter-option-label">Ministry Brands</span><span class="filter-option-count">4</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="brand" data-value="parishsoft" onchange="toggleFilter(this)"><span class="filter-option-label">ParishSOFT</span><span class="filter-option-count">1</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="brand" data-value="protectmyministry" onchange="toggleFilter(this)"><span class="filter-option-label">Protect My Ministry</span><span class="filter-option-count">1</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="brand" data-value="shelby" onchange="toggleFilter(this)"><span class="filter-option-label">Shelby</span><span class="filter-option-count">2</span></label>
+        </div>
+
+        <div class="filter-section">
+          <div class="filter-section-header">
+            <div class="filter-section-title">Integration</div>
+            <button class="clear-btn" onclick="clearGroup('integration')">Clear</button>
+          </div>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="integration" data-value="yes" onchange="toggleFilter(this)"><span class="filter-option-label">Yes</span><span class="filter-option-count">9</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter="integration" data-value="no" onchange="toggleFilter(this)"><span class="filter-option-label">No</span><span class="filter-option-count">9</span></label>
+        </div>
+
+        <button class="clear-btn" onclick="clearAllFilters()" style="width:100%;text-align:center;border:0.5px solid #e0e0e0;border-radius:10px;padding:10px;margin-top:8px">Clear All Filters</button>
+      </div>
+
+      <!-- RIGHT: RESULTS -->
+      <div>
+        <div class="results-meta">
+          <div class="results-count" id="resultsCount">Showing <strong>18</strong> partners</div>
+        </div>
+
+        <div class="anno" style="margin:0 0 16px"><strong>Partner Cards:</strong> Logo + name + description + tags pattern. Preferred badge (navy) and Integration badge (green &#x2713;) create visual hierarchy. 'Learn More →' drives to dedicated partner detail pages.</div>
+
+        <div class="partner-grid" id="partnerGrid">
+
+      <div class="p-card" data-solutions="giving,payment" data-brands="amplify,easytithe" data-integration="yes">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Pushpay</div></div>
+        <div class="p-card-desc">Mobile giving and donor management platform that helps churches increase generosity and deepen engagement.</div>
+        <div class="p-card-tags"><span class="p-tag">Giving</span><span class="p-tag">Payment</span></div>
+        <div class="p-card-badges"><span class="badge-preferred">Preferred</span><span class="badge-integration">&#x2713; Integration</span></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="payment,giving" data-brands="amplify,ministrybrands" data-integration="yes">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Vanco</div></div>
+        <div class="p-card-desc">Payment processing and event registration designed specifically for faith-based organizations.</div>
+        <div class="p-card-tags"><span class="p-tag">Payment</span><span class="p-tag">Giving</span></div>
+        <div class="p-card-badges"><span class="badge-integration">&#x2713; Integration</span></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="digital,media,giving" data-brands="amplify" data-integration="no">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Subsplash</div></div>
+        <div class="p-card-desc">Church app, giving, and media platform helping ministries engage their communities digitally.</div>
+        <div class="p-card-tags"><span class="p-tag">Digital</span><span class="p-tag">Media</span><span class="p-tag">Giving</span></div>
+        <div class="p-card-badges"></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="chms" data-brands="amplify,fellowshipone" data-integration="yes">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Planning Center</div></div>
+        <div class="p-card-desc">Service planning, check-in, and volunteer scheduling tools trusted by thousands of churches.</div>
+        <div class="p-card-tags"><span class="p-tag">ChMS</span></div>
+        <div class="p-card-badges"><span class="badge-integration">&#x2713; Integration</span></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="giving,websites,chms" data-brands="amplify" data-integration="no">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Tithe.ly</div></div>
+        <div class="p-card-desc">All-in-one giving, church management, and website tools to simplify ministry operations.</div>
+        <div class="p-card-tags"><span class="p-tag">Giving</span><span class="p-tag">Websites</span><span class="p-tag">ChMS</span></div>
+        <div class="p-card-badges"></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="chms" data-brands="amplify,fellowshipone" data-integration="yes">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Church Community Builder</div></div>
+        <div class="p-card-desc">ChMS and small group management platform that helps churches build authentic community.</div>
+        <div class="p-card-tags"><span class="p-tag">ChMS</span></div>
+        <div class="p-card-badges"><span class="badge-preferred">Preferred</span><span class="badge-integration">&#x2713; Integration</span></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="media,digital" data-brands="amplify,ministrybrands" data-integration="yes">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Resi Media</div></div>
+        <div class="p-card-desc">Live streaming and video hosting built for churches that want reliable, high-quality broadcasts.</div>
+        <div class="p-card-tags"><span class="p-tag">Media</span><span class="p-tag">Digital</span></div>
+        <div class="p-card-badges"><span class="badge-integration">&#x2713; Integration</span></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="chms,accounting" data-brands="shelby" data-integration="no">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Servant Keeper</div></div>
+        <div class="p-card-desc">Church management and contribution tracking software with an intuitive, easy-to-learn interface.</div>
+        <div class="p-card-tags"><span class="p-tag">ChMS</span><span class="p-tag">Accounting</span></div>
+        <div class="p-card-badges"></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="chms,accounting,denominational" data-brands="amplify,shelby" data-integration="no">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">ACS Technologies</div></div>
+        <div class="p-card-desc">Comprehensive church management suite serving denominations and large congregations for over 40 years.</div>
+        <div class="p-card-tags"><span class="p-tag">ChMS</span><span class="p-tag">Accounting</span><span class="p-tag">Denominational</span></div>
+        <div class="p-card-badges"><span class="badge-preferred">Preferred</span></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="giving,payment" data-brands="easytithe,amplify" data-integration="no">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">SecureGive</div></div>
+        <div class="p-card-desc">Secure giving kiosks and online donation tools that make generosity simple for every member.</div>
+        <div class="p-card-tags"><span class="p-tag">Giving</span><span class="p-tag">Payment</span></div>
+        <div class="p-card-badges"></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="chms" data-brands="amplify" data-integration="yes">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Breeze ChMS</div></div>
+        <div class="p-card-desc">Simple, affordable church management software designed to be easy for anyone on your team to use.</div>
+        <div class="p-card-tags"><span class="p-tag">ChMS</span></div>
+        <div class="p-card-badges"><span class="badge-integration">&#x2713; Integration</span></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="chms,digital" data-brands="amplify,ministrybrands" data-integration="no">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">MemberHub</div></div>
+        <div class="p-card-desc">Membership management and communication tools that keep your congregation informed and connected.</div>
+        <div class="p-card-tags"><span class="p-tag">ChMS</span><span class="p-tag">Digital</span></div>
+        <div class="p-card-badges"></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="protection" data-brands="protectmyministry,amplify,ministrybrands" data-integration="yes">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Protect My Ministry</div></div>
+        <div class="p-card-desc">Background check services designed specifically for churches and faith-based organizations.</div>
+        <div class="p-card-tags"><span class="p-tag">Protection</span></div>
+        <div class="p-card-badges"><span class="badge-preferred">Preferred</span><span class="badge-integration">&#x2713; Integration</span></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="protection" data-brands="amplify,ministrybrands" data-integration="no">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">MinistrySafe</div></div>
+        <div class="p-card-desc">Abuse prevention training and background check platform helping churches create safe environments.</div>
+        <div class="p-card-tags"><span class="p-tag">Protection</span></div>
+        <div class="p-card-badges"></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="chms,digital,media" data-brands="amplify" data-integration="no">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Faithlife</div></div>
+        <div class="p-card-desc">Bible software, church management, and giving tools from the makers of Logos Bible Software.</div>
+        <div class="p-card-tags"><span class="p-tag">ChMS</span><span class="p-tag">Digital</span><span class="p-tag">Media</span></div>
+        <div class="p-card-badges"></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="giving,donor" data-brands="amplify,donordirect" data-integration="no">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Generis</div></div>
+        <div class="p-card-desc">Generosity consulting and capital campaign experts helping churches fund their God-given vision.</div>
+        <div class="p-card-tags"><span class="p-tag">Giving</span><span class="p-tag">Donor</span></div>
+        <div class="p-card-badges"><span class="badge-preferred">Preferred</span></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="giving,digital" data-brands="amplify,easytithe" data-integration="no">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">Kindrid</div></div>
+        <div class="p-card-desc">Digital giving and engagement tools that make it easy for anyone to give from anywhere.</div>
+        <div class="p-card-tags"><span class="p-tag">Giving</span><span class="p-tag">Digital</span></div>
+        <div class="p-card-badges"></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+      <div class="p-card" data-solutions="websites" data-brands="amplify" data-integration="yes">
+        <div class="p-card-header"><div class="p-card-logo">Logo</div><div class="p-card-name">ChurchSpring</div></div>
+        <div class="p-card-desc">Church website builder that makes it simple to create a beautiful, effective online presence.</div>
+        <div class="p-card-tags"><span class="p-tag">Websites</span></div>
+        <div class="p-card-badges"><span class="badge-integration">&#x2713; Integration</span></div>
+        <a href="partner-detail.html" class="p-card-link">Learn More &rarr;</a>
+      </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BECOME A PARTNER CTA -->
+<div class="cta-strip-wrap">
+  <div class="w">
+    <div class="mb-cta-strip">
+      <div>
+        <h3>Build with Ministry Brands</h3>
+        <p>Our partner program connects you to 90,000+ organizations across churches, parishes, nonprofits, and beyond.</p>
+      </div>
+      <a href="mb-become-partner.html" class="btn btn-white">Become a Partner &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<footer class="mb-footer">
+  <div class="w">
+    <div class="mb-footer-grid">
+      <div><div style="display:flex;align-items:center;gap:10px"><svg width="32" height="14" viewBox="0 0 48 20" fill="none" style="color:rgba(255,255,255,0.75)"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg><span style="font-size:15px;font-weight:700;color:white">Ministry Brands</span></div><p class="mb-footer-brand">Technology built for the missions that hold communities together.</p></div>
+      <div><div class="mb-footer-col-title">Brands</div><a href="home.html" class="mb-footer-col-link">Amplify</a><a href="#" class="mb-footer-col-link">ParishSOFT</a><a href="#" class="mb-footer-col-link">DonorDirect</a><a href="#" class="mb-footer-col-link">Protect My Ministry</a></div>
+      <div><div class="mb-footer-col-title">Company</div><a href="mb-company.html" class="mb-footer-col-link">About</a><a href="mb-meet-team.html" class="mb-footer-col-link">Meet the Team</a><a href="mb-careers.html" class="mb-footer-col-link">Careers</a><a href="mb-press.html" class="mb-footer-col-link">Press</a></div>
+      <div><div class="mb-footer-col-title">Resources</div><a href="healthy-church-hub.html" class="mb-footer-col-link">Healthy Church Hub</a><a href="mb-partners.html" class="mb-footer-col-link">Partners</a><a href="mb-press.html" class="mb-footer-col-link">News</a></div>
+      <div><div class="mb-footer-col-title">Connect</div><a href="mb-contact.html" class="mb-footer-col-link">Contact</a><a href="login.html" class="mb-footer-col-link">Login</a><a href="request-demo.html" class="mb-footer-col-link">Book a Demo</a></div>
+    </div>
+    <div class="mb-footer-bottom"><span>© 2026 Ministry Brands. All rights reserved.</span><span style="display:flex;gap:24px"><a href="#" class="mb-footer-col-link" style="margin:0">Privacy</a><a href="#" class="mb-footer-col-link" style="margin:0">Terms</a><a href="#" class="mb-footer-col-link" style="margin:0">Cookies</a></span></div>
+  </div>
+</footer>
+
+<div class="anno-legend-wrap">
+  <div class="anno-legend"><div class="anno-legend-title">Annotation Legend</div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div></div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'"><span style="font-size:16px">&#x1F4DD;</span><span class="anno-label">Show Annotations</span></button>
+</div>
+
+<script>
+document.body.classList.add("anno-hidden");
+function toggleDropdown(e,id){e.stopPropagation();var btn=document.getElementById(id);var isOpen=btn.classList.contains('open');document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open')});if(!isOpen)btn.classList.add('open')}
+document.addEventListener('click',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open')})});
+
+/* PARTNER FILTER JS */
+var activeSolutions=new Set(),activeBrands=new Set(),activeIntegration=new Set();
+function toggleFilter(cb){var k=cb.dataset.filter,v=cb.dataset.value,t=k==='solution'?activeSolutions:k==='brand'?activeBrands:activeIntegration;if(cb.checked)t.add(v);else t.delete(v);applyFilters();}
+function clearGroup(g){document.querySelectorAll('.filter-checkbox[data-filter="'+g+'"]').forEach(function(cb){cb.checked=false;});if(g==='solution')activeSolutions.clear();else if(g==='brand')activeBrands.clear();else if(g==='integration')activeIntegration.clear();applyFilters();}
+function clearAllFilters(){document.querySelectorAll('.filter-checkbox').forEach(function(cb){cb.checked=false;});activeSolutions.clear();activeBrands.clear();activeIntegration.clear();applyFilters();}
+function applyFilters(){var cards=document.querySelectorAll('.p-card'),count=0;cards.forEach(function(card){var s=card.dataset.solutions?card.dataset.solutions.split(','):[],b=card.dataset.brands?card.dataset.brands.split(','):[],i=card.dataset.integration||'';var sm=activeSolutions.size===0||s.some(function(x){return activeSolutions.has(x);});var bm=activeBrands.size===0||b.some(function(x){return activeBrands.has(x);});var im=activeIntegration.size===0||activeIntegration.has(i);if(sm&&bm&&im){card.style.display='flex';count++;}else{card.style.display='none';}});document.getElementById('resultsCount').innerHTML='Showing <strong>'+count+'</strong> partner'+(count!==1?'s':'');}
+</script>
+</body>
+</html>

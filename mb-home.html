@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Home — Ministry Brands</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:white;min-height:100vh;color:#1a1a1a}
+
+/* ===== MB NAV — classic top bar ===== */
+.mb-nav{position:sticky;top:0;z-index:200;background:white;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px}
+.mb-nav-left{display:flex;align-items:center;gap:10px}
+.mb-nav-mark{display:flex;align-items:center}
+.mb-nav-mark svg{display:block;color:#1E3A5F}
+.mb-nav-brand{font-size:16px;font-weight:700;color:#1E3A5F;letter-spacing:-0.01em}
+.mb-nav-links{display:flex;align-items:center;gap:6px;margin:0 auto}
+.mb-nav-link{position:relative;padding:9px 14px;font-size:14px;font-weight:500;color:#444;cursor:pointer;border-radius:6px;transition:color 0.12s,background 0.12s;text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;font-family:inherit}
+.mb-nav-link:hover{color:#1E3A5F;background:#f4f5f8}
+.mb-nav-link.active{color:#1E3A5F}
+.mb-nav-chevron{font-size:8px;color:#bbb;transition:transform 0.15s}
+.mb-nav-link.open .mb-nav-chevron{transform:rotate(180deg)}
+.mb-nav-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:100}
+.mb-nav-link.open .mb-nav-dropdown{display:block}
+.mb-nav-dropdown a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}
+.mb-nav-dropdown a:hover{background:#f4f5f8;color:#1E3A5F}
+.mb-nav-right{display:flex;align-items:center;gap:14px}
+.mb-nav-login{font-size:13px;color:#666;text-decoration:none;font-weight:500;padding:8px 12px}
+.mb-nav-login:hover{color:#1E3A5F}
+.mb-nav-cta{background:#1E3A5F;color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s}
+.mb-nav-cta:hover{background:#2a4a73}
+
+/* ===== LAYOUT ===== */
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f8fa}
+.section.dark{background:#1E3A5F;color:white}
+.section-eyebrow{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.section-eyebrow.light{color:rgba(255,255,255,0.55)}
+.section-h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px}
+.section-h2.light{color:white}
+.section-sub{font-size:17px;color:#777;line-height:1.6;max-width:560px}
+.section-sub.light{color:rgba(255,255,255,0.7)}
+.section-center{text-align:center;max-width:600px;margin:0 auto 56px}
+.section-center .section-sub{margin:0 auto}
+
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
+.btn-navy{background:#1E3A5F;color:white}
+.btn-navy:hover{background:#2a4a73}
+.btn-white{background:white;color:#1E3A5F}
+.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:#1E3A5F;border:1px solid #1E3A5F}
+.btn-ghost:hover{background:#1E3A5F;color:white}
+.btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}
+.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
+
+/* ===== HERO ===== */
+.mb-hero{background:linear-gradient(180deg,#1E3A5F 0%,#162d4a 100%);color:white;padding:120px 0 100px;position:relative;overflow:hidden}
+.mb-hero-content{max-width:780px;margin:0 auto;text-align:center;position:relative;z-index:2}
+.mb-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:24px}
+.mb-hero-h1{font-size:60px;font-weight:700;letter-spacing:-0.03em;line-height:1.05;margin-bottom:24px}
+.mb-hero-sub{font-size:18px;color:rgba(255,255,255,0.78);line-height:1.65;max-width:600px;margin:0 auto 36px}
+.mb-hero-ctas{display:flex;gap:12px;justify-content:center}
+.mb-hero-bg{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(70,67,93,0.35) 0%,transparent 50%),radial-gradient(circle at 80% 30%,rgba(30,58,95,0.5) 0%,transparent 50%);pointer-events:none}
+
+/* ===== STAT STRIP ===== */
+.mb-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:white;border-bottom:0.5px solid #f0f0f0}
+.mb-stat{padding:48px 32px;text-align:center;border-right:0.5px solid #f0f0f0}
+.mb-stat:last-child{border-right:none}
+.mb-stat-value{font-size:44px;font-weight:700;color:#1E3A5F;letter-spacing:-0.025em;line-height:1;margin-bottom:8px}
+.mb-stat-label{font-size:13px;color:#888;line-height:1.4}
+
+/* ===== 4-BRAND SHOWCASE ===== */
+.mb-brands{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.mb-brand-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:32px 26px;text-decoration:none;color:inherit;transition:all 0.15s;display:flex;flex-direction:column;cursor:pointer}
+.mb-brand-card:hover{border-color:#1E3A5F;transform:translateY(-3px);box-shadow:0 8px 24px rgba(30,58,95,0.08)}
+.mb-brand-logo{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;margin-bottom:20px}
+.mb-brand-logo.amplify{background:#46435D}
+.mb-brand-logo.parishsoft{background:#8b6f47}
+.mb-brand-logo.donordirect{background:#2a6e5a}
+.mb-brand-logo.protect{background:#a14040}
+.mb-brand-name{font-size:18px;font-weight:700;color:#1a1a1a;margin-bottom:6px;letter-spacing:-0.01em}
+.mb-brand-tag{font-size:12px;font-weight:600;color:#999;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:14px}
+.mb-brand-desc{font-size:14px;color:#666;line-height:1.6;margin-bottom:22px;flex:1}
+.mb-brand-link{font-size:13px;font-weight:600;color:#1E3A5F;text-decoration:none}
+.mb-brand-link:after{content:" →";transition:transform 0.12s;display:inline-block}
+.mb-brand-card:hover .mb-brand-link:after{transform:translateX(3px)}
+
+/* ===== ONE PLATFORM ===== */
+.mb-platform{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.mb-platform-visual{aspect-ratio:5/4;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);border-radius:16px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.mb-platform-visual-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:80%;height:80%}
+.mb-platform-cell{background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:600;font-size:13px;backdrop-filter:blur(4px)}
+
+/* ===== HCH TEASER ===== */
+.mb-hch{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.mb-hch-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mb-hch-card{background:white;border:0.5px solid #e8e8e8;border-radius:12px;padding:18px;cursor:pointer;transition:all 0.15s;text-decoration:none;color:inherit;display:block}
+.mb-hch-card:hover{border-color:#1E3A5F;transform:translateY(-2px)}
+.mb-hch-card-type{font-size:10px;font-weight:700;color:#888;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
+.mb-hch-card-title{font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.4}
+
+/* ===== LATEST NEWS ===== */
+.mb-news{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.mb-news-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:all 0.15s;display:flex;flex-direction:column;cursor:pointer}
+.mb-news-card:hover{border-color:#1E3A5F;transform:translateY(-2px);box-shadow:0 6px 20px rgba(30,58,95,0.06)}
+.mb-news-card-img{aspect-ratio:16/10;background:linear-gradient(135deg,#1E3A5F 0%,#46435D 100%)}
+.mb-news-card-img.alt{background:linear-gradient(135deg,#46435D 0%,#8b6f47 100%)}
+.mb-news-card-img.alt2{background:linear-gradient(135deg,#2a6e5a 0%,#1E3A5F 100%)}
+.mb-news-card-body{padding:22px 22px 24px}
+.mb-news-card-topic{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1E3A5F;margin-bottom:10px}
+.mb-news-card-title{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:10px;letter-spacing:-0.01em}
+.mb-news-card-date{font-size:12px;color:#999}
+
+/* ===== FOOTER ===== */
+footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 32px}
+.mb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.mb-footer-brand{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px;margin-top:14px}
+.mb-footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
+.mb-footer-col-link{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;transition:color 0.12s}
+.mb-footer-col-link:hover{color:white}
+.mb-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:0.5px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35)}
+
+/* ===== ANNOTATION SYSTEM (consistent with rest of project) ===== */
+.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);max-width:380px;pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}
+.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-move{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.anno-move::before{content:'✅ SECTION MOVED';color:#2E7D32}
+.anno-gap{background:#FFF3E0;border-color:#FFB74D;color:#E65100}
+.anno-gap::before{content:'⚠️ GAP IDENTIFIED';color:#E65100}
+.anno-persona{background:#F3E5F5;border-color:#CE93D8;color:#4A148C}
+.anno-persona::before{content:'👤 PERSONA FOCUS';color:#7B1FA2}
+.anno strong{font-weight:700}
+.anno em{font-style:italic;color:inherit;opacity:0.75}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#1E3A5F;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#2a4a73}
+body.anno-hidden .anno{display:none}
+</style>
+</head>
+<body>
+
+<!-- ============ MB NAV ============ -->
+<nav class="mb-nav">
+  <div class="mb-nav-left">
+    <span class="mb-nav-mark">
+      <svg width="32" height="14" viewBox="0 0 48 20" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/>
+      </svg>
+    </span>
+    <span class="mb-nav-brand">Ministry Brands</span>
+  </div>
+  <div class="mb-nav-links">
+    <a href="home.html" class="mb-nav-link">Churches</a>
+    <a href="#" class="mb-nav-link">Parishes</a>
+    <a href="#" class="mb-nav-link">Nonprofits</a>
+    <a href="#" class="mb-nav-link">Protection</a>
+    <button class="mb-nav-link" id="navCompany" onclick="toggleDropdown(event,'navCompany')">Company <span class="mb-nav-chevron">▾</span>
+      <div class="mb-nav-dropdown">
+        <a href="mb-company.html">About</a>
+        <a href="mb-meet-team.html">Meet the Team</a>
+        <a href="mb-careers.html">Careers</a>
+        <a href="mb-press.html">Press</a>
+        <a href="mb-partners.html">Partners</a>
+      </div>
+    </button>
+    <a href="mb-contact.html" class="mb-nav-link">Contact</a>
+  </div>
+  <div class="mb-nav-right">
+    <a href="login.html" class="mb-nav-login">Login</a>
+    <a href="request-demo.html" class="mb-nav-cta">Book a Demo</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="mb-hero">
+  <div class="mb-hero-bg"></div>
+  <div class="w mb-hero-content">
+    <div class="mb-hero-eyebrow">Ministry Brands</div>
+    <h1 class="mb-hero-h1">Empowering communities. Amplifying generosity.</h1>
+    <p class="mb-hero-sub">A family of software platforms built for churches, parishes, nonprofits, and the missions that hold them together. 90,000+ organizations run on Ministry Brands.</p>
+    <div class="mb-hero-ctas">
+      <a href="request-demo.html" class="btn btn-white">Book a Demo</a>
+      <a href="#brands" class="btn btn-ghost-light">Explore our Brands</a>
+    </div>
+  </div>
+</section>
+
+<div class="anno anno-page"><strong>Hero Strategy:</strong> Corporate tagline echoes Amplify's "amplifying generosity" while positioning Ministry Brands as the family of platforms. Stat (90K+ orgs) builds immediate credibility. Two clear paths: demo for high-intent, brands for research-mode.</div>
+
+<!-- ============ STAT STRIP ============ -->
+<div class="mb-stats">
+  <div class="mb-stat"><div class="mb-stat-value">90,000+</div><div class="mb-stat-label">Organizations served</div></div>
+  <div class="mb-stat"><div class="mb-stat-value">$6.5B+</div><div class="mb-stat-label">In giving managed</div></div>
+  <div class="mb-stat"><div class="mb-stat-value">42K</div><div class="mb-stat-label">Websites powered</div></div>
+  <div class="mb-stat"><div class="mb-stat-value">1.7M</div><div class="mb-stat-label">Background checks run</div></div>
+</div>
+
+<!-- ============ 4-BRAND SHOWCASE ============ -->
+<section class="section" id="brands">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Our Brands</div>
+      <div class="section-h2">Built for every kind of mission</div>
+      <div class="section-sub">Whichever path your organization is on — Ministry Brands has a purpose-built platform to support it.</div>
+    </div>
+    <div class="mb-brands">
+      <a href="home.html" class="mb-brand-card">
+        <div class="mb-brand-logo amplify">A</div>
+        <div class="mb-brand-name">Amplify</div>
+        <div class="mb-brand-tag">For Churches</div>
+        <div class="mb-brand-desc">An end-to-end church management platform: giving, websites, communications, planning, and more — all connected.</div>
+        <span class="mb-brand-link">Explore Amplify</span>
+      </a>
+      <a href="#" class="mb-brand-card">
+        <div class="mb-brand-logo parishsoft">P</div>
+        <div class="mb-brand-name">ParishSOFT</div>
+        <div class="mb-brand-tag">For Parishes &amp; Dioceses</div>
+        <div class="mb-brand-desc">Census, sacramental records, and contributions software trusted by Catholic parishes across North America.</div>
+        <span class="mb-brand-link">Explore ParishSOFT</span>
+      </a>
+      <a href="#" class="mb-brand-card">
+        <div class="mb-brand-logo donordirect">D</div>
+        <div class="mb-brand-name">DonorDirect</div>
+        <div class="mb-brand-tag">For Nonprofits</div>
+        <div class="mb-brand-desc">Donor relationship management built for mission-driven nonprofits with complex stewardship needs.</div>
+        <span class="mb-brand-link">Explore DonorDirect</span>
+      </a>
+      <a href="#" class="mb-brand-card">
+        <div class="mb-brand-logo protect">P</div>
+        <div class="mb-brand-name">Protect My Ministry</div>
+        <div class="mb-brand-tag">For Ministry Safety</div>
+        <div class="mb-brand-desc">Background screening, safety training, and check-in tools that protect the people you serve.</div>
+        <span class="mb-brand-link">Explore Protection</span>
+      </a>
+    </div>
+    <div class="anno anno-persona"><strong>Audience-Routing:</strong> The 4-brand card grid is the primary navigation device. Visitors self-select by audience (Church / Parish / Nonprofit / Safety) which routes them to the appropriate brand site. Mirrors the audience-led top nav.</div>
+  </div>
+</section>
+
+<!-- ============ ONE PLATFORM ============ -->
+<section class="section alt">
+  <div class="w">
+    <div class="mb-platform">
+      <div>
+        <div class="section-eyebrow">One Family, Many Solutions</div>
+        <div class="section-h2" style="margin-bottom:18px">Forty-plus years of building for mission</div>
+        <p class="section-sub" style="margin-bottom:20px">Ministry Brands started with a simple idea: that the software supporting churches, parishes, and nonprofits should be as committed to mission as the organizations it serves.</p>
+        <p class="section-sub" style="margin-bottom:28px">Today, four purpose-built platforms work together under one parent — each engineered for the unique workflows and people of its category, while sharing a foundation of security, support, and stewardship.</p>
+        <a href="mb-company.html" class="btn btn-navy">Learn About Ministry Brands →</a>
+      </div>
+      <div class="mb-platform-visual">
+        <div class="mb-platform-visual-grid">
+          <div class="mb-platform-cell">Amplify</div>
+          <div class="mb-platform-cell">ParishSOFT</div>
+          <div class="mb-platform-cell">DonorDirect</div>
+          <div class="mb-platform-cell">Protect My Ministry</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HCH TEASER ============ -->
+<section class="section">
+  <div class="w">
+    <div class="mb-hch">
+      <div>
+        <div class="section-eyebrow">Healthy Church Hub</div>
+        <div class="section-h2" style="margin-bottom:14px">Resources for healthier ministries</div>
+        <p class="section-sub" style="margin-bottom:28px">Practical research, webinars, and stories from the field — curated for the leaders building thriving communities.</p>
+        <a href="healthy-church-hub.html" class="btn btn-ghost">Explore the Hub →</a>
+      </div>
+      <div class="mb-hch-cards">
+        <a href="ebook-landing.html" class="mb-hch-card">
+          <div class="mb-hch-card-type">eBook</div>
+          <div class="mb-hch-card-title">2026 Annual Church Giving Report</div>
+        </a>
+        <a href="webinar-registration.html" class="mb-hch-card">
+          <div class="mb-hch-card-type">Webinar</div>
+          <div class="mb-hch-card-title">Amplify Your Church's Digital Reach</div>
+        </a>
+        <a href="podcast-episode.html" class="mb-hch-card">
+          <div class="mb-hch-card-type">Podcast</div>
+          <div class="mb-hch-card-title">Leading Through Change</div>
+        </a>
+        <a href="blog-post.html" class="mb-hch-card">
+          <div class="mb-hch-card-type">Blog</div>
+          <div class="mb-hch-card-title">5 Signs Your Tech Stack is Holding You Back</div>
+        </a>
+      </div>
+    </div>
+    <div class="anno anno-move"><strong>Shared content:</strong> The Healthy Church Hub is shared between MB.com and Amplify (it lives under the Amplify brand but features content relevant to all customers). MB pages link out to existing Amplify HCH pages — no duplication.</div>
+  </div>
+</section>
+
+<!-- ============ LATEST NEWS ============ -->
+<section class="section alt">
+  <div class="w">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px">
+      <div>
+        <div class="section-eyebrow">News &amp; Press</div>
+        <div class="section-h2">Latest from Ministry Brands</div>
+      </div>
+      <a href="mb-press.html" class="btn btn-ghost">View All News →</a>
+    </div>
+    <div class="mb-news">
+      <a href="mb-news-article.html" class="mb-news-card">
+        <div class="mb-news-card-img"></div>
+        <div class="mb-news-card-body">
+          <div class="mb-news-card-topic">Industry Insights</div>
+          <div class="mb-news-card-title">Innovation in Church Software Means Measurable Ministry</div>
+          <div class="mb-news-card-date">April 8, 2026</div>
+        </div>
+      </a>
+      <a href="mb-news-article.html" class="mb-news-card">
+        <div class="mb-news-card-img alt"></div>
+        <div class="mb-news-card-body">
+          <div class="mb-news-card-topic">Safety</div>
+          <div class="mb-news-card-title">Hiring Is a Safety Practice: Building a Culture That Starts With Your People</div>
+          <div class="mb-news-card-date">March 22, 2026</div>
+        </div>
+      </a>
+      <a href="mb-news-article.html" class="mb-news-card">
+        <div class="mb-news-card-img alt2"></div>
+        <div class="mb-news-card-body">
+          <div class="mb-news-card-topic">Giving</div>
+          <div class="mb-news-card-title">2024 State of Church Giving: Digital Platforms Drive Recurring Generosity</div>
+          <div class="mb-news-card-date">March 4, 2026</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="mb-footer">
+  <div class="w">
+    <div class="mb-footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <svg width="32" height="14" viewBox="0 0 48 20" fill="none" style="color:rgba(255,255,255,0.75)"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg>
+          <span style="font-size:15px;font-weight:700;color:white">Ministry Brands</span>
+        </div>
+        <p class="mb-footer-brand">Technology built for the missions that hold communities together.</p>
+      </div>
+      <div>
+        <div class="mb-footer-col-title">Brands</div>
+        <a href="home.html" class="mb-footer-col-link">Amplify</a>
+        <a href="#" class="mb-footer-col-link">ParishSOFT</a>
+        <a href="#" class="mb-footer-col-link">DonorDirect</a>
+        <a href="#" class="mb-footer-col-link">Protect My Ministry</a>
+      </div>
+      <div>
+        <div class="mb-footer-col-title">Company</div>
+        <a href="mb-company.html" class="mb-footer-col-link">About</a>
+        <a href="mb-meet-team.html" class="mb-footer-col-link">Meet the Team</a>
+        <a href="mb-careers.html" class="mb-footer-col-link">Careers</a>
+        <a href="mb-press.html" class="mb-footer-col-link">Press</a>
+      </div>
+      <div>
+        <div class="mb-footer-col-title">Resources</div>
+        <a href="healthy-church-hub.html" class="mb-footer-col-link">Healthy Church Hub</a>
+        <a href="mb-partners.html" class="mb-footer-col-link">Partners</a>
+        <a href="mb-press.html" class="mb-footer-col-link">News</a>
+      </div>
+      <div>
+        <div class="mb-footer-col-title">Connect</div>
+        <a href="mb-contact.html" class="mb-footer-col-link">Contact</a>
+        <a href="login.html" class="mb-footer-col-link">Login</a>
+        <a href="request-demo.html" class="mb-footer-col-link">Book a Demo</a>
+      </div>
+    </div>
+    <div class="mb-footer-bottom">
+      <span>© 2026 Ministry Brands. All rights reserved.</span>
+      <span style="display:flex;gap:24px"><a href="#" class="mb-footer-col-link" style="margin:0">Privacy</a><a href="#" class="mb-footer-col-link" style="margin:0">Terms</a><a href="#" class="mb-footer-col-link" style="margin:0">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ANNOTATION LEGEND + TOGGLE -->
+<div class="anno-legend-wrap">
+  <div class="anno-legend">
+    <div class="anno-legend-title">Annotation Legend</div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div>
+  </div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'">
+    <span style="font-size:16px">&#x1F4DD;</span>
+    <span class="anno-label">Show Annotations</span>
+  </button>
+</div>
+
+<script>
+document.body.classList.add("anno-hidden");
+
+// Simple dropdown for Company nav item
+function toggleDropdown(e, id){
+  e.stopPropagation();
+  var btn = document.getElementById(id);
+  var isOpen = btn.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open')});
+  if(!isOpen) btn.classList.add('open');
+}
+document.addEventListener('click', function(){
+  document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open')});
+});
+// Hover to open
+document.querySelectorAll('.mb-nav-link').forEach(function(link){
+  if(link.querySelector('.mb-nav-dropdown')){
+    link.addEventListener('mouseenter', function(){
+      document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==link)el.classList.remove('open')});
+      link.classList.add('open');
+    });
+    link.parentNode.addEventListener('mouseleave', function(){
+      link.classList.remove('open');
+    });
+  }
+});
+</script>
+</body>
+</html>
