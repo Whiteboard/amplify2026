@@ -191,14 +191,14 @@ body.anno-hidden .anno{display:none}
 <section class="section">
   <div class="w">
     <div class="route-tabs" role="tablist">
-      <button class="route-tab active" data-target="sales" onclick="showPanel('sales',this)">Sales</button>
-      <button class="route-tab" data-target="support" onclick="showPanel('support',this)">Support</button>
+      <button class="route-tab active" data-target="general" onclick="showPanel('general',this)">General</button>
+      <button class="route-tab" data-target="sales" onclick="showPanel('sales',this)">Sales</button>
       <button class="route-tab" data-target="press" onclick="showPanel('press',this)">Press</button>
-      <button class="route-tab" data-target="general" onclick="showPanel('general',this)">General</button>
+      <button class="route-tab" data-target="support" onclick="showPanel('support',this)">Support</button>
     </div>
 
     <!-- SALES -->
-    <div class="route-panel active" id="panel-sales">
+    <div class="route-panel" id="panel-sales">
       <div>
         <div class="section-eyebrow">Sales</div>
         <h2>Talk to Sales</h2>
@@ -267,7 +267,7 @@ body.anno-hidden .anno{display:none}
     </div>
 
     <!-- GENERAL -->
-    <div class="route-panel" id="panel-general">
+    <div class="route-panel active" id="panel-general">
       <div>
         <div class="section-eyebrow">General</div>
         <h2>Other inquiries</h2>
@@ -285,7 +285,7 @@ body.anno-hidden .anno{display:none}
   </div>
 </section>
 
-<div class="anno"><strong>Default tab = Sales:</strong> Most new traffic to /contact is bottom-of-funnel intent. Defaulting to Sales reflects the business goal of the page; support customers know to look for a separate tab, and existing customers land here far less often than prospects.</div>
+<div class="anno"><strong>Default tab = General:</strong> Tab order is General &rarr; Sales &rarr; Press &rarr; Support. General leads as the catch-all entry point so unsure visitors aren&rsquo;t forced to self-categorize before getting help. The other three sit in order of typical conversion intent.</div>
 
 <!-- WHO WE ARE -->
 <section class="who-we-are">
