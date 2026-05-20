@@ -366,8 +366,7 @@ body.anno-hidden .anno{display:none}
     <h1 class="mb-hero-h1">Empowering communities. Amplifying generosity.</h1>
     <p class="mb-hero-sub">A family of software platforms built for churches, parishes, nonprofits, and the missions that hold them together. 90,000+ organizations run on Ministry Brands.</p>
     <div class="mb-hero-ctas">
-      <a href="request-demo.html" class="btn btn-white">Book a Demo</a>
-      <a href="#brands" class="btn btn-ghost-light">Explore our Brands</a>
+      <a href="#brands" class="btn btn-white">Explore our Brands</a>
     </div>
   </div>
 </section>
@@ -891,14 +890,17 @@ document.body.classList.add("anno-hidden");
 
 // Dropdown: hover-to-open, click-to-pin, outside-click closes
 function toggleDropdown(e, id){
+  var btn = document.getElementById(id);
+  // If click came from inside the dropdown (a menu item), let it pass through
+  var dd = btn.querySelector('.mb-nav-dropdown');
+  if (dd && dd.contains(e.target)) return;
   e.stopPropagation();
   e.preventDefault();
-  var btn = document.getElementById(id);
-  var isOpen = btn.classList.contains('open');
+  var wasPinned = btn.dataset.pinned === '1';
   document.querySelectorAll('.mb-nav-link.open').forEach(function(el){
     if(el !== btn){ el.classList.remove('open'); delete el.dataset.pinned; }
   });
-  if(isOpen){
+  if(wasPinned){
     btn.classList.remove('open');
     delete btn.dataset.pinned;
   } else {
