@@ -48,14 +48,42 @@ body{background:white;min-height:100vh;color:#1a1a1a}
 .mb-cta-strip h3{font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
 .mb-cta-strip p{color:rgba(255,255,255,0.7);font-size:15px;max-width:520px}
 
-/* One Team, Many Solutions */
-.solutions-row{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.solutions-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:32px}
-.solutions-stat{background:white;border:0.5px solid #e8e8e8;border-radius:12px;padding:24px}
-.solutions-stat-value{font-size:28px;font-weight:700;color:#1E3A5F;letter-spacing:-0.02em;margin-bottom:4px}
-.solutions-stat-label{font-size:12px;color:#888}
-.solutions-visual{aspect-ratio:5/4;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);border-radius:16px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:32px}
-.solutions-cell{background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.18);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:600;font-size:14px}
+/* WHY WE DO THIS WORK — customer commitment section */
+.commit-section{padding:88px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.commit-intro{max-width:720px;margin:0 auto 56px;text-align:center}
+.commit-intro h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:18px}
+.commit-intro p{font-size:17px;color:#666;line-height:1.7}
+.commit-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:0 auto}
+.commit-card{background:#f7f8fa;border:0.5px solid #e6e8ec;border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;transition:all 0.18s}
+.commit-card:hover{border-color:#1E3A5F;transform:translateY(-3px);box-shadow:0 8px 28px rgba(30,58,95,0.08)}
+.commit-card-quote-mark{font-family:Georgia,serif;font-size:48px;color:#1E3A5F;line-height:0.6;margin-bottom:18px;opacity:0.4}
+.commit-card-quote{font-size:15px;color:#333;line-height:1.65;margin-bottom:24px;flex:1;font-weight:500}
+.commit-card-author{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:0.5px solid #e6e8ec}
+.commit-card-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);flex-shrink:0}
+.commit-card-name{font-size:14px;font-weight:700;color:#1a1a1a;letter-spacing:-0.005em}
+.commit-card-role{font-size:12px;color:#777;font-weight:500;margin-top:2px}
+
+/* CULTURE PHOTO CAROUSEL — masonry, 1-2 tall, smooth scroll */
+.culture-carousel{padding:64px 0 80px;background:white;border-bottom:0.5px solid #f0f0f0;overflow:hidden;position:relative}
+.culture-carousel-label{font-size:11px;color:#999;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;text-align:center;margin-bottom:40px;position:relative;z-index:3}
+.culture-carousel::before,.culture-carousel::after{content:'';position:absolute;top:140px;bottom:60px;width:120px;z-index:2;pointer-events:none}
+.culture-carousel::before{left:0;background:linear-gradient(90deg,white 0%,transparent 100%)}
+.culture-carousel::after{right:0;background:linear-gradient(-90deg,white 0%,transparent 100%)}
+.culture-track{display:flex;gap:14px;width:max-content;animation:culture-scroll 80s linear infinite;height:380px}
+.culture-carousel:hover .culture-track{animation-play-state:paused}
+@keyframes culture-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.culture-col{display:flex;flex-direction:column;gap:14px;flex-shrink:0}
+.culture-photo{border-radius:14px;width:300px}
+.culture-photo.tall{height:380px}
+.culture-photo.short{height:183px}
+.culture-photo.amp{background:linear-gradient(135deg,#46435D 0%,#2d2a44 100%)}
+.culture-photo.navy{background:linear-gradient(135deg,#1E3A5F 0%,#162d4a 100%)}
+.culture-photo.par{background:linear-gradient(135deg,#8b6f47 0%,#5d4730 100%)}
+.culture-photo.dd{background:linear-gradient(135deg,#2a6e5a 0%,#1c4a3d 100%)}
+.culture-photo.pm{background:linear-gradient(135deg,#a14040 0%,#6f2a2a 100%)}
+.culture-photo.mix1{background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%)}
+.culture-photo.mix2{background:linear-gradient(135deg,#1E3A5F 0%,#2a6e5a 100%)}
+.culture-photo.mix3{background:linear-gradient(135deg,#8b6f47 0%,#1E3A5F 100%)}
 
 /* D&I */
 .di-card{background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);color:white;border-radius:16px;padding:56px 64px;text-align:center;max-width:880px;margin:0 auto}
@@ -128,31 +156,80 @@ body.anno-hidden .anno{display:none}
     <div class="mb-page-hero-eyebrow">Careers</div>
     <h1>Love making a difference? So do we.</h1>
     <p>Join a team that builds software for the missions that hold communities together. Engineering, product, sales, and customer success roles across the US and Galway, Ireland.</p>
-    <div class="mb-page-hero-ctas"><a href="https://ministrybrands.wd1.myworkdayjobs.com" class="btn btn-white">See our Openings</a><a href="#culture" class="btn btn-ghost-light">Our Culture</a></div>
+    <div class="mb-page-hero-ctas"><a href="https://ministrybrands.wd1.myworkdayjobs.com" class="btn btn-white">See our Openings</a></div>
   </div>
 </section>
 
 <div class="anno anno-move"><strong>Page slimmed from live:</strong> The current /careers page has 6 + 5 team spotlights split across two sections, an 8-photo culture gallery, and duplicated CTAs. This version consolidates: one spotlight row, one D&I block, one award strip, one Galway callout — cleaner narrative arc without losing content.</div>
 
-<!-- ONE TEAM, MANY SOLUTIONS -->
-<section class="section" id="culture">
+<!-- WHY WE DO THIS WORK — customer commitment -->
+<section class="commit-section" id="culture">
   <div class="w">
-    <div class="solutions-row">
-      <div>
-        <div class="section-eyebrow">One Team, Many Solutions</div>
-        <div class="section-h2" style="margin-bottom:18px">Four brands, one company</div>
-        <p class="section-sub" style="margin-bottom:18px">Ministry Brands brings together Amplify, ParishSOFT, DonorDirect, and Protect My Ministry under one roof. Engineering, product, and customer-facing teams collaborate across all four — meaning your impact reaches every kind of mission.</p>
-        <div class="solutions-stats">
-          <div class="solutions-stat"><div class="solutions-stat-value">95,000+</div><div class="solutions-stat-label">Customers served</div></div>
-          <div class="solutions-stat"><div class="solutions-stat-value">40+ years</div><div class="solutions-stat-label">In ministry tech</div></div>
-          <div class="solutions-stat"><div class="solutions-stat-value">600+</div><div class="solutions-stat-label">Team members</div></div>
-          <div class="solutions-stat"><div class="solutions-stat-value">2</div><div class="solutions-stat-label">Continents</div></div>
+    <div class="commit-intro">
+      <div class="section-eyebrow">Why we do this work</div>
+      <h2>We work for the people who serve people.</h2>
+      <p>Every day, the churches, parishes, and nonprofits we serve do the hard work of holding communities together. Our team shows up for them — building software that takes the friction out of ministry so they can spend more time on what matters.</p>
+    </div>
+    <div class="commit-cards">
+      <div class="commit-card">
+        <div class="commit-card-quote-mark">&ldquo;</div>
+        <p class="commit-card-quote">I came from big tech, and I missed feeling like my work mattered. Here, when I ship a feature, a youth pastor uses it on Sunday to keep their volunteers safe.</p>
+        <div class="commit-card-author">
+          <div class="commit-card-avatar"></div>
+          <div>
+            <div class="commit-card-name">Hannah Park</div>
+            <div class="commit-card-role">VP, Engineering</div>
+          </div>
         </div>
       </div>
-      <div class="solutions-visual">
-        <div class="solutions-cell">Amplify</div><div class="solutions-cell">ParishSOFT</div><div class="solutions-cell">DonorDirect</div><div class="solutions-cell">Protect My Ministry</div>
+      <div class="commit-card">
+        <div class="commit-card-quote-mark">&ldquo;</div>
+        <p class="commit-card-quote">Our customers aren&rsquo;t just running a business &mdash; they&rsquo;re leading missions. Helping them spend less time fighting software and more time with their people is the most meaningful work I&rsquo;ve done.</p>
+        <div class="commit-card-author">
+          <div class="commit-card-avatar"></div>
+          <div>
+            <div class="commit-card-name">Marcus Lee</div>
+            <div class="commit-card-role">VP, Customer Success</div>
+          </div>
+        </div>
+      </div>
+      <div class="commit-card">
+        <div class="commit-card-quote-mark">&ldquo;</div>
+        <p class="commit-card-quote">We talk to customers every week. Their generosity, patience, and trust shape everything we build &mdash; from a small parish census update to a major donor platform launch.</p>
+        <div class="commit-card-author">
+          <div class="commit-card-avatar"></div>
+          <div>
+            <div class="commit-card-name">Elena Rodriguez</div>
+            <div class="commit-card-role">VP, Marketing</div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- CULTURE PHOTO CAROUSEL — masonry, smooth-scroll -->
+<section class="culture-carousel">
+  <div class="culture-carousel-label">Life at Ministry Brands</div>
+  <div class="culture-track">
+    <!-- duplicated set 1 -->
+    <div class="culture-col"><div class="culture-photo tall amp"></div></div>
+    <div class="culture-col"><div class="culture-photo short navy"></div><div class="culture-photo short mix1"></div></div>
+    <div class="culture-col"><div class="culture-photo tall par"></div></div>
+    <div class="culture-col"><div class="culture-photo short dd"></div><div class="culture-photo short mix2"></div></div>
+    <div class="culture-col"><div class="culture-photo tall navy"></div></div>
+    <div class="culture-col"><div class="culture-photo short pm"></div><div class="culture-photo short mix3"></div></div>
+    <div class="culture-col"><div class="culture-photo tall mix1"></div></div>
+    <div class="culture-col"><div class="culture-photo short amp"></div><div class="culture-photo short navy"></div></div>
+    <!-- duplicated set 2 — identical, for seamless loop -->
+    <div class="culture-col"><div class="culture-photo tall amp"></div></div>
+    <div class="culture-col"><div class="culture-photo short navy"></div><div class="culture-photo short mix1"></div></div>
+    <div class="culture-col"><div class="culture-photo tall par"></div></div>
+    <div class="culture-col"><div class="culture-photo short dd"></div><div class="culture-photo short mix2"></div></div>
+    <div class="culture-col"><div class="culture-photo tall navy"></div></div>
+    <div class="culture-col"><div class="culture-photo short pm"></div><div class="culture-photo short mix3"></div></div>
+    <div class="culture-col"><div class="culture-photo tall mix1"></div></div>
+    <div class="culture-col"><div class="culture-photo short amp"></div><div class="culture-photo short navy"></div></div>
   </div>
 </section>
 
@@ -163,7 +240,6 @@ body.anno-hidden .anno{display:none}
       <span class="di-card-tag">Our Commitment</span>
       <h3 style="margin-top:18px">Building a workplace as inclusive as the communities we serve</h3>
       <p>We are committed to a workplace where every team member is valued, every voice is heard, and every background is welcomed. Our diversity and inclusion work is a year-round practice — not a campaign — and includes our active partnership with the National Alliance on Mental Illness (NAMI).</p>
-      <a href="#" class="btn btn-ghost-light">Read our D&amp;I Charter →</a>
     </div>
   </div>
 </section>
