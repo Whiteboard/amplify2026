@@ -87,6 +87,41 @@ body{background:white;min-height:100vh;color:#1a1a1a}
 
 /* Office cards */
 .offices-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+
+/* WHO WE ARE section */
+.who-we-are{padding:88px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.who-we-are-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:80px;align-items:center}
+.who-we-are-h{font-size:56px;font-weight:700;color:#1E3A5F;line-height:1.02;letter-spacing:-0.03em;margin:14px 0 32px}
+.who-we-are-p{font-size:18px;color:#555;line-height:1.6;margin-bottom:24px}
+.who-we-are-p:last-child{margin-bottom:0}
+.who-we-are-imagery{position:relative;aspect-ratio:1;width:100%;max-width:480px;margin-left:auto;min-height:480px}
+.who-img{position:absolute;border-radius:18px;box-shadow:0 16px 40px rgba(0,0,0,0.12),0 4px 12px rgba(0,0,0,0.06);overflow:hidden}
+.who-img-1{top:0;left:0;width:62%;aspect-ratio:4/5;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);transform:rotate(-3deg);z-index:2}
+.who-img-2{top:18%;right:0;width:55%;aspect-ratio:4/3;background:linear-gradient(135deg,#2a6e5a 0%,#1E3A5F 100%);transform:rotate(4deg);z-index:1}
+.who-img-3{bottom:0;left:18%;width:60%;aspect-ratio:5/4;background:linear-gradient(135deg,#8b6f47 0%,#46435D 100%);transform:rotate(-2deg);z-index:3}
+
+/* Support Ticket Modal */
+.support-modal{position:fixed;inset:0;background:rgba(20,20,30,0.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:1000;padding:24px;animation:smFadeIn 0.2s ease}
+.support-modal.show{display:flex}
+@keyframes smFadeIn{from{opacity:0}to{opacity:1}}
+.support-modal-card{background:#f4f5f7;border-radius:20px;max-width:560px;width:100%;padding:48px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.3);animation:smSlideUp 0.25s ease}
+@keyframes smSlideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.support-modal-close{position:absolute;top:18px;right:18px;background:transparent;border:none;font-size:24px;color:#999;cursor:pointer;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0;line-height:1}
+.support-modal-close:hover{background:rgba(0,0,0,0.06);color:#1a1a1a}
+.support-modal-icon{width:64px;height:64px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;color:#1E3A5F;font-size:26px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.support-modal-title{font-size:26px;font-weight:700;color:#1E3A5F;letter-spacing:-0.02em;line-height:1.1;margin-bottom:14px}
+.support-modal-sub{font-size:18px;color:#333;font-weight:500;margin-bottom:28px}
+.support-modal form{display:flex;flex-direction:column;gap:14px}
+.support-modal-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.support-modal input,.support-modal select,.support-modal textarea{width:100%;padding:18px 20px;border:0.5px solid #e0e3e8;border-radius:8px;font-family:inherit;font-size:15px;color:#1a1a1a;background:white;outline:none;transition:border-color 0.12s}
+.support-modal input:focus,.support-modal select:focus,.support-modal textarea:focus{border-color:#1E3A5F}
+.support-modal textarea{min-height:120px;resize:vertical;line-height:1.5}
+.support-modal-captcha{display:flex;align-items:center;justify-content:space-between;background:#4285F4;color:white;padding:10px 16px;border-radius:8px;font-size:11px;font-weight:500;line-height:1.4;margin-top:6px;gap:12px}
+.support-modal-captcha-text strong{font-size:13px;font-weight:700;display:block;margin-bottom:2px}
+.support-modal-captcha-text a{color:white;text-decoration:underline}
+.support-modal-captcha-icon{flex-shrink:0;width:52px;height:42px;background:white;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#4285F4;font-size:24px}
+.support-modal-submit{margin-top:8px;background:#1E3A5F;color:white;border:none;padding:18px;border-radius:8px;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;transition:background 0.12s}
+.support-modal-submit:hover{background:#2a4a73}
 .office-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;overflow:hidden}
 .office-map{aspect-ratio:4/3;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);position:relative;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600}
 .office-body{padding:28px 32px}
@@ -170,7 +205,6 @@ body.anno-hidden .anno{display:none}
         <p>See a live walkthrough of the platform that fits your mission. Our team will match you with the right specialist&mdash;whether that&rsquo;s Amplify for churches, ParishSOFT for parishes, DonorDirect for nonprofits, or Protect My Ministry for background checks.</p>
         <div class="route-panel-ctas">
           <a href="request-demo.html" class="btn btn-navy">Book a Demo &rarr;</a>
-          <a href="#" class="btn btn-ghost">See Pricing</a>
         </div>
       </div>
       <form class="form" onsubmit="event.preventDefault()">
@@ -199,8 +233,7 @@ body.anno-hidden .anno{display:none}
         <h2>Existing customers</h2>
         <p>Already using one of our platforms? Our customer support team handles tickets across all four brands. For the fastest answer, submit a ticket through our help center&mdash;our specialists route it to the right product team.</p>
         <div class="route-panel-ctas">
-          <a href="#" class="btn btn-navy">Submit a Support Ticket &rarr;</a>
-          <a href="#" class="btn btn-ghost">Visit Help Center</a>
+          <button type="button" class="btn btn-navy" onclick="openSupportModal()" style="font-family:inherit;border:none;cursor:pointer">Submit a Support Ticket &rarr;</button>
         </div>
       </div>
       <div class="info-card">
@@ -253,6 +286,25 @@ body.anno-hidden .anno{display:none}
 </section>
 
 <div class="anno"><strong>Default tab = Sales:</strong> Most new traffic to /contact is bottom-of-funnel intent. Defaulting to Sales reflects the business goal of the page; support customers know to look for a separate tab, and existing customers land here far less often than prospects.</div>
+
+<!-- WHO WE ARE -->
+<section class="who-we-are">
+  <div class="w">
+    <div class="who-we-are-grid">
+      <div>
+        <div class="section-eyebrow">Who we are</div>
+        <h2 class="who-we-are-h">Your mission is our #1 mission</h2>
+        <p class="who-we-are-p">Technology for missional organizations was falling short. So we raised the bar. Ministry Brands has helped over 90,000 organizations grow and amplify their impact on the world.</p>
+        <p class="who-we-are-p">Our solutions give organizational leaders seamless, integrated tools to cover giving, people management, communications, streaming, safety, and more. And together, our 650+ associates help teams transform how they operate, freeing them up to spend their time where it matters most.</p>
+      </div>
+      <div class="who-we-are-imagery">
+        <div class="who-img who-img-1"></div>
+        <div class="who-img who-img-2"></div>
+        <div class="who-img who-img-3"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- OFFICES -->
 <section class="section alt">
@@ -334,6 +386,37 @@ function showPanel(target,btn){
   var panel=document.getElementById('panel-'+target);
   if(panel)panel.classList.add('active');
 }
+function openSupportModal(){document.getElementById('support-modal').classList.add('show')}
+function closeSupportModal(){document.getElementById('support-modal').classList.remove('show')}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSupportModal()});
 </script>
+
+<!-- SUPPORT TICKET MODAL -->
+<div class="support-modal" id="support-modal" onclick="if(event.target===this)closeSupportModal()">
+  <form class="support-modal-card" onsubmit="event.preventDefault();alert('Wireframe — ticket would submit here.');closeSupportModal()">
+    <button type="button" class="support-modal-close" onclick="closeSupportModal()" aria-label="Close">&times;</button>
+    <div class="support-modal-icon">&#9993;</div>
+    <h3 class="support-modal-title">Current Customer Technical Support</h3>
+    <p class="support-modal-sub">We&rsquo;re here to help!</p>
+    <div class="support-modal-row">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email" required>
+    </div>
+    <select required>
+      <option value="">Select Brand</option>
+      <option>Amplify</option>
+      <option>ParishSOFT</option>
+      <option>DonorDirect</option>
+      <option>Protect My Ministry</option>
+    </select>
+    <textarea placeholder="Include your organization name and a short description of the issue." required></textarea>
+    <div class="support-modal-captcha">
+      <div class="support-modal-captcha-text"><strong>protected by reCAPTCHA</strong>reCAPTCHA is changing its terms of service. <a href="#">Take action.</a></div>
+      <div class="support-modal-captcha-icon">&#x21BB;</div>
+    </div>
+    <button type="submit" class="support-modal-submit">Submit</button>
+  </form>
+</div>
+
 </body>
 </html>
