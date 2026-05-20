@@ -894,11 +894,11 @@ function toggleDropdown(e, id){
   e.stopPropagation();
   e.preventDefault();
   var btn = document.getElementById(id);
-  var isOpen = btn.classList.contains('open');
+  var wasPinned = btn.dataset.pinned === '1';
   document.querySelectorAll('.mb-nav-link.open').forEach(function(el){
     if(el !== btn){ el.classList.remove('open'); delete el.dataset.pinned; }
   });
-  if(isOpen){
+  if(wasPinned){
     btn.classList.remove('open');
     delete btn.dataset.pinned;
   } else {

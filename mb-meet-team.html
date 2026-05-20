@@ -193,7 +193,7 @@ body.anno-hidden .anno{display:none}
 
 <script>
 document.body.classList.add("anno-hidden");
-function toggleDropdown(e,id){e.stopPropagation();e.preventDefault();var btn=document.getElementById(id);var isOpen=btn.classList.contains('open');document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==btn){el.classList.remove('open');delete el.dataset.pinned}});if(isOpen){btn.classList.remove('open');delete btn.dataset.pinned}else{btn.classList.add('open');btn.dataset.pinned='1'}}
+function toggleDropdown(e,id){e.stopPropagation();e.preventDefault();var btn=document.getElementById(id);var wasPinned=btn.dataset.pinned==='1';document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==btn){el.classList.remove('open');delete el.dataset.pinned}});if(wasPinned){btn.classList.remove('open');delete btn.dataset.pinned}else{btn.classList.add('open');btn.dataset.pinned='1'}}
 document.addEventListener('click',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open');delete el.dataset.pinned})});
 document.querySelectorAll('.mb-nav-link').forEach(function(link){if(link.querySelector('.mb-nav-dropdown')){link.addEventListener('mouseenter',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==link)el.classList.remove('open')});link.classList.add('open')});link.addEventListener('mouseleave',function(){if(!link.dataset.pinned)link.classList.remove('open')})}});
 </script>
