@@ -74,6 +74,11 @@ body{background:white;min-height:100vh;color:#1a1a1a}
 .news-card-headline{font-size:17px;font-weight:700;color:#1a1a1a;line-height:1.35;letter-spacing:-0.01em;margin-bottom:10px}
 .news-card-excerpt{font-size:13px;color:#777;line-height:1.55;margin-bottom:16px;flex:1}
 .news-card-date{font-size:12px;color:#999;font-weight:500}
+.news-card-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:14px;border-top:0.5px solid #f0f0f0;margin-top:auto}
+.news-card-source{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.04em;color:#1E3A5F;text-transform:uppercase;white-space:nowrap}
+.news-card-source.external::after{content:'↗';font-size:13px;font-weight:600}
+.news-card-source.internal::after{content:'→';font-size:13px;font-weight:600}
+.news-card-source-name{color:#777;text-transform:none;letter-spacing:0;font-weight:500;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* Pagination */
 .pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:56px}
@@ -128,7 +133,7 @@ body.anno-hidden .anno{display:none}
   </div>
 </section>
 
-<div class="anno anno-page"><strong>Press hub strategy:</strong> The current /press page is a flat list of releases. This version leads with a featured editorial piece (positioning Ministry Brands as a thought leader, not just an issuer of announcements), filters by topic to support the four-brand portfolio, and reserves the grid for both releases and analysis. The featured article links to a reusable article template.</div>
+<div class="anno anno-page"><strong>Press hub strategy:</strong> Two card types in the grid. <strong>Internal cards</strong> (footer shows &ldquo;Read on MB&rdquo;) link to our own article template &mdash; reserved for MB-authored thought leadership. <strong>External cards</strong> (footer shows source + outbound arrow) are press mentions and pickups; clicking opens the publication in a new tab. Most releases live externally on PR wires or industry pubs, so this card grid mirrors that reality instead of pretending everything is hosted on MB.</div>
 
 <!-- FEATURED ARTICLE -->
 <section class="section" id="featured">
@@ -173,51 +178,51 @@ body.anno-hidden .anno{display:none}
     <div class="news-grid">
       <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
         <div class="news-card-img" style="background:linear-gradient(135deg,#a14040,#46435D)"></div>
-        <div class="news-card-body"><span class="news-card-chip">Safety</span><h3 class="news-card-headline">Hiring Is a Safety Practice: Building a Culture That Starts With Your People</h3><p class="news-card-excerpt">Background checks are step one. The real safeguard is a hiring process that screens for trust as carefully as it screens for skill.</p><span class="news-card-date">April 2, 2026</span></div>
+        <div class="news-card-body"><span class="news-card-chip">Safety</span><h3 class="news-card-headline">Hiring Is a Safety Practice: Building a Culture That Starts With Your People</h3><p class="news-card-excerpt">Background checks are step one. The real safeguard is a hiring process that screens for trust as carefully as it screens for skill.</p><div class="news-card-meta"><span class="news-card-date">April 2, 2026</span><span class="news-card-source internal">Read on MB</span></div></div>
       </a>
       <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
         <div class="news-card-img" style="background:linear-gradient(135deg,#2a6e5a,#1E3A5F)"></div>
-        <div class="news-card-body"><span class="news-card-chip">Accounting</span><h3 class="news-card-headline">Accounting for mission: How churches use automation to strengthen trust</h3><p class="news-card-excerpt">When finance teams close the books faster, leaders spend less time reconciling and more time stewarding.</p><span class="news-card-date">March 27, 2026</span></div>
+        <div class="news-card-body"><span class="news-card-chip">Accounting</span><h3 class="news-card-headline">Accounting for mission: How churches use automation to strengthen trust</h3><p class="news-card-excerpt">When finance teams close the books faster, leaders spend less time reconciling and more time stewarding.</p><div class="news-card-meta"><span class="news-card-date">March 27, 2026</span><span class="news-card-source internal">Read on MB</span></div></div>
       </a>
-      <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
         <div class="news-card-img" style="background:linear-gradient(135deg,#1E3A5F,#46435D)"></div>
-        <div class="news-card-body"><span class="news-card-chip">Giving</span><h3 class="news-card-headline">2024 State of Church Giving Report: Digital Platforms Drive Recurring Generosity</h3><p class="news-card-excerpt">Our annual report on giving behavior, with a deep look at recurring donor growth and channel mix.</p><span class="news-card-date">March 18, 2026</span></div>
+        <div class="news-card-body"><span class="news-card-chip">Giving</span><h3 class="news-card-headline">2024 State of Church Giving Report: Digital Platforms Drive Recurring Generosity</h3><p class="news-card-excerpt">Our annual report on giving behavior, with a deep look at recurring donor growth and channel mix.</p><div class="news-card-meta"><span class="news-card-date">March 18, 2026</span><span class="news-card-source external"><span class="news-card-source-name">Christianity Today</span></span></div></div>
       </a>
-      <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
         <div class="news-card-img" style="background:linear-gradient(135deg,#46435D,#1E3A5F)"></div>
-        <div class="news-card-body"><span class="news-card-chip">AI</span><h3 class="news-card-headline">AI in Ministry: Practical Use Cases for Today&rsquo;s Church Staff</h3><p class="news-card-excerpt">Not chatbots in the sanctuary. Quiet wins in sermon prep, follow-up, and admin time.</p><span class="news-card-date">March 11, 2026</span></div>
+        <div class="news-card-body"><span class="news-card-chip">AI</span><h3 class="news-card-headline">AI in Ministry: Practical Use Cases for Today&rsquo;s Church Staff</h3><p class="news-card-excerpt">Not chatbots in the sanctuary. Quiet wins in sermon prep, follow-up, and admin time.</p><div class="news-card-meta"><span class="news-card-date">March 11, 2026</span><span class="news-card-source external"><span class="news-card-source-name">ChurchTechToday</span></span></div></div>
       </a>
-      <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
         <div class="news-card-img" style="background:linear-gradient(135deg,#8b6f47,#a14040)"></div>
-        <div class="news-card-body"><span class="news-card-chip">Children&rsquo;s Ministry</span><h3 class="news-card-headline">Children&rsquo;s Ministry Check-In: New Safety Standards for 2026</h3><p class="news-card-excerpt">Updated guidance on volunteer screening, secure pickup, and the new digital paper trail every parent wants.</p><span class="news-card-date">March 4, 2026</span></div>
+        <div class="news-card-body"><span class="news-card-chip">Children&rsquo;s Ministry</span><h3 class="news-card-headline">Children&rsquo;s Ministry Check-In: New Safety Standards for 2026</h3><p class="news-card-excerpt">Updated guidance on volunteer screening, secure pickup, and the new digital paper trail every parent wants.</p><div class="news-card-meta"><span class="news-card-date">March 4, 2026</span><span class="news-card-source external"><span class="news-card-source-name">MinistryWatch</span></span></div></div>
       </a>
-      <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
         <div class="news-card-img" style="background:linear-gradient(135deg,#1E3A5F,#2a6e5a)"></div>
-        <div class="news-card-body"><span class="news-card-chip">Partnerships</span><h3 class="news-card-headline">Ministry Brands Announces Strategic Partnership with PushPay</h3><p class="news-card-excerpt">A new integration brings deeper giving insights to ParishSOFT and DonorDirect customers.</p><span class="news-card-date">February 26, 2026</span></div>
+        <div class="news-card-body"><span class="news-card-chip">Partnerships</span><h3 class="news-card-headline">Ministry Brands Announces Strategic Partnership with PushPay</h3><p class="news-card-excerpt">A new integration brings deeper giving insights to ParishSOFT and DonorDirect customers.</p><div class="news-card-meta"><span class="news-card-date">February 26, 2026</span><span class="news-card-source external"><span class="news-card-source-name">PR Newswire</span></span></div></div>
       </a>
-      <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
         <div class="news-card-img" style="background:linear-gradient(135deg,#8b6f47,#46435D)"></div>
-        <div class="news-card-body"><span class="news-card-chip">Awards</span><h3 class="news-card-headline">Cigna Recognizes Ministry Brands for Workplace Wellness</h3><p class="news-card-excerpt">Bronze-level Healthy Workforce Designation for our employee mental-health programs and culture work.</p><span class="news-card-date">February 18, 2026</span></div>
+        <div class="news-card-body"><span class="news-card-chip">Awards</span><h3 class="news-card-headline">Cigna Recognizes Ministry Brands for Workplace Wellness</h3><p class="news-card-excerpt">Bronze-level Healthy Workforce Designation for our employee mental-health programs and culture work.</p><div class="news-card-meta"><span class="news-card-date">February 18, 2026</span><span class="news-card-source external"><span class="news-card-source-name">HR Dive</span></span></div></div>
       </a>
-      <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
         <div class="news-card-img" style="background:linear-gradient(135deg,#46435D,#a14040)"></div>
-        <div class="news-card-body"><span class="news-card-chip">Worship</span><h3 class="news-card-headline">From Sundays to Streaming: The Hybrid Worship Playbook</h3><p class="news-card-excerpt">Practical guidance for the in-person + online services that are now the default, not the exception.</p><span class="news-card-date">February 11, 2026</span></div>
+        <div class="news-card-body"><span class="news-card-chip">Worship</span><h3 class="news-card-headline">From Sundays to Streaming: The Hybrid Worship Playbook</h3><p class="news-card-excerpt">Practical guidance for the in-person + online services that are now the default, not the exception.</p><div class="news-card-meta"><span class="news-card-date">February 11, 2026</span><span class="news-card-source external"><span class="news-card-source-name">Outreach Magazine</span></span></div></div>
       </a>
-      <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
         <div class="news-card-img" style="background:linear-gradient(135deg,#2a6e5a,#46435D)"></div>
-        <div class="news-card-body"><span class="news-card-chip">Analytics</span><h3 class="news-card-headline">Analytics That Matter: 5 Metrics Every Church Should Track</h3><p class="news-card-excerpt">Attendance is a starting point. These five measures tell you how discipleship is actually moving.</p><span class="news-card-date">February 4, 2026</span></div>
+        <div class="news-card-body"><span class="news-card-chip">Analytics</span><h3 class="news-card-headline">Analytics That Matter: 5 Metrics Every Church Should Track</h3><p class="news-card-excerpt">Attendance is a starting point. These five measures tell you how discipleship is actually moving.</p><div class="news-card-meta"><span class="news-card-date">February 4, 2026</span><span class="news-card-source external"><span class="news-card-source-name">Church Executive</span></span></div></div>
       </a>
-      <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
         <div class="news-card-img" style="background:linear-gradient(135deg,#1E3A5F,#8b6f47)"></div>
-        <div class="news-card-body"><span class="news-card-chip">Accounting</span><h3 class="news-card-headline">Building Trust Through Transparency: New Reporting Tools</h3><p class="news-card-excerpt">A look at the new reporting suite that puts donor-ready statements one click away.</p><span class="news-card-date">January 28, 2026</span></div>
+        <div class="news-card-body"><span class="news-card-chip">Accounting</span><h3 class="news-card-headline">Building Trust Through Transparency: New Reporting Tools</h3><p class="news-card-excerpt">A look at the new reporting suite that puts donor-ready statements one click away.</p><div class="news-card-meta"><span class="news-card-date">January 28, 2026</span><span class="news-card-source external"><span class="news-card-source-name">Nonprofit Quarterly</span></span></div></div>
       </a>
-      <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
         <div class="news-card-img" style="background:linear-gradient(135deg,#a14040,#1E3A5F)"></div>
-        <div class="news-card-body"><span class="news-card-chip">Giving</span><h3 class="news-card-headline">The Annual Giving Pulse: Q1 2026 Trends</h3><p class="news-card-excerpt">Recurring giving is up. Cash is down. What the first quarter tells us about the year ahead.</p><span class="news-card-date">January 21, 2026</span></div>
+        <div class="news-card-body"><span class="news-card-chip">Giving</span><h3 class="news-card-headline">The Annual Giving Pulse: Q1 2026 Trends</h3><p class="news-card-excerpt">Recurring giving is up. Cash is down. What the first quarter tells us about the year ahead.</p><div class="news-card-meta"><span class="news-card-date">January 21, 2026</span><span class="news-card-source external"><span class="news-card-source-name">Christianity Today</span></span></div></div>
       </a>
-      <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
         <div class="news-card-img" style="background:linear-gradient(135deg,#46435D,#2a6e5a)"></div>
-        <div class="news-card-body"><span class="news-card-chip">Safety</span><h3 class="news-card-headline">Safer Sundays: Background Checks Done Right</h3><p class="news-card-excerpt">The most common mistakes churches make in volunteer screening &mdash; and how to fix them this quarter.</p><span class="news-card-date">January 14, 2026</span></div>
+        <div class="news-card-body"><span class="news-card-chip">Safety</span><h3 class="news-card-headline">Safer Sundays: Background Checks Done Right</h3><p class="news-card-excerpt">The most common mistakes churches make in volunteer screening &mdash; and how to fix them this quarter.</p><div class="news-card-meta"><span class="news-card-date">January 14, 2026</span><span class="news-card-source external"><span class="news-card-source-name">Faith &amp; Leadership</span></span></div></div>
       </a>
     </div>
 
