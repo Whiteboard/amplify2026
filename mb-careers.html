@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Careers — Ministry Brands</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:white;min-height:100vh;color:#1a1a1a}
+.mb-nav{position:sticky;top:0;z-index:200;background:white;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px}
+.mb-nav-left{display:flex;align-items:center;gap:10px}.mb-nav-mark svg{display:block;color:#1E3A5F}
+.mb-nav-brand{font-size:16px;font-weight:700;color:#1E3A5F;letter-spacing:-0.01em}
+.mb-nav-links{display:flex;align-items:center;gap:6px;margin:0 auto}
+.mb-nav-link{position:relative;padding:9px 14px;font-size:14px;font-weight:500;color:#444;cursor:pointer;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;font-family:inherit;transition:color 0.12s,background 0.12s}
+.mb-nav-link:hover{color:#1E3A5F;background:#f4f5f8}.mb-nav-link.active{color:#1E3A5F;font-weight:600}
+.mb-nav-chevron{font-size:8px;color:#bbb;transition:transform 0.15s}.mb-nav-link.open .mb-nav-chevron{transform:rotate(180deg)}
+.mb-nav-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:100}
+.mb-nav-link.open .mb-nav-dropdown::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px}
+.mb-nav-link.open .mb-nav-dropdown{display:block}
+.mb-nav-dropdown a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}.mb-nav-dropdown a:hover{background:#f4f5f8;color:#1E3A5F}
+.mb-nav-right{display:flex;align-items:center;gap:14px}
+.mb-nav-login{font-size:13px;color:#666;text-decoration:none;font-weight:500;padding:8px 12px}.mb-nav-login:hover{color:#1E3A5F}
+.mb-nav-cta{background:#1E3A5F;color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s}.mb-nav-cta:hover{background:#2a4a73}
+
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f8fa}
+.section-eyebrow{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.section-h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px}
+.section-sub{font-size:17px;color:#777;line-height:1.6;max-width:560px}
+.section-center{text-align:center;max-width:680px;margin:0 auto 56px}.section-center .section-sub{margin:0 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
+.btn-navy{background:#1E3A5F;color:white}.btn-navy:hover{background:#2a4a73}
+.btn-white{background:white;color:#1E3A5F}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:#1E3A5F;border:1px solid #1E3A5F}.btn-ghost:hover{background:#1E3A5F;color:white}
+.btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
+.mb-page-hero{background:linear-gradient(180deg,#1E3A5F 0%,#162d4a 100%);color:white;padding:96px 0 88px;text-align:center}
+.mb-page-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px}
+.mb-page-hero h1{font-size:54px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:20px}
+.mb-page-hero p{font-size:17px;color:rgba(255,255,255,0.78);line-height:1.65;max-width:640px;margin:0 auto 32px}
+.mb-page-hero-ctas{display:flex;gap:12px;justify-content:center}
+.mb-breadcrumb{padding:18px 0;background:#fafbfc;border-bottom:0.5px solid #f0f0f0}
+.mb-breadcrumb-inner{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
+.mb-breadcrumb a{color:#888;text-decoration:none}.mb-breadcrumb a:hover{color:#1E3A5F}
+
+.mb-cta-strip{background:#1E3A5F;color:white;border-radius:16px;padding:48px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.mb-cta-strip h3{font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
+.mb-cta-strip p{color:rgba(255,255,255,0.7);font-size:15px;max-width:520px}
+
+/* WHY WE DO THIS WORK — customer commitment section */
+.commit-section{padding:88px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.commit-intro{max-width:720px;margin:0 auto 56px;text-align:center}
+.commit-intro h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:18px}
+.commit-intro p{font-size:17px;color:#666;line-height:1.7}
+.commit-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:0 auto}
+.commit-card{background:#f7f8fa;border:0.5px solid #e6e8ec;border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;transition:all 0.18s}
+.commit-card:hover{border-color:#1E3A5F;transform:translateY(-3px);box-shadow:0 8px 28px rgba(30,58,95,0.08)}
+.commit-card-quote-mark{font-family:Georgia,serif;font-size:48px;color:#1E3A5F;line-height:0.6;margin-bottom:18px;opacity:0.4}
+.commit-card-quote{font-size:15px;color:#333;line-height:1.65;margin-bottom:24px;flex:1;font-weight:500}
+.commit-card-author{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:0.5px solid #e6e8ec}
+.commit-card-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);flex-shrink:0}
+.commit-card-name{font-size:14px;font-weight:700;color:#1a1a1a;letter-spacing:-0.005em}
+.commit-card-role{font-size:12px;color:#777;font-weight:500;margin-top:2px}
+
+/* CULTURE PHOTO CAROUSEL — masonry, 1-2 tall, smooth scroll */
+.culture-carousel{padding:64px 0 80px;background:white;border-bottom:0.5px solid #f0f0f0;overflow:hidden;position:relative}
+.culture-carousel-label{font-size:11px;color:#999;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;text-align:center;margin-bottom:40px;position:relative;z-index:3}
+.culture-carousel::before,.culture-carousel::after{content:'';position:absolute;top:140px;bottom:60px;width:120px;z-index:2;pointer-events:none}
+.culture-carousel::before{left:0;background:linear-gradient(90deg,white 0%,transparent 100%)}
+.culture-carousel::after{right:0;background:linear-gradient(-90deg,white 0%,transparent 100%)}
+.culture-track{display:flex;gap:14px;width:max-content;animation:culture-scroll 80s linear infinite;height:380px}
+.culture-carousel:hover .culture-track{animation-play-state:paused}
+@keyframes culture-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.culture-col{display:flex;flex-direction:column;gap:14px;flex-shrink:0}
+.culture-photo{border-radius:14px;width:300px}
+.culture-photo.tall{height:380px}
+.culture-photo.short{height:183px}
+.culture-photo.amp{background:linear-gradient(135deg,#46435D 0%,#2d2a44 100%)}
+.culture-photo.navy{background:linear-gradient(135deg,#1E3A5F 0%,#162d4a 100%)}
+.culture-photo.par{background:linear-gradient(135deg,#8b6f47 0%,#5d4730 100%)}
+.culture-photo.dd{background:linear-gradient(135deg,#2a6e5a 0%,#1c4a3d 100%)}
+.culture-photo.pm{background:linear-gradient(135deg,#a14040 0%,#6f2a2a 100%)}
+.culture-photo.mix1{background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%)}
+.culture-photo.mix2{background:linear-gradient(135deg,#1E3A5F 0%,#2a6e5a 100%)}
+.culture-photo.mix3{background:linear-gradient(135deg,#8b6f47 0%,#1E3A5F 100%)}
+
+/* D&I */
+.di-card{background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);color:white;border-radius:16px;padding:56px 64px;text-align:center;max-width:880px;margin:0 auto}
+.di-card h3{font-size:32px;font-weight:700;letter-spacing:-0.02em;margin-bottom:16px}
+.di-card p{font-size:16px;line-height:1.7;color:rgba(255,255,255,0.85);max-width:640px;margin:0 auto 24px}
+.di-card-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);padding:8px 16px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase}
+
+/* Awards */
+/* Awards — featured layout */
+.awards-featured{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+.award-feature{background:white;border:0.5px solid #e6e8ec;border-radius:18px;padding:36px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.award-feature-source{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:18px;border-bottom:0.5px solid #f0f0f0}
+.award-feature-source-mark{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;font-weight:700;flex-shrink:0}
+.award-feature-source-mark.cigna{background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%)}
+.award-feature-source-mark.comparably{background:linear-gradient(135deg,#06b6d4 0%,#0891b2 100%)}
+.award-feature-source-name{font-size:14px;font-weight:700;color:#1a1a1a;letter-spacing:-0.005em}
+.award-feature-source-year{font-size:12px;color:#999;font-weight:500;margin-left:auto}
+.award-feature-title{font-size:24px;font-weight:700;color:#1a1a1a;letter-spacing:-0.02em;line-height:1.2;margin-bottom:12px}
+.award-feature-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#c98e3c 0%,#a06c20 100%);color:white;padding:5px 12px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;align-self:flex-start;margin-bottom:18px}
+.award-feature-desc{font-size:15px;color:#555;line-height:1.65;margin-bottom:22px}
+.award-feature-list-label{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;margin-top:8px}
+.award-feature-list{list-style:none;padding:0;margin:0 0 22px 0;display:flex;flex-direction:column;gap:10px}
+.award-feature-list li{display:flex;align-items:center;gap:10px;font-size:14px;color:#333;font-weight:500}
+.award-feature-list-check{width:20px;height:20px;border-radius:50%;background:#e5f0ff;color:#1E3A5F;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+
+/* Comparably hero score */
+.comp-score-hero{display:flex;align-items:center;gap:18px;margin-bottom:20px;padding:18px;background:linear-gradient(135deg,#f5fafd 0%,#eaf5fa 100%);border-radius:14px}
+.comp-score-pct{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#10b981 0%,#059669 100%);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;line-height:1}
+.comp-score-pct-num{font-size:18px;font-weight:700;letter-spacing:-0.02em}
+.comp-score-pct-label{font-size:8px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-top:2px;opacity:0.9}
+.comp-score-text{flex:1}
+.comp-score-headline{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
+.comp-score-meta{font-size:12px;color:#777}
+.comp-score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.comp-score-tile{background:#f7f8fa;border:0.5px solid #e6e8ec;border-radius:10px;padding:14px 10px;text-align:center}
+.comp-score-tile-num{font-size:13px;font-weight:700;color:#10b981;letter-spacing:-0.005em;margin-bottom:3px}
+.comp-score-tile-label{font-size:11px;color:#666;font-weight:600}
+.comp-score-extras{display:flex;flex-direction:column;gap:8px;margin-top:auto;padding-top:18px;border-top:0.5px solid #f0f0f0}
+.comp-score-extra-row{display:flex;align-items:center;justify-content:space-between;font-size:13px}
+.comp-score-extra-label{color:#777}
+.comp-score-extra-value{color:#10b981;font-weight:700}
+
+/* Employee quote pullout */
+.award-quote{background:linear-gradient(135deg,#1E3A5F 0%,#162d4a 100%);color:white;border-radius:18px;padding:48px 56px;text-align:center;max-width:980px;margin:0 auto}
+.award-quote-mark{font-family:Georgia,serif;font-size:64px;color:rgba(255,255,255,0.3);line-height:0.6;margin-bottom:12px}
+.award-quote-prompt{font-size:13px;color:rgba(255,255,255,0.55);font-weight:500;margin-bottom:14px}
+.award-quote-text{font-size:24px;font-weight:600;color:white;line-height:1.4;letter-spacing:-0.015em;margin-bottom:20px;max-width:780px;margin-left:auto;margin-right:auto}
+.award-quote-source{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.6);font-weight:500;letter-spacing:0.04em}
+.award-quote-source-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.4)}
+
+/* Galway callout */
+.galway-strip{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:40px 48px;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.galway-strip-flag{display:inline-flex;align-items:center;gap:10px;background:#eaf0f7;color:#1E3A5F;padding:6px 14px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px}
+.galway-strip h3{font-size:24px;font-weight:700;letter-spacing:-0.02em;color:#1a1a1a;margin-bottom:8px}
+.galway-strip p{font-size:15px;color:#777;line-height:1.55;max-width:520px}
+
+/* Team spotlights — single carousel (slimmed) */
+.spotlight-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.spotlight-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:24px 20px;text-align:center}
+.spotlight-photo{aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);margin-bottom:16px}
+.spotlight-name{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.spotlight-role{font-size:12px;color:#888}
+
+footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 32px}
+.mb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.mb-footer-brand{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px;margin-top:14px}
+.mb-footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
+.mb-footer-col-link{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;transition:color 0.12s}.mb-footer-col-link:hover{color:white}
+.mb-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:0.5px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35)}
+
+/* Annotations */
+.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12);max-width:380px;pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-move{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}.anno-move::before{content:'✅ SECTION MOVED';color:#2E7D32}
+.anno strong{font-weight:700}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#1E3A5F;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#2a4a73}
+body.anno-hidden .anno{display:none}
+</style>
+</head>
+<body>
+
+<nav class="mb-nav">
+  <div class="mb-nav-left"><span class="mb-nav-mark"><svg width="32" height="14" viewBox="0 0 48 20" fill="none"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg></span><a href="mb-home.html" style="text-decoration:none"><span class="mb-nav-brand">Ministry Brands</span></a></div>
+  <div class="mb-nav-links">
+    <a href="home.html" class="mb-nav-link">Churches</a><a href="#" class="mb-nav-link">Parishes</a><a href="#" class="mb-nav-link">Nonprofits</a><a href="#" class="mb-nav-link">Protection</a>
+    <button class="mb-nav-link active" id="navCompany" onclick="toggleDropdown(event,'navCompany')">Company <span class="mb-nav-chevron">▾</span><div class="mb-nav-dropdown"><a href="mb-company.html">About</a><a href="mb-meet-team.html">Meet the Team</a><a href="mb-careers.html">Careers</a><a href="mb-press.html">Press</a><a href="mb-partners.html">Partners</a></div></button>
+      </div>
+  <div class="mb-nav-right"><a href="login.html" class="mb-nav-login">Login</a><a href="mb-contact.html" class="mb-nav-cta">Contact Us</a></div>
+</nav>
+
+<div class="mb-breadcrumb"><div class="w mb-breadcrumb-inner"><a href="mb-home.html">Home</a> <span>›</span> <a href="mb-company.html">Company</a> <span>›</span> <span>Careers</span></div></div>
+
+<section class="mb-page-hero">
+  <div class="w">
+    <div class="mb-page-hero-eyebrow">Careers</div>
+    <h1>Love making a difference? So do we.</h1>
+    <p>Join a team that builds software for the missions that hold communities together. Engineering, product, sales, and customer success roles across the US and Galway, Ireland.</p>
+    <div class="mb-page-hero-ctas"><a href="https://ministrybrands.wd1.myworkdayjobs.com" class="btn btn-white">See our Openings</a></div>
+  </div>
+</section>
+
+<div class="anno anno-move"><strong>Page slimmed from live:</strong> The current /careers page has 6 + 5 team spotlights split across two sections, an 8-photo culture gallery, and duplicated CTAs. This version consolidates: one spotlight row, one D&I block, one award strip, one Galway callout — cleaner narrative arc without losing content.</div>
+
+<!-- WHY WE DO THIS WORK — customer commitment -->
+<section class="commit-section" id="culture">
+  <div class="w">
+    <div class="commit-intro">
+      <div class="section-eyebrow">Why we do this work</div>
+      <h2>We work for the people who serve people.</h2>
+      <p>Every day, the churches, parishes, and nonprofits we serve do the hard work of holding communities together. Our team shows up for them — building software that takes the friction out of ministry so they can spend more time on what matters.</p>
+    </div>
+    <div class="commit-cards">
+      <div class="commit-card">
+        <div class="commit-card-quote-mark">&ldquo;</div>
+        <p class="commit-card-quote">I came from big tech, and I missed feeling like my work mattered. Here, when I ship a feature, a youth pastor uses it on Sunday to keep their volunteers safe.</p>
+        <div class="commit-card-author">
+          <div class="commit-card-avatar"></div>
+          <div>
+            <div class="commit-card-name">Hannah Park</div>
+            <div class="commit-card-role">VP, Engineering</div>
+          </div>
+        </div>
+      </div>
+      <div class="commit-card">
+        <div class="commit-card-quote-mark">&ldquo;</div>
+        <p class="commit-card-quote">Our customers aren&rsquo;t just running a business &mdash; they&rsquo;re leading missions. Helping them spend less time fighting software and more time with their people is the most meaningful work I&rsquo;ve done.</p>
+        <div class="commit-card-author">
+          <div class="commit-card-avatar"></div>
+          <div>
+            <div class="commit-card-name">Marcus Lee</div>
+            <div class="commit-card-role">VP, Customer Success</div>
+          </div>
+        </div>
+      </div>
+      <div class="commit-card">
+        <div class="commit-card-quote-mark">&ldquo;</div>
+        <p class="commit-card-quote">We talk to customers every week. Their generosity, patience, and trust shape everything we build &mdash; from a small parish census update to a major donor platform launch.</p>
+        <div class="commit-card-author">
+          <div class="commit-card-avatar"></div>
+          <div>
+            <div class="commit-card-name">Elena Rodriguez</div>
+            <div class="commit-card-role">VP, Marketing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="anno anno-persona"><strong>Humanizing over brand stats:</strong> The original section here led with brand-level stats (95K customers, 40 years, 600 team, 2 continents). On a careers page, that reads as corporate boilerplate. Three current-team quote cards put the spotlight on the people doing the work and the customers they show up for &mdash; the kind of signal a real candidate is scanning for. The stats still live on the home page where they belong.</div>
+
+<!-- CULTURE PHOTO CAROUSEL — masonry, smooth-scroll -->
+<section class="culture-carousel">
+  <div class="culture-carousel-label">Life at Ministry Brands</div>
+  <div class="culture-track">
+    <!-- duplicated set 1 -->
+    <div class="culture-col"><div class="culture-photo tall amp"></div></div>
+    <div class="culture-col"><div class="culture-photo short navy"></div><div class="culture-photo short mix1"></div></div>
+    <div class="culture-col"><div class="culture-photo tall par"></div></div>
+    <div class="culture-col"><div class="culture-photo short dd"></div><div class="culture-photo short mix2"></div></div>
+    <div class="culture-col"><div class="culture-photo tall navy"></div></div>
+    <div class="culture-col"><div class="culture-photo short pm"></div><div class="culture-photo short mix3"></div></div>
+    <div class="culture-col"><div class="culture-photo tall mix1"></div></div>
+    <div class="culture-col"><div class="culture-photo short amp"></div><div class="culture-photo short navy"></div></div>
+    <!-- duplicated set 2 — identical, for seamless loop -->
+    <div class="culture-col"><div class="culture-photo tall amp"></div></div>
+    <div class="culture-col"><div class="culture-photo short navy"></div><div class="culture-photo short mix1"></div></div>
+    <div class="culture-col"><div class="culture-photo tall par"></div></div>
+    <div class="culture-col"><div class="culture-photo short dd"></div><div class="culture-photo short mix2"></div></div>
+    <div class="culture-col"><div class="culture-photo tall navy"></div></div>
+    <div class="culture-col"><div class="culture-photo short pm"></div><div class="culture-photo short mix3"></div></div>
+    <div class="culture-col"><div class="culture-photo tall mix1"></div></div>
+    <div class="culture-col"><div class="culture-photo short amp"></div><div class="culture-photo short navy"></div></div>
+  </div>
+</section>
+
+<div class="anno"><strong>Masonry over a static gallery:</strong> Live `/careers` uses a static 8-photo grid. We trade that for a horizontally-scrolling masonry strip that pauses on hover, can hold more images, and feels like a culture moodboard rather than a stock-photo dump. Heights vary (tall vs. stacked-pairs) for visual rhythm. Photos are gradient placeholders; real photography drops in 1:1.</div>
+
+<!-- D&I -->
+<section class="section alt">
+  <div class="w">
+    <div class="di-card">
+      <span class="di-card-tag">Our Commitment</span>
+      <h3 style="margin-top:18px">Building a workplace as inclusive as the communities we serve</h3>
+      <p>We are committed to a workplace where every team member is valued, every voice is heard, and every background is welcomed. Our diversity and inclusion work is a year-round practice — not a campaign — and includes our active partnership with the National Alliance on Mental Illness (NAMI).</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORKPLACE AWARDS -->
+<section class="section">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Workplace Awards</div>
+      <div class="section-h2">Recognized for the place we're building</div>
+    </div>
+    <div class="awards-featured">
+
+      <!-- CIGNA BRONZE -->
+      <div class="award-feature">
+        <div class="award-feature-source">
+          <div class="award-feature-source-mark cigna">C</div>
+          <div class="award-feature-source-name">Cigna Healthcare</div>
+          <span class="award-feature-source-year">2024</span>
+        </div>
+        <span class="award-feature-badge">🥉 Bronze Recipient</span>
+        <div class="award-feature-title">2024 Cigna Healthy Workforce Designation&trade;</div>
+        <p class="award-feature-desc">At Ministry Brands, the well-being of our workforce is a top priority. This recognition from Cigna Healthcare is a testament to our ongoing commitment to fostering a healthier, more productive, and engaged team.</p>
+        <div class="award-feature-list-label">Program Strengths</div>
+        <ul class="award-feature-list">
+          <li><span class="award-feature-list-check">✓</span>Visible Senior Leadership</li>
+          <li><span class="award-feature-list-check">✓</span>Strong Employee Engagement</li>
+        </ul>
+        <p class="award-feature-desc" style="margin-bottom:0;font-size:14px;color:#777">Earning this prestigious designation affirms our continuous efforts to make Ministry Brands a health-focused, employee-centric organization.</p>
+      </div>
+
+      <!-- COMPARABLY -->
+      <div class="award-feature">
+        <div class="award-feature-source">
+          <div class="award-feature-source-mark comparably">◉</div>
+          <div class="award-feature-source-name">Comparably</div>
+          <span class="award-feature-source-year">2024</span>
+        </div>
+        <div class="comp-score-hero">
+          <div class="comp-score-pct"><div class="comp-score-pct-num">TOP<br>20%</div></div>
+          <div class="comp-score-text">
+            <div class="comp-score-headline">Company Culture Score</div>
+            <div class="comp-score-meta">As rated by 546 current employees</div>
+          </div>
+        </div>
+        <div class="comp-score-grid">
+          <div class="comp-score-tile"><div class="comp-score-tile-num">Top 5%</div><div class="comp-score-tile-label">Team</div></div>
+          <div class="comp-score-tile"><div class="comp-score-tile-num">Top 5%</div><div class="comp-score-tile-label">Manager</div></div>
+          <div class="comp-score-tile"><div class="comp-score-tile-num">Top 15%</div><div class="comp-score-tile-label">Work Culture</div></div>
+        </div>
+        <div class="award-feature-list-label">Award Recognition</div>
+        <ul class="award-feature-list" style="margin-bottom:0">
+          <li><span class="award-feature-list-check">★</span>Best Company Work-Life Balance &mdash; Large Companies, 2024</li>
+        </ul>
+        <div class="comp-score-extras">
+          <div class="comp-score-extra-row"><span class="comp-score-extra-label">CEO Score &mdash; Chris Bacon</span><span class="comp-score-extra-value">Top 30%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMPLOYEE QUOTE PULLOUT -->
+    <div class="award-quote">
+      <div class="award-quote-mark">&ldquo;</div>
+      <div class="award-quote-prompt">What is most positive about the culture and environment at your company?</div>
+      <div class="award-quote-text">It feels casual but work is getting done. Team celebrations and culture club events are great.</div>
+      <div class="award-quote-source"><span class="award-quote-source-dot"></span>Anonymous employee review <span class="award-quote-source-dot"></span>Comparably</div>
+    </div>
+    <div class="anno anno-page"><strong>Awards as substance, not stickers:</strong> Live `/careers` uses small medal-icon cards that read as decoration. Real candidates want to know what the awards say about the company. We feature the two strongest recognitions in full (Cigna Bronze with the actual program-strength language; Comparably with the Top 5%/15% breakdown and the CEO score) plus the verbatim Comparably review &mdash; the kind of detail a candidate can verify and reference.</div>
+  </div>
+</section>
+
+<!-- GALWAY CALLOUT -->
+<section class="section alt">
+  <div class="w">
+    <div class="galway-strip">
+      <div>
+        <span class="galway-strip-flag">🇮🇪 Galway, Ireland</span>
+        <h3>Our European R&amp;D Centre</h3>
+        <p>Our Galway team builds and ships software for customers around the world from the heart of Ireland's west coast tech scene. Engineering, design, and product roles based in Galway with hybrid and remote options.</p>
+      </div>
+      <a href="mb-galway.html" class="btn btn-navy">Explore Galway →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM SPOTLIGHTS (single, not duplicated) -->
+<section class="section">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Get to Know our Team</div>
+      <div class="section-h2">Meet a few of the people building this</div>
+    </div>
+    <div class="spotlight-row">
+      <div class="spotlight-card"><div class="spotlight-photo"></div><div class="spotlight-name">Maya R.</div><div class="spotlight-role">UI/UX Designer</div></div>
+      <div class="spotlight-card"><div class="spotlight-photo"></div><div class="spotlight-name">Jordan K.</div><div class="spotlight-role">Sales Engineer</div></div>
+      <div class="spotlight-card"><div class="spotlight-photo"></div><div class="spotlight-name">Priya S.</div><div class="spotlight-role">Client Success</div></div>
+      <div class="spotlight-card"><div class="spotlight-photo"></div><div class="spotlight-name">Sam D.</div><div class="spotlight-role">Creative Manager</div></div>
+      <div class="spotlight-card"><div class="spotlight-photo"></div><div class="spotlight-name">Aoife M.</div><div class="spotlight-role">Engineering Lead, Galway</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="section alt">
+  <div class="w">
+    <div class="mb-cta-strip">
+      <div><h3>Find your role</h3><p>Engineering, product, customer success, sales, marketing — open positions across our US and Galway offices.</p></div>
+      <a href="https://ministrybrands.wd1.myworkdayjobs.com" class="btn btn-white">Explore Open Positions →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="mb-footer">
+  <div class="w">
+    <div class="mb-footer-grid">
+      <div><div style="display:flex;align-items:center;gap:10px"><svg width="32" height="14" viewBox="0 0 48 20" fill="none" style="color:rgba(255,255,255,0.75)"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg><span style="font-size:15px;font-weight:700;color:white">Ministry Brands</span></div><p class="mb-footer-brand">Technology built for the missions that hold communities together.</p></div>
+      <div><div class="mb-footer-col-title">Brands</div><a href="home.html" class="mb-footer-col-link">Amplify</a><a href="#" class="mb-footer-col-link">ParishSOFT</a><a href="#" class="mb-footer-col-link">DonorDirect</a><a href="#" class="mb-footer-col-link">Protect My Ministry</a></div>
+      <div><div class="mb-footer-col-title">Company</div><a href="mb-company.html" class="mb-footer-col-link">About</a><a href="mb-meet-team.html" class="mb-footer-col-link">Meet the Team</a><a href="mb-careers.html" class="mb-footer-col-link">Careers</a><a href="mb-press.html" class="mb-footer-col-link">Press</a></div>
+      <div><div class="mb-footer-col-title">Resources</div><a href="healthy-church-hub.html" class="mb-footer-col-link">Healthy Church Hub</a><a href="mb-partners.html" class="mb-footer-col-link">Partners</a><a href="mb-press.html" class="mb-footer-col-link">News</a></div>
+      <div><div class="mb-footer-col-title">Connect</div><a href="mb-contact.html" class="mb-footer-col-link">Contact</a><a href="login.html" class="mb-footer-col-link">Login</a></div>
+    </div>
+    <div class="mb-footer-bottom"><span>© 2026 Ministry Brands. All rights reserved.</span><span style="display:flex;gap:24px"><a href="#" class="mb-footer-col-link" style="margin:0">Privacy</a><a href="#" class="mb-footer-col-link" style="margin:0">Terms</a><a href="#" class="mb-footer-col-link" style="margin:0">Cookies</a></span></div>
+  </div>
+</footer>
+
+<div class="anno-legend-wrap">
+  <div class="anno-legend"><div class="anno-legend-title">Annotation Legend</div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div></div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'"><span style="font-size:16px">&#x1F4DD;</span><span class="anno-label">Show Annotations</span></button>
+</div>
+
+<script>
+document.body.classList.add("anno-hidden");
+function toggleDropdown(e,id){e.stopPropagation();e.preventDefault();var btn=document.getElementById(id);var isOpen=btn.classList.contains('open');document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==btn){el.classList.remove('open');delete el.dataset.pinned}});if(isOpen){btn.classList.remove('open');delete btn.dataset.pinned}else{btn.classList.add('open');btn.dataset.pinned='1'}}
+document.addEventListener('click',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open');delete el.dataset.pinned})});
+document.querySelectorAll('.mb-nav-link').forEach(function(link){if(link.querySelector('.mb-nav-dropdown')){link.addEventListener('mouseenter',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==link)el.classList.remove('open')});link.classList.add('open')});link.addEventListener('mouseleave',function(){if(!link.dataset.pinned)link.classList.remove('open')})}});
+</script>
+</body>
+</html>

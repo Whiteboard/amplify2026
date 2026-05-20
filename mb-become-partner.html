@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Become a Partner — Ministry Brands</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:white;min-height:100vh;color:#1a1a1a}
+
+/* MB NAV */
+.mb-nav{position:sticky;top:0;z-index:200;background:white;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px}
+.mb-nav-left{display:flex;align-items:center;gap:10px}.mb-nav-mark svg{display:block;color:#1E3A5F}
+.mb-nav-brand{font-size:16px;font-weight:700;color:#1E3A5F;letter-spacing:-0.01em}
+.mb-nav-links{display:flex;align-items:center;gap:6px;margin:0 auto}
+.mb-nav-link{position:relative;padding:9px 14px;font-size:14px;font-weight:500;color:#444;cursor:pointer;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;font-family:inherit;transition:color 0.12s,background 0.12s}
+.mb-nav-link:hover{color:#1E3A5F;background:#f4f5f8}.mb-nav-link.active{color:#1E3A5F;font-weight:600}
+.mb-nav-chevron{font-size:8px;color:#bbb;transition:transform 0.15s}.mb-nav-link.open .mb-nav-chevron{transform:rotate(180deg)}
+.mb-nav-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:100}
+.mb-nav-link.open .mb-nav-dropdown::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px}
+.mb-nav-link.open .mb-nav-dropdown{display:block}
+.mb-nav-dropdown a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}.mb-nav-dropdown a:hover{background:#f4f5f8;color:#1E3A5F}
+.mb-nav-right{display:flex;align-items:center;gap:14px}
+.mb-nav-login{font-size:13px;color:#666;text-decoration:none;font-weight:500;padding:8px 12px}.mb-nav-login:hover{color:#1E3A5F}
+.mb-nav-cta{background:#1E3A5F;color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s}.mb-nav-cta:hover{background:#2a4a73}
+
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f8fa}
+.section-eyebrow{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.section-h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px}
+.section-sub{font-size:17px;color:#777;line-height:1.6;max-width:560px}
+.section-center{text-align:center;max-width:680px;margin:0 auto 56px}.section-center .section-sub{margin:0 auto}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
+.btn-navy{background:#1E3A5F;color:white}.btn-navy:hover{background:#2a4a73}
+.btn-white{background:white;color:#1E3A5F}.btn-white:hover{background:#f0f0f0}
+.btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
+
+.mb-page-hero{background:linear-gradient(180deg,#1E3A5F 0%,#162d4a 100%);color:white;padding:96px 0 88px;text-align:center}
+.mb-page-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px}
+.mb-page-hero h1{font-size:54px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:20px}
+.mb-page-hero p{font-size:17px;color:rgba(255,255,255,0.78);line-height:1.65;max-width:640px;margin:0 auto 32px}
+.mb-page-hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+.mb-breadcrumb{padding:18px 0;background:#fafbfc;border-bottom:0.5px solid #f0f0f0}
+.mb-breadcrumb-inner{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
+.mb-breadcrumb a{color:#888;text-decoration:none}.mb-breadcrumb a:hover{color:#1E3A5F}
+
+/* Why partner */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.why-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:28px 24px;transition:all 0.15s}
+.why-card:hover{border-color:#a8b8ce;box-shadow:0 6px 24px rgba(30,58,95,0.08);transform:translateY(-2px)}
+.why-icon{width:48px;height:48px;border-radius:12px;background:#eaf0f7;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+.why-name{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:8px;letter-spacing:-0.01em}
+.why-desc{font-size:13px;color:#777;line-height:1.6}
+
+/* How it works */
+.steps-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative}
+.step{position:relative;padding:0 4px}
+.step-num{width:36px;height:36px;border-radius:50%;background:#1E3A5F;color:white;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;margin-bottom:18px}
+.step-name{font-size:18px;font-weight:700;color:#1a1a1a;margin-bottom:8px;letter-spacing:-0.01em}
+.step-desc{font-size:14px;color:#777;line-height:1.55}
+.step::after{content:'';position:absolute;top:18px;right:-12px;width:24px;height:0.5px;background:#d8e2ee}
+.step:last-child::after{display:none}
+
+/* Form */
+.form-wrap{background:white;border:0.5px solid #e8e8e8;border-radius:20px;padding:48px 56px;max-width:640px;margin:0 auto;box-shadow:0 8px 32px rgba(0,0,0,0.04)}
+.form-row{margin-bottom:18px}
+.form-row.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-label{display:block;font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:6px}
+.form-label .opt{color:#aaa;font-weight:400;margin-left:4px}
+.form-input,.form-textarea,.form-select{width:100%;padding:11px 14px;border:0.5px solid #d8e2ee;border-radius:8px;font-size:14px;font-family:inherit;color:#1a1a1a;background:white;transition:border-color 0.12s}
+.form-input:focus,.form-textarea:focus,.form-select:focus{outline:none;border-color:#1E3A5F;box-shadow:0 0 0 3px rgba(30,58,95,0.1)}
+.form-textarea{min-height:96px;resize:vertical;line-height:1.5}
+.radio-group{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.radio-option{display:flex;align-items:center;gap:8px;padding:10px 14px;border:0.5px solid #d8e2ee;border-radius:8px;cursor:pointer;font-size:13px;color:#444;transition:all 0.12s}
+.radio-option:hover{border-color:#1E3A5F;color:#1E3A5F}
+.radio-option input{accent-color:#1E3A5F;cursor:pointer}
+.form-submit{width:100%;background:#1E3A5F;color:white;border:none;padding:14px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:background 0.12s;margin-top:8px}
+.form-submit:hover{background:#2a4a73}
+
+/* Logo strip */
+.logos-row{display:grid;grid-template-columns:repeat(8,1fr);gap:14px;margin-top:32px}
+.logo-tile{aspect-ratio:3/2;border-radius:10px;background:linear-gradient(135deg,#eaf0f7 0%,#d8e2ee 100%);display:flex;align-items:center;justify-content:center;font-size:11px;color:#1E3A5F;font-weight:600;letter-spacing:0.04em}
+
+/* FOOTER */
+footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 32px}
+.mb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.mb-footer-brand{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px;margin-top:14px}
+.mb-footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
+.mb-footer-col-link{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;transition:color 0.12s}.mb-footer-col-link:hover{color:white}
+.mb-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:0.5px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35)}
+
+/* ANNOTATIONS */
+.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12);max-width:380px;pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno strong{font-weight:700}.anno em{font-style:italic;opacity:0.75}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#1E3A5F;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#2a4a73}
+body.anno-hidden .anno{display:none}
+</style>
+</head>
+<body>
+
+<nav class="mb-nav">
+  <div class="mb-nav-left"><span class="mb-nav-mark"><svg width="32" height="14" viewBox="0 0 48 20" fill="none"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg></span><a href="mb-home.html" style="text-decoration:none"><span class="mb-nav-brand">Ministry Brands</span></a></div>
+  <div class="mb-nav-links">
+    <a href="home.html" class="mb-nav-link">Churches</a><a href="#" class="mb-nav-link">Parishes</a><a href="#" class="mb-nav-link">Nonprofits</a><a href="#" class="mb-nav-link">Protection</a>
+    <button class="mb-nav-link active" id="navCompany" onclick="toggleDropdown(event,'navCompany')">Company <span class="mb-nav-chevron">▾</span><div class="mb-nav-dropdown"><a href="mb-company.html">About</a><a href="mb-meet-team.html">Meet the Team</a><a href="mb-careers.html">Careers</a><a href="mb-press.html">Press</a><a href="mb-partners.html">Partners</a></div></button>
+      </div>
+  <div class="mb-nav-right"><a href="login.html" class="mb-nav-login">Login</a><a href="mb-contact.html" class="mb-nav-cta">Contact Us</a></div>
+</nav>
+
+<div class="mb-breadcrumb"><div class="w mb-breadcrumb-inner"><a href="mb-home.html">Home</a> <span>›</span> <a href="mb-partners.html">Partners</a> <span>›</span> <span>Become a Partner</span></div></div>
+
+<section class="mb-page-hero">
+  <div class="w">
+    <div class="mb-page-hero-eyebrow">Partner Program</div>
+    <h1>Partner with Ministry Brands</h1>
+    <p>Join 100+ partners building integrations, services, and complementary tools that extend Ministry Brands for our 90,000+ customers.</p>
+    <div class="mb-page-hero-ctas">
+      <a href="#form" class="btn btn-white">Apply Now</a>
+      <a href="mailto:partnerships@ministrybrands.com" class="btn btn-ghost-light">Talk to Partnerships</a>
+    </div>
+  </div>
+</section>
+
+<div class="anno anno-page"><strong>Application-first page:</strong> Hero CTA jumps straight to the form. The Why/How sections above the form give partners the case for filling it out, but a single page beats a multi-step funnel for top-of-funnel applications. <em>Form is the conversion goal — everything else exists to support it.</em></div>
+
+<!-- WHY PARTNER -->
+<section class="section">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Why Partner</div>
+      <div class="section-h2">Reach, distribution, and a team behind you</div>
+      <p class="section-sub">Four reasons partners build with Ministry Brands.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">📈</div><div class="why-name">Reach 90K+ organizations</div><div class="why-desc">Get in front of churches, parishes, and nonprofits actively using Ministry Brands platforms.</div></div>
+      <div class="why-card"><div class="why-icon">🔌</div><div class="why-name">Native integrations</div><div class="why-desc">Built-in distribution through our Solutions marketplace and partner directory.</div></div>
+      <div class="why-card"><div class="why-icon">📣</div><div class="why-name">Co-marketing</div><div class="why-desc">Joint webinars, case studies, and event sponsorships to amplify your launch.</div></div>
+      <div class="why-card"><div class="why-icon">🛟</div><div class="why-name">Partner support</div><div class="why-desc">Dedicated partner success team, sandbox accounts, and certification programs.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section alt">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">How it Works</div>
+      <div class="section-h2">From application to launch in four steps</div>
+    </div>
+    <div class="steps-row">
+      <div class="step"><div class="step-num">1</div><div class="step-name">Apply</div><div class="step-desc">Submit your application below; we'll review within 5 business days.</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-name">Qualify</div><div class="step-desc">A partner team member walks through your use case and confirms fit.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-name">Integrate</div><div class="step-desc">Get sandbox access, API docs, and a technical contact.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-name">Launch</div><div class="step-desc">Your listing goes live in our partner directory; we kick off co-marketing.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="section" id="form">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Apply Now</div>
+      <div class="section-h2">Tell us about your team</div>
+      <p class="section-sub">We'll get back to you within 5 business days.</p>
+    </div>
+    <form class="form-wrap" onsubmit="event.preventDefault();alert('Thanks — this is a wireframe. No data sent.');">
+      <div class="form-row">
+        <label class="form-label">Company name</label>
+        <input class="form-input" type="text" required>
+      </div>
+      <div class="form-row split">
+        <div><label class="form-label">Your name</label><input class="form-input" type="text" required></div>
+        <div><label class="form-label">Your role</label><input class="form-input" type="text" required></div>
+      </div>
+      <div class="form-row split">
+        <div><label class="form-label">Email</label><input class="form-input" type="email" required></div>
+        <div><label class="form-label">Phone <span class="opt">(optional)</span></label><input class="form-input" type="text"></div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">What do you build?</label>
+        <textarea class="form-textarea" required placeholder="One or two sentences about your product or service."></textarea>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Why partner with Ministry Brands?</label>
+        <textarea class="form-textarea" required placeholder="What you hope to get out of the partnership."></textarea>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Which brand are you most aligned with?</label>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="brand" value="amplify"> Amplify</label>
+          <label class="radio-option"><input type="radio" name="brand" value="parishsoft"> ParishSOFT</label>
+          <label class="radio-option"><input type="radio" name="brand" value="donordirect"> DonorDirect</label>
+          <label class="radio-option"><input type="radio" name="brand" value="protectmyministry"> Protect My Ministry</label>
+          <label class="radio-option" style="grid-column:1/-1"><input type="radio" name="brand" value="multi"> Multi-brand</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">How did you hear about the program?</label>
+        <select class="form-select" required>
+          <option value="">Select one…</option>
+          <option>Customer recommendation</option>
+          <option>Search</option>
+          <option>Event</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <button type="submit" class="form-submit">Submit Application</button>
+    </form>
+  </div>
+</section>
+
+<!-- EXISTING PARTNERS LOGO STRIP -->
+<section class="section alt">
+  <div class="w">
+    <div class="section-center" style="margin-bottom:0">
+      <div class="section-eyebrow">In Good Company</div>
+      <div class="section-h2">Join our existing partners</div>
+      <p class="section-sub">A small sample of the 100+ teams building with Ministry Brands today.</p>
+    </div>
+    <div class="logos-row">
+      <div class="logo-tile">Pushpay</div>
+      <div class="logo-tile">Vanco</div>
+      <div class="logo-tile">Subsplash</div>
+      <div class="logo-tile">Planning Center</div>
+      <div class="logo-tile">Tithe.ly</div>
+      <div class="logo-tile">CCB</div>
+      <div class="logo-tile">Resi Media</div>
+      <div class="logo-tile">Breeze</div>
+    </div>
+  </div>
+</section>
+
+<footer class="mb-footer">
+  <div class="w">
+    <div class="mb-footer-grid">
+      <div><div style="display:flex;align-items:center;gap:10px"><svg width="32" height="14" viewBox="0 0 48 20" fill="none" style="color:rgba(255,255,255,0.75)"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg><span style="font-size:15px;font-weight:700;color:white">Ministry Brands</span></div><p class="mb-footer-brand">Technology built for the missions that hold communities together.</p></div>
+      <div><div class="mb-footer-col-title">Brands</div><a href="home.html" class="mb-footer-col-link">Amplify</a><a href="#" class="mb-footer-col-link">ParishSOFT</a><a href="#" class="mb-footer-col-link">DonorDirect</a><a href="#" class="mb-footer-col-link">Protect My Ministry</a></div>
+      <div><div class="mb-footer-col-title">Company</div><a href="mb-company.html" class="mb-footer-col-link">About</a><a href="mb-meet-team.html" class="mb-footer-col-link">Meet the Team</a><a href="mb-careers.html" class="mb-footer-col-link">Careers</a><a href="mb-press.html" class="mb-footer-col-link">Press</a></div>
+      <div><div class="mb-footer-col-title">Resources</div><a href="healthy-church-hub.html" class="mb-footer-col-link">Healthy Church Hub</a><a href="mb-partners.html" class="mb-footer-col-link">Partners</a><a href="mb-press.html" class="mb-footer-col-link">News</a></div>
+      <div><div class="mb-footer-col-title">Connect</div><a href="mb-contact.html" class="mb-footer-col-link">Contact</a><a href="login.html" class="mb-footer-col-link">Login</a></div>
+    </div>
+    <div class="mb-footer-bottom"><span>© 2026 Ministry Brands. All rights reserved.</span><span style="display:flex;gap:24px"><a href="#" class="mb-footer-col-link" style="margin:0">Privacy</a><a href="#" class="mb-footer-col-link" style="margin:0">Terms</a><a href="#" class="mb-footer-col-link" style="margin:0">Cookies</a></span></div>
+  </div>
+</footer>
+
+<div class="anno-legend-wrap">
+  <div class="anno-legend"><div class="anno-legend-title">Annotation Legend</div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div></div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'"><span style="font-size:16px">&#x1F4DD;</span><span class="anno-label">Show Annotations</span></button>
+</div>
+
+<script>
+document.body.classList.add("anno-hidden");
+function toggleDropdown(e,id){e.stopPropagation();e.preventDefault();var btn=document.getElementById(id);var isOpen=btn.classList.contains('open');document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==btn){el.classList.remove('open');delete el.dataset.pinned}});if(isOpen){btn.classList.remove('open');delete btn.dataset.pinned}else{btn.classList.add('open');btn.dataset.pinned='1'}}
+document.addEventListener('click',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open');delete el.dataset.pinned})});
+document.querySelectorAll('.mb-nav-link').forEach(function(link){if(link.querySelector('.mb-nav-dropdown')){link.addEventListener('mouseenter',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==link)el.classList.remove('open')});link.classList.add('open')});link.addEventListener('mouseleave',function(){if(!link.dataset.pinned)link.classList.remove('open')})}});
+</script>
+</body>
+</html>

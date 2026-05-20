@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Home — Ministry Brands</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:white;min-height:100vh;color:#1a1a1a}
+
+/* ===== MB NAV — classic top bar ===== */
+.mb-nav{position:sticky;top:0;z-index:200;background:white;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px}
+.mb-nav-left{display:flex;align-items:center;gap:10px}
+.mb-nav-mark{display:flex;align-items:center}
+.mb-nav-mark svg{display:block;color:#1E3A5F}
+.mb-nav-brand{font-size:16px;font-weight:700;color:#1E3A5F;letter-spacing:-0.01em}
+.mb-nav-links{display:flex;align-items:center;gap:6px;margin:0 auto}
+.mb-nav-link{position:relative;padding:9px 14px;font-size:14px;font-weight:500;color:#444;cursor:pointer;border-radius:6px;transition:color 0.12s,background 0.12s;text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;font-family:inherit}
+.mb-nav-link:hover{color:#1E3A5F;background:#f4f5f8}
+.mb-nav-link.active{color:#1E3A5F}
+.mb-nav-chevron{font-size:8px;color:#bbb;transition:transform 0.15s}
+.mb-nav-link.open .mb-nav-chevron{transform:rotate(180deg)}
+.mb-nav-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:100}
+.mb-nav-link.open .mb-nav-dropdown::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px}
+.mb-nav-link.open .mb-nav-dropdown{display:block}
+.mb-nav-dropdown a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}
+.mb-nav-dropdown a:hover{background:#f4f5f8;color:#1E3A5F}
+.mb-nav-right{display:flex;align-items:center;gap:14px}
+.mb-nav-login{font-size:13px;color:#666;text-decoration:none;font-weight:500;padding:8px 12px}
+.mb-nav-login:hover{color:#1E3A5F}
+.mb-nav-cta{background:#1E3A5F;color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s}
+.mb-nav-cta:hover{background:#2a4a73}
+
+/* ===== LAYOUT ===== */
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f8fa}
+.section.dark{background:#1E3A5F;color:white}
+.section-eyebrow{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.section-eyebrow.light{color:rgba(255,255,255,0.55)}
+.section-h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px}
+.section-h2.light{color:white}
+.section-sub{font-size:17px;color:#777;line-height:1.6;max-width:560px}
+.section-sub.light{color:rgba(255,255,255,0.7)}
+.section-center{text-align:center;max-width:600px;margin:0 auto 56px}
+.section-center .section-sub{margin:0 auto}
+
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
+.btn-navy{background:#1E3A5F;color:white}
+.btn-navy:hover{background:#2a4a73}
+.btn-white{background:white;color:#1E3A5F}
+.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:#1E3A5F;border:1px solid #1E3A5F}
+.btn-ghost:hover{background:#1E3A5F;color:white}
+.btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}
+.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
+
+/* ===== HERO ===== */
+.mb-hero{background:linear-gradient(180deg,#1E3A5F 0%,#162d4a 100%);color:white;padding:120px 0 100px;position:relative;overflow:hidden}
+.mb-hero-content{max-width:780px;margin:0 auto;text-align:center;position:relative;z-index:2}
+.mb-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:24px}
+.mb-hero-h1{font-size:60px;font-weight:700;letter-spacing:-0.03em;line-height:1.05;margin-bottom:24px}
+.mb-hero-sub{font-size:18px;color:rgba(255,255,255,0.78);line-height:1.65;max-width:600px;margin:0 auto 36px}
+.mb-hero-ctas{display:flex;gap:12px;justify-content:center}
+.mb-hero-bg{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(70,67,93,0.35) 0%,transparent 50%),radial-gradient(circle at 80% 30%,rgba(30,58,95,0.5) 0%,transparent 50%);pointer-events:none}
+
+/* ===== STAT STRIP ===== */
+.mb-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:white;border-bottom:0.5px solid #f0f0f0}
+.mb-stat{padding:48px 32px;text-align:center;border-right:0.5px solid #f0f0f0}
+.mb-stat:last-child{border-right:none}
+.mb-stat-value{font-size:44px;font-weight:700;color:#1E3A5F;letter-spacing:-0.025em;line-height:1;margin-bottom:8px}
+.mb-stat-label{font-size:13px;color:#888;line-height:1.4}
+
+/* ===== LOGO REEL ===== */
+.mb-logos{background:white;padding:48px 0 56px;border-bottom:0.5px solid #f0f0f0}
+.mb-logos-label{font-size:11px;color:#999;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;text-align:center;margin-bottom:32px}
+.mb-logos-row{display:grid;grid-template-columns:repeat(7,1fr);gap:48px;align-items:center;max-width:1100px;margin:0 auto;padding:0 48px;opacity:0.7}
+.mb-logo-placeholder{height:32px;background:#d4d4d4;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#888;font-size:11px;font-weight:600;letter-spacing:0.04em}
+
+/* ===== FULL-WIDTH BRAND SECTIONS ===== */
+.mb-brand-section{padding:64px 0 96px;border-bottom:0.5px solid #f0f0f0}
+.mb-brand-section.alt{background:#f7f8fa}
+.mb-brand-section-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;max-width:1200px;margin:0 auto;padding:0 48px}
+.mb-brand-section.reverse .mb-brand-section-inner{direction:rtl}
+.mb-brand-section.reverse .mb-brand-section-inner > *{direction:ltr}
+/* Header row at top of each section: logo+audience LEFT, CTA RIGHT */
+.mb-brand-header{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;max-width:1200px;margin:0 auto 48px;padding:0 48px 32px;border-bottom:0.5px solid #e6e8ec}
+.mb-brand-section.alt .mb-brand-header{border-bottom-color:#e0e3e8}
+.mb-brand-header-left{display:flex;flex-direction:column;gap:8px}
+.mb-brand-header-logo{display:flex;align-items:center;gap:12px}
+.mb-brand-header-name{font-size:20px;font-weight:700;color:#1a1a1a;letter-spacing:-0.015em}
+.mb-brand-header-audience{font-size:15px;color:#777;font-weight:500;font-style:italic;letter-spacing:-0.005em}
+.mb-brand-header-cta{flex-shrink:0;margin-top:6px}
+.mb-brand-section-badge{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px}
+.mb-brand-section-mark{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px}
+.mb-brand-section-mark.amplify{background:#46435D}
+.mb-brand-section-mark.parishsoft{background:#8b6f47}
+.mb-brand-section-mark.donordirect{background:#2a6e5a}
+.mb-brand-section-mark.protect{background:#a14040}
+.mb-brand-section-brand{font-size:14px;font-weight:700;color:#1a1a1a;letter-spacing:-0.01em}
+.mb-brand-section-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.mb-brand-section-eyebrow.amplify{color:#46435D}
+.mb-brand-section-eyebrow.parishsoft{color:#8b6f47}
+.mb-brand-section-eyebrow.donordirect{color:#2a6e5a}
+.mb-brand-section-eyebrow.protect{color:#a14040}
+.mb-brand-section h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:18px}
+.mb-brand-section-desc{font-size:17px;color:#666;line-height:1.65;margin-bottom:28px}
+.mb-brand-section-features{list-style:none;padding:0;margin:0 0 32px 0;display:flex;flex-direction:column;gap:12px}
+.mb-brand-section-features li{display:flex;align-items:flex-start;gap:11px;font-size:14px;color:#444;line-height:1.5}
+.mb-brand-section-check{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:700;margin-top:1px}
+.mb-brand-section-check.amplify{background:#46435D}
+.mb-brand-section-check.parishsoft{background:#8b6f47}
+.mb-brand-section-check.donordirect{background:#2a6e5a}
+.mb-brand-section-check.protect{background:#a14040}
+.mb-brand-section-cta{display:inline-flex;align-items:center;justify-content:center;padding:13px 24px;border-radius:8px;font-size:14px;font-weight:600;color:white;text-decoration:none;transition:all 0.15s}
+.mb-brand-section-cta.amplify{background:#46435D}.mb-brand-section-cta.amplify:hover{background:#5a576e}
+.mb-brand-section-cta.parishsoft{background:#8b6f47}.mb-brand-section-cta.parishsoft:hover{background:#a08555}
+.mb-brand-section-cta.donordirect{background:#2a6e5a}.mb-brand-section-cta.donordirect:hover{background:#358571}
+.mb-brand-section-cta.protect{background:#a14040}.mb-brand-section-cta.protect:hover{background:#b95050}
+.mb-brand-visual{aspect-ratio:4/3;border-radius:18px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 48px rgba(0,0,0,0.08)}
+.mb-brand-visual.amplify{background:linear-gradient(135deg,#46435D 0%,#2d2a44 100%)}
+.mb-brand-visual.parishsoft{background:linear-gradient(135deg,#8b6f47 0%,#5d4730 100%)}
+.mb-brand-visual.donordirect{background:linear-gradient(135deg,#2a6e5a 0%,#1c4a3d 100%)}
+.mb-brand-visual.protect{background:linear-gradient(135deg,#a14040 0%,#6f2a2a 100%)}
+.mb-brand-visual-stack{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:78%;height:78%}
+.mb-brand-visual-cell{background:rgba(255,255,255,0.12);border:0.5px solid rgba(255,255,255,0.18);border-radius:12px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.92);font-size:13px;font-weight:600;backdrop-filter:blur(4px)}
+
+/* --- Amplify: layered dashboard-stack mock --- */
+.amp-mock{position:relative;width:88%;height:88%}
+.amp-mock-card{position:absolute;background:rgba(255,255,255,0.95);border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,0.25),0 2px 6px rgba(0,0,0,0.12);overflow:hidden}
+.amp-mock-card.main{left:0;top:0;width:72%;height:100%;display:flex;flex-direction:column}
+.amp-mock-card.stat{right:0;top:8%;width:38%;height:34%;padding:18px;display:flex;flex-direction:column;justify-content:space-between}
+.amp-mock-card.list{right:0;bottom:6%;width:38%;height:46%;padding:16px;display:flex;flex-direction:column;gap:8px}
+.amp-mock-header{padding:12px 14px;border-bottom:0.5px solid #efeff3;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.amp-mock-title{font-size:11px;font-weight:700;color:#46435D;letter-spacing:-0.01em}
+.amp-mock-dots{display:flex;gap:4px}
+.amp-mock-dot{width:6px;height:6px;border-radius:50%;background:#e3e3e8}
+.amp-mock-body{padding:14px;flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
+.amp-mock-statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.amp-mock-statbox{background:#f4f3f7;border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:4px}
+.amp-mock-statbar{height:6px;border-radius:3px;background:linear-gradient(90deg,#46435D 0%,#46435D var(--w,60%),#e3e3e8 var(--w,60%),#e3e3e8 100%)}
+.amp-mock-statlabel{font-size:8px;color:#888;font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
+.amp-mock-chart{flex:1;background:#fafafa;border-radius:8px;padding:10px;display:flex;align-items:flex-end;gap:5px;min-height:50px}
+.amp-mock-bar{flex:1;background:linear-gradient(180deg,#46435D 0%,#5a576e 100%);border-radius:3px 3px 0 0;opacity:0.85}
+.amp-mock-bignum{font-size:22px;font-weight:700;color:#46435D;letter-spacing:-0.02em;line-height:1}
+.amp-mock-smallabel{font-size:9px;color:#999;font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
+.amp-mock-trend{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;color:#46435D}
+.amp-mock-listitem{display:flex;align-items:center;gap:8px;font-size:10px}
+.amp-mock-listdot{width:18px;height:18px;border-radius:5px;background:#eeedf4;color:#46435D;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.amp-mock-listtext{flex:1;height:6px;background:#f0f0f4;border-radius:3px}
+
+/* --- ParishSOFT: sacramental record card mock --- */
+.par-mock{position:relative;width:88%;height:90%}
+.par-mock-card{position:absolute;background:rgba(255,255,255,0.96);border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,0.25),0 2px 6px rgba(0,0,0,0.12);overflow:hidden}
+.par-mock-card.main{left:0;top:0;width:68%;height:100%;display:flex;flex-direction:column}
+.par-mock-card.event{right:0;top:6%;width:42%;padding:16px;display:flex;flex-direction:column;gap:10px}
+.par-mock-card.history{right:0;bottom:6%;width:42%;padding:16px;display:flex;flex-direction:column;gap:10px}
+.par-mock-header{padding:12px 14px;background:#f9f6f0;border-bottom:0.5px solid #ece5d4;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.par-mock-title{font-size:11px;font-weight:700;color:#8b6f47;letter-spacing:-0.01em}
+.par-mock-id{font-size:9px;font-weight:600;color:#bcaa86;letter-spacing:0.05em}
+.par-mock-family{padding:14px;display:flex;align-items:center;gap:10px;border-bottom:0.5px solid #f3eee0}
+.par-mock-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#a08555 0%,#5d4730 100%);flex-shrink:0}
+.par-mock-name-stack{flex:1;display:flex;flex-direction:column;gap:4px}
+.par-mock-name{height:8px;width:70%;border-radius:3px;background:#dcd1bc}
+.par-mock-meta{height:5px;width:50%;border-radius:3px;background:#ece5d4}
+.par-mock-section{padding:12px 14px;border-bottom:0.5px solid #f3eee0;display:flex;flex-direction:column;gap:8px}
+.par-mock-section:last-child{border-bottom:none}
+.par-mock-section-label{font-size:8px;font-weight:700;color:#8b6f47;letter-spacing:0.08em;text-transform:uppercase}
+.par-mock-field{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.par-mock-fieldlabel{font-size:9px;color:#aaa;flex-shrink:0}
+.par-mock-fieldvalue{flex:1;max-width:60%;height:6px;border-radius:3px;background:#ece5d4}
+.par-mock-fieldvalue.filled{background:linear-gradient(90deg,#8b6f47 0%,#8b6f47 100%);opacity:0.6}
+.par-mock-eventtitle{font-size:10px;font-weight:700;color:#1a1a1a}
+.par-mock-eventsub{font-size:9px;color:#888}
+.par-mock-eventbadge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:999px;background:#f9f6f0;color:#8b6f47;font-size:9px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;align-self:flex-start}
+.par-mock-timeline{display:flex;flex-direction:column;gap:6px}
+.par-mock-tlitem{display:flex;align-items:center;gap:8px}
+.par-mock-tldot{width:8px;height:8px;border-radius:50%;background:#8b6f47;opacity:0.7;flex-shrink:0}
+.par-mock-tllabel{flex:1;height:5px;border-radius:3px;background:#ece5d4}
+.par-mock-tldate{font-size:8px;color:#bcaa86;font-weight:600;flex-shrink:0}
+
+/* --- DonorDirect: two-pane donor profile --- */
+.dd-mock{position:relative;width:90%;height:88%;display:grid;grid-template-columns:1fr 1.1fr;gap:14px}
+.dd-mock-card{background:rgba(255,255,255,0.96);border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,0.25),0 2px 6px rgba(0,0,0,0.12);overflow:hidden;display:flex;flex-direction:column}
+.dd-mock-profile-header{padding:14px;background:#f0f8f4;border-bottom:0.5px solid #d5eadf;display:flex;align-items:center;justify-content:space-between}
+.dd-mock-title{font-size:10px;font-weight:700;color:#2a6e5a;letter-spacing:-0.01em}
+.dd-mock-status{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;color:#2a6e5a;background:white;padding:2px 8px;border-radius:999px;border:0.5px solid #d5eadf}
+.dd-mock-profile-body{padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;flex:1;justify-content:center}
+.dd-mock-pavatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#358571 0%,#1c4a3d 100%)}
+.dd-mock-pname-block{display:flex;flex-direction:column;align-items:center;gap:5px;width:100%}
+.dd-mock-pname{height:9px;width:60%;border-radius:3px;background:#c5dfd4}
+.dd-mock-pemail{height:6px;width:48%;border-radius:3px;background:#e5efe9}
+.dd-mock-pstats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;width:100%;margin-top:6px}
+.dd-mock-pstat{background:#f0f8f4;border-radius:8px;padding:8px 6px;text-align:center}
+.dd-mock-pstat-value{font-size:13px;font-weight:700;color:#2a6e5a;letter-spacing:-0.02em}
+.dd-mock-pstat-label{font-size:7px;color:#888;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;margin-top:2px}
+.dd-mock-timeline-header{padding:14px;border-bottom:0.5px solid #efeff3;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.dd-mock-tlinetitle{font-size:11px;font-weight:700;color:#1a1a1a}
+.dd-mock-tlinetag{font-size:8px;font-weight:600;color:#999;letter-spacing:0.05em;text-transform:uppercase}
+.dd-mock-tlines{padding:14px;flex:1;display:flex;align-items:flex-end;gap:6px;min-height:0}
+.dd-mock-tlbar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%}
+.dd-mock-tlbar{width:100%;background:linear-gradient(180deg,#2a6e5a 0%,#358571 100%);border-radius:3px 3px 0 0;opacity:0.85}
+.dd-mock-tlmonth{font-size:7px;color:#bbb;font-weight:600;letter-spacing:0.04em}
+.dd-mock-footer{padding:10px 14px;background:#fafafa;border-top:0.5px solid #efeff3;display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#666;font-weight:600}
+.dd-mock-footer-num{color:#2a6e5a;font-weight:700}
+
+/* --- Protect My Ministry: background check report --- */
+.pm-mock{position:relative;width:84%;height:88%}
+.pm-mock-card{position:absolute;background:rgba(255,255,255,0.96);border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,0.25),0 2px 6px rgba(0,0,0,0.12);overflow:hidden}
+.pm-mock-card.main{left:0;top:0;width:72%;height:100%;display:flex;flex-direction:column}
+.pm-mock-card.shield{right:0;top:14%;width:38%;padding:18px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.pm-mock-card.monitor{right:0;bottom:8%;width:38%;padding:14px;display:flex;flex-direction:column;gap:8px}
+.pm-mock-header{padding:12px 14px;background:#fbf1f1;border-bottom:0.5px solid #ecd6d6;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.pm-mock-title{font-size:11px;font-weight:700;color:#a14040;letter-spacing:-0.01em}
+.pm-mock-id{font-size:9px;color:#c79090;font-weight:600;letter-spacing:0.05em}
+.pm-mock-volunteer{padding:14px;display:flex;align-items:center;gap:10px;border-bottom:0.5px solid #f5e6e6}
+.pm-mock-vavatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#b95050 0%,#6f2a2a 100%);flex-shrink:0}
+.pm-mock-vname-stack{flex:1;display:flex;flex-direction:column;gap:5px}
+.pm-mock-vname{height:8px;width:55%;border-radius:3px;background:#e3c0c0}
+.pm-mock-vmeta{height:5px;width:40%;border-radius:3px;background:#f5e6e6}
+.pm-mock-statusbanner{padding:10px 14px;background:linear-gradient(90deg,#2a6e5a 0%,#358571 100%);color:white;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.pm-mock-statustext{font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.pm-mock-statusdate{font-size:9px;opacity:0.85}
+.pm-mock-checks{padding:10px 14px;flex:1;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.pm-mock-check{display:flex;align-items:center;gap:9px}
+.pm-mock-check-icon{width:18px;height:18px;border-radius:5px;background:#e5f2eb;color:#2a6e5a;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.pm-mock-check-label{flex:1;font-size:9px;color:#444;font-weight:600}
+.pm-mock-check-status{font-size:8px;font-weight:700;color:#2a6e5a;letter-spacing:0.05em}
+.pm-mock-shield-icon{width:46px;height:54px;background:linear-gradient(180deg,#a14040 0%,#6f2a2a 100%);clip-path:polygon(50% 0%,100% 18%,100% 60%,50% 100%,0 60%,0 18%);display:flex;align-items:center;justify-content:center;color:white;font-size:22px;font-weight:700}
+.pm-mock-shield-label{font-size:10px;font-weight:700;color:#1a1a1a;text-align:center;letter-spacing:-0.01em}
+.pm-mock-shield-sub{font-size:8px;color:#888;text-align:center;font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
+.pm-mock-monitor-label{font-size:8px;font-weight:700;color:#a14040;letter-spacing:0.06em;text-transform:uppercase}
+.pm-mock-monitor-row{display:flex;align-items:center;gap:6px;font-size:9px;color:#666}
+.pm-mock-monitor-dot{width:6px;height:6px;border-radius:50%;background:#2a6e5a;flex-shrink:0}
+
+/* ===== ONE FAMILY MANY SOLUTIONS — intro / brand navigator ===== */
+.mb-family{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.mb-family-h2{font-size:48px;font-weight:700;color:#1a1a1a;line-height:1.05;letter-spacing:-0.03em;margin-bottom:20px}
+.mb-family-desc{font-size:17px;color:#666;line-height:1.7;margin-bottom:32px;max-width:480px}
+.mb-family-meta{display:flex;gap:32px;margin-top:32px;padding-top:24px;border-top:0.5px solid #e0e3e8}
+.mb-family-meta-num{font-size:24px;font-weight:700;color:#1E3A5F;letter-spacing:-0.02em;line-height:1;margin-bottom:6px}
+.mb-family-meta-label{font-size:11px;color:#888;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+.mb-nav-card{background:white;border-radius:18px;box-shadow:0 12px 36px rgba(0,0,0,0.08),0 2px 8px rgba(0,0,0,0.04);overflow:hidden;border:0.5px solid #e8e8e8}
+.mb-nav-card-header{padding:18px 24px;background:#f7f8fa;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between}
+.mb-nav-card-title{font-size:11px;font-weight:700;color:#666;letter-spacing:0.12em;text-transform:uppercase}
+.mb-nav-card-count{font-size:11px;font-weight:700;color:#bbb}
+.mb-nav-row{display:flex;align-items:center;gap:18px;padding:20px 24px;border-bottom:0.5px solid #f0f0f0;text-decoration:none;color:inherit;cursor:pointer;position:relative;transition:background 0.15s,padding-left 0.18s ease;overflow:hidden}
+.mb-nav-row:last-child{border-bottom:none}
+.mb-nav-row:hover{background:#fafbfc;padding-left:30px}
+.mb-nav-row-stripe{position:absolute;left:0;top:0;bottom:0;width:5px}
+.mb-nav-row-stripe.amplify{background:#46435D}
+.mb-nav-row-stripe.parishsoft{background:#8b6f47}
+.mb-nav-row-stripe.donordirect{background:#2a6e5a}
+.mb-nav-row-stripe.protect{background:#a14040}
+.mb-nav-row-mark{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:15px;flex-shrink:0;transition:transform 0.18s ease}
+.mb-nav-row-mark.amplify{background:#46435D}
+.mb-nav-row-mark.parishsoft{background:#8b6f47}
+.mb-nav-row-mark.donordirect{background:#2a6e5a}
+.mb-nav-row-mark.protect{background:#a14040}
+.mb-nav-row:hover .mb-nav-row-mark{transform:scale(1.06)}
+.mb-nav-row-body{flex:1;min-width:0}
+.mb-nav-row-name{font-size:16px;font-weight:700;color:#1a1a1a;letter-spacing:-0.01em;margin-bottom:2px}
+.mb-nav-row-tag{font-size:12px;color:#888;font-weight:500}
+.mb-nav-row-arrow{font-size:16px;color:#c0c0c8;transition:transform 0.18s,color 0.18s}
+.mb-nav-row:hover .mb-nav-row-arrow{color:#1E3A5F;transform:translateX(4px)}
+
+/* ===== HCH TEASER ===== */
+.mb-hch{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.mb-hch-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mb-hch-card{background:white;border:0.5px solid #e8e8e8;border-radius:12px;padding:18px;cursor:pointer;transition:all 0.15s;text-decoration:none;color:inherit;display:block}
+.mb-hch-card:hover{border-color:#1E3A5F;transform:translateY(-2px)}
+.mb-hch-card-type{font-size:10px;font-weight:700;color:#888;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
+.mb-hch-card-title{font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.4}
+
+/* ===== LATEST NEWS ===== */
+.mb-news{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.mb-news-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:all 0.15s;display:flex;flex-direction:column;cursor:pointer}
+.mb-news-card:hover{border-color:#1E3A5F;transform:translateY(-2px);box-shadow:0 6px 20px rgba(30,58,95,0.06)}
+.mb-news-card-img{aspect-ratio:16/10;background:linear-gradient(135deg,#1E3A5F 0%,#46435D 100%)}
+.mb-news-card-img.alt{background:linear-gradient(135deg,#46435D 0%,#8b6f47 100%)}
+.mb-news-card-img.alt2{background:linear-gradient(135deg,#2a6e5a 0%,#1E3A5F 100%)}
+.mb-news-card-body{padding:22px 22px 24px}
+.mb-news-card-topic{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1E3A5F;margin-bottom:10px}
+.mb-news-card-title{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:10px;letter-spacing:-0.01em}
+.mb-news-card-date{font-size:12px;color:#999}
+
+/* ===== FOOTER ===== */
+footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 32px}
+.mb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.mb-footer-brand{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px;margin-top:14px}
+.mb-footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
+.mb-footer-col-link{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;transition:color 0.12s}
+.mb-footer-col-link:hover{color:white}
+.mb-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:0.5px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35)}
+
+/* ===== ANNOTATION SYSTEM (consistent with rest of project) ===== */
+.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);max-width:380px;pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}
+.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-move{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}
+.anno-move::before{content:'✅ SECTION MOVED';color:#2E7D32}
+.anno-gap{background:#FFF3E0;border-color:#FFB74D;color:#E65100}
+.anno-gap::before{content:'⚠️ GAP IDENTIFIED';color:#E65100}
+.anno-persona{background:#F3E5F5;border-color:#CE93D8;color:#4A148C}
+.anno-persona::before{content:'👤 PERSONA FOCUS';color:#7B1FA2}
+.anno strong{font-weight:700}
+.anno em{font-style:italic;color:inherit;opacity:0.75}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#1E3A5F;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#2a4a73}
+body.anno-hidden .anno{display:none}
+</style>
+</head>
+<body>
+
+<!-- ============ MB NAV ============ -->
+<nav class="mb-nav">
+  <div class="mb-nav-left">
+    <span class="mb-nav-mark">
+      <svg width="32" height="14" viewBox="0 0 48 20" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/>
+      </svg>
+    </span>
+    <span class="mb-nav-brand">Ministry Brands</span>
+  </div>
+  <div class="mb-nav-links">
+    <a href="home.html" class="mb-nav-link">Churches</a>
+    <a href="#" class="mb-nav-link">Parishes</a>
+    <a href="#" class="mb-nav-link">Nonprofits</a>
+    <a href="#" class="mb-nav-link">Protection</a>
+    <button class="mb-nav-link" id="navCompany" onclick="toggleDropdown(event,'navCompany')">Company <span class="mb-nav-chevron">▾</span>
+      <div class="mb-nav-dropdown">
+        <a href="mb-company.html">About</a>
+        <a href="mb-meet-team.html">Meet the Team</a>
+        <a href="mb-careers.html">Careers</a>
+        <a href="mb-press.html">Press</a>
+        <a href="mb-partners.html">Partners</a>
+      </div>
+    </button>
+      </div>
+  <div class="mb-nav-right">
+    <a href="login.html" class="mb-nav-login">Login</a>
+    <a href="mb-contact.html" class="mb-nav-cta">Contact Us</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="mb-hero">
+  <div class="mb-hero-bg"></div>
+  <div class="w mb-hero-content">
+    <div class="mb-hero-eyebrow">Ministry Brands</div>
+    <h1 class="mb-hero-h1">Empowering communities. Amplifying generosity.</h1>
+    <p class="mb-hero-sub">A family of software platforms built for churches, parishes, nonprofits, and the missions that hold them together. 90,000+ organizations run on Ministry Brands.</p>
+    <div class="mb-hero-ctas">
+      <a href="request-demo.html" class="btn btn-white">Book a Demo</a>
+      <a href="#brands" class="btn btn-ghost-light">Explore our Brands</a>
+    </div>
+  </div>
+</section>
+
+<div class="anno anno-page"><strong>Hero Strategy:</strong> Corporate tagline echoes Amplify's "amplifying generosity" while positioning Ministry Brands as the family of platforms. Stat (90K+ orgs) builds immediate credibility. Two clear paths: demo for high-intent, brands for research-mode.</div>
+
+<!-- ============ LOGO REEL ============ -->
+<div class="mb-logos">
+  <div class="mb-logos-label">Trusted by 90,000+ organizations across North America</div>
+  <div class="mb-logos-row">
+    <div class="mb-logo-placeholder">CHURCH&nbsp;A</div>
+    <div class="mb-logo-placeholder">DIOCESE&nbsp;B</div>
+    <div class="mb-logo-placeholder">MISSION&nbsp;C</div>
+    <div class="mb-logo-placeholder">FOUNDATION&nbsp;D</div>
+    <div class="mb-logo-placeholder">PARISH&nbsp;E</div>
+    <div class="mb-logo-placeholder">MINISTRY&nbsp;F</div>
+    <div class="mb-logo-placeholder">NONPROFIT&nbsp;G</div>
+  </div>
+</div>
+
+<!-- ============ STAT STRIP ============ -->
+<div class="mb-stats">
+  <div class="mb-stat"><div class="mb-stat-value">90,000+</div><div class="mb-stat-label">Organizations served</div></div>
+  <div class="mb-stat"><div class="mb-stat-value">$6.5B+</div><div class="mb-stat-label">In giving managed</div></div>
+  <div class="mb-stat"><div class="mb-stat-value">42K</div><div class="mb-stat-label">Websites powered</div></div>
+  <div class="mb-stat"><div class="mb-stat-value">1.7M</div><div class="mb-stat-label">Background checks run</div></div>
+</div>
+
+<!-- Anchor target for the "Explore our Brands" hero CTA -->
+<div id="brands"></div>
+
+<!-- ============ ONE FAMILY, MANY SOLUTIONS — intro / brand navigator ============ -->
+<section class="section alt" style="padding:88px 0">
+  <div class="w">
+    <div class="mb-family">
+      <div>
+        <div class="section-eyebrow">One Family, Many Solutions</div>
+        <h2 class="mb-family-h2">Four platforms.<br>One purpose.</h2>
+        <p class="mb-family-desc">Ministry Brands brings together four purpose-built software platforms under one parent — each engineered for a specific kind of mission, all sharing a foundation of security, support, and stewardship.</p>
+        <a href="mb-company.html" class="btn btn-navy">Learn About Ministry Brands →</a>
+        <div class="mb-family-meta">
+          <div>
+            <div class="mb-family-meta-num">40+ yrs</div>
+            <div class="mb-family-meta-label">In ministry tech</div>
+          </div>
+          <div>
+            <div class="mb-family-meta-num">4</div>
+            <div class="mb-family-meta-label">Purpose-built brands</div>
+          </div>
+          <div>
+            <div class="mb-family-meta-num">90K+</div>
+            <div class="mb-family-meta-label">Organizations served</div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-nav-card">
+        <div class="mb-nav-card-header">
+          <span class="mb-nav-card-title">Jump to a brand</span>
+          <span class="mb-nav-card-count">4 platforms</span>
+        </div>
+        <a href="#brand-amplify" class="mb-nav-row">
+          <span class="mb-nav-row-stripe amplify"></span>
+          <div class="mb-nav-row-mark amplify">A</div>
+          <div class="mb-nav-row-body">
+            <div class="mb-nav-row-name">Amplify</div>
+            <div class="mb-nav-row-tag">For Churches</div>
+          </div>
+          <span class="mb-nav-row-arrow">↓</span>
+        </a>
+        <a href="#brand-parishsoft" class="mb-nav-row">
+          <span class="mb-nav-row-stripe parishsoft"></span>
+          <div class="mb-nav-row-mark parishsoft">P</div>
+          <div class="mb-nav-row-body">
+            <div class="mb-nav-row-name">ParishSOFT</div>
+            <div class="mb-nav-row-tag">For Parishes &amp; Dioceses</div>
+          </div>
+          <span class="mb-nav-row-arrow">↓</span>
+        </a>
+        <a href="#brand-donordirect" class="mb-nav-row">
+          <span class="mb-nav-row-stripe donordirect"></span>
+          <div class="mb-nav-row-mark donordirect">D</div>
+          <div class="mb-nav-row-body">
+            <div class="mb-nav-row-name">DonorDirect</div>
+            <div class="mb-nav-row-tag">For Nonprofits</div>
+          </div>
+          <span class="mb-nav-row-arrow">↓</span>
+        </a>
+        <a href="#brand-protect" class="mb-nav-row">
+          <span class="mb-nav-row-stripe protect"></span>
+          <div class="mb-nav-row-mark protect">P</div>
+          <div class="mb-nav-row-body">
+            <div class="mb-nav-row-name">Protect My Ministry</div>
+            <div class="mb-nav-row-tag">For Ministry Safety</div>
+          </div>
+          <span class="mb-nav-row-arrow">↓</span>
+        </a>
+      </div>
+    </div>
+    <div class="anno anno-page"><strong>Family Intro Strategy:</strong> Positioned as the first thing visitors see after the stats strip. The right-side navigator card lets visitors jump straight to the brand they care about, doubling as a visual preview of all four. Each row's left-edge stripe color matches that brand's section below.</div>
+  </div>
+</section>
+
+<!-- ============ AMPLIFY DEEP-DIVE ============ -->
+<section class="mb-brand-section" id="brand-amplify">
+  <div class="mb-brand-header">
+    <div class="mb-brand-header-left">
+      <div class="mb-brand-header-logo">
+        <div class="mb-brand-section-mark amplify">A</div>
+        <span class="mb-brand-header-name">Amplify</span>
+      </div>
+      <div class="mb-brand-header-audience">For Churches</div>
+    </div>
+    <a href="home.html" class="mb-brand-section-cta amplify mb-brand-header-cta">Explore Amplify →</a>
+  </div>
+  <div class="mb-brand-section-inner">
+    <div>
+      <h2>Run your church. Not the other way around.</h2>
+      <p class="mb-brand-section-desc">An end-to-end church management platform built for congregations of every size. Replace fragmented tools with one connected system for giving, people, communications, websites, and service planning.</p>
+      <ul class="mb-brand-section-features">
+        <li><span class="mb-brand-section-check amplify">✓</span><span><strong>Giving &amp; finance</strong> — online giving, recurring gifts, fund accounting, and donor stewardship</span></li>
+        <li><span class="mb-brand-section-check amplify">✓</span><span><strong>People &amp; engagement</strong> — member records, groups, attendance, and communications</span></li>
+        <li><span class="mb-brand-section-check amplify">✓</span><span><strong>Worship operations</strong> — service planning, volunteer scheduling, and check-in</span></li>
+        <li><span class="mb-brand-section-check amplify">✓</span><span><strong>Digital presence</strong> — church website, mobile app, and live streaming</span></li>
+      </ul>
+    </div>
+    <div class="mb-brand-visual amplify">
+      <div class="amp-mock">
+        <!-- Main dashboard card (back-left, larger) -->
+        <div class="amp-mock-card main">
+          <div class="amp-mock-header">
+            <div class="amp-mock-title">Amplify · Dashboard</div>
+            <div class="amp-mock-dots"><div class="amp-mock-dot"></div><div class="amp-mock-dot"></div><div class="amp-mock-dot"></div></div>
+          </div>
+          <div class="amp-mock-body">
+            <div class="amp-mock-statrow">
+              <div class="amp-mock-statbox"><div class="amp-mock-statlabel">Giving</div><div class="amp-mock-statbar" style="--w:75%"></div></div>
+              <div class="amp-mock-statbox"><div class="amp-mock-statlabel">People</div><div class="amp-mock-statbar" style="--w:60%"></div></div>
+              <div class="amp-mock-statbox"><div class="amp-mock-statlabel">Engage</div><div class="amp-mock-statbar" style="--w:45%"></div></div>
+            </div>
+            <div class="amp-mock-chart">
+              <div class="amp-mock-bar" style="height:38%"></div>
+              <div class="amp-mock-bar" style="height:52%"></div>
+              <div class="amp-mock-bar" style="height:68%"></div>
+              <div class="amp-mock-bar" style="height:48%"></div>
+              <div class="amp-mock-bar" style="height:82%"></div>
+              <div class="amp-mock-bar" style="height:64%"></div>
+              <div class="amp-mock-bar" style="height:90%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Stat card (front-right top) -->
+        <div class="amp-mock-card stat">
+          <div>
+            <div class="amp-mock-smallabel">Weekly giving</div>
+            <div class="amp-mock-bignum">$42.6K</div>
+          </div>
+          <div class="amp-mock-trend">▲ 12% vs last week</div>
+        </div>
+        <!-- List card (front-right bottom) -->
+        <div class="amp-mock-card list">
+          <div class="amp-mock-smallabel">This Sunday</div>
+          <div class="amp-mock-listitem"><div class="amp-mock-listdot">✓</div><div class="amp-mock-listtext"></div></div>
+          <div class="amp-mock-listitem"><div class="amp-mock-listdot">✓</div><div class="amp-mock-listtext"></div></div>
+          <div class="amp-mock-listitem"><div class="amp-mock-listdot">✓</div><div class="amp-mock-listtext"></div></div>
+          <div class="amp-mock-listitem"><div class="amp-mock-listdot" style="background:#f4f3f7;color:#bbb">○</div><div class="amp-mock-listtext"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="anno anno-persona"><strong>Audience-Routing per Section:</strong> Each brand gets a dedicated full-width section (rather than equal-weight cards) so visitors can self-identify and explore deeply. Alternating left/right layout creates rhythm and equal visual weight across the 4 brands.</div>
+
+<div class="anno"><strong>Distinct product-mock per brand:</strong> Rather than the same 2&times;2 tile composition four times, each brand visual is shaped like the artifact that brand produces &mdash; Amplify gets a multi-module dashboard, ParishSOFT a sacramental record card, DonorDirect a donor profile + giving chart, Protect a background-check report with shield badge. Reinforces &ldquo;these are different products&rdquo; without needing real screenshots.</div>
+
+<!-- ============ PARISHSOFT DEEP-DIVE ============ -->
+<section class="mb-brand-section alt reverse" id="brand-parishsoft">
+  <div class="mb-brand-header">
+    <div class="mb-brand-header-left">
+      <div class="mb-brand-header-logo">
+        <div class="mb-brand-section-mark parishsoft">P</div>
+        <span class="mb-brand-header-name">ParishSOFT</span>
+      </div>
+      <div class="mb-brand-header-audience">For Parishes &amp; Dioceses</div>
+    </div>
+    <a href="#" class="mb-brand-section-cta parishsoft mb-brand-header-cta">Explore ParishSOFT →</a>
+  </div>
+  <div class="mb-brand-section-inner">
+    <div>
+      <h2>Trusted by the Catholic church for 30+ years.</h2>
+      <p class="mb-brand-section-desc">Census, sacramental records, contributions, and diocesan reporting — all in one platform designed specifically for Catholic parishes and the dioceses they belong to.</p>
+      <ul class="mb-brand-section-features">
+        <li><span class="mb-brand-section-check parishsoft">✓</span><span><strong>Family census &amp; sacramental records</strong> — baptism, confirmation, marriage tracking</span></li>
+        <li><span class="mb-brand-section-check parishsoft">✓</span><span><strong>Online giving &amp; contributions</strong> — recurring offering, capital campaigns, e-statements</span></li>
+        <li><span class="mb-brand-section-check parishsoft">✓</span><span><strong>Diocesan-level reporting</strong> — roll-up reporting across all parishes in the diocese</span></li>
+        <li><span class="mb-brand-section-check parishsoft">✓</span><span><strong>Parish websites &amp; communications</strong> — bulletins, email, mobile-ready websites</span></li>
+      </ul>
+    </div>
+    <div class="mb-brand-visual parishsoft">
+      <div class="par-mock">
+        <!-- Main family / sacramental record card -->
+        <div class="par-mock-card main">
+          <div class="par-mock-header">
+            <div class="par-mock-title">Family Record</div>
+            <div class="par-mock-id">#F-04287</div>
+          </div>
+          <div class="par-mock-family">
+            <div class="par-mock-avatar"></div>
+            <div class="par-mock-name-stack">
+              <div class="par-mock-name"></div>
+              <div class="par-mock-meta"></div>
+            </div>
+          </div>
+          <div class="par-mock-section">
+            <div class="par-mock-section-label">Family</div>
+            <div class="par-mock-field"><span class="par-mock-fieldlabel">Members</span><span class="par-mock-fieldvalue filled" style="max-width:18%"></span></div>
+            <div class="par-mock-field"><span class="par-mock-fieldlabel">Joined</span><span class="par-mock-fieldvalue" style="max-width:50%"></span></div>
+          </div>
+          <div class="par-mock-section">
+            <div class="par-mock-section-label">Sacraments</div>
+            <div class="par-mock-field"><span class="par-mock-fieldlabel">Baptism</span><span class="par-mock-fieldvalue" style="max-width:55%"></span></div>
+            <div class="par-mock-field"><span class="par-mock-fieldlabel">Confirmation</span><span class="par-mock-fieldvalue" style="max-width:55%"></span></div>
+            <div class="par-mock-field"><span class="par-mock-fieldlabel">Marriage</span><span class="par-mock-fieldvalue filled" style="max-width:55%"></span></div>
+          </div>
+          <div class="par-mock-section">
+            <div class="par-mock-section-label">Contributions YTD</div>
+            <div class="par-mock-field"><span class="par-mock-fieldlabel">Total</span><span class="par-mock-fieldvalue filled" style="max-width:65%"></span></div>
+          </div>
+        </div>
+        <!-- Event notification -->
+        <div class="par-mock-card event">
+          <div class="par-mock-eventbadge">New Sacrament</div>
+          <div class="par-mock-eventtitle">Baptism Recorded</div>
+          <div class="par-mock-eventsub">Sun, March 24 · Fr. Murphy</div>
+        </div>
+        <!-- Recent activity timeline -->
+        <div class="par-mock-card history">
+          <div class="par-mock-section-label">Recent Activity</div>
+          <div class="par-mock-timeline">
+            <div class="par-mock-tlitem"><div class="par-mock-tldot"></div><div class="par-mock-tllabel"></div><div class="par-mock-tldate">Mar 24</div></div>
+            <div class="par-mock-tlitem"><div class="par-mock-tldot"></div><div class="par-mock-tllabel"></div><div class="par-mock-tldate">Mar 18</div></div>
+            <div class="par-mock-tlitem"><div class="par-mock-tldot"></div><div class="par-mock-tllabel"></div><div class="par-mock-tldate">Feb 09</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DONORDIRECT DEEP-DIVE ============ -->
+<section class="mb-brand-section" id="brand-donordirect">
+  <div class="mb-brand-header">
+    <div class="mb-brand-header-left">
+      <div class="mb-brand-header-logo">
+        <div class="mb-brand-section-mark donordirect">D</div>
+        <span class="mb-brand-header-name">DonorDirect</span>
+      </div>
+      <div class="mb-brand-header-audience">For Nonprofits</div>
+    </div>
+    <a href="#" class="mb-brand-section-cta donordirect mb-brand-header-cta">Explore DonorDirect →</a>
+  </div>
+  <div class="mb-brand-section-inner">
+    <div>
+      <h2>Built for the donor relationships that change lives.</h2>
+      <p class="mb-brand-section-desc">Mission-driven nonprofits need more than a database. DonorDirect is a complete donor relationship management platform built for the complex stewardship workflows that healthy nonprofits depend on.</p>
+      <ul class="mb-brand-section-features">
+        <li><span class="mb-brand-section-check donordirect">✓</span><span><strong>Donor 360°</strong> — gifts, communications, engagement, and lifetime value in one record</span></li>
+        <li><span class="mb-brand-section-check donordirect">✓</span><span><strong>Major-donor stewardship</strong> — moves management, cultivation pipelines, planned giving</span></li>
+        <li><span class="mb-brand-section-check donordirect">✓</span><span><strong>Campaign &amp; appeal tracking</strong> — multi-channel attribution and ROI reporting</span></li>
+        <li><span class="mb-brand-section-check donordirect">✓</span><span><strong>Integrations</strong> — connect with email, accounting, and outreach tools you already use</span></li>
+      </ul>
+    </div>
+    <div class="mb-brand-visual donordirect">
+      <div class="dd-mock">
+        <!-- Left pane: donor profile -->
+        <div class="dd-mock-card">
+          <div class="dd-mock-profile-header">
+            <div class="dd-mock-title">Donor Profile</div>
+            <div class="dd-mock-status">●&nbsp;Major</div>
+          </div>
+          <div class="dd-mock-profile-body">
+            <div class="dd-mock-pavatar"></div>
+            <div class="dd-mock-pname-block">
+              <div class="dd-mock-pname"></div>
+              <div class="dd-mock-pemail"></div>
+            </div>
+            <div class="dd-mock-pstats">
+              <div class="dd-mock-pstat"><div class="dd-mock-pstat-value">$42K</div><div class="dd-mock-pstat-label">Lifetime</div></div>
+              <div class="dd-mock-pstat"><div class="dd-mock-pstat-value">28</div><div class="dd-mock-pstat-label">Gifts</div></div>
+              <div class="dd-mock-pstat"><div class="dd-mock-pstat-value">5y</div><div class="dd-mock-pstat-label">Donor</div></div>
+            </div>
+          </div>
+          <div class="dd-mock-footer">
+            <span>Next touch</span><span class="dd-mock-footer-num">Apr 22</span>
+          </div>
+        </div>
+        <!-- Right pane: giving timeline -->
+        <div class="dd-mock-card">
+          <div class="dd-mock-timeline-header">
+            <div class="dd-mock-tlinetitle">Giving over time</div>
+            <div class="dd-mock-tlinetag">Last 6 mo</div>
+          </div>
+          <div class="dd-mock-tlines">
+            <div class="dd-mock-tlbar-wrap"><div class="dd-mock-tlbar" style="height:30%"></div><div class="dd-mock-tlmonth">NOV</div></div>
+            <div class="dd-mock-tlbar-wrap"><div class="dd-mock-tlbar" style="height:48%"></div><div class="dd-mock-tlmonth">DEC</div></div>
+            <div class="dd-mock-tlbar-wrap"><div class="dd-mock-tlbar" style="height:88%"></div><div class="dd-mock-tlmonth">JAN</div></div>
+            <div class="dd-mock-tlbar-wrap"><div class="dd-mock-tlbar" style="height:35%"></div><div class="dd-mock-tlmonth">FEB</div></div>
+            <div class="dd-mock-tlbar-wrap"><div class="dd-mock-tlbar" style="height:62%"></div><div class="dd-mock-tlmonth">MAR</div></div>
+            <div class="dd-mock-tlbar-wrap"><div class="dd-mock-tlbar" style="height:74%"></div><div class="dd-mock-tlmonth">APR</div></div>
+          </div>
+          <div class="dd-mock-footer">
+            <span>Total this period</span><span class="dd-mock-footer-num">$8,420</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROTECT MY MINISTRY DEEP-DIVE ============ -->
+<section class="mb-brand-section alt reverse" id="brand-protect">
+  <div class="mb-brand-header">
+    <div class="mb-brand-header-left">
+      <div class="mb-brand-header-logo">
+        <div class="mb-brand-section-mark protect">P</div>
+        <span class="mb-brand-header-name">Protect My Ministry</span>
+      </div>
+      <div class="mb-brand-header-audience">For Ministry Safety</div>
+    </div>
+    <a href="#" class="mb-brand-section-cta protect mb-brand-header-cta">Explore Protection →</a>
+  </div>
+  <div class="mb-brand-section-inner">
+    <div>
+      <h2>Keep the people in your care safe.</h2>
+      <p class="mb-brand-section-desc">Background checks, ongoing monitoring, and safety training built for the unique requirements of ministry settings. Trusted by churches, parishes, and nonprofits to protect the children, volunteers, and staff they serve.</p>
+      <ul class="mb-brand-section-features">
+        <li><span class="mb-brand-section-check protect">✓</span><span><strong>Background screening</strong> — criminal, sex offender, motor vehicle, and credit reports</span></li>
+        <li><span class="mb-brand-section-check protect">✓</span><span><strong>Ongoing monitoring</strong> — alerts on new offenses for your active volunteers</span></li>
+        <li><span class="mb-brand-section-check protect">✓</span><span><strong>Child &amp; volunteer safety training</strong> — abuse prevention, mandatory reporting</span></li>
+        <li><span class="mb-brand-section-check protect">✓</span><span><strong>Check-in &amp; access control</strong> — secure room check-in for kids and youth programs</span></li>
+      </ul>
+    </div>
+    <div class="mb-brand-visual protect">
+      <div class="pm-mock">
+        <!-- Main check report card -->
+        <div class="pm-mock-card main">
+          <div class="pm-mock-header">
+            <div class="pm-mock-title">Background Check</div>
+            <div class="pm-mock-id">#PC-9382</div>
+          </div>
+          <div class="pm-mock-volunteer">
+            <div class="pm-mock-vavatar"></div>
+            <div class="pm-mock-vname-stack">
+              <div class="pm-mock-vname"></div>
+              <div class="pm-mock-vmeta"></div>
+            </div>
+          </div>
+          <div class="pm-mock-statusbanner">
+            <div class="pm-mock-statustext">✓ Cleared</div>
+            <div class="pm-mock-statusdate">Apr 14</div>
+          </div>
+          <div class="pm-mock-checks">
+            <div class="pm-mock-check"><div class="pm-mock-check-icon">✓</div><div class="pm-mock-check-label">Criminal History</div><div class="pm-mock-check-status">CLEAR</div></div>
+            <div class="pm-mock-check"><div class="pm-mock-check-icon">✓</div><div class="pm-mock-check-label">Sex Offender Registry</div><div class="pm-mock-check-status">CLEAR</div></div>
+            <div class="pm-mock-check"><div class="pm-mock-check-icon">✓</div><div class="pm-mock-check-label">Motor Vehicle Record</div><div class="pm-mock-check-status">CLEAR</div></div>
+            <div class="pm-mock-check"><div class="pm-mock-check-icon">✓</div><div class="pm-mock-check-label">Credit Report</div><div class="pm-mock-check-status">CLEAR</div></div>
+          </div>
+        </div>
+        <!-- Shield badge card -->
+        <div class="pm-mock-card shield">
+          <div class="pm-mock-shield-icon">✓</div>
+          <div class="pm-mock-shield-label">Approved Volunteer</div>
+          <div class="pm-mock-shield-sub">Active</div>
+        </div>
+        <!-- Active monitoring card -->
+        <div class="pm-mock-card monitor">
+          <div class="pm-mock-monitor-label">Active Monitoring</div>
+          <div class="pm-mock-monitor-row"><div class="pm-mock-monitor-dot"></div><span>Last check 2 days ago</span></div>
+          <div class="pm-mock-monitor-row"><div class="pm-mock-monitor-dot"></div><span>No new alerts</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HCH TEASER ============ -->
+<section class="section">
+  <div class="w">
+    <div class="mb-hch">
+      <div>
+        <div class="section-eyebrow">Healthy Church Hub</div>
+        <div class="section-h2" style="margin-bottom:14px">Resources for healthier ministries</div>
+        <p class="section-sub" style="margin-bottom:28px">Practical research, webinars, and stories from the field — curated for the leaders building thriving communities.</p>
+        <a href="healthy-church-hub.html" class="btn btn-ghost">Explore the Hub →</a>
+      </div>
+      <div class="mb-hch-cards">
+        <a href="ebook-landing.html" class="mb-hch-card">
+          <div class="mb-hch-card-type">eBook</div>
+          <div class="mb-hch-card-title">2026 Annual Church Giving Report</div>
+        </a>
+        <a href="webinar-registration.html" class="mb-hch-card">
+          <div class="mb-hch-card-type">Webinar</div>
+          <div class="mb-hch-card-title">Amplify Your Church's Digital Reach</div>
+        </a>
+        <a href="podcast-episode.html" class="mb-hch-card">
+          <div class="mb-hch-card-type">Podcast</div>
+          <div class="mb-hch-card-title">Leading Through Change</div>
+        </a>
+        <a href="blog-post.html" class="mb-hch-card">
+          <div class="mb-hch-card-type">Blog</div>
+          <div class="mb-hch-card-title">5 Signs Your Tech Stack is Holding You Back</div>
+        </a>
+      </div>
+    </div>
+    <div class="anno anno-move"><strong>Shared content:</strong> The Healthy Church Hub is shared between MB.com and Amplify (it lives under the Amplify brand but features content relevant to all customers). MB pages link out to existing Amplify HCH pages — no duplication.</div>
+  </div>
+</section>
+
+<!-- ============ LATEST NEWS ============ -->
+<section class="section alt">
+  <div class="w">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px">
+      <div>
+        <div class="section-eyebrow">News &amp; Press</div>
+        <div class="section-h2">Latest from Ministry Brands</div>
+      </div>
+      <a href="mb-press.html" class="btn btn-ghost">View All News →</a>
+    </div>
+    <div class="mb-news">
+      <a href="mb-news-article.html" class="mb-news-card">
+        <div class="mb-news-card-img"></div>
+        <div class="mb-news-card-body">
+          <div class="mb-news-card-topic">Industry Insights</div>
+          <div class="mb-news-card-title">Innovation in Church Software Means Measurable Ministry</div>
+          <div class="mb-news-card-date">April 8, 2026</div>
+        </div>
+      </a>
+      <a href="mb-news-article.html" class="mb-news-card">
+        <div class="mb-news-card-img alt"></div>
+        <div class="mb-news-card-body">
+          <div class="mb-news-card-topic">Safety</div>
+          <div class="mb-news-card-title">Hiring Is a Safety Practice: Building a Culture That Starts With Your People</div>
+          <div class="mb-news-card-date">March 22, 2026</div>
+        </div>
+      </a>
+      <a href="mb-news-article.html" class="mb-news-card">
+        <div class="mb-news-card-img alt2"></div>
+        <div class="mb-news-card-body">
+          <div class="mb-news-card-topic">Giving</div>
+          <div class="mb-news-card-title">2024 State of Church Giving: Digital Platforms Drive Recurring Generosity</div>
+          <div class="mb-news-card-date">March 4, 2026</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="mb-footer">
+  <div class="w">
+    <div class="mb-footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <svg width="32" height="14" viewBox="0 0 48 20" fill="none" style="color:rgba(255,255,255,0.75)"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg>
+          <span style="font-size:15px;font-weight:700;color:white">Ministry Brands</span>
+        </div>
+        <p class="mb-footer-brand">Technology built for the missions that hold communities together.</p>
+      </div>
+      <div>
+        <div class="mb-footer-col-title">Brands</div>
+        <a href="home.html" class="mb-footer-col-link">Amplify</a>
+        <a href="#" class="mb-footer-col-link">ParishSOFT</a>
+        <a href="#" class="mb-footer-col-link">DonorDirect</a>
+        <a href="#" class="mb-footer-col-link">Protect My Ministry</a>
+      </div>
+      <div>
+        <div class="mb-footer-col-title">Company</div>
+        <a href="mb-company.html" class="mb-footer-col-link">About</a>
+        <a href="mb-meet-team.html" class="mb-footer-col-link">Meet the Team</a>
+        <a href="mb-careers.html" class="mb-footer-col-link">Careers</a>
+        <a href="mb-press.html" class="mb-footer-col-link">Press</a>
+      </div>
+      <div>
+        <div class="mb-footer-col-title">Resources</div>
+        <a href="healthy-church-hub.html" class="mb-footer-col-link">Healthy Church Hub</a>
+        <a href="mb-partners.html" class="mb-footer-col-link">Partners</a>
+        <a href="mb-press.html" class="mb-footer-col-link">News</a>
+      </div>
+      <div>
+        <div class="mb-footer-col-title">Connect</div>
+        <a href="mb-contact.html" class="mb-footer-col-link">Contact</a>
+        <a href="login.html" class="mb-footer-col-link">Login</a>
+        
+      </div>
+    </div>
+    <div class="mb-footer-bottom">
+      <span>© 2026 Ministry Brands. All rights reserved.</span>
+      <span style="display:flex;gap:24px"><a href="#" class="mb-footer-col-link" style="margin:0">Privacy</a><a href="#" class="mb-footer-col-link" style="margin:0">Terms</a><a href="#" class="mb-footer-col-link" style="margin:0">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ANNOTATION LEGEND + TOGGLE -->
+<div class="anno-legend-wrap">
+  <div class="anno-legend">
+    <div class="anno-legend-title">Annotation Legend</div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div>
+  </div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'">
+    <span style="font-size:16px">&#x1F4DD;</span>
+    <span class="anno-label">Show Annotations</span>
+  </button>
+</div>
+
+<script>
+document.body.classList.add("anno-hidden");
+
+// Dropdown: hover-to-open, click-to-pin, outside-click closes
+function toggleDropdown(e, id){
+  e.stopPropagation();
+  e.preventDefault();
+  var btn = document.getElementById(id);
+  var isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.mb-nav-link.open').forEach(function(el){
+    if(el !== btn){ el.classList.remove('open'); delete el.dataset.pinned; }
+  });
+  if(isOpen){
+    btn.classList.remove('open');
+    delete btn.dataset.pinned;
+  } else {
+    btn.classList.add('open');
+    btn.dataset.pinned = '1';
+  }
+}
+document.addEventListener('click', function(){
+  document.querySelectorAll('.mb-nav-link.open').forEach(function(el){
+    el.classList.remove('open');
+    delete el.dataset.pinned;
+  });
+});
+document.querySelectorAll('.mb-nav-link').forEach(function(link){
+  if(link.querySelector('.mb-nav-dropdown')){
+    link.addEventListener('mouseenter', function(){
+      document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==link)el.classList.remove('open')});
+      link.classList.add('open');
+    });
+    link.addEventListener('mouseleave', function(){
+      if(!link.dataset.pinned) link.classList.remove('open');
+    });
+  }
+});
+</script>
+</body>
+</html>
