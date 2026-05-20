@@ -92,12 +92,47 @@ body{background:white;min-height:100vh;color:#1a1a1a}
 .di-card-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);padding:8px 16px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase}
 
 /* Awards */
-.awards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.award-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:32px;text-align:center}
-.award-medal{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#c98e3c 0%,#a06c20 100%);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;color:white;font-size:24px;font-weight:700}
-.award-name{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:6px}
-.award-org{font-size:13px;color:#888;font-weight:500;margin-bottom:14px}
-.award-desc{font-size:13px;color:#666;line-height:1.55}
+/* Awards — featured layout */
+.awards-featured{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+.award-feature{background:white;border:0.5px solid #e6e8ec;border-radius:18px;padding:36px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.award-feature-source{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:18px;border-bottom:0.5px solid #f0f0f0}
+.award-feature-source-mark{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;font-weight:700;flex-shrink:0}
+.award-feature-source-mark.cigna{background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%)}
+.award-feature-source-mark.comparably{background:linear-gradient(135deg,#06b6d4 0%,#0891b2 100%)}
+.award-feature-source-name{font-size:14px;font-weight:700;color:#1a1a1a;letter-spacing:-0.005em}
+.award-feature-source-year{font-size:12px;color:#999;font-weight:500;margin-left:auto}
+.award-feature-title{font-size:24px;font-weight:700;color:#1a1a1a;letter-spacing:-0.02em;line-height:1.2;margin-bottom:12px}
+.award-feature-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#c98e3c 0%,#a06c20 100%);color:white;padding:5px 12px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;align-self:flex-start;margin-bottom:18px}
+.award-feature-desc{font-size:15px;color:#555;line-height:1.65;margin-bottom:22px}
+.award-feature-list-label{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;margin-top:8px}
+.award-feature-list{list-style:none;padding:0;margin:0 0 22px 0;display:flex;flex-direction:column;gap:10px}
+.award-feature-list li{display:flex;align-items:center;gap:10px;font-size:14px;color:#333;font-weight:500}
+.award-feature-list-check{width:20px;height:20px;border-radius:50%;background:#e5f0ff;color:#1E3A5F;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+
+/* Comparably hero score */
+.comp-score-hero{display:flex;align-items:center;gap:18px;margin-bottom:20px;padding:18px;background:linear-gradient(135deg,#f5fafd 0%,#eaf5fa 100%);border-radius:14px}
+.comp-score-pct{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#10b981 0%,#059669 100%);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;line-height:1}
+.comp-score-pct-num{font-size:18px;font-weight:700;letter-spacing:-0.02em}
+.comp-score-pct-label{font-size:8px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-top:2px;opacity:0.9}
+.comp-score-text{flex:1}
+.comp-score-headline{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
+.comp-score-meta{font-size:12px;color:#777}
+.comp-score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.comp-score-tile{background:#f7f8fa;border:0.5px solid #e6e8ec;border-radius:10px;padding:14px 10px;text-align:center}
+.comp-score-tile-num{font-size:13px;font-weight:700;color:#10b981;letter-spacing:-0.005em;margin-bottom:3px}
+.comp-score-tile-label{font-size:11px;color:#666;font-weight:600}
+.comp-score-extras{display:flex;flex-direction:column;gap:8px;margin-top:auto;padding-top:18px;border-top:0.5px solid #f0f0f0}
+.comp-score-extra-row{display:flex;align-items:center;justify-content:space-between;font-size:13px}
+.comp-score-extra-label{color:#777}
+.comp-score-extra-value{color:#10b981;font-weight:700}
+
+/* Employee quote pullout */
+.award-quote{background:linear-gradient(135deg,#1E3A5F 0%,#162d4a 100%);color:white;border-radius:18px;padding:48px 56px;text-align:center;max-width:980px;margin:0 auto}
+.award-quote-mark{font-family:Georgia,serif;font-size:64px;color:rgba(255,255,255,0.3);line-height:0.6;margin-bottom:12px}
+.award-quote-prompt{font-size:13px;color:rgba(255,255,255,0.55);font-weight:500;margin-bottom:14px}
+.award-quote-text{font-size:24px;font-weight:600;color:white;line-height:1.4;letter-spacing:-0.015em;margin-bottom:20px;max-width:780px;margin-left:auto;margin-right:auto}
+.award-quote-source{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.6);font-weight:500;letter-spacing:0.04em}
+.award-quote-source-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.4)}
 
 /* Galway callout */
 .galway-strip{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:40px 48px;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
@@ -251,10 +286,61 @@ body.anno-hidden .anno{display:none}
       <div class="section-eyebrow">Workplace Awards</div>
       <div class="section-h2">Recognized for the place we're building</div>
     </div>
-    <div class="awards-grid">
-      <div class="award-card"><div class="award-medal">🥉</div><div class="award-name">Cigna Healthy Workforce</div><div class="award-org">Bronze Designation, 2025</div><div class="award-desc">For programs supporting team wellness, mental health resources, and culture of work-life balance.</div></div>
-      <div class="award-card"><div class="award-medal">⭐</div><div class="award-name">Best Places to Work</div><div class="award-org">Inc. Magazine, 2024</div><div class="award-desc">Honored for our employee experience, growth trajectory, and mission-driven culture.</div></div>
-      <div class="award-card"><div class="award-medal">🌱</div><div class="award-name">Top Companies for Growth</div><div class="award-org">Built In, 2025</div><div class="award-desc">Recognized as a leading tech employer for career development and internal mobility.</div></div>
+    <div class="awards-featured">
+
+      <!-- CIGNA BRONZE -->
+      <div class="award-feature">
+        <div class="award-feature-source">
+          <div class="award-feature-source-mark cigna">C</div>
+          <div class="award-feature-source-name">Cigna Healthcare</div>
+          <span class="award-feature-source-year">2024</span>
+        </div>
+        <span class="award-feature-badge">🥉 Bronze Recipient</span>
+        <div class="award-feature-title">2024 Cigna Healthy Workforce Designation&trade;</div>
+        <p class="award-feature-desc">At Ministry Brands, the well-being of our workforce is a top priority. This recognition from Cigna Healthcare is a testament to our ongoing commitment to fostering a healthier, more productive, and engaged team.</p>
+        <div class="award-feature-list-label">Program Strengths</div>
+        <ul class="award-feature-list">
+          <li><span class="award-feature-list-check">✓</span>Visible Senior Leadership</li>
+          <li><span class="award-feature-list-check">✓</span>Strong Employee Engagement</li>
+        </ul>
+        <p class="award-feature-desc" style="margin-bottom:0;font-size:14px;color:#777">Earning this prestigious designation affirms our continuous efforts to make Ministry Brands a health-focused, employee-centric organization.</p>
+      </div>
+
+      <!-- COMPARABLY -->
+      <div class="award-feature">
+        <div class="award-feature-source">
+          <div class="award-feature-source-mark comparably">◉</div>
+          <div class="award-feature-source-name">Comparably</div>
+          <span class="award-feature-source-year">2024</span>
+        </div>
+        <div class="comp-score-hero">
+          <div class="comp-score-pct"><div class="comp-score-pct-num">TOP<br>20%</div></div>
+          <div class="comp-score-text">
+            <div class="comp-score-headline">Company Culture Score</div>
+            <div class="comp-score-meta">As rated by 546 current employees</div>
+          </div>
+        </div>
+        <div class="comp-score-grid">
+          <div class="comp-score-tile"><div class="comp-score-tile-num">Top 5%</div><div class="comp-score-tile-label">Team</div></div>
+          <div class="comp-score-tile"><div class="comp-score-tile-num">Top 5%</div><div class="comp-score-tile-label">Manager</div></div>
+          <div class="comp-score-tile"><div class="comp-score-tile-num">Top 15%</div><div class="comp-score-tile-label">Work Culture</div></div>
+        </div>
+        <div class="award-feature-list-label">Award Recognition</div>
+        <ul class="award-feature-list" style="margin-bottom:0">
+          <li><span class="award-feature-list-check">★</span>Best Company Work-Life Balance &mdash; Large Companies, 2024</li>
+        </ul>
+        <div class="comp-score-extras">
+          <div class="comp-score-extra-row"><span class="comp-score-extra-label">CEO Score &mdash; Chris Bacon</span><span class="comp-score-extra-value">Top 30%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMPLOYEE QUOTE PULLOUT -->
+    <div class="award-quote">
+      <div class="award-quote-mark">&ldquo;</div>
+      <div class="award-quote-prompt">What is most positive about the culture and environment at your company?</div>
+      <div class="award-quote-text">It feels casual but work is getting done. Team celebrations and culture club events are great.</div>
+      <div class="award-quote-source"><span class="award-quote-source-dot"></span>Anonymous employee review <span class="award-quote-source-dot"></span>Comparably</div>
     </div>
   </div>
 </section>
