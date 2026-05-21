@@ -200,6 +200,9 @@ body.comment-mode #cm-banner{display:flex}
 /* ======================================= */
 #pageDrawer{position:fixed;top:56px;left:0;right:0;background:#1c1b28;color:white;border-bottom:0.5px solid #2a2a2a;z-index:150;max-height:0;overflow:hidden;transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
 #pageDrawer.open{max-height:calc(100vh - 56px)}
+/* When drawer is open, disable comment-related chrome buttons */
+body.pd-open #btn-comments,body.pd-open #btn-comment-mode{opacity:0.35;pointer-events:none;cursor:not-allowed}
+body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.3);color:white}
 .pd-inner{max-width:1480px;margin:0 auto;padding:22px 32px 32px;max-height:calc(100vh - 56px);overflow-y:auto}
 .pd-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:0.5px solid rgba(255,255,255,0.08);margin-bottom:24px}
 .pd-title{font-size:12px;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.12em;text-transform:uppercase}
@@ -1398,11 +1401,13 @@ function openPageDrawer(){
     });
   }
   pageDrawerEl.classList.add('open');
+  document.body.classList.add('pd-open');
   setTimeout(function(){ pdSearch.focus(); }, 200);
 }
 
 function closePageDrawer(){
   pageDrawerEl.classList.remove('open');
+  document.body.classList.remove('pd-open');
   pdSearch.value = '';
   filterCards('');
 }
