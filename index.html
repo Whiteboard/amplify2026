@@ -196,6 +196,51 @@ body.comment-mode #cm-banner{display:flex}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ======================================= */
+/* PAGE INDEX DRAWER                       */
+/* ======================================= */
+#pageDrawer{position:fixed;top:56px;left:0;right:0;background:#1c1b28;color:white;border-bottom:0.5px solid #2a2a2a;z-index:150;max-height:0;overflow:hidden;transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
+#pageDrawer.open{max-height:calc(100vh - 56px)}
+.pd-inner{max-width:1480px;margin:0 auto;padding:22px 32px 32px;max-height:calc(100vh - 56px);overflow-y:auto}
+.pd-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:0.5px solid rgba(255,255,255,0.08);margin-bottom:24px}
+.pd-title{font-size:12px;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.12em;text-transform:uppercase}
+.pd-title strong{color:white;margin-right:8px}
+.pd-search{flex:1;max-width:380px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px 14px;font-size:13px;outline:none;font-family:inherit;color:white}
+.pd-search::placeholder{color:rgba(255,255,255,0.45)}
+.pd-search:focus{border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.1)}
+.pd-close{background:transparent;border:0.5px solid rgba(255,255,255,0.18);border-radius:8px;padding:9px 14px;cursor:pointer;font-size:12px;color:rgba(255,255,255,0.7);font-family:inherit;transition:all 0.12s}
+.pd-close:hover{background:rgba(255,255,255,0.06);color:white}
+.pd-section{margin-bottom:36px}
+.pd-section:last-child{margin-bottom:0}
+.pd-section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:6px 0 8px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer;background:transparent;border-top:none;border-left:none;border-right:none;width:100%;font-family:inherit;text-align:left;color:inherit;user-select:none}
+.pd-section-head:hover{border-bottom-color:rgba(255,255,255,0.15)}
+.pd-section-name{font-size:13px;font-weight:700;color:white;letter-spacing:0.06em;text-transform:uppercase}
+.pd-section-count{font-size:11px;color:rgba(255,255,255,0.4);font-weight:500;flex:1}
+.pd-section-chevron{font-size:10px;color:rgba(255,255,255,0.5);transition:transform 0.18s ease}
+.pd-section[data-collapsed="true"] .pd-section-chevron{transform:rotate(-90deg)}
+.pd-section[data-collapsed="true"] .pd-section-body{display:none}
+.pd-cat-wrap{margin-bottom:8px}
+.pd-cat{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase;margin:18px 0 12px;cursor:pointer;background:transparent;border:none;padding:6px 0;width:100%;font-family:inherit;text-align:left;user-select:none}
+.pd-cat:hover{color:rgba(255,255,255,0.8)}
+.pd-cat-chevron{font-size:9px;color:rgba(255,255,255,0.4);transition:transform 0.18s ease}
+.pd-cat-wrap[data-collapsed="true"] .pd-cat-chevron{transform:rotate(-90deg)}
+.pd-cat-wrap[data-collapsed="true"] .pd-grid{display:none}
+/* Search overrides collapsed state so matches stay visible */
+#pd-body[data-searching="true"] .pd-section[data-collapsed="true"] .pd-section-body{display:block}
+#pd-body[data-searching="true"] .pd-cat-wrap[data-collapsed="true"] .pd-grid{display:grid}
+.pd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.pd-card{background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;cursor:pointer;text-decoration:none;color:inherit;transition:all 0.15s;display:flex;flex-direction:column}
+.pd-card:hover{border-color:rgba(255,255,255,0.45);transform:translateY(-2px);background:rgba(255,255,255,0.07)}
+.pd-card.current{border-color:#5a576e;background:rgba(70,67,93,0.25);border-width:1.5px}
+.pd-card-thumb-wrap{aspect-ratio:16/10;background:#0f0e15;overflow:hidden;position:relative}
+.pd-card-thumb{position:absolute;top:0;left:0;width:500%;height:500%;border:none;transform:scale(0.2);transform-origin:0 0;pointer-events:none;background:white}
+.pd-card-thumb-placeholder{position:absolute;inset:0;background:linear-gradient(135deg,#2a2a35 0%,#1a1a22 100%);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+.pd-card-body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:3px;flex:1}
+.pd-card-name{font-size:13px;font-weight:600;color:white;line-height:1.3;letter-spacing:-0.005em}
+.pd-card-slug{font-size:11px;color:rgba(255,255,255,0.4);font-family:'SF Mono',Consolas,monospace}
+.pd-card-current-tag{display:inline-flex;align-items:center;font-size:9px;font-weight:700;color:#7BC47F;background:rgba(123,196,127,0.15);padding:2px 6px;border-radius:4px;letter-spacing:0.06em;text-transform:uppercase;align-self:flex-start;margin-top:2px}
+.pd-empty{padding:32px;text-align:center;color:rgba(255,255,255,0.4);font-size:13px}
+
+/* ======================================= */
 /* RESPONSIVE                              */
 /* ======================================= */
 @media (max-width:720px){
@@ -204,6 +249,7 @@ body.comment-mode #cm-banner{display:flex}
   .chrome-btn{padding:7px 10px}
   #cpanel{width:100%}
   #viewer{padding:12px}
+  .pd-grid{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -232,6 +278,10 @@ body.comment-mode #cm-banner{display:flex}
       <button class="chrome-btn" id="btn-help" title="How to review this document">
         <span>?</span>
       </button>
+      <button class="chrome-btn" id="btn-pages" title="Browse all wireframe pages">
+        <span style="font-size:14px;line-height:1">☰</span>
+        <span>All Pages</span>
+      </button>
       <button class="chrome-btn" id="btn-comments" title="Open comments panel">
         <span>💬 Comments</span>
         <span class="count" id="comment-count">0</span>
@@ -259,6 +309,18 @@ body.comment-mode #cm-banner{display:flex}
     </div>
   </main>
 
+</div>
+
+<!-- ============ PAGE INDEX DRAWER ============ -->
+<div id="pageDrawer">
+  <div class="pd-inner">
+    <div class="pd-header">
+      <div class="pd-title"><strong>All pages</strong><span id="pd-count"></span></div>
+      <input type="text" class="pd-search" id="pdSearch" placeholder="Search pages…" autocomplete="off">
+      <button class="pd-close" id="pdClose">Close ✕</button>
+    </div>
+    <div id="pd-body"></div>
+  </div>
 </div>
 
 <!-- ============ INSTRUCTIONS OVERLAY ============ -->
@@ -1098,6 +1160,302 @@ btnHelp.addEventListener('click', function(){
 btnFs.addEventListener('click', toggleFs);
 
 /* ==============================================================
+   PAGE INDEX DRAWER
+   ============================================================== */
+var pageIndex = {
+  'Ministry Brands': {
+    pages: [
+      {name:'Home', slug:'mb-home.html'},
+      {name:'Company / About', slug:'mb-company.html'},
+      {name:'Meet the Team', slug:'mb-meet-team.html'},
+      {name:'Careers', slug:'mb-careers.html'},
+      {name:'Galway, Ireland', slug:'mb-galway.html'},
+      {name:'Press / Newsroom', slug:'mb-press.html'},
+      {name:'News Article', slug:'mb-news-article.html'},
+      {name:'Partners Directory', slug:'mb-partners.html'},
+      {name:'Become a Partner', slug:'mb-become-partner.html'},
+      {name:'Contact', slug:'mb-contact.html'}
+    ]
+  },
+  'Amplify': {
+    categories: {
+      'Platform': [
+        {name:'Home', slug:'home.html'},
+        {name:'Platform Overview', slug:'platform-overview.html'}
+      ],
+      'Products': [
+        {name:'Giving', slug:'giving.html'},
+        {name:'Accounting', slug:'accounting.html'},
+        {name:'People (ChMS)', slug:'people.html'},
+        {name:'Websites', slug:'websites.html'},
+        {name:'Mobile App', slug:'mobile-app.html'},
+        {name:'Communications', slug:'communications.html'},
+        {name:'Streaming', slug:'streaming.html'},
+        {name:'Service Planning', slug:'service-planning.html'},
+        {name:'Media', slug:'media.html'},
+        {name:'Safety', slug:'safety.html'}
+      ],
+      'Bundles': [
+        {name:'Complete Bundle', slug:'complete-bundle.html'},
+        {name:'Generosity Bundle', slug:'generosity-bundle.html'},
+        {name:'Financial Bundle', slug:'financial-bundle.html'},
+        {name:'Digital Bundle', slug:'digital-bundle.html'}
+      ],
+      'Who We Serve — By Role': [
+        {name:'Senior Pastor', slug:'senior-pastor.html'},
+        {name:'Associate Pastor', slug:'associate-pastor.html'},
+        {name:'Finance / Treasurer', slug:'finance-treasurer.html'},
+        {name:'Communications Director', slug:'communications-director.html'},
+        {name:'Worship Pastor', slug:'worship-pastor.html'}
+      ],
+      'Who We Serve — By Church Type': [
+        {name:'Multi-site', slug:'multi-site.html'},
+        {name:'Large Churches', slug:'large-churches.html'},
+        {name:'Growing Churches', slug:'growing-churches.html'},
+        {name:'Small Churches', slug:'small-churches.html'},
+        {name:'Church Plants', slug:'church-plants.html'},
+        {name:'Denominations', slug:'denominations.html'},
+        {name:'Digital Churches', slug:'digital-churches.html'}
+      ],
+      'Services': [
+        {name:'Services Overview', slug:'services-overview.html'},
+        {name:'Service Detail', slug:'service-detail.html'}
+      ],
+      'Healthy Church Hub': [
+        {name:'Hub Home', slug:'healthy-church-hub.html'},
+        {name:'Blog Post', slug:'blog-post.html'},
+        {name:'Podcast Episode', slug:'podcast-episode.html'},
+        {name:'eBook Landing', slug:'ebook-landing.html'},
+        {name:'Webinar Registration', slug:'webinar-registration.html'},
+        {name:'Customer Story', slug:'customer-story.html'}
+      ],
+      'Partners': [
+        {name:'Partners Directory', slug:'partners.html'},
+        {name:'Partner Detail', slug:'partner-detail.html'}
+      ],
+      'Amplify+ HQ': [
+        {name:'HQ Dashboard', slug:'hq.html'},
+        {name:'HQ Donor', slug:'hq-donor.html'},
+        {name:'HQ Financials', slug:'hq-financials.html'},
+        {name:'HQ Arena', slug:'hq-arena.html'}
+      ],
+      'Utility': [
+        {name:'Login', slug:'login.html'},
+        {name:'Search Results', slug:'search-results.html'},
+        {name:'Request Demo', slug:'request-demo.html'}
+      ]
+    }
+  }
+};
+
+var pageDrawerEl = document.getElementById('pageDrawer');
+var pdBody = document.getElementById('pd-body');
+var pdCountEl = document.getElementById('pd-count');
+var pdSearch = document.getElementById('pdSearch');
+var pdClose = document.getElementById('pdClose');
+var btnPages = document.getElementById('btn-pages');
+var pdIntersectionObs = null;
+var pdRendered = false;
+
+function totalPageCount(){
+  var n = 0;
+  Object.keys(pageIndex).forEach(function(site){
+    var s = pageIndex[site];
+    if(s.pages) n += s.pages.length;
+    if(s.categories) Object.keys(s.categories).forEach(function(cat){ n += s.categories[cat].length });
+  });
+  return n;
+}
+
+function buildCardHtml(p){
+  var cur = (p.slug === state.currentPage) ? ' current' : '';
+  return '<a href="javascript:void(0)" class="pd-card'+cur+'" data-slug="'+p.slug+'" data-name="'+esc(p.name).toLowerCase()+'">'+
+    '<div class="pd-card-thumb-wrap">'+
+      '<div class="pd-card-thumb-placeholder">Loading…</div>'+
+      '<iframe class="pd-card-thumb" data-src="'+p.slug+'" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-same-origin"></iframe>'+
+    '</div>'+
+    '<div class="pd-card-body">'+
+      '<span class="pd-card-name">'+esc(p.name)+'</span>'+
+      '<span class="pd-card-slug">'+esc(p.slug)+'</span>'+
+      (cur ? '<span class="pd-card-current-tag">● Current</span>' : '')+
+    '</div>'+
+  '</a>';
+}
+
+function renderPageDrawer(){
+  var html = '';
+  Object.keys(pageIndex).forEach(function(site){
+    var s = pageIndex[site];
+    var count = 0;
+    if(s.pages) count += s.pages.length;
+    if(s.categories) Object.keys(s.categories).forEach(function(c){ count += s.categories[c].length });
+    html += '<div class="pd-section" data-collapsed="false">'+
+      '<button class="pd-section-head" type="button" data-toggle="section">'+
+        '<span class="pd-section-name">'+site+'</span>'+
+        '<span class="pd-section-count">'+count+' pages</span>'+
+        '<span class="pd-section-chevron">▾</span>'+
+      '</button>'+
+      '<div class="pd-section-body">';
+    if(s.pages){
+      html += '<div class="pd-grid">';
+      s.pages.forEach(function(p){ html += buildCardHtml(p); });
+      html += '</div>';
+    }
+    if(s.categories){
+      Object.keys(s.categories).forEach(function(cat){
+        html += '<div class="pd-cat-wrap" data-collapsed="false">'+
+          '<button class="pd-cat" type="button" data-toggle="cat">'+
+            '<span class="pd-cat-chevron">▾</span>'+
+            cat+' <span style="color:rgba(255,255,255,0.3);font-weight:500">'+s.categories[cat].length+'</span>'+
+          '</button>'+
+          '<div class="pd-grid">';
+        s.categories[cat].forEach(function(p){ html += buildCardHtml(p); });
+        html += '</div></div>';
+      });
+    }
+    html += '</div></div>';
+  });
+  pdBody.innerHTML = html;
+  pdCountEl.textContent = ' · ' + totalPageCount() + ' total';
+
+  // Wire section/cat collapse toggles
+  Array.prototype.forEach.call(pdBody.querySelectorAll('[data-toggle="section"]'), function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var sec = btn.closest('.pd-section');
+      sec.dataset.collapsed = sec.dataset.collapsed === 'true' ? 'false' : 'true';
+    });
+  });
+  Array.prototype.forEach.call(pdBody.querySelectorAll('[data-toggle="cat"]'), function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var wrap = btn.closest('.pd-cat-wrap');
+      wrap.dataset.collapsed = wrap.dataset.collapsed === 'true' ? 'false' : 'true';
+    });
+  });
+
+  // Wire card clicks
+  Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-card'), function(card){
+    card.addEventListener('click', function(e){
+      e.preventDefault();
+      var slug = card.dataset.slug;
+      try{ iframe.contentWindow.location.href = slug; }catch(err){ iframe.src = slug; }
+      closePageDrawer();
+    });
+  });
+
+  // Lazy-load thumbnail iframes when scrolled into view
+  if(pdIntersectionObs){ pdIntersectionObs.disconnect(); }
+  pdIntersectionObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var f = entry.target;
+        if(f.dataset.src && !f.src){
+          f.src = f.dataset.src;
+          // hide placeholder + scrub annotations from the thumbnail
+          f.addEventListener('load', function(){
+            var ph = f.parentNode.querySelector('.pd-card-thumb-placeholder');
+            if(ph) ph.style.display='none';
+            // Strip annotations + toggle from the rendered preview
+            try {
+              var doc = f.contentDocument;
+              if(doc){
+                // Inject CSS that hides every annotation artifact
+                var s = doc.createElement('style');
+                s.textContent = '.anno,.anno-toggle,.anno-legend,.anno-legend-wrap,.__wb_pin{display:none!important}';
+                doc.head.appendChild(s);
+                // Belt-and-suspenders: ensure body has anno-hidden class (some pages rely on it)
+                doc.body.classList.add('anno-hidden');
+              }
+            } catch(err){}
+          }, {once:true});
+        }
+        pdIntersectionObs.unobserve(f);
+      }
+    });
+  }, {root: pdBody, rootMargin:'200px'});
+  Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-card-thumb'), function(f){ pdIntersectionObs.observe(f); });
+}
+
+function openPageDrawer(){
+  if(!pdRendered){
+    renderPageDrawer();
+    pdRendered = true;
+  } else {
+    // refresh current-page highlight on re-open
+    Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-card'), function(card){
+      var isCurrent = card.dataset.slug === state.currentPage;
+      card.classList.toggle('current', isCurrent);
+      var tag = card.querySelector('.pd-card-current-tag');
+      if(isCurrent && !tag){
+        var t = document.createElement('span');
+        t.className = 'pd-card-current-tag';
+        t.textContent = '● Current';
+        card.querySelector('.pd-card-body').appendChild(t);
+      } else if(!isCurrent && tag){
+        tag.remove();
+      }
+    });
+  }
+  pageDrawerEl.classList.add('open');
+  setTimeout(function(){ pdSearch.focus(); }, 200);
+}
+
+function closePageDrawer(){
+  pageDrawerEl.classList.remove('open');
+  pdSearch.value = '';
+  filterCards('');
+}
+
+function filterCards(q){
+  q = q.trim().toLowerCase();
+  pdBody.dataset.searching = q ? 'true' : 'false';
+  var anyVisible = false;
+  Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-card'), function(card){
+    var matches = !q || card.dataset.name.indexOf(q) > -1 || card.dataset.slug.toLowerCase().indexOf(q) > -1;
+    card.style.display = matches ? '' : 'none';
+    if(matches) anyVisible = true;
+  });
+  // Hide empty section heads when filtering
+  Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-section'), function(sec){
+    var visibleCards = sec.querySelectorAll('.pd-card');
+    var anyShown = false;
+    Array.prototype.forEach.call(visibleCards, function(c){ if(c.style.display !== 'none') anyShown = true });
+    sec.style.display = anyShown ? '' : 'none';
+  });
+  // Hide empty category heads
+  Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-cat'), function(cat){
+    var next = cat.nextElementSibling;
+    if(next && next.classList.contains('pd-grid')){
+      var anyShown = false;
+      Array.prototype.forEach.call(next.querySelectorAll('.pd-card'), function(c){
+        if(c.style.display !== 'none') anyShown = true;
+      });
+      cat.style.display = anyShown ? '' : 'none';
+      next.style.display = anyShown ? '' : 'none';
+    }
+  });
+}
+
+btnPages.addEventListener('click', function(e){
+  e.stopPropagation();
+  if(pageDrawerEl.classList.contains('open')) closePageDrawer();
+  else openPageDrawer();
+});
+pdClose.addEventListener('click', closePageDrawer);
+pdSearch.addEventListener('input', function(){ filterCards(pdSearch.value); });
+
+// Close on outside-click (when drawer is open and click is outside)
+document.addEventListener('click', function(e){
+  if(!pageDrawerEl.classList.contains('open')) return;
+  if(pageDrawerEl.contains(e.target)) return;
+  if(btnPages.contains(e.target)) return;
+  closePageDrawer();
+});
+
+// Esc closes drawer too (in addition to existing keydown handlers below)
+
+/* ==============================================================
    FULL-SCREEN
    ============================================================== */
 function toggleFs(){
@@ -1137,6 +1495,7 @@ if(!seen){
    ============================================================== */
 document.addEventListener('keydown', function(e){
   if(e.key === 'Escape'){
+    if(pageDrawerEl.classList.contains('open')){ closePageDrawer(); return; }
     if(state.commentMode){ exitCommentMode(); return; }
     if(cmodal.classList.contains('show')){ closeModal(); return; }
     if(instructions.classList.contains('show')){
