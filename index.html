@@ -144,6 +144,12 @@ body.comment-mode #cm-banner{display:flex}
 .cp-filter:hover{border-color:#c0bdd4}
 .cp-filter.active{border-color:#46435D;background:#46435D;color:white}
 .cp-filter .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.cp-phase-tabs{display:flex;gap:0;margin:0 -20px 14px;padding:0 20px 0;border-bottom:0.5px solid #eee}
+.cp-phase-tab{flex:1;background:transparent;border:none;border-bottom:2px solid transparent;padding:10px 12px;font-family:inherit;font-size:12px;font-weight:600;color:#888;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all 0.12s;margin-bottom:-1px}
+.cp-phase-tab:hover{color:#46435D}
+.cp-phase-tab.active{color:#46435D;border-bottom-color:#46435D}
+.cp-phase-tab-count{font-size:10px;font-weight:700;color:#aaa;background:#f4f3f7;padding:1px 7px;border-radius:999px;transition:all 0.12s}
+.cp-phase-tab.active .cp-phase-tab-count{background:#eeedf4;color:#46435D}
 .cp-list{flex:1;overflow-y:auto;padding:12px 16px}
 .cp-empty{text-align:center;padding:40px 20px;color:#aaa;font-size:13px;line-height:1.6}
 .cp-empty-icon{font-size:32px;margin-bottom:12px;opacity:0.4}
@@ -433,6 +439,10 @@ body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,
       <div class="cp-title">All comments</div>
       <button class="cp-close" id="cp-close" aria-label="Close">×</button>
     </div>
+    <div class="cp-phase-tabs">
+      <button class="cp-phase-tab active" data-phase="1">Phase 1 <span class="cp-phase-tab-count" id="phase1Count">0</span></button>
+      <button class="cp-phase-tab" data-phase="2">Phase 2 <span class="cp-phase-tab-count" id="phase2Count">0</span></button>
+    </div>
     <div class="cp-filters">
       <button class="cp-filter active" data-f="all">All</button>
       <button class="cp-filter" data-f="design"><span class="dot" style="background:#3949AB"></span>Design</button>
@@ -464,6 +474,7 @@ var state = {
   pendingPin: null,         // { page, selector, xInEl, yInEl, clientX, clientY }
   allComments: loadComments(),
   filter: 'all',
+  phase: '1',               // 'Phase 1' (existing comments) or 'Phase 2' (new comments)
   currentPage: 'home.html',
   pendingType: null,
   deepLinkPin: null,        // pin from URL params, if any
@@ -813,6 +824,7 @@ cmForm.addEventListener('submit', function(e){
     type: state.pendingType || 'general',
     text: cmText.value.trim(),
     name: cmName.value.trim(),
+    phase: '2',
     created: new Date().toISOString()
   };
 
@@ -820,6 +832,9 @@ cmForm.addEventListener('submit', function(e){
   if(!state.allComments[comment.page]) state.allComments[comment.page] = [];
   state.allComments[comment.page].push(comment);
   saveComments();
+
+  // Switch to Phase 2 so the user sees the new comment they just created
+  setActivePhase('2');
 
   // Re-render
   renderPins();
@@ -840,7 +855,8 @@ function submitToFormspree(comment){
   }
   var deepLink = buildDeepLink(comment);
   var body = {
-    _subject: '[Amplify 2026] ' + comment.type.toUpperCase() + ' comment on ' + friendlyPageName(comment.page),
+    _subject: '[Amplify 2026 · Phase ' + (commentPhase(comment)) + '] ' + comment.type.toUpperCase() + ' comment on ' + friendlyPageName(comment.page),
+    phase: 'Phase ' + commentPhase(comment),
     page: comment.page,
     page_name: friendlyPageName(comment.page),
     type: comment.type,
@@ -879,6 +895,7 @@ function submitToSheet(comment){
       selector: comment.selector,
       xInEl: comment.xInEl,
       yInEl: comment.yInEl,
+      phase: commentPhase(comment),
       created: comment.created
     }),
     redirect: 'follow'
@@ -941,6 +958,10 @@ function buildDeepLink(comment){
 /* ==============================================================
    COMMENT COUNT + PANEL
    ============================================================== */
+function commentPhase(c){
+  // Comments without a phase field default to Phase 1 (pre-tabs era)
+  return (c && c.phase && String(c.phase) === '2') ? '2' : '1';
+}
 function totalCommentCount(){
   var n = 0;
   Object.keys(state.allComments).forEach(function(p){
@@ -948,8 +969,21 @@ function totalCommentCount(){
   });
   return n;
 }
+function phaseCommentCount(phase){
+  var n = 0;
+  Object.keys(state.allComments).forEach(function(p){
+    (state.allComments[p] || []).forEach(function(c){
+      if(commentPhase(c) === phase) n++;
+    });
+  });
+  return n;
+}
 function updateCommentCount(){
   countEl.textContent = totalCommentCount();
+  var p1 = document.getElementById('phase1Count');
+  var p2 = document.getElementById('phase2Count');
+  if(p1) p1.textContent = phaseCommentCount('1');
+  if(p2) p2.textContent = phaseCommentCount('2');
 }
 
 function renderPanel(){
@@ -958,10 +992,12 @@ function renderPanel(){
     return (state.allComments[p] || []).length > 0;
   });
 
-  // Apply filter
+  // Apply phase + filter
   var filteredByPage = {};
   pages.forEach(function(p){
     var list = state.allComments[p].slice();
+    // Filter by active phase
+    list = list.filter(function(c){return commentPhase(c) === state.phase});
     if(state.filter !== 'all'){
       list = list.filter(function(c){return c.type === state.filter});
     }
@@ -970,9 +1006,14 @@ function renderPanel(){
   var filteredPages = Object.keys(filteredByPage);
 
   if(!filteredPages.length){
-    var emptyMsg = totalCommentCount() === 0
-      ? 'No comments yet.<br>Click <strong>+ Add Comment</strong> to leave one.'
-      : 'No comments match the <strong>'+esc(state.filter)+'</strong> filter.';
+    var emptyMsg;
+    if(totalCommentCount() === 0){
+      emptyMsg = 'No comments yet.<br>Click <strong>+ Add Comment</strong> to leave one.';
+    } else if(phaseCommentCount(state.phase) === 0){
+      emptyMsg = 'No comments in <strong>Phase '+esc(state.phase)+'</strong> yet.' + (state.phase === '2' ? '<br>New comments will land here.' : '');
+    } else {
+      emptyMsg = 'No comments match the <strong>'+esc(state.filter)+'</strong> filter in <strong>Phase '+esc(state.phase)+'</strong>.';
+    }
     cpList.innerHTML = '<div class="cp-empty"><div class="cp-empty-icon">💭</div><div>'+emptyMsg+'</div></div>';
     return;
   }
@@ -1145,6 +1186,23 @@ cpFilters.forEach(function(btn){
     renderPanel();
   });
 });
+
+/* Phase tabs */
+var cpPhaseTabs = document.querySelectorAll('.cp-phase-tab');
+cpPhaseTabs.forEach(function(btn){
+  btn.addEventListener('click', function(){
+    cpPhaseTabs.forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    state.phase = btn.dataset.phase;
+    renderPanel();
+  });
+});
+function setActivePhase(phase){
+  state.phase = String(phase);
+  cpPhaseTabs.forEach(function(b){
+    b.classList.toggle('active', b.dataset.phase === state.phase);
+  });
+}
 
 /* ==============================================================
    CHROME BUTTONS
