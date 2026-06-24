@@ -210,8 +210,11 @@ body.anno-hidden .anno{display:none}
 .product-tile-icon{width:52px;height:52px;border-radius:12px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px;color:#46435D}
 .product-tile-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
 .product-tile-desc{font-size:12px;color:#aaa;line-height:1.5}
-.outcome-card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px;transition:all 0.15s;cursor:pointer}
-.outcome-card:hover{border-color:#c0bdd4;box-shadow:0 4px 20px rgba(70,67,93,0.08);transform:translateY(-2px)}
+.outcome-card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px}
+.outcome-card.placeholder{background:transparent;border:1px dashed #d4d4dc;display:flex;align-items:center;justify-content:center;text-align:center;color:#aaa}
+.outcome-card.placeholder .outcome-card-icon{background:transparent;color:#c0c0c8;border:1px dashed #d4d4dc}
+.outcome-card.placeholder .outcome-card-title{color:#999;font-weight:600;margin:0}
+.outcome-card.placeholder .outcome-card-body{display:none}
 .outcome-card-icon{width:44px;height:44px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
 .outcome-card-title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:6px}
 .outcome-card-body{font-size:14px;color:#888;line-height:1.6}
@@ -402,10 +405,11 @@ body.anno-hidden .anno{display:none}
         <div class="outcome-card-title">Launch Digital Ministry</div>
         <div class="outcome-card-body">Meet your congregation wherever they spend their time.</div>
       </div>
-      <div class="outcome-card">
-        <div class="outcome-card-icon">&#x2B21;</div>
-        <div class="outcome-card-title">All Solutions</div>
-        <div class="outcome-card-body">The full Amplify platform working as one connected system for your entire church.</div>
+      <div class="outcome-card placeholder">
+        <div>
+          <div class="outcome-card-icon" style="margin:0 auto 12px">+</div>
+          <div class="outcome-card-title">Placeholder for future outcome</div>
+        </div>
       </div>
     </div>
   </div>
