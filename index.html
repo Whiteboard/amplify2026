@@ -210,7 +210,14 @@ body.comment-mode #cm-banner{display:flex}
 body.pd-open #btn-comments,body.pd-open #btn-comment-mode{opacity:0.35;pointer-events:none;cursor:not-allowed}
 body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.3);color:white}
 .pd-inner{max-width:1480px;margin:0 auto;padding:22px 32px 32px;max-height:calc(100vh - 56px);overflow-y:auto}
-.pd-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:0.5px solid rgba(255,255,255,0.08);margin-bottom:24px}
+.pd-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:0.5px solid rgba(255,255,255,0.08);margin-bottom:24px}
+.pd-key-toggle{background:transparent;border:0.5px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.7);padding:8px 14px;border-radius:8px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:0.02em;display:inline-flex;align-items:center;gap:7px;transition:all 0.15s;white-space:nowrap;height:36px}
+.pd-key-toggle:hover{border-color:rgba(255,255,255,0.4);color:white}
+.pd-key-toggle .star{color:#c88f1a;font-size:13px;line-height:1;transition:color 0.15s}
+.pd-key-toggle.active{background:#fce88a;border-color:#eac95b;color:#6b520d}
+.pd-key-toggle.active .star{color:#8a6210}
+.pd-key-toggle.shake{animation:pdKeyShake 0.45s cubic-bezier(0.36,0.07,0.19,0.97)}
+@keyframes pdKeyShake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-3px)}40%,60%{transform:translateX(3px)}}
 .pd-title{font-size:12px;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.12em;text-transform:uppercase}
 .pd-title strong{color:white;margin-right:8px}
 .pd-search{flex:1;max-width:380px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px 14px;font-size:13px;outline:none;font-family:inherit;color:white}
@@ -326,6 +333,7 @@ body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,
     <div class="pd-header">
       <div class="pd-title"><strong>All pages</strong><span id="pd-count"></span></div>
       <input type="text" class="pd-search" id="pdSearch" placeholder="Search pages…" autocomplete="off">
+      <button class="pd-key-toggle" id="pdKeyToggle" type="button" title="Show only key review pages"><span class="star">★</span> Key pages</button>
       <button class="pd-close" id="pdClose">Close ✕</button>
     </div>
     <div id="pd-body"></div>
@@ -1314,9 +1322,35 @@ var pdBody = document.getElementById('pd-body');
 var pdCountEl = document.getElementById('pd-count');
 var pdSearch = document.getElementById('pdSearch');
 var pdClose = document.getElementById('pdClose');
+var pdKeyToggle = document.getElementById('pdKeyToggle');
 var btnPages = document.getElementById('btn-pages');
 var pdIntersectionObs = null;
 var pdRendered = false;
+
+var KEY_PAGES = {
+  'home.html':1,
+  'senior-pastor.html':1,
+  'platform-overview.html':1,
+  'complete-bundle.html':1,
+  'giving.html':1,
+  'services-overview.html':1,
+  'service-detail.html':1,
+  'healthy-church-hub.html':1,
+  'partner-detail.html':1,
+  'request-demo.html':1,
+  'search-results.html':1,
+  'mb-home.html':1,
+  'mb-company.html':1,
+  'mb-careers.html':1
+};
+var KEY_PAGE_PW = 'shammer';
+var pdKeyActive = false;
+function pdIsUnlocked(){
+  try { return sessionStorage.getItem('wb-key-unlocked') === '1'; } catch(e){ return false; }
+}
+function pdSetUnlocked(){
+  try { sessionStorage.setItem('wb-key-unlocked','1'); } catch(e){}
+}
 
 function totalPageCount(){
   var n = 0;
@@ -1472,10 +1506,12 @@ function closePageDrawer(){
 
 function filterCards(q){
   q = q.trim().toLowerCase();
-  pdBody.dataset.searching = q ? 'true' : 'false';
+  pdBody.dataset.searching = (q || pdKeyActive) ? 'true' : 'false';
   var anyVisible = false;
   Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-card'), function(card){
-    var matches = !q || card.dataset.name.indexOf(q) > -1 || card.dataset.slug.toLowerCase().indexOf(q) > -1;
+    var textMatch = !q || card.dataset.name.indexOf(q) > -1 || card.dataset.slug.toLowerCase().indexOf(q) > -1;
+    var keyMatch = !pdKeyActive || !!KEY_PAGES[card.dataset.slug];
+    var matches = textMatch && keyMatch;
     card.style.display = matches ? '' : 'none';
     if(matches) anyVisible = true;
   });
@@ -1507,6 +1543,34 @@ btnPages.addEventListener('click', function(e){
 });
 pdClose.addEventListener('click', closePageDrawer);
 pdSearch.addEventListener('input', function(){ filterCards(pdSearch.value); });
+
+function pdApplyKeyState(){
+  pdKeyToggle.classList.toggle('active', pdKeyActive);
+  filterCards(pdSearch.value);
+}
+pdKeyToggle.addEventListener('click', function(e){
+  e.stopPropagation();
+  if(pdKeyActive){
+    pdKeyActive = false;
+    pdApplyKeyState();
+    return;
+  }
+  if(pdIsUnlocked()){
+    pdKeyActive = true;
+    pdApplyKeyState();
+    return;
+  }
+  var pw = window.prompt('Enter password to view key pages:');
+  if(pw === null) return;
+  if(pw === KEY_PAGE_PW){
+    pdSetUnlocked();
+    pdKeyActive = true;
+    pdApplyKeyState();
+  } else {
+    pdKeyToggle.classList.add('shake');
+    setTimeout(function(){ pdKeyToggle.classList.remove('shake'); }, 500);
+  }
+});
 
 // Close on outside-click (when drawer is open and click is outside)
 document.addEventListener('click', function(e){
