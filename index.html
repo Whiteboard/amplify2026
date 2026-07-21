@@ -210,13 +210,21 @@ body.comment-mode #cm-banner{display:flex}
 body.pd-open #btn-comments,body.pd-open #btn-comment-mode{opacity:0.35;pointer-events:none;cursor:not-allowed}
 body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.3);color:white}
 .pd-inner{max-width:1480px;margin:0 auto;padding:22px 32px 32px;max-height:calc(100vh - 56px);overflow-y:auto}
-.pd-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:0.5px solid rgba(255,255,255,0.08);margin-bottom:24px}
-.pd-key-toggle{background:transparent;border:0.5px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.7);padding:8px 14px;border-radius:8px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:0.02em;display:inline-flex;align-items:center;gap:7px;transition:all 0.15s;white-space:nowrap;height:36px}
-.pd-key-toggle:hover{border-color:rgba(255,255,255,0.4);color:white}
-.pd-key-toggle .star{color:#c88f1a;font-size:13px;line-height:1;transition:color 0.15s}
-.pd-key-toggle.active{background:#fce88a;border-color:#eac95b;color:#6b520d}
-.pd-key-toggle.active .star{color:#8a6210}
-.pd-key-toggle.shake{animation:pdKeyShake 0.45s cubic-bezier(0.36,0.07,0.19,0.97)}
+.pd-header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:18px;border-bottom:0.5px solid rgba(255,255,255,0.08);margin-bottom:20px;flex-wrap:wrap}
+.pd-group-filter{display:inline-flex;align-items:center;gap:6px;padding:4px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:10px;height:36px}
+.pd-group-btn{background:transparent;border:0.5px solid transparent;color:rgba(255,255,255,0.62);padding:5px 12px;border-radius:6px;font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:0.02em;display:inline-flex;align-items:center;gap:6px;transition:all 0.15s;white-space:nowrap}
+.pd-group-btn:hover{color:white;background:rgba(255,255,255,0.06)}
+.pd-group-btn .swatch{width:8px;height:8px;border-radius:2px;flex-shrink:0;transition:transform 0.15s}
+.pd-group-btn.active{color:#1c1b28}
+.pd-group-btn[data-group="key"].active{background:#fce88a;border-color:#eac95b}
+.pd-group-btn[data-group="key"] .swatch{background:#fce88a;border:0.5px solid #eac95b}
+.pd-group-btn[data-group="standard"].active{background:#e5e7ec;border-color:#c9ced9}
+.pd-group-btn[data-group="standard"] .swatch{background:#e5e7ec;border:0.5px solid #c9ced9}
+.pd-group-btn[data-group="cms-template"].active{background:#e6dcff;border-color:#c9baf0}
+.pd-group-btn[data-group="cms-template"] .swatch{background:#e6dcff;border:0.5px solid #c9baf0}
+.pd-group-btn[data-group="cms-archive"].active{background:#c9ebe0;border-color:#95d3bf}
+.pd-group-btn[data-group="cms-archive"] .swatch{background:#c9ebe0;border:0.5px solid #95d3bf}
+.pd-group-filter.shake{animation:pdKeyShake 0.45s cubic-bezier(0.36,0.07,0.19,0.97)}
 @keyframes pdKeyShake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-3px)}40%,60%{transform:translateX(3px)}}
 .pd-title{font-size:12px;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.12em;text-transform:uppercase}
 .pd-title strong{color:white;margin-right:8px}
@@ -333,7 +341,12 @@ body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,
     <div class="pd-header">
       <div class="pd-title"><strong>All pages</strong><span id="pd-count"></span></div>
       <input type="text" class="pd-search" id="pdSearch" placeholder="Search pages…" autocomplete="off">
-      <button class="pd-key-toggle" id="pdKeyToggle" type="button" title="Show only key review pages"><span class="star">★</span> Key pages</button>
+      <div class="pd-group-filter" id="pdGroupFilter" title="Filter by page classification">
+        <button class="pd-group-btn" type="button" data-group="key"><span class="swatch"></span>Key</button>
+        <button class="pd-group-btn" type="button" data-group="standard"><span class="swatch"></span>Standard</button>
+        <button class="pd-group-btn" type="button" data-group="cms-template"><span class="swatch"></span>CMS Template</button>
+        <button class="pd-group-btn" type="button" data-group="cms-archive"><span class="swatch"></span>CMS Archive</button>
+      </div>
       <button class="pd-close" id="pdClose">Close ✕</button>
     </div>
     <div id="pd-body"></div>
@@ -1322,34 +1335,44 @@ var pdBody = document.getElementById('pd-body');
 var pdCountEl = document.getElementById('pd-count');
 var pdSearch = document.getElementById('pdSearch');
 var pdClose = document.getElementById('pdClose');
-var pdKeyToggle = document.getElementById('pdKeyToggle');
+var pdGroupFilter = document.getElementById('pdGroupFilter');
+var pdGroupBtns = pdGroupFilter.querySelectorAll('.pd-group-btn');
 var btnPages = document.getElementById('btn-pages');
 var pdIntersectionObs = null;
 var pdRendered = false;
 
-var KEY_PAGES = {
-  'home.html':1,
-  'senior-pastor.html':1,
-  'platform-overview.html':1,
-  'complete-bundle.html':1,
-  'giving.html':1,
-  'services-overview.html':1,
-  'service-detail.html':1,
-  'healthy-church-hub.html':1,
-  'partner-detail.html':1,
-  'request-demo.html':1,
-  'search-results.html':1,
-  'mb-home.html':1,
-  'mb-company.html':1,
-  'mb-careers.html':1
+var PAGE_GROUPS = {
+  'home.html':'key',
+  'senior-pastor.html':'key',
+  'platform-overview.html':'key',
+  'complete-bundle.html':'key',
+  'giving.html':'key',
+  'service-detail.html':'key',
+  'request-demo.html':'key',
+  'services-overview.html':'standard',
+  'mb-company.html':'standard',
+  'mb-careers.html':'standard',
+  'blog-post.html':'cms-template',
+  'ebook-landing.html':'cms-template',
+  'webinar-registration.html':'cms-template',
+  'podcast-episode.html':'cms-template',
+  'customer-story.html':'cms-template',
+  'partner-detail.html':'cms-template',
+  'healthy-church-hub.html':'cms-archive',
+  'search-results.html':'cms-archive',
+  'partners.html':'cms-archive'
 };
 var KEY_PAGE_PW = 'shammer';
-var pdKeyActive = false;
+var pdActiveGroups = {};
 function pdIsUnlocked(){
   try { return sessionStorage.getItem('wb-key-unlocked') === '1'; } catch(e){ return false; }
 }
 function pdSetUnlocked(){
   try { sessionStorage.setItem('wb-key-unlocked','1'); } catch(e){}
+}
+function pdAnyGroupActive(){
+  for(var k in pdActiveGroups){ if(pdActiveGroups[k]) return true; }
+  return false;
 }
 
 function totalPageCount(){
@@ -1506,12 +1529,13 @@ function closePageDrawer(){
 
 function filterCards(q){
   q = q.trim().toLowerCase();
-  pdBody.dataset.searching = (q || pdKeyActive) ? 'true' : 'false';
+  var groupFilterActive = pdAnyGroupActive();
+  pdBody.dataset.searching = (q || groupFilterActive) ? 'true' : 'false';
   var anyVisible = false;
   Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-card'), function(card){
     var textMatch = !q || card.dataset.name.indexOf(q) > -1 || card.dataset.slug.toLowerCase().indexOf(q) > -1;
-    var keyMatch = !pdKeyActive || !!KEY_PAGES[card.dataset.slug];
-    var matches = textMatch && keyMatch;
+    var groupMatch = !groupFilterActive || !!pdActiveGroups[PAGE_GROUPS[card.dataset.slug] || ''];
+    var matches = textMatch && groupMatch;
     card.style.display = matches ? '' : 'none';
     if(matches) anyVisible = true;
   });
@@ -1544,32 +1568,38 @@ btnPages.addEventListener('click', function(e){
 pdClose.addEventListener('click', closePageDrawer);
 pdSearch.addEventListener('input', function(){ filterCards(pdSearch.value); });
 
-function pdApplyKeyState(){
-  pdKeyToggle.classList.toggle('active', pdKeyActive);
+function pdApplyGroupState(){
+  Array.prototype.forEach.call(pdGroupBtns, function(btn){
+    btn.classList.toggle('active', !!pdActiveGroups[btn.dataset.group]);
+  });
   filterCards(pdSearch.value);
 }
-pdKeyToggle.addEventListener('click', function(e){
-  e.stopPropagation();
-  if(pdKeyActive){
-    pdKeyActive = false;
-    pdApplyKeyState();
-    return;
-  }
-  if(pdIsUnlocked()){
-    pdKeyActive = true;
-    pdApplyKeyState();
-    return;
-  }
-  var pw = window.prompt('Enter password to view key pages:');
-  if(pw === null) return;
-  if(pw === KEY_PAGE_PW){
-    pdSetUnlocked();
-    pdKeyActive = true;
-    pdApplyKeyState();
+function pdToggleGroup(group){
+  if(pdActiveGroups[group]){
+    delete pdActiveGroups[group];
   } else {
-    pdKeyToggle.classList.add('shake');
-    setTimeout(function(){ pdKeyToggle.classList.remove('shake'); }, 500);
+    pdActiveGroups[group] = true;
   }
+  pdApplyGroupState();
+}
+Array.prototype.forEach.call(pdGroupBtns, function(btn){
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var group = btn.dataset.group;
+    if(pdIsUnlocked()){
+      pdToggleGroup(group);
+      return;
+    }
+    var pw = window.prompt('Enter password to filter pages by classification:');
+    if(pw === null) return;
+    if(pw === KEY_PAGE_PW){
+      pdSetUnlocked();
+      pdToggleGroup(group);
+    } else {
+      pdGroupFilter.classList.add('shake');
+      setTimeout(function(){ pdGroupFilter.classList.remove('shake'); }, 500);
+    }
+  });
 });
 
 // Close on outside-click (when drawer is open and click is outside)
