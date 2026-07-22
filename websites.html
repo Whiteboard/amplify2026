@@ -747,71 +747,75 @@ body.anno-hidden .anno{display:none}
 
 <!-- FOOTER -->
 <footer style="background:#1a1a1a;padding:64px 0 32px">
-  <div class="w">
-    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
-      <div>
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-          <svg width="28" height="28" viewBox="0 0 32 32"><rect width="16" height="16" fill="rgba(255,255,255,0.4)"/><rect x="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect y="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect x="16" y="16" width="16" height="16" fill="rgba(255,255,255,0.4)"/></svg>
-          <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">Spired for Churches</span>
+    <div style="max-width:1200px;margin:0 auto;padding:0 48px">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+        <!-- Brand + search + socials -->
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+            <span style="width:28px;height:28px;border-radius:50%;background:#46435D;display:inline-flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700">s</span>
+            <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">spired</span>
+          </div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:260px;margin-bottom:20px">Software for churches, parishes, protection, and non-profit organizations &mdash; trusted by 90,000+ ministries.</div>
+          <form action="search-results.html" method="get" style="max-width:280px;margin-bottom:20px;position:relative">
+            <input type="search" name="q" placeholder="Search&hellip;" style="width:100%;padding:10px 40px 10px 14px;font-family:inherit;font-size:13px;color:white;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:8px;outline:none;transition:border-color 0.15s" onfocus="this.style.borderColor='rgba(255,255,255,0.35)'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+            <button type="submit" aria-label="Search" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:rgba(255,255,255,0.5);width:28px;height:28px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">&#x2315;</button>
+          </form>
+          <div style="display:flex;gap:12px">
+            <a href="#" aria-label="Twitter" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            <a href="#" aria-label="LinkedIn" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="#" aria-label="YouTube" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+          </div>
         </div>
-        <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:240px">Church management software built to help 55,000+ ministries thrive.</div>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Solutions</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Increase Giving</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Engage Community</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Grow Attendance</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Streamline Ops</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Financial Stewardship</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Volunteer Teams</span>
+        <!-- Solutions -->
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Solutions</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="platform-overview.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Platform Overview</a>
+            <a href="giving.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Giving</a>
+            <a href="accounting.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Accounting</a>
+            <a href="people.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">People (ChMS)</a>
+            <a href="websites.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Websites</a>
+            <a href="mobile-app.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Mobile App</a>
+            <a href="streaming.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Streaming</a>
+            <a href="communications.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Communications</a>
+            <a href="safety.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Safety</a>
+          </div>
+        </div>
+        <!-- Resources -->
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Resources</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="healthy-church-hub.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Healthy Church Hub</a>
+            <a href="webinar-registration.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Webinars</a>
+            <a href="ebook-landing.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">eBooks</a>
+            <a href="podcast-episode.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Podcasts</a>
+            <a href="blog-post.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Blog</a>
+            <a href="customer-story.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Customer Stories</a>
+          </div>
+        </div>
+        <!-- Company -->
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Company</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="mb-company.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">About</a>
+            <a href="mb-careers.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Careers</a>
+            <a href="mb-press.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Press</a>
+            <a href="partners.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Partners</a>
+            <a href="mb-contact.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Contact</a>
+          </div>
         </div>
       </div>
-      <div>
-        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Products</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <a href="giving.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Giving</a>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Accounting</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">People (ChMS)</span>
-          <a href="websites.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Websites</a>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Mobile App</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Service Planning</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Safety</span>
-        </div>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Resources</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Healthy Church Hub</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Webinars</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">eBooks</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Podcasts</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Blog</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Customer Stories</span>
-        </div>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Company</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">About</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Leadership</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Careers</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Partners</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Contact</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Press</span>
+      <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Spired. All rights reserved.</div>
+        <div style="display:flex;gap:24px">
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Privacy Policy</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Terms of Service</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Cookie Settings</span>
         </div>
       </div>
     </div>
-    <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between">
-      <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Ministry Brands. All rights reserved.</div>
-      <div style="display:flex;gap:24px">
-        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Privacy Policy</span>
-        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Terms of Service</span>
-        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Cookie Settings</span>
-      </div>
-    </div>
-  </div>
-</footer>
+  </footer>
+
 
 <!-- ANNOTATION TOGGLE -->
 <div class="anno-legend-wrap">
