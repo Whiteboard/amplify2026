@@ -30,8 +30,8 @@ body{background:#46435D;min-height:100vh}
 .sn-mega{display:none;position:absolute;top:64px;left:0;right:0;background:white;border-top:0.5px solid #e8e8e8;border-bottom:0.5px solid #e8e8e8;box-shadow:0 12px 40px rgba(0,0,0,0.08);z-index:290;overflow:hidden}
 .sn-mega.show{display:block}
 .sn-mega-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:260px 1fr;min-height:380px}
-.sn-mega-left{background:#f7f8fa;border-right:0.5px solid #ebeef2;padding:22px 0}
-.sn-mega-item{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;cursor:pointer;font-size:14px;font-weight:500;color:#555;background:transparent;border:none;width:100%;text-align:left;font-family:inherit;transition:all 0.12s;border-left:3px solid transparent}
+.sn-mega-left{background:#f7f8fa;border-right:0.5px solid #ebeef2;padding:0;display:flex;flex-direction:column}
+.sn-mega-item{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;cursor:pointer;font-size:14px;font-weight:500;color:#555;background:transparent;border:none;width:100%;text-align:left;font-family:inherit;transition:all 0.12s;border-left:3px solid transparent;flex:1}
 .sn-mega-item:hover{color:#46435D;background:#eeedf4}
 .sn-mega-item.active{color:#46435D;background:white;border-left-color:#46435D;font-weight:600}
 .sn-mega-item .sn-arr{font-size:12px;color:#ccc;transition:transform 0.12s}
