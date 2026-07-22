@@ -6,76 +6,86 @@ body{background:#46435D;min-height:100vh}
 /* SITE */
 #site{display:block}
 
-/* UTILITY BAR */
-.utility-bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;height:56px;background:white;border-bottom:0.5px solid #e8e8e8;position:sticky;top:0;z-index:300}
-.util-left{display:flex;align-items:center;gap:16px}
-.util-link{font-size:14px;font-weight:500;color:#555;cursor:pointer;transition:color 0.1s;text-decoration:none}
-.util-link:hover{color:#46435D}
-.util-center{display:flex;align-items:center;justify-content:center;gap:10px}
-.logo-wordmark{font-size:24px;font-weight:700;color:#46435D;letter-spacing:-0.02em}
-.util-right{display:flex;align-items:center;justify-content:flex-end;gap:16px}
-.util-sep{color:#ddd;font-size:10px}
-.search-field{display:flex;align-items:center;gap:6px;cursor:text}
-.search-icon{color:#bbb;font-size:14px}
-.search-placeholder{font-size:12px;color:#bbb}
+/* SPIRED NAV */
+.spired-nav{position:sticky;top:0;z-index:300;background:white;border-bottom:0.5px solid #e8e8e8;height:64px;padding:0 32px}
+.sn-inner{display:flex;align-items:center;width:100%;height:100%;max-width:1400px;margin:0 auto;gap:32px}
+.sn-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.sn-logo-mark{width:28px;height:28px;border-radius:50%;background:#46435D;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700}
+.sn-logo-wordmark{font-size:20px;font-weight:600;color:#1a1a1a;letter-spacing:-0.02em}
+.sn-links{display:flex;align-items:center;gap:0;flex:1}
+.sn-link{background:none;border:none;padding:9px 16px;font-family:inherit;font-size:14px;font-weight:500;color:#444;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;border-radius:6px;transition:color 0.12s,background 0.12s;white-space:nowrap}
+.sn-link:hover,.sn-link.open{color:#46435D;background:#f5f4f8}
+.sn-chev{font-size:9px;color:#bbb;transition:transform 0.15s}
+.sn-link.open .sn-chev{transform:rotate(180deg)}
+.sn-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.sn-cta{background:#46435D;color:white;border:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s;display:inline-block}
+.sn-cta:hover{background:#5a576e}
+.sn-utility{font-size:14px;color:#666;text-decoration:none;font-weight:500;padding:8px 6px;transition:color 0.12s;background:none;border:none;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.sn-utility:hover{color:#46435D}
+.sn-about-wrap{position:relative}
+.sn-about-drop{display:none;position:absolute;top:calc(100% + 6px);right:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:310}
+.sn-about-wrap.open .sn-about-drop{display:block}
+.sn-about-drop a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}
+.sn-about-drop a:hover{background:#f5f4f8;color:#46435D}
 
-/* NAV */
-.nav-stage{display:flex;justify-content:center;align-items:center;padding:14px 32px;position:sticky;top:56px;z-index:200;pointer-events:none}
-.nav-group{display:inline-flex;align-items:center;gap:10px;position:relative;pointer-events:all}
-.island{background:white;border:0.5px solid #e0e0e0;border-radius:999px;display:inline-flex;align-items:center;gap:2px;padding:5px 8px;box-shadow:0 2px 16px rgba(0,0,0,0.08)}
-.nav-btn{background:none;border:none;padding:9px 18px;font-size:14px;color:#666;cursor:pointer;border-radius:999px;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:all 0.12s}
-.nav-btn:hover,.nav-btn.open{color:#46435D;background:#f5f4f8}
-.chevron{font-size:8px;color:#ccc;transition:transform 0.15s}
-.nav-btn.open .chevron{transform:rotate(180deg)}
-.demo-island{background:#46435D;border-radius:999px;padding:10px 22px;box-shadow:0 2px 16px rgba(70,67,93,0.25);cursor:pointer;transition:background 0.12s}
-.demo-island:hover{background:#5a576e}
-.demo-label{font-size:13px;font-weight:500;color:white}
-
-/* MEGA MENU */
-.mega{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:white;border:0.5px solid #e0e0e0;z-index:200;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.1);overflow:hidden;min-width:860px}
-.mega.show{display:block}
-.mega-inner{display:grid;grid-template-columns:1fr 2fr;min-height:380px}
-.left-panel{background:#f7f7f6;border-right:0.5px solid #ebebeb;padding:18px 0}
-.left-label{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;padding:0 16px 12px}
-.outcome-item{display:flex;align-items:center;justify-content:space-between;padding:9px 16px;cursor:pointer;font-size:14px;color:#666;border-left:2px solid transparent;transition:all 0.1s;line-height:1.3}
-.outcome-item:hover{color:#46435D;background:#f0efed;border-left-color:#ccc}
-.outcome-item.active{color:#46435D;background:white;border-left-color:#46435D;font-weight:600}
-.outcome-item .arr{font-size:11px;opacity:0;flex-shrink:0;margin-left:8px}
-.outcome-item.active .arr,.outcome-item:hover .arr{opacity:0.5}
-.outcome-item.active .arr{opacity:1}
-.left-divider{border:none;border-top:0.5px solid #ebebeb;margin:10px 0}
-.platform-btn{margin:0 12px 4px;padding:10px 14px;border:0.5px solid #e0e0e0;border-radius:10px;cursor:pointer;text-align:left;background:white;width:calc(100% - 24px);display:block;transition:all 0.12s}
-.platform-btn:hover{border-color:#46435D}
-.platform-btn-label{font-size:12px;font-weight:500;color:#46435D;display:block}
-.platform-btn-sub{font-size:11px;color:#aaa;margin-top:2px;display:block}
-.right-panel{padding:20px 22px;display:flex;flex-direction:column}
-.right-header{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
-.outcome-desc{font-size:14px;color:#777;margin-bottom:14px;line-height:1.5;padding-bottom:14px;border-bottom:0.5px solid #f0f0f0}
-.bundle-banner{display:flex;align-items:center;gap:14px;padding:14px 18px;margin-bottom:14px;background:#eeedf4;border:0.5px solid #d8d6e6;border-radius:12px;cursor:pointer;transition:all 0.12s}
-.bundle-banner:hover{border-color:#46435D;box-shadow:0 4px 12px rgba(70,67,93,0.1)}
-.bundle-icon{width:36px;height:36px;border-radius:8px;background:#46435D;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;flex-shrink:0}
-.bundle-body{flex:1;min-width:0}
-.bundle-name{font-size:13px;font-weight:700;color:#46435D;margin-bottom:2px}
-.bundle-tagline{font-size:11px;color:#888;line-height:1.4}
-.bundle-cta{font-size:11px;font-weight:600;color:#46435D;white-space:nowrap;flex-shrink:0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
-.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.products-grid.all-grid{grid-template-columns:repeat(4,1fr)}
-.product-card{border:0.5px solid #ebebeb;border-radius:12px;padding:14px;cursor:pointer;transition:all 0.12s;background:white;display:flex;flex-direction:column}
-.product-card:hover{border-color:#46435D;transform:translateY(-2px);box-shadow:0 4px 12px rgba(70,67,93,0.1)}
-.product-icon{width:30px;height:30px;border-radius:7px;background:#f0f0f0;margin-bottom:9px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#999}
-.product-name{font-size:13px;font-weight:600;color:#46435D;margin-bottom:3px}
-.product-desc{font-size:11px;color:#aaa;line-height:1.4}
-.right-footer{margin-top:16px;padding-top:12px;border-top:0.5px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
-.rf-label{font-size:12px;color:#aaa}
-.rf-link{font-size:12px;color:#46435D;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
-.simple-panel{padding:20px 28px;display:flex;gap:48px;align-items:flex-start;min-width:520px}
-.s-section{flex:1;min-width:180px}
-.s-category{display:flex;align-items:center;justify-content:flex-start;gap:8px;padding:6px 0;margin-bottom:8px}
-.s-cat-icon{width:26px;height:26px;border-radius:6px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
-.s-cat-label{font-size:14px;font-weight:700;color:#46435D}
-.s-item{font-size:14px;color:#666;padding:7px 0;cursor:pointer;border-bottom:0.5px solid #f5f5f5;transition:color 0.1s;display:block;text-align:left}
-.s-item:hover{color:#46435D}
-.s-item:last-child{border-bottom:none}
+/* SPIRED MEGA MENU */
+.sn-mega{display:none;position:absolute;top:64px;left:0;right:0;background:white;border-top:0.5px solid #e8e8e8;border-bottom:0.5px solid #e8e8e8;box-shadow:0 12px 40px rgba(0,0,0,0.08);z-index:290;overflow:hidden}
+.sn-mega.show{display:block}
+.sn-mega-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:260px 1fr;min-height:380px}
+.sn-mega-left{background:#f7f8fa;border-right:0.5px solid #ebeef2;padding:0}
+.sn-mega-item{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;cursor:pointer;font-size:14px;font-weight:500;color:#555;background:transparent;border:none;width:100%;text-align:left;font-family:inherit;transition:all 0.12s;border-left:3px solid transparent;min-height:95px}
+.sn-mega-item:hover{color:#46435D;background:#eeedf4}
+.sn-mega-item.active{color:#46435D;background:white;border-left-color:#46435D;font-weight:600}
+.sn-mega-item .sn-arr{font-size:12px;color:#ccc;transition:transform 0.12s}
+.sn-mega-item.active .sn-arr{color:#46435D;transform:translateX(3px)}
+.sn-mega-right{padding:32px 44px;display:flex;flex-direction:column}
+.sn-mega-topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:26px}
+.sn-mega-title-block{display:flex;gap:14px;align-items:flex-start}
+.sn-mega-title-icon{width:28px;height:28px;border-radius:50%;background:#eeedf4;color:#46435D;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:2px}
+.sn-mega-title{font-size:16px;font-weight:600;color:#1a1a1a;margin-bottom:4px;letter-spacing:-0.01em}
+.sn-mega-sub{font-size:12px;color:#888;line-height:1.5;max-width:540px}
+.sn-mega-actions{display:flex;gap:10px;flex-shrink:0}
+.sn-mega-action{padding:8px 16px;border:0.5px solid #d0d0d5;background:white;color:#46435D;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;transition:all 0.12s;font-family:inherit;cursor:pointer;white-space:nowrap}
+.sn-mega-action:hover{border-color:#46435D;background:#f5f4f8}
+.sn-mega-action.solid{background:#46435D;color:white;border-color:#46435D}
+.sn-mega-action.solid:hover{background:#5a576e}
+.sn-mega-two-col{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding-top:8px}
+.sn-mega-col-title{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:14px}
+.sn-mega-col-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.sn-mega-col-list a{padding:7px 0;font-size:14px;color:#555;text-decoration:none;transition:color 0.12s;display:block}
+.sn-mega-col-list a:hover{color:#46435D}
+.sn-mega-solutions{display:grid;grid-template-columns:2fr 1fr;gap:44px;padding-top:8px}
+.sn-mega-products{display:grid;grid-template-columns:1fr 1fr;gap:2px 24px}
+.sn-mega-product{display:flex;align-items:center;gap:10px;padding:9px 6px;text-decoration:none;color:#333;font-size:14px;font-weight:500;border-radius:6px;transition:background 0.12s}
+.sn-mega-product:hover{background:#f5f4f8;color:#46435D}
+.sn-mega-product-icon{width:22px;height:22px;color:#46435D;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.sn-mega-product-badge{background:#46435D;color:white;font-size:9px;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:999px;margin-left:6px;text-transform:uppercase}
+.sn-mega-bundles{display:flex;flex-direction:column;padding-left:28px;border-left:0.5px solid #ebeef2}
+.sn-mega-bundles-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sn-mega-bundles-icon{width:26px;height:26px;border-radius:6px;background:#eeedf4;color:#46435D;display:flex;align-items:center;justify-content:center;font-size:12px}
+.sn-mega-bundles-title h4{font-size:15px;font-weight:600;color:#1a1a1a;letter-spacing:-0.01em}
+.sn-mega-bundles p{font-size:11px;color:#888;line-height:1.5;margin-bottom:14px;max-width:220px}
+.sn-mega-bundles a{padding:9px 0;font-size:14px;color:#555;text-decoration:none;transition:color 0.12s;display:block;border-bottom:0.5px solid #f0f0f0}
+.sn-mega-bundles a:last-child{border-bottom:none}
+.sn-mega-bundles a:hover{color:#46435D}
+.sn-mega-hq{display:grid;grid-template-columns:1fr 1fr;gap:14px 44px;padding-top:8px}
+.sn-mega-hq-card{display:flex;gap:14px;padding:14px;text-decoration:none;color:inherit;border-radius:10px;transition:background 0.12s}
+.sn-mega-hq-card:hover{background:#f5f4f8}
+.sn-mega-hq-icon{width:32px;height:32px;border-radius:8px;background:#eeedf4;color:#46435D;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px}
+.sn-mega-hq-name{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:4px}
+.sn-mega-hq-desc{font-size:11px;color:#888;line-height:1.5}
+.sn-mega-hch-features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px;padding-top:8px}
+.sn-mega-hch-card{background:#f7f8fa;border:0.5px solid #ebeef2;border-radius:10px;padding:12px;text-decoration:none;color:inherit;transition:all 0.12s;display:flex;flex-direction:column;gap:10px}
+.sn-mega-hch-card:hover{border-color:#46435D;background:#f5f4f8}
+.sn-mega-hch-thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#46435D 0%,#2d2a44 100%);border-radius:6px}
+.sn-mega-hch-eyebrow{font-size:9px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase}
+.sn-mega-hch-title{font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.3}
+.sn-mega-hch-desc{font-size:11px;color:#888;line-height:1.4}
+.sn-mega-hch-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 44px}
+.sn-mega-hch-item{display:flex;gap:12px;text-decoration:none;color:inherit;padding:8px 0}
+.sn-mega-hch-item-icon{width:24px;color:#46435D;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.sn-mega-hch-item-name{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:3px}
+.sn-mega-hch-item-desc{font-size:11px;color:#888;line-height:1.5}
 
 /* LAYOUT */
 .w{max-width:1200px;margin:0 auto;padding:0 48px}
@@ -208,38 +218,36 @@ body.anno-hidden .anno{display:none}
 <!-- SITE CONTENT -->
 <div id="site">
 
-<!-- UTILITY BAR -->
-<div class="utility-bar">
-  <div class="util-left">
-    <a href="mb-home.html" class="util-link">Company</a><a href="hq.html" class="util-link">Amplify+ HQ</a>
-  </div>
-  <div class="util-center">
-    <a href="home.html" style="display:flex;align-items:center;gap:10px;text-decoration:none">
-      <svg width="32" height="32" viewBox="0 0 32 32"><rect width="16" height="16" fill="#c8c8c8"/><rect x="16" width="16" height="16" fill="#e4e4e4"/><rect y="16" width="16" height="16" fill="#e4e4e4"/><rect x="16" y="16" width="16" height="16" fill="#c8c8c8"/></svg>
-      <span class="logo-wordmark">Amplify</span>
+<nav class="spired-nav" id="spiredNav">
+  <div class="sn-inner">
+    <a href="home.html" class="sn-logo">
+      <span class="sn-logo-mark">s</span>
+      <span class="sn-logo-wordmark">spired</span>
     </a>
-  </div>
-  <div class="util-right">
-    <a href="search-results.html" class="search-field" style="text-decoration:none"><span class="search-icon">&#x2315;</span><span class="search-placeholder">Search</span></a>
-    <span class="util-sep">|</span>
-    <a href="login.html" class="util-link" style="text-decoration:none">Login</a>
-  </div>
-</div>
-
-<!-- NAV -->
-<div class="nav-stage">
-  <div class="nav-group">
-    <div class="island" id="primaryNav">
-      <button class="nav-btn" onmouseenter="openMenu('who',this)" onclick="openMenu('who',this)">Who We Serve <span class="chevron">&#x25BE;</span></button>
-      <button class="nav-btn" onmouseenter="openMenu('solutions',this)" onclick="window.location.href='platform-overview.html'">Solutions <span class="chevron">&#x25BE;</span></button>
-      <button class="nav-btn" onmouseenter="openMenu('services',this)" onclick="window.location.href='services-overview.html'">Services <span class="chevron">&#x25BE;</span></button>
-      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='healthy-church-hub.html'">Healthy Church Hub</button>
-      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='partners.html'">Partners</button>
+    <div class="sn-links">
+      <a class="sn-link" data-sn-key="churches" href="churches.html" onmouseenter="snOpen('churches',this)">Churches <span class="sn-chev">▾</span></a>
+      <a class="sn-link" href="#parishes" onmouseenter="snClose()">Parishes</a>
+      <a class="sn-link" href="#protection" onmouseenter="snClose()">Protection</a>
+      <a class="sn-link" href="#non-profit" onmouseenter="snClose()">Non-Profit</a>
     </div>
-    <a href="request-demo.html" class="demo-island" style="text-decoration:none"><span class="demo-label">Request Demo</span></a>
-    <div class="mega" id="megaMenu"></div>
+    <div class="sn-right">
+      <a href="request-demo.html" class="sn-cta">Request Demo</a>
+      <a href="login.html" class="sn-utility">Login</a>
+      <div class="sn-about-wrap" id="snAboutWrap">
+        <button class="sn-utility" onclick="snToggleAbout(event)">About <span class="sn-chev">▾</span></button>
+        <div class="sn-about-drop">
+          <a href="mb-company.html">About Us</a>
+          <a href="mb-meet-team.html">Meet the Team</a>
+          <a href="mb-careers.html">Careers</a>
+          <a href="mb-press.html">Press / Newsroom</a>
+          <a href="mb-contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+  <div class="sn-mega" id="snMega"></div>
+</nav>
+
 
 <!-- BREADCRUMB -->
 <div style="background:white;border-bottom:0.5px solid #f0f0f0">
@@ -273,7 +281,7 @@ body.anno-hidden .anno{display:none}
           <span style="font-size:12px;color:rgba(255,255,255,0.6);font-weight:500">Media</span>
         </div>
         <div style="font-size:44px;font-weight:700;color:white;letter-spacing:-0.025em;line-height:1.08;margin-bottom:16px">Church Motion Graphics That Move Hearts to Action</div>
-        <div style="font-size:16px;color:rgba(255,255,255,0.6);line-height:1.65;margin-bottom:32px">Bring your ministry to life with a premiere library of motion graphics, worship media, social content, and kids' ministry curriculum. Amplify+ Media makes it easy to inspire connection.</div>
+        <div style="font-size:16px;color:rgba(255,255,255,0.6);line-height:1.65;margin-bottom:32px">Bring your ministry to life with a premiere library of motion graphics, worship media, social content, and kids' ministry curriculum. Spired for Churches+ Media makes it easy to inspire connection.</div>
         <div style="display:flex;gap:12px">
           <a href="request-demo.html" class="btn btn-white" style="text-decoration:none">Book a Meeting</a>
           <a href="#" class="btn btn-ghost" style="text-decoration:none">Start Free Trial</a>
@@ -307,7 +315,7 @@ body.anno-hidden .anno{display:none}
     <div class="section-center">
       <div class="section-eyebrow">By the numbers</div>
       <div class="section-h2">A Library Built for Ministry at Scale</div>
-      <div class="section-sub">Thousands of churches trust Amplify Media to power their worship experience, social presence, and kids' ministry every single week.</div>
+      <div class="section-sub">Thousands of churches trust Spired for Churches Media to power their worship experience, social presence, and kids' ministry every single week.</div>
     </div>
     <div class="grid-3" style="margin-bottom:32px">
       <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:32px;text-align:center">
@@ -326,7 +334,7 @@ body.anno-hidden .anno{display:none}
     <div class="grid-3">
       <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:32px;text-align:center">
         <div class="stat-num">55K+</div>
-        <div class="stat-label">churches already using Amplify</div>
+        <div class="stat-label">churches already using Spired for Churches</div>
       </div>
       <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:32px;text-align:center">
         <div class="stat-num">500+</div>
@@ -506,7 +514,7 @@ body.anno-hidden .anno{display:none}
         <div style="width:48px;height:48px;border-radius:50%;background:#c8d7c5;border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:16px;color:#46435D;margin-right:-12px;z-index:2">&#x1F469;</div>
         <div style="width:48px;height:48px;border-radius:50%;background:#d4d1e0;border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:16px;color:#46435D;z-index:1">&#x1F468;</div>
       </div>
-      <div style="font-size:15px;color:#777;line-height:1.6;max-width:480px">With Amplify, you're not going it alone. You get a creative partner that knows churches, understands worship culture, and is ready to help you shine &mdash; every step of the way.</div>
+      <div style="font-size:15px;color:#777;line-height:1.6;max-width:480px">With Spired for Churches, you're not going it alone. You get a creative partner that knows churches, understands worship culture, and is ready to help you shine &mdash; every step of the way.</div>
     </div>
   </div>
 </div>
@@ -520,7 +528,7 @@ body.anno-hidden .anno{display:none}
     <div class="section-center">
       <div class="section-eyebrow">Smart connections</div>
       <div class="section-h2">Your Media, Everywhere It Matters</div>
-      <div class="section-sub">Amplify Media integrates seamlessly with your streaming and website tools so your creative assets flow wherever your audience is &mdash; no re-uploading, no friction.</div>
+      <div class="section-sub">Spired for Churches Media integrates seamlessly with your streaming and website tools so your creative assets flow wherever your audience is &mdash; no re-uploading, no friction.</div>
     </div>
     <div class="grid-2">
       <div style="background:#f7f7f6;border:0.5px solid #e8e8e8;border-radius:16px;overflow:hidden">
@@ -530,7 +538,7 @@ body.anno-hidden .anno{display:none}
         <div style="padding:24px">
           <div style="font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">Streaming Integration</div>
           <div style="font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:8px;line-height:1.3">Media assets that enhance your live broadcast</div>
-          <div style="font-size:13px;color:#888;line-height:1.6">Use motion backgrounds, title graphics, and countdown timers directly in your Amplify stream. No file juggling &mdash; just drag, drop, and go live with visuals that match the moment.</div>
+          <div style="font-size:13px;color:#888;line-height:1.6">Use motion backgrounds, title graphics, and countdown timers directly in your Spired for Churches stream. No file juggling &mdash; just drag, drop, and go live with visuals that match the moment.</div>
         </div>
       </div>
       <div style="background:#f7f7f6;border:0.5px solid #e8e8e8;border-radius:16px;overflow:hidden">
@@ -540,7 +548,7 @@ body.anno-hidden .anno{display:none}
         <div style="padding:24px">
           <div style="font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">Websites Integration</div>
           <div style="font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:8px;line-height:1.3">Graphics and content that flow to your site</div>
-          <div style="font-size:13px;color:#888;line-height:1.6">Publish sermon graphics, event banners, and social content directly to your Amplify website. Keep your digital front door visually fresh without extra steps or manual uploads.</div>
+          <div style="font-size:13px;color:#888;line-height:1.6">Publish sermon graphics, event banners, and social content directly to your Spired for Churches website. Keep your digital front door visually fresh without extra steps or manual uploads.</div>
         </div>
       </div>
     </div>
@@ -598,7 +606,7 @@ body.anno-hidden .anno{display:none}
     <div class="section-center">
       <div class="section-eyebrow">The pathway to a connected ministry</div>
       <div class="section-h2">Media is only the beginning</div>
-      <div class="section-sub">Integrated tools amplify your creative content across every channel. See how Amplify can help you power all areas of your digital ministry.</div>
+      <div class="section-sub">Integrated tools amplify your creative content across every channel. See how Spired for Churches can help you power all areas of your digital ministry.</div>
     </div>
     <!-- Primary: 4 most connected products -->
     <div class="grid-4" style="margin-bottom:20px">
@@ -697,7 +705,7 @@ body.anno-hidden .anno{display:none}
 <!-- RESOURCE / MARKETPLACE CALLOUT -->
 <div class="section" style="position:relative">
   <div class="anno" style="position:absolute;top:24px;right:48px;margin:0;z-index:60">
-    <strong>Resource:</strong> Nurture path for non-buyers. Catches visitors who scrolled full page but didn't convert. "Browse the Marketplace" appeals to Worship Pastor's browsing behavior. Positions Amplify as creative partner.
+    <strong>Resource:</strong> Nurture path for non-buyers. Catches visitors who scrolled full page but didn't convert. "Browse the Marketplace" appeals to Worship Pastor's browsing behavior. Positions Spired for Churches as creative partner.
   </div>
   <div class="w">
     <div style="background:#eeedf4;border-radius:16px;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px">
@@ -717,7 +725,7 @@ body.anno-hidden .anno{display:none}
   </div>
   <div class="w" style="text-align:center">
     <div style="font-size:38px;font-weight:700;color:white;letter-spacing:-0.02em;margin-bottom:12px">See Your Ministry Come Alive</div>
-    <div style="font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto">Schedule your demo now and we'll show you how Amplify Media can transform your worship experience, social presence, and creative workflow.</div>
+    <div style="font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto">Schedule your demo now and we'll show you how Spired for Churches Media can transform your worship experience, social presence, and creative workflow.</div>
     <div style="display:flex;gap:12px;justify-content:center">
       <a href="request-demo.html" class="btn btn-white" style="text-decoration:none">Book a Demo</a>
       <a href="request-demo.html" class="btn btn-ghost" style="text-decoration:none">Talk to Sales</a>
@@ -727,71 +735,70 @@ body.anno-hidden .anno{display:none}
 
 <!-- FOOTER -->
 <footer style="background:#1a1a1a;padding:64px 0 32px">
-  <div class="w">
-    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
-      <div>
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-          <svg width="28" height="28" viewBox="0 0 32 32"><rect width="16" height="16" fill="rgba(255,255,255,0.4)"/><rect x="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect y="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect x="16" y="16" width="16" height="16" fill="rgba(255,255,255,0.4)"/></svg>
-          <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">Amplify</span>
+    <div style="max-width:1200px;margin:0 auto;padding:0 48px">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+        <!-- Brand + search + socials -->
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+            <span style="width:28px;height:28px;border-radius:50%;background:#46435D;display:inline-flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700">s</span>
+            <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">spired</span>
+          </div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:260px;margin-bottom:20px">Software for churches, parishes, protection, and non-profit organizations &mdash; trusted by 90,000+ ministries.</div>
+          <form action="search-results.html" method="get" style="max-width:280px;margin-bottom:20px;position:relative">
+            <input type="search" name="q" placeholder="Search&hellip;" style="width:100%;padding:10px 40px 10px 14px;font-family:inherit;font-size:13px;color:white;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:8px;outline:none;transition:border-color 0.15s" onfocus="this.style.borderColor='rgba(255,255,255,0.35)'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+            <button type="submit" aria-label="Search" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:rgba(255,255,255,0.5);width:28px;height:28px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">&#x2315;</button>
+          </form>
+          <div style="display:flex;gap:12px">
+            <a href="#" aria-label="Twitter" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            <a href="#" aria-label="LinkedIn" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="#" aria-label="YouTube" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+          </div>
         </div>
-        <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:240px">Church management software built to help 55,000+ ministries thrive.</div>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Solutions</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Increase Giving</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Engage Community</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Grow Attendance</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Streamline Ops</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Financial Stewardship</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Volunteer Teams</span>
+        <!-- Solutions -->
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Solutions</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="platform-overview.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Platform Overview</a>
+            <a href="hq.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Headquarters Complete Bundle</a>
+            <a href="complete-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Complete Bundle</a>
+            <a href="generosity-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Generosity Bundle</a>
+            <a href="financial-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Financial Bundle</a>
+            <a href="digital-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Digital Bundle</a>
+          </div>
+        </div>
+        <!-- Resources -->
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Resources</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="healthy-church-hub.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Healthy Church Hub</a>
+            <a href="services-overview.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Services</a>
+            <a href="partners.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Partners</a>
+            <a href="#" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Ministry Brands Academy</a>
+            <a href="#" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Church Plant Program</a>
+          </div>
+        </div>
+        <!-- Company -->
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Company</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="mb-company.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">About</a>
+            <a href="mb-careers.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Careers</a>
+            <a href="mb-press.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Press</a>
+            <a href="mb-contact.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Contact</a>
+          </div>
         </div>
       </div>
-      <div>
-        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Products</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <a href="giving.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Giving</a>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Accounting</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">People (ChMS)</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Websites</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Mobile App</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Service Planning</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Safety</span>
-        </div>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Resources</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Healthy Church Hub</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Webinars</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">eBooks</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Podcasts</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Blog</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Customer Stories</span>
-        </div>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Company</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">About</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Leadership</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Careers</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Partners</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Contact</span>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer">Press</span>
+      <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Spired. All rights reserved.</div>
+        <div style="display:flex;gap:24px">
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Privacy Policy</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Terms of Service</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Cookie Settings</span>
         </div>
       </div>
     </div>
-    <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between">
-      <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Ministry Brands. All rights reserved.</div>
-      <div style="display:flex;gap:24px">
-        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Privacy Policy</span>
-        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Terms of Service</span>
-        <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Cookie Settings</span>
-      </div>
-    </div>
-  </div>
-</footer>
+  </footer>
+
 
 <!-- ANNOTATION TOGGLE -->
 <div class="anno-legend-wrap">
@@ -813,29 +820,142 @@ body.anno-hidden .anno{display:none}
 
 <script>
 document.body.classList.add("anno-hidden");
-var icons={"Giving":"$","Accounting":"=","People (ChMS)":"P","Websites":"W","Mobile App":"M","Communications":"@","Streaming":"&#x25B6;","Service Planning":"&#x2713;","Media":"&#x25C9;","Safety":"S"};
-var allProducts=[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"People (ChMS)",desc:"Member records & group management"},{name:"Websites",desc:"Your digital front door"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Media",desc:"Sermon content & distribution"},{name:"Safety",desc:"Check-in, background checks & protocols"}];
-var productUrls={"Giving":"giving.html","Accounting":"accounting.html","People (ChMS)":"people.html","Websites":"websites.html","Mobile App":"mobile-app.html","Communications":"communications.html","Streaming":"streaming.html","Service Planning":"service-planning.html","Media":"media.html","Safety":"safety.html"};
-var bundleUrls={"Complete Bundle":"complete-bundle.html","Generosity Bundle":"generosity-bundle.html","Financial Bundle":"financial-bundle.html","Digital Bundle":"digital-bundle.html"};
-var outcomes={
-  all:{desc:"The full Amplify platform \u2014 every tool working together as one connected system.",products:allProducts,gridClass:"all-grid",bundle:{name:"Complete Bundle",tagline:"Every tool, one price \u2014 the full Amplify platform for your entire church.",cta:"Explore the Complete Bundle \u2192"}},
-  giving:{desc:"Tools that invite generosity and give your finance team full visibility.",products:[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"Mobile App",desc:"Give from anywhere, anytime"},{name:"Communications",desc:"Generosity campaigns & appeals"}],bundle:{name:"Generosity Bundle",tagline:"All the giving & finance tools your church needs \u2014 packaged together.",cta:"Explore the Generosity Bundle \u2192"}},
-  engage:{desc:"Keep your congregation connected and actively participating between Sundays.",products:[{name:"People (ChMS)",desc:"Member records & group management"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Websites",desc:"Your digital front door"}]},
-  grow:{desc:"Expand your reach, convert first-time visitors, and retain the people who find you.",products:[{name:"Websites",desc:"First impression that converts"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Media",desc:"Sermon content & distribution"},{name:"Mobile App",desc:"Retain & re-engage members"}]},
-  streamline:{desc:"Replace fragmented tools with one connected system so nothing falls through the cracks.",products:[{name:"People (ChMS)",desc:"One database for your whole church"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Safety",desc:"Check-in & safety protocols"},{name:"Communications",desc:"Automated workflows & scheduling"}]},
-  financial:{desc:"Accurate books, clean audits, and board-ready reporting \u2014 without the late nights.",products:[{name:"Accounting",desc:"Fund accounting & compliance"},{name:"Giving",desc:"Donor management & statements"}],bundle:{name:"Financial Bundle",tagline:"Accounting, giving, and reporting \u2014 everything for financial stewardship.",cta:"Explore the Financial Bundle \u2192"}},
-  volunteer:{desc:"Your team shows up prepared, on time, knowing exactly what\u2019s expected.",products:[{name:"Service Planning",desc:"Scheduling & role assignment"},{name:"People (ChMS)",desc:"Volunteer profiles & history"},{name:"Communications",desc:"Automated reminders & confirmations"},{name:"Mobile App",desc:"Volunteers manage availability on the go"}]},
-  digital:{desc:"Meet your congregation \u2014 and reach new ones \u2014 wherever they spend their time.",products:[{name:"Streaming",desc:"Broadcast live or on-demand"},{name:"Websites",desc:"A site that works as hard as you do"},{name:"Mobile App",desc:"Your branded church app"},{name:"Media",desc:"Manage & distribute content at scale"}],bundle:{name:"Digital Bundle",tagline:"Streaming, websites, app, and media \u2014 launch your digital ministry.",cta:"Explore the Digital Bundle \u2192"}}
-};
-var simpleMenus={
-  who:{sections:[{icon:"👤",label:"By Role",items:[{n:"Executive / Senior Pastor",h:"senior-pastor.html"},{n:"Associate Pastor",h:"associate-pastor.html"},{n:"Finance Leader / Treasurer",h:"finance-treasurer.html"},{n:"Communications Director",h:"communications-director.html"},{n:"Worship Pastor",h:"worship-pastor.html"}]},{icon:"⛪",label:"By Church Type",items:[{n:"Multi-site Churches",h:"multi-site.html"},{n:"Denominations & Networks",h:"denominations.html"},{n:"Large Churches",h:"large-churches.html"},{n:"Growing Churches",h:"growing-churches.html"},{n:"Small Churches",h:"small-churches.html"},{n:"Church Plants",h:"church-plants.html"},{n:"Digital / Online Churches",h:"digital-churches.html"}]}]},
-  services:{sections:[{icon:"🛠",label:"Support & Delivery",items:[{n:"Services Overview",h:"services-overview.html"},{n:"Implementation & Onboarding",h:"service-detail.html"},{n:"Strategy & Consulting",h:"service-detail.html"},{n:"Data Migration",h:"service-detail.html"},{n:"Support & Training",h:"service-detail.html"}]}]}
-};
-function renderRight(k){var o=outcomes[k],gc=o.gridClass||'';var cards=o.products.map(function(p){return'<a href="'+(productUrls[p.name]||'#')+'" class="product-card" style="text-decoration:none;color:inherit"><div class="product-icon">'+(icons[p.name]||'\u00B7')+'</div><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.desc+'</div></a>';}).join('');var bh='';if(o.bundle){bh='<a href="'+(bundleUrls[o.bundle.name]||'#')+'" class="bundle-banner" style="text-decoration:none;color:inherit"><div class="bundle-icon">\u2B21</div><div class="bundle-body"><div class="bundle-name">'+o.bundle.name+'</div><div class="bundle-tagline">'+o.bundle.tagline+'</div></div><span class="bundle-cta">'+o.bundle.cta+'</span></a>';}var rh=k==='all'?'':'<div class="right-header">Relevant tools</div>';document.getElementById('rPanel').innerHTML=rh+'<div class="outcome-desc">'+o.desc+'</div>'+bh+'<div class="products-grid '+gc+'">'+cards+'</div><div class="right-footer"><span class="rf-label">Not sure where to start?</span><span class="rf-link">Take the Healthy Church Assessment \u2192</span></div>';}
-function buildSolutions(){var defs=[{k:'all',label:'All Solutions'},{k:'giving',label:'Increase Giving & Generosity'},{k:'engage',label:'Engage Your Church Community'},{k:'grow',label:'Grow Attendance & Reach'},{k:'streamline',label:'Streamline Church Operations'},{k:'financial',label:'Improve Financial Stewardship'},{k:'volunteer',label:'Strengthen Volunteer & Staff Effectiveness'},{k:'digital',label:'Launch & Scale Digital Ministry'}];var rows=defs.map(function(d,i){return'<div class="outcome-item'+(i===0?' active':'')+'" data-k="'+d.k+'">'+d.label+' <span class="arr">\u203A</span></div>';}).join('');return'<div class="mega-inner"><div class="left-panel"><div class="left-label">What do you want to do?</div>'+rows+'<div class="left-divider"></div><a href="platform-overview.html" class="platform-btn" style="text-decoration:none;color:inherit"><span class="platform-btn-label">Platform Overview \u2192</span><span class="platform-btn-sub">How Amplify works as one system</span></a></div><div class="right-panel" id="rPanel"></div></div>';}
-function buildSimple(k){return'<div class="simple-panel">'+simpleMenus[k].sections.map(function(s){return'<div class="s-section"><div class="s-category"><div class="s-cat-icon">'+s.icon+'</div><span class="s-cat-label">'+s.label+'</span></div>'+s.items.map(function(i){return'<a href="'+i.h+'" class="s-item">'+i.n+'</a>';}).join('')+'</div>';}).join('')+'</div>';}
-var cur=null,curBtn=null;
-function closeMenu(){if(curBtn)curBtn.classList.remove('open');var m=document.getElementById('megaMenu');if(m)m.classList.remove('show');cur=null;curBtn=null;}
-function openMenu(key,btn){closeMenu();cur=key;curBtn=btn;btn.classList.add('open');var m=document.getElementById('megaMenu');if(key==='solutions'){m.innerHTML=buildSolutions();m.querySelectorAll('.outcome-item').forEach(function(el){el.addEventListener('mouseenter',function(){m.querySelectorAll('.outcome-item').forEach(function(i){i.classList.remove('active')});this.classList.add('active');renderRight(this.dataset.k);});});renderRight('all');}else{m.innerHTML=buildSimple(key);}m.classList.add('show');}
-document.addEventListener('click',function(e){if(!e.target.closest('#primaryNav')&&!e.target.closest('.utility-bar'))closeMenu();});
+</script>
+<script>
+/* SPIRED NAV — mega menu behavior */
+(function(){
+  var megaEl = document.getElementById('snMega');
+  var curBtn = null, curSub = 'who';
+  var MEGA_ITEMS = [
+    {k:'who', label:'Who We Serve'},
+    {k:'solutions', label:'Solutions'},
+    {k:'hq', label:'Churches HQ'},
+    {k:'hch', label:'Healthy Church Hub'}
+  ];
+  var PRODUCTS = [
+    {name:'Giving', url:'giving.html'},
+    {name:'Accounting', url:'accounting.html'},
+    {name:'People (CHMS)', url:'people.html'},
+    {name:'Websites', url:'websites.html'},
+    {name:'Mobile App', url:'mobile-app.html'},
+    {name:'Communications', url:'communications.html'},
+    {name:'Streaming', url:'streaming.html'},
+    {name:'Service Planning', url:'service-planning.html'},
+    {name:'Media', url:'media.html'},
+    {name:'Safety', url:'safety.html'},
+    {name:'Equip', url:'#', badge:'NEW'}
+  ];
+  function buildLeft(active){
+    return '<div class="sn-mega-left">' + MEGA_ITEMS.map(function(i){
+      return '<button class="sn-mega-item'+(i.k===active?' active':'')+'" data-sub="'+i.k+'">'+i.label+' <span class="sn-arr">\u203A</span></button>';
+    }).join('') + '</div>';
+  }
+  function buildWho(){
+    var types = [
+      ['Multi-Site Churches','multi-site.html'],
+      ['Denominations & Networks','denominations.html'],
+      ['Large Churches','large-churches.html'],
+      ['Growing Churches','growing-churches.html'],
+      ['Small Churches','small-churches.html'],
+      ['Church Plants','church-plants.html'],
+      ['Digital / Online Churches','digital-churches.html']
+    ];
+    var roles = [
+      ['Executive Or Senior Pastor','senior-pastor.html'],
+      ['Associate Pastor','associate-pastor.html'],
+      ['Finance Leader Or Treasurer','finance-treasurer.html'],
+      ['Communications Director','communications-director.html'],
+      ['Worship Pastor','worship-pastor.html']
+    ];
+    return '<div class="sn-mega-two-col">' +
+      '<div><div class="sn-mega-title-block" style="margin-bottom:14px"><div class="sn-mega-title-icon">\u26EA</div><div><div class="sn-mega-col-title" style="margin-bottom:2px">Church Types We Serve</div><div class="sn-mega-sub">Explore how Spired supports every kind of church.</div></div></div><ul class="sn-mega-col-list">' +
+        types.map(function(t){return '<li><a href="'+t[1]+'">'+t[0]+'</a></li>';}).join('') +
+      '</ul></div>' +
+      '<div><div class="sn-mega-title-block" style="margin-bottom:14px"><div class="sn-mega-title-icon">\u2032</div><div><div class="sn-mega-col-title" style="margin-bottom:2px">Roles We Serve</div><div class="sn-mega-sub">Solutions tailored to the people who lead a church.</div></div></div><ul class="sn-mega-col-list">' +
+        roles.map(function(r){return '<li><a href="'+r[1]+'">'+r[0]+'</a></li>';}).join('') +
+      '</ul></div>' +
+    '</div>';
+  }
+  function buildSolutions(){
+    var prods = PRODUCTS.map(function(p){
+      return '<a href="'+p.url+'" class="sn-mega-product"><span class="sn-mega-product-icon">\u26A1</span>'+p.name+(p.badge?'<span class="sn-mega-product-badge">'+p.badge+'</span>':'')+'</a>';
+    }).join('');
+    return '<div class="sn-mega-topbar"><div class="sn-mega-title-block"><div><div class="sn-mega-title">Platform Overview</div><div class="sn-mega-sub">One Connected Platform for Your Entire Church</div></div></div><div class="sn-mega-actions"><a href="#" class="sn-mega-action">Not Sure Where To Start?</a><a href="platform-overview.html" class="sn-mega-action solid">See The Full Ecosystem</a></div></div>' +
+      '<div class="sn-mega-solutions">' +
+        '<div class="sn-mega-products">'+prods+'</div>' +
+        '<div class="sn-mega-bundles">' +
+          '<div class="sn-mega-bundles-title"><div class="sn-mega-bundles-icon">\u25C6</div><h4>Bundles</h4></div>' +
+          '<p>Bundle the tools your church needs into one plan, one price.</p>' +
+          '<a href="complete-bundle.html">Complete Bundle</a>' +
+          '<a href="generosity-bundle.html">Generosity Bundle</a>' +
+          '<a href="digital-bundle.html">Digital Bundle</a>' +
+          '<a href="financial-bundle.html">Financial Bundle</a>' +
+        '</div>' +
+      '</div>';
+  }
+  function buildHq(){
+    var cards = [
+      ['Headquarters Complete','hq.html','Everything in one bundle \u2014 the full HQ stack.'],
+      ['Headquarters Financials','hq-financials.html','Giving, accounting, and financial oversight.'],
+      ['Headquarters Donor','hq-donor.html','Donor engagement and stewardship tools.'],
+      ['Headquarters Arena','hq-arena.html','The command center for multi-site operations.']
+    ];
+    return '<div class="sn-mega-topbar"><div class="sn-mega-title-block"><div><div class="sn-mega-title">Bundles Optimized For Your Church Headquarters</div><div class="sn-mega-sub">Pre-configured suites for the operational core of your organization.</div></div></div></div>' +
+      '<div class="sn-mega-hq">' + cards.map(function(c){
+        return '<a href="'+c[1]+'" class="sn-mega-hq-card"><div class="sn-mega-hq-icon">\u25C6</div><div><div class="sn-mega-hq-name">'+c[0]+'</div><div class="sn-mega-hq-desc">'+c[2]+'</div></div></a>';
+      }).join('') + '</div>';
+  }
+  function buildHch(){
+    var features = [
+      ['Upcoming Webinar',"Grow Your Church's Digital Reach in 2026",'Live discussion on reaching congregants beyond the sanctuary.','webinar-registration.html'],
+      ['Free eBook','The Ultimate Easter Planning Guide for Churches','Checklists, timelines, and outreach ideas — start planning today.','ebook-landing.html'],
+      ['Podcast \u00b7 Ep. 166','Toby Walters: Balancing Church Tech With Sacred Spaces','On faithful adoption of technology inside worship spaces.','podcast-episode.html']
+    ];
+    var items = [
+      ['Managed Services','Expert help for setup, migration & growth. Real people who understand ministry.','services-overview.html'],
+      ['Ministry Brands Academy','Free, practical training for today\u2019s ministry leaders.','#'],
+      ['Partners','Trusted partners extending what Spired can do.','partners.html'],
+      ['Church Plant Program','Helping church plants flourish, fulfill, and lead.','#']
+    ];
+    return '<div class="sn-mega-topbar"><div class="sn-mega-title-block"><div class="sn-mega-title-icon">\u26EA</div><div><div class="sn-mega-title">Healthy Church Hub</div><div class="sn-mega-sub">Explore blogs, podcasts, webinars, eBooks and customer stories designed to help your church thrive \u2014 all in one place.</div></div></div><div class="sn-mega-actions"><a href="healthy-church-hub.html" class="sn-mega-action">Take Me To The Healthy Church Hub</a></div></div>' +
+      '<div class="sn-mega-hch-features">' + features.map(function(f){
+        return '<a href="'+f[3]+'" class="sn-mega-hch-card"><div class="sn-mega-hch-thumb"></div><div class="sn-mega-hch-eyebrow">'+f[0]+'</div><div class="sn-mega-hch-title">'+f[1]+'</div><div class="sn-mega-hch-desc">'+f[2]+'</div></a>';
+      }).join('') + '</div>' +
+      '<div class="sn-mega-hch-list">' + items.map(function(it){
+        return '<a href="'+it[2]+'" class="sn-mega-hch-item"><div class="sn-mega-hch-item-icon">\u26A1</div><div><div class="sn-mega-hch-item-name">'+it[0]+'</div><div class="sn-mega-hch-item-desc">'+it[1]+'</div></div></a>';
+      }).join('') + '</div>';
+  }
+  var BUILDERS = {who:buildWho, solutions:buildSolutions, hq:buildHq, hch:buildHch};
+  function renderMega(sub){
+    curSub = sub;
+    megaEl.innerHTML = '<div class="sn-mega-grid">' + buildLeft(sub) + '<div class="sn-mega-right">' + BUILDERS[sub]() + '</div></div>';
+    megaEl.querySelectorAll('.sn-mega-item').forEach(function(btn){
+      btn.addEventListener('mouseenter', function(){ renderMega(btn.dataset.sub); });
+      btn.addEventListener('click', function(e){ e.stopPropagation(); renderMega(btn.dataset.sub); });
+    });
+  }
+  window.snOpen = function(key, btn){
+    document.querySelectorAll('.sn-link').forEach(function(b){ b.classList.remove('open'); });
+    btn.classList.add('open');
+    curBtn = btn;
+    renderMega(curSub);
+    megaEl.classList.add('show');
+  };
+  window.snClose = function(){
+    if(curBtn) curBtn.classList.remove('open');
+    megaEl.classList.remove('show');
+    curBtn = null;
+  };
+  window.snToggleAbout = function(e){
+    e.stopPropagation();
+    document.getElementById('snAboutWrap').classList.toggle('open');
+  };
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('.spired-nav')){ if(window.snClose) snClose(); var w=document.getElementById('snAboutWrap'); if(w) w.classList.remove('open'); }
+  });
+  document.querySelector('.spired-nav').addEventListener('mouseleave', function(e){
+    var to = e.relatedTarget;
+    if(!to || !to.closest || !to.closest('.sn-mega')) snClose();
+  });
+})();
 </script>

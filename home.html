@@ -1,134 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Home — Ministry Brands</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
-body{background:#46435D;min-height:100vh}
+body{background:white;min-height:100vh;color:#1a1a1a}
 
-/* PASSWORD GATE */
-#gate{position:fixed;inset:0;background:#46435D;display:flex;align-items:center;justify-content:center;z-index:9999}
-#gate-box{background:white;border-radius:20px;padding:48px;width:360px;text-align:center}
-#gate-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:28px}
-#gate-title{font-size:20px;font-weight:700;color:#1a1a1a;margin-bottom:6px}
-#gate-sub{font-size:14px;color:#aaa;margin-bottom:24px}
-#gate-input{width:100%;padding:12px 16px;border:0.5px solid #e0e0e0;border-radius:10px;font-size:14px;color:#1a1a1a;outline:none;margin-bottom:12px;transition:border-color 0.15s}
-#gate-input:focus{border-color:#46435D}
-#gate-btn{width:100%;padding:12px;background:#46435D;color:white;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:background 0.15s}
-#gate-btn:hover{background:#5a576e}
-#gate-err{font-size:12px;color:#e05050;margin-top:8px;display:none}
+/* SPIRED NAV */
+.spired-nav{position:sticky;top:0;z-index:300;background:white;border-bottom:0.5px solid #e8e8e8;height:64px;padding:0 32px}
+.sn-inner{display:flex;align-items:center;width:100%;height:100%;max-width:1400px;margin:0 auto;gap:32px}
+.sn-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.sn-logo-mark{width:28px;height:28px;border-radius:50%;background:#46435D;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700}
+.sn-logo-wordmark{font-size:20px;font-weight:600;color:#1a1a1a;letter-spacing:-0.02em}
+.sn-links{display:flex;align-items:center;gap:0;flex:1}
+.sn-link{background:none;border:none;padding:9px 16px;font-family:inherit;font-size:14px;font-weight:500;color:#444;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;border-radius:6px;transition:color 0.12s,background 0.12s;white-space:nowrap}
+.sn-link:hover,.sn-link.open{color:#46435D;background:#f5f4f8}
+.sn-chev{font-size:9px;color:#bbb;transition:transform 0.15s}
+.sn-link.open .sn-chev{transform:rotate(180deg)}
+.sn-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.sn-cta{background:#46435D;color:white;border:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s;display:inline-block}
+.sn-cta:hover{background:#5a576e}
+.sn-utility{font-size:14px;color:#666;text-decoration:none;font-weight:500;padding:8px 6px;transition:color 0.12s;background:none;border:none;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.sn-utility:hover{color:#46435D}
+.sn-about-wrap{position:relative}
+.sn-about-drop{display:none;position:absolute;top:calc(100% + 6px);right:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:310}
+.sn-about-wrap.open .sn-about-drop{display:block}
+.sn-about-drop a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}
+.sn-about-drop a:hover{background:#f5f4f8;color:#46435D}
 
-/* SITE */
-#site{display:block}
+/* SPIRED MEGA MENU */
+.sn-mega{display:none;position:absolute;top:64px;left:0;right:0;background:white;border-top:0.5px solid #e8e8e8;border-bottom:0.5px solid #e8e8e8;box-shadow:0 12px 40px rgba(0,0,0,0.08);z-index:290;overflow:hidden}
+.sn-mega.show{display:block}
+.sn-mega-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:260px 1fr;min-height:380px}
+.sn-mega-left{background:#f7f8fa;border-right:0.5px solid #ebeef2;padding:0}
+.sn-mega-item{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;cursor:pointer;font-size:14px;font-weight:500;color:#555;background:transparent;border:none;width:100%;text-align:left;font-family:inherit;transition:all 0.12s;border-left:3px solid transparent;min-height:95px}
+.sn-mega-item:hover{color:#46435D;background:#eeedf4}
+.sn-mega-item.active{color:#46435D;background:white;border-left-color:#46435D;font-weight:600}
+.sn-mega-item .sn-arr{font-size:12px;color:#ccc;transition:transform 0.12s}
+.sn-mega-item.active .sn-arr{color:#46435D;transform:translateX(3px)}
+.sn-mega-right{padding:32px 44px;display:flex;flex-direction:column}
+.sn-mega-topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:26px}
+.sn-mega-title-block{display:flex;gap:14px;align-items:flex-start}
+.sn-mega-title-icon{width:28px;height:28px;border-radius:50%;background:#eeedf4;color:#46435D;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:2px}
+.sn-mega-title{font-size:16px;font-weight:600;color:#1a1a1a;margin-bottom:4px;letter-spacing:-0.01em}
+.sn-mega-sub{font-size:12px;color:#888;line-height:1.5;max-width:540px}
+.sn-mega-actions{display:flex;gap:10px;flex-shrink:0}
+.sn-mega-action{padding:8px 16px;border:0.5px solid #d0d0d5;background:white;color:#46435D;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;transition:all 0.12s;font-family:inherit;cursor:pointer;white-space:nowrap}
+.sn-mega-action:hover{border-color:#46435D;background:#f5f4f8}
+.sn-mega-action.solid{background:#46435D;color:white;border-color:#46435D}
+.sn-mega-action.solid:hover{background:#5a576e}
+.sn-mega-two-col{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding-top:8px}
+.sn-mega-col-title{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:14px}
+.sn-mega-col-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.sn-mega-col-list a{padding:7px 0;font-size:14px;color:#555;text-decoration:none;transition:color 0.12s;display:block}
+.sn-mega-col-list a:hover{color:#46435D}
+.sn-mega-solutions{display:grid;grid-template-columns:2fr 1fr;gap:44px;padding-top:8px}
+.sn-mega-products{display:grid;grid-template-columns:1fr 1fr;gap:2px 24px}
+.sn-mega-product{display:flex;align-items:center;gap:10px;padding:9px 6px;text-decoration:none;color:#333;font-size:14px;font-weight:500;border-radius:6px;transition:background 0.12s}
+.sn-mega-product:hover{background:#f5f4f8;color:#46435D}
+.sn-mega-product-icon{width:22px;height:22px;color:#46435D;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.sn-mega-product-badge{background:#46435D;color:white;font-size:9px;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:999px;margin-left:6px;text-transform:uppercase}
+.sn-mega-bundles{display:flex;flex-direction:column;padding-left:28px;border-left:0.5px solid #ebeef2}
+.sn-mega-bundles-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sn-mega-bundles-icon{width:26px;height:26px;border-radius:6px;background:#eeedf4;color:#46435D;display:flex;align-items:center;justify-content:center;font-size:12px}
+.sn-mega-bundles-title h4{font-size:15px;font-weight:600;color:#1a1a1a;letter-spacing:-0.01em}
+.sn-mega-bundles p{font-size:11px;color:#888;line-height:1.5;margin-bottom:14px;max-width:220px}
+.sn-mega-bundles a{padding:9px 0;font-size:14px;color:#555;text-decoration:none;transition:color 0.12s;display:block;border-bottom:0.5px solid #f0f0f0}
+.sn-mega-bundles a:last-child{border-bottom:none}
+.sn-mega-bundles a:hover{color:#46435D}
+.sn-mega-hq{display:grid;grid-template-columns:1fr 1fr;gap:14px 44px;padding-top:8px}
+.sn-mega-hq-card{display:flex;gap:14px;padding:14px;text-decoration:none;color:inherit;border-radius:10px;transition:background 0.12s}
+.sn-mega-hq-card:hover{background:#f5f4f8}
+.sn-mega-hq-icon{width:32px;height:32px;border-radius:8px;background:#eeedf4;color:#46435D;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px}
+.sn-mega-hq-name{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:4px}
+.sn-mega-hq-desc{font-size:11px;color:#888;line-height:1.5}
+.sn-mega-hch-features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px;padding-top:8px}
+.sn-mega-hch-card{background:#f7f8fa;border:0.5px solid #ebeef2;border-radius:10px;padding:12px;text-decoration:none;color:inherit;transition:all 0.12s;display:flex;flex-direction:column;gap:10px}
+.sn-mega-hch-card:hover{border-color:#46435D;background:#f5f4f8}
+.sn-mega-hch-thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#46435D 0%,#2d2a44 100%);border-radius:6px}
+.sn-mega-hch-eyebrow{font-size:9px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase}
+.sn-mega-hch-title{font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.3}
+.sn-mega-hch-desc{font-size:11px;color:#888;line-height:1.4}
+.sn-mega-hch-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 44px}
+.sn-mega-hch-item{display:flex;gap:12px;text-decoration:none;color:inherit;padding:8px 0}
+.sn-mega-hch-item-icon{width:24px;color:#46435D;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.sn-mega-hch-item-name{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:3px}
+.sn-mega-hch-item-desc{font-size:11px;color:#888;line-height:1.5}
 
-/* UTILITY BAR */
-.utility-bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;height:56px;background:white;border-bottom:0.5px solid #e8e8e8;position:sticky;top:0;z-index:300}
-.util-left{display:flex;align-items:center;gap:16px}
-.util-link{font-size:14px;font-weight:500;color:#555;cursor:pointer;transition:color 0.1s;text-decoration:none}
-.util-link:hover{color:#46435D}
-.util-center{display:flex;align-items:center;justify-content:center;gap:10px}
-.logo-wordmark{font-size:24px;font-weight:700;color:#46435D;letter-spacing:-0.02em}
-.util-right{display:flex;align-items:center;justify-content:flex-end;gap:16px}
-.util-sep{color:#ddd;font-size:10px}
-.search-field{display:flex;align-items:center;gap:6px;cursor:text}
-.search-icon{color:#bbb;font-size:14px}
-.search-placeholder{font-size:12px;color:#bbb}
+/* ===== MB NAV — classic top bar ===== */
 
-/* NAV */
-.nav-stage{display:flex;justify-content:center;align-items:center;padding:14px 32px;position:sticky;top:56px;z-index:200;pointer-events:none}
-.nav-group{display:inline-flex;align-items:center;gap:10px;position:relative;pointer-events:all}
-.island{background:white;border:0.5px solid #e0e0e0;border-radius:999px;display:inline-flex;align-items:center;gap:2px;padding:5px 8px;box-shadow:0 2px 16px rgba(0,0,0,0.08)}
-.nav-btn{background:none;border:none;padding:9px 18px;font-size:14px;color:#666;cursor:pointer;border-radius:999px;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:all 0.12s}
-.nav-btn:hover,.nav-btn.open{color:#46435D;background:#f5f4f8}
-.chevron{font-size:8px;color:#ccc;transition:transform 0.15s}
-.nav-btn.open .chevron{transform:rotate(180deg)}
-.demo-island{background:#46435D;border-radius:999px;padding:10px 22px;box-shadow:0 2px 16px rgba(70,67,93,0.25);cursor:pointer;transition:background 0.12s}
-.demo-island:hover{background:#5a576e}
-.demo-label{font-size:13px;font-weight:500;color:white}
-
-/* MEGA MENU */
-.mega{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:white;border:0.5px solid #e0e0e0;z-index:200;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.1);overflow:hidden;min-width:860px}
-.mega.show{display:block}
-.mega-inner{display:grid;grid-template-columns:1fr 2fr;min-height:380px}
-.left-panel{background:#f7f7f6;border-right:0.5px solid #ebebeb;padding:18px 0}
-.left-label{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;padding:0 16px 12px}
-.outcome-item{display:flex;align-items:center;justify-content:space-between;padding:9px 16px;cursor:pointer;font-size:14px;color:#666;border-left:2px solid transparent;transition:all 0.1s;line-height:1.3}
-.outcome-item:hover{color:#46435D;background:#f0efed;border-left-color:#ccc}
-.outcome-item.active{color:#46435D;background:white;border-left-color:#46435D;font-weight:600}
-.outcome-item .arr{font-size:11px;opacity:0;flex-shrink:0;margin-left:8px}
-.outcome-item.active .arr,.outcome-item:hover .arr{opacity:0.5}
-.outcome-item.active .arr{opacity:1}
-.left-divider{border:none;border-top:0.5px solid #ebebeb;margin:10px 0}
-.platform-btn{margin:0 12px 4px;padding:10px 14px;border:0.5px solid #e0e0e0;border-radius:10px;cursor:pointer;text-align:left;background:white;width:calc(100% - 24px);display:block;transition:all 0.12s}
-.platform-btn:hover{border-color:#46435D}
-.platform-btn-label{font-size:12px;font-weight:500;color:#46435D;display:block}
-.platform-btn-sub{font-size:11px;color:#aaa;margin-top:2px;display:block}
-.right-panel{padding:20px 22px;display:flex;flex-direction:column}
-.right-header{font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
-.outcome-desc{font-size:14px;color:#777;margin-bottom:14px;line-height:1.5;padding-bottom:14px;border-bottom:0.5px solid #f0f0f0}
-
-/* BUNDLE BANNER */
-.bundle-banner{display:flex;align-items:center;gap:14px;padding:14px 18px;margin-bottom:14px;background:#eeedf4;border:0.5px solid #d8d6e6;border-radius:12px;cursor:pointer;transition:all 0.12s}
-.bundle-banner:hover{border-color:#46435D;box-shadow:0 4px 12px rgba(70,67,93,0.1)}
-.bundle-icon{width:36px;height:36px;border-radius:8px;background:#46435D;display:flex;align-items:center;justify-content:center;font-size:14px;color:white;flex-shrink:0}
-.bundle-body{flex:1;min-width:0}
-.bundle-name{font-size:13px;font-weight:700;color:#46435D;margin-bottom:2px}
-.bundle-tagline{font-size:11px;color:#888;line-height:1.4}
-.bundle-cta{font-size:11px;font-weight:600;color:#46435D;white-space:nowrap;flex-shrink:0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
-
-.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.products-grid.all-grid{grid-template-columns:repeat(4,1fr)}
-.product-card{border:0.5px solid #ebebeb;border-radius:12px;padding:14px;cursor:pointer;transition:all 0.12s;background:white;display:flex;flex-direction:column}
-.product-card:hover{border-color:#46435D;transform:translateY(-2px);box-shadow:0 4px 12px rgba(70,67,93,0.1)}
-.product-icon{width:30px;height:30px;border-radius:7px;background:#f0f0f0;margin-bottom:9px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#999}
-.product-name{font-size:13px;font-weight:600;color:#46435D;margin-bottom:3px}
-.product-desc{font-size:11px;color:#aaa;line-height:1.4}
-.right-footer{margin-top:16px;padding-top:12px;border-top:0.5px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
-.rf-label{font-size:12px;color:#aaa}
-.rf-link{font-size:12px;color:#46435D;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4}
-.simple-panel{padding:20px 28px;display:flex;gap:48px;align-items:flex-start;min-width:520px}
-.s-section{flex:1;min-width:180px}
-.s-category{display:flex;align-items:center;justify-content:flex-start;gap:8px;padding:6px 0;margin-bottom:8px}
-.s-cat-icon{width:26px;height:26px;border-radius:6px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
-.s-cat-label{font-size:14px;font-weight:700;color:#46435D}
-.s-item{font-size:14px;color:#666;padding:7px 0;cursor:pointer;border-bottom:0.5px solid #f5f5f5;transition:color 0.1s;display:block;text-align:left}
-.s-item:hover{color:#46435D}
-.s-item:last-child{border-bottom:none}
-
-/* LAYOUT */
+/* ===== LAYOUT ===== */
 .w{max-width:1200px;margin:0 auto;padding:0 48px}
-.section{padding:72px 0;background:white;border-bottom:0.5px solid #f0f0f0}
-.section.alt{background:#f7f7f6}
-.section.dark{background:#46435D}
-.section-center{text-align:center;max-width:600px;margin:0 auto 48px}
-.section-eyebrow{font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
-.section-eyebrow.light{color:rgba(255,255,255,0.5)}
-.section-h2{font-size:32px;font-weight:700;color:#1a1a1a;line-height:1.2;letter-spacing:-0.02em;margin-bottom:12px}
+.section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f8fa}
+.section.dark{background:#46435D;color:white}
+.section-eyebrow{font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.section-eyebrow.light{color:rgba(255,255,255,0.55)}
+.section-h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px}
 .section-h2.light{color:white}
-.section-sub{font-size:16px;color:#888;line-height:1.6}
-.section-sub.light{color:rgba(255,255,255,0.6)}
+.section-sub{font-size:17px;color:#777;line-height:1.6;max-width:560px}
+.section-sub.light{color:rgba(255,255,255,0.7)}
+.section-center{text-align:center;max-width:600px;margin:0 auto 56px}
+.section-center .section-sub{margin:0 auto}
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 28px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;white-space:nowrap;text-decoration:none}
-.btn-white{background:white;color:#46435D}.btn-white:hover{background:#f0f0f0}
-.btn-ghost{background:transparent;color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.3)}.btn-ghost:hover{border-color:rgba(255,255,255,0.6);color:white}
-.btn-dark{background:#46435D;color:white}.btn-dark:hover{background:#5a576e}
-.btn-outline{background:transparent;color:#46435D;border:1px solid #c0bdd4}.btn-outline:hover{border-color:#46435D}
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
+.btn-navy{background:#46435D;color:white}
+.btn-navy:hover{background:#5a576e}
+.btn-white{background:white;color:#46435D}
+.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:#46435D;border:1px solid #46435D}
+.btn-ghost:hover{background:#46435D;color:white}
+.btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}
+.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
 
-/* GRIDS & CARDS */
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.card{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px;transition:all 0.15s;cursor:pointer;text-decoration:none;display:block}
-.card:hover{border-color:#c0bdd4;box-shadow:0 4px 20px rgba(70,67,93,0.08);transform:translateY(-2px)}
-.card-icon{width:44px;height:44px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
-.card-title{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:6px}
-.card-body{font-size:14px;color:#888;line-height:1.6}
-.tcard{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px}
-.tquote{font-size:15px;color:#444;line-height:1.7;margin-bottom:20px;font-style:italic}
-.tavatar{width:40px;height:40px;border-radius:50%;background:#e0dfe8;flex-shrink:0}
-.tname{font-size:14px;font-weight:600;color:#1a1a1a}
-.trole{font-size:12px;color:#aaa;margin-top:2px}
+/* ===== HERO ===== */
+.mb-hero{background:linear-gradient(180deg,#46435D 0%,#2d2a44 100%);color:white;padding:120px 0 100px;position:relative;overflow:hidden}
+.mb-hero-content{max-width:780px;margin:0 auto;text-align:center;position:relative;z-index:2}
+.mb-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:24px}
+.mb-hero-h1{font-size:60px;font-weight:700;letter-spacing:-0.03em;line-height:1.05;margin-bottom:24px}
+.mb-hero-sub{font-size:18px;color:rgba(255,255,255,0.78);line-height:1.65;max-width:600px;margin:0 auto 36px}
+.mb-hero-ctas{display:flex;gap:12px;justify-content:center}
+.mb-hero-bg{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(70,67,93,0.35) 0%,transparent 50%),radial-gradient(circle at 80% 30%,rgba(70,67,93,0.5) 0%,transparent 50%);pointer-events:none}
 
-/* ANNOTATION SYSTEM — floating cards */
-.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);max-width:380px;transition:opacity 0.25s,transform 0.25s;pointer-events:auto}
+/* ===== STAT STRIP ===== */
+.mb-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:white;border-bottom:0.5px solid #f0f0f0}
+.mb-stat{padding:48px 32px;text-align:center;border-right:0.5px solid #f0f0f0}
+.mb-stat:last-child{border-right:none}
+.mb-stat-value{font-size:44px;font-weight:700;color:#46435D;letter-spacing:-0.025em;line-height:1;margin-bottom:8px}
+.mb-stat-label{font-size:13px;color:#888;line-height:1.4}
+
+/* ===== LOGO REEL ===== */
+.mb-logos{background:white;padding:48px 0 56px;border-bottom:0.5px solid #f0f0f0}
+.mb-logos-label{font-size:11px;color:#999;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;text-align:center;margin-bottom:32px}
+.mb-logos-row{display:grid;grid-template-columns:repeat(7,1fr);gap:48px;align-items:center;max-width:1100px;margin:0 auto;padding:0 48px;opacity:0.7}
+.mb-logo-placeholder{height:32px;background:#d4d4d4;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#888;font-size:11px;font-weight:600;letter-spacing:0.04em}
+
+/* ===== FULL-WIDTH BRAND SECTIONS ===== */
+.mb-brand-section{padding:64px 0 96px;border-bottom:0.5px solid #f0f0f0}
+.mb-brand-section.alt{background:#f7f8fa}
+.mb-brand-section-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;max-width:1200px;margin:0 auto;padding:0 48px}
+.mb-brand-section.reverse .mb-brand-section-inner{direction:rtl}
+.mb-brand-section.reverse .mb-brand-section-inner > *{direction:ltr}
+/* Header row at top of each section: logo+audience LEFT, CTA RIGHT */
+.mb-brand-header{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;max-width:1200px;margin:0 auto 48px;padding:0 48px 32px;border-bottom:0.5px solid #e6e8ec}
+.mb-brand-section.alt .mb-brand-header{border-bottom-color:#e0e3e8}
+.mb-brand-header-left{display:flex;flex-direction:column;gap:8px}
+.mb-brand-header-logo{display:flex;align-items:center;gap:12px}
+.mb-brand-header-name{font-size:20px;font-weight:700;color:#1a1a1a;letter-spacing:-0.015em}
+.mb-brand-header-audience{font-size:15px;color:#777;font-weight:500;font-style:italic;letter-spacing:-0.005em}
+.mb-brand-header-cta{flex-shrink:0;margin-top:6px}
+.mb-brand-section-badge{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px}
+.mb-brand-section-mark{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px}
+.mb-brand-section-mark.amplify{background:#46435D}
+.mb-brand-section-mark.parishsoft{background:#8b6f47}
+.mb-brand-section-mark.donordirect{background:#2a6e5a}
+.mb-brand-section-mark.protect{background:#a14040}
+.mb-brand-section-brand{font-size:14px;font-weight:700;color:#1a1a1a;letter-spacing:-0.01em}
+.mb-brand-section-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.mb-brand-section-eyebrow.amplify{color:#46435D}
+.mb-brand-section-eyebrow.parishsoft{color:#8b6f47}
+.mb-brand-section-eyebrow.donordirect{color:#2a6e5a}
+.mb-brand-section-eyebrow.protect{color:#a14040}
+.mb-brand-section h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:18px}
+.mb-brand-section-desc{font-size:17px;color:#666;line-height:1.65;margin-bottom:28px}
+.mb-brand-section-features{list-style:none;padding:0;margin:0 0 32px 0;display:flex;flex-direction:column;gap:12px}
+.mb-brand-section-features li{display:flex;align-items:flex-start;gap:11px;font-size:14px;color:#444;line-height:1.5}
+.mb-brand-section-check{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:700;margin-top:1px}
+.mb-brand-section-check.amplify{background:#46435D}
+.mb-brand-section-check.parishsoft{background:#8b6f47}
+.mb-brand-section-check.donordirect{background:#2a6e5a}
+.mb-brand-section-check.protect{background:#a14040}
+.mb-brand-section-cta{display:inline-flex;align-items:center;justify-content:center;padding:13px 24px;border-radius:8px;font-size:14px;font-weight:600;color:white;text-decoration:none;transition:all 0.15s}
+.mb-brand-section-cta.amplify{background:#46435D}.mb-brand-section-cta.amplify:hover{background:#5a576e}
+.mb-brand-section-cta.parishsoft{background:#8b6f47}.mb-brand-section-cta.parishsoft:hover{background:#a08555}
+.mb-brand-section-cta.donordirect{background:#2a6e5a}.mb-brand-section-cta.donordirect:hover{background:#358571}
+.mb-brand-section-cta.protect{background:#a14040}.mb-brand-section-cta.protect:hover{background:#b95050}
+.mb-brand-visual{aspect-ratio:4/3;border-radius:18px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 48px rgba(0,0,0,0.08)}
+.mb-brand-visual.amplify{background:linear-gradient(135deg,#46435D 0%,#2d2a44 100%)}
+.mb-brand-visual.parishsoft{background:linear-gradient(135deg,#8b6f47 0%,#5d4730 100%)}
+.mb-brand-visual.donordirect{background:linear-gradient(135deg,#2a6e5a 0%,#1c4a3d 100%)}
+.mb-brand-visual.protect{background:linear-gradient(135deg,#a14040 0%,#6f2a2a 100%)}
+.mb-brand-visual-stack{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:78%;height:78%}
+.mb-brand-visual-cell{background:rgba(255,255,255,0.12);border:0.5px solid rgba(255,255,255,0.18);border-radius:12px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.92);font-size:13px;font-weight:600;backdrop-filter:blur(4px)}
+
+/* --- Spired for Churches: layered dashboard-stack mock --- */
+.amp-mock{position:relative;width:88%;height:88%}
+.amp-mock-card{position:absolute;background:rgba(255,255,255,0.95);border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,0.25),0 2px 6px rgba(0,0,0,0.12);overflow:hidden}
+.amp-mock-card.main{left:0;top:0;width:72%;height:100%;display:flex;flex-direction:column}
+.amp-mock-card.stat{right:0;top:8%;width:38%;height:34%;padding:18px;display:flex;flex-direction:column;justify-content:space-between}
+.amp-mock-card.list{right:0;bottom:6%;width:38%;height:46%;padding:16px;display:flex;flex-direction:column;gap:8px}
+.amp-mock-header{padding:12px 14px;border-bottom:0.5px solid #efeff3;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.amp-mock-title{font-size:11px;font-weight:700;color:#46435D;letter-spacing:-0.01em}
+.amp-mock-dots{display:flex;gap:4px}
+.amp-mock-dot{width:6px;height:6px;border-radius:50%;background:#e3e3e8}
+.amp-mock-body{padding:14px;flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
+.amp-mock-statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.amp-mock-statbox{background:#f4f3f7;border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:4px}
+.amp-mock-statbar{height:6px;border-radius:3px;background:linear-gradient(90deg,#46435D 0%,#46435D var(--w,60%),#e3e3e8 var(--w,60%),#e3e3e8 100%)}
+.amp-mock-statlabel{font-size:8px;color:#888;font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
+.amp-mock-chart{flex:1;background:#fafafa;border-radius:8px;padding:10px;display:flex;align-items:flex-end;gap:5px;min-height:50px}
+.amp-mock-bar{flex:1;background:linear-gradient(180deg,#46435D 0%,#5a576e 100%);border-radius:3px 3px 0 0;opacity:0.85}
+.amp-mock-bignum{font-size:22px;font-weight:700;color:#46435D;letter-spacing:-0.02em;line-height:1}
+.amp-mock-smallabel{font-size:9px;color:#999;font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
+.amp-mock-trend{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;color:#46435D}
+.amp-mock-listitem{display:flex;align-items:center;gap:8px;font-size:10px}
+.amp-mock-listdot{width:18px;height:18px;border-radius:5px;background:#eeedf4;color:#46435D;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.amp-mock-listtext{flex:1;height:6px;background:#f0f0f4;border-radius:3px}
+
+/* --- ParishSOFT: sacramental record card mock --- */
+.par-mock{position:relative;width:88%;height:90%}
+.par-mock-card{position:absolute;background:rgba(255,255,255,0.96);border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,0.25),0 2px 6px rgba(0,0,0,0.12);overflow:hidden}
+.par-mock-card.main{left:0;top:0;width:68%;height:100%;display:flex;flex-direction:column}
+.par-mock-card.event{right:0;top:6%;width:42%;padding:16px;display:flex;flex-direction:column;gap:10px}
+.par-mock-card.history{right:0;bottom:6%;width:42%;padding:16px;display:flex;flex-direction:column;gap:10px}
+.par-mock-header{padding:12px 14px;background:#f9f6f0;border-bottom:0.5px solid #ece5d4;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.par-mock-title{font-size:11px;font-weight:700;color:#8b6f47;letter-spacing:-0.01em}
+.par-mock-id{font-size:9px;font-weight:600;color:#bcaa86;letter-spacing:0.05em}
+.par-mock-family{padding:14px;display:flex;align-items:center;gap:10px;border-bottom:0.5px solid #f3eee0}
+.par-mock-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#a08555 0%,#5d4730 100%);flex-shrink:0}
+.par-mock-name-stack{flex:1;display:flex;flex-direction:column;gap:4px}
+.par-mock-name{height:8px;width:70%;border-radius:3px;background:#dcd1bc}
+.par-mock-meta{height:5px;width:50%;border-radius:3px;background:#ece5d4}
+.par-mock-section{padding:12px 14px;border-bottom:0.5px solid #f3eee0;display:flex;flex-direction:column;gap:8px}
+.par-mock-section:last-child{border-bottom:none}
+.par-mock-section-label{font-size:8px;font-weight:700;color:#8b6f47;letter-spacing:0.08em;text-transform:uppercase}
+.par-mock-field{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.par-mock-fieldlabel{font-size:9px;color:#aaa;flex-shrink:0}
+.par-mock-fieldvalue{flex:1;max-width:60%;height:6px;border-radius:3px;background:#ece5d4}
+.par-mock-fieldvalue.filled{background:linear-gradient(90deg,#8b6f47 0%,#8b6f47 100%);opacity:0.6}
+.par-mock-eventtitle{font-size:10px;font-weight:700;color:#1a1a1a}
+.par-mock-eventsub{font-size:9px;color:#888}
+.par-mock-eventbadge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:999px;background:#f9f6f0;color:#8b6f47;font-size:9px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;align-self:flex-start}
+.par-mock-timeline{display:flex;flex-direction:column;gap:6px}
+.par-mock-tlitem{display:flex;align-items:center;gap:8px}
+.par-mock-tldot{width:8px;height:8px;border-radius:50%;background:#8b6f47;opacity:0.7;flex-shrink:0}
+.par-mock-tllabel{flex:1;height:5px;border-radius:3px;background:#ece5d4}
+.par-mock-tldate{font-size:8px;color:#bcaa86;font-weight:600;flex-shrink:0}
+
+/* --- DonorDirect: two-pane donor profile --- */
+.dd-mock{position:relative;width:90%;height:88%;display:grid;grid-template-columns:1fr 1.1fr;gap:14px}
+.dd-mock-card{background:rgba(255,255,255,0.96);border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,0.25),0 2px 6px rgba(0,0,0,0.12);overflow:hidden;display:flex;flex-direction:column}
+.dd-mock-profile-header{padding:14px;background:#f0f8f4;border-bottom:0.5px solid #d5eadf;display:flex;align-items:center;justify-content:space-between}
+.dd-mock-title{font-size:10px;font-weight:700;color:#2a6e5a;letter-spacing:-0.01em}
+.dd-mock-status{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;color:#2a6e5a;background:white;padding:2px 8px;border-radius:999px;border:0.5px solid #d5eadf}
+.dd-mock-profile-body{padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;flex:1;justify-content:center}
+.dd-mock-pavatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#358571 0%,#1c4a3d 100%)}
+.dd-mock-pname-block{display:flex;flex-direction:column;align-items:center;gap:5px;width:100%}
+.dd-mock-pname{height:9px;width:60%;border-radius:3px;background:#c5dfd4}
+.dd-mock-pemail{height:6px;width:48%;border-radius:3px;background:#e5efe9}
+.dd-mock-pstats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;width:100%;margin-top:6px}
+.dd-mock-pstat{background:#f0f8f4;border-radius:8px;padding:8px 6px;text-align:center}
+.dd-mock-pstat-value{font-size:13px;font-weight:700;color:#2a6e5a;letter-spacing:-0.02em}
+.dd-mock-pstat-label{font-size:7px;color:#888;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;margin-top:2px}
+.dd-mock-timeline-header{padding:14px;border-bottom:0.5px solid #efeff3;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.dd-mock-tlinetitle{font-size:11px;font-weight:700;color:#1a1a1a}
+.dd-mock-tlinetag{font-size:8px;font-weight:600;color:#999;letter-spacing:0.05em;text-transform:uppercase}
+.dd-mock-tlines{padding:14px;flex:1;display:flex;align-items:flex-end;gap:6px;min-height:0}
+.dd-mock-tlbar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%}
+.dd-mock-tlbar{width:100%;background:linear-gradient(180deg,#2a6e5a 0%,#358571 100%);border-radius:3px 3px 0 0;opacity:0.85}
+.dd-mock-tlmonth{font-size:7px;color:#bbb;font-weight:600;letter-spacing:0.04em}
+.dd-mock-footer{padding:10px 14px;background:#fafafa;border-top:0.5px solid #efeff3;display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#666;font-weight:600}
+.dd-mock-footer-num{color:#2a6e5a;font-weight:700}
+
+/* --- Protect My Ministry: background check report --- */
+.pm-mock{position:relative;width:84%;height:88%}
+.pm-mock-card{position:absolute;background:rgba(255,255,255,0.96);border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,0.25),0 2px 6px rgba(0,0,0,0.12);overflow:hidden}
+.pm-mock-card.main{left:0;top:0;width:72%;height:100%;display:flex;flex-direction:column}
+.pm-mock-card.shield{right:0;top:14%;width:38%;padding:18px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.pm-mock-card.monitor{right:0;bottom:8%;width:38%;padding:14px;display:flex;flex-direction:column;gap:8px}
+.pm-mock-header{padding:12px 14px;background:#fbf1f1;border-bottom:0.5px solid #ecd6d6;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.pm-mock-title{font-size:11px;font-weight:700;color:#a14040;letter-spacing:-0.01em}
+.pm-mock-id{font-size:9px;color:#c79090;font-weight:600;letter-spacing:0.05em}
+.pm-mock-volunteer{padding:14px;display:flex;align-items:center;gap:10px;border-bottom:0.5px solid #f5e6e6}
+.pm-mock-vavatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#b95050 0%,#6f2a2a 100%);flex-shrink:0}
+.pm-mock-vname-stack{flex:1;display:flex;flex-direction:column;gap:5px}
+.pm-mock-vname{height:8px;width:55%;border-radius:3px;background:#e3c0c0}
+.pm-mock-vmeta{height:5px;width:40%;border-radius:3px;background:#f5e6e6}
+.pm-mock-statusbanner{padding:10px 14px;background:linear-gradient(90deg,#2a6e5a 0%,#358571 100%);color:white;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.pm-mock-statustext{font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.pm-mock-statusdate{font-size:9px;opacity:0.85}
+.pm-mock-checks{padding:10px 14px;flex:1;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.pm-mock-check{display:flex;align-items:center;gap:9px}
+.pm-mock-check-icon{width:18px;height:18px;border-radius:5px;background:#e5f2eb;color:#2a6e5a;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.pm-mock-check-label{flex:1;font-size:9px;color:#444;font-weight:600}
+.pm-mock-check-status{font-size:8px;font-weight:700;color:#2a6e5a;letter-spacing:0.05em}
+.pm-mock-shield-icon{width:46px;height:54px;background:linear-gradient(180deg,#a14040 0%,#6f2a2a 100%);clip-path:polygon(50% 0%,100% 18%,100% 60%,50% 100%,0 60%,0 18%);display:flex;align-items:center;justify-content:center;color:white;font-size:22px;font-weight:700}
+.pm-mock-shield-label{font-size:10px;font-weight:700;color:#1a1a1a;text-align:center;letter-spacing:-0.01em}
+.pm-mock-shield-sub{font-size:8px;color:#888;text-align:center;font-weight:600;letter-spacing:0.04em;text-transform:uppercase}
+.pm-mock-monitor-label{font-size:8px;font-weight:700;color:#a14040;letter-spacing:0.06em;text-transform:uppercase}
+.pm-mock-monitor-row{display:flex;align-items:center;gap:6px;font-size:9px;color:#666}
+.pm-mock-monitor-dot{width:6px;height:6px;border-radius:50%;background:#2a6e5a;flex-shrink:0}
+
+/* ===== ONE FAMILY MANY SOLUTIONS — intro / brand navigator ===== */
+.mb-family{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.mb-family-h2{font-size:48px;font-weight:700;color:#1a1a1a;line-height:1.05;letter-spacing:-0.03em;margin-bottom:20px}
+.mb-family-desc{font-size:17px;color:#666;line-height:1.7;margin-bottom:32px;max-width:480px}
+.mb-family-meta{display:flex;gap:32px;margin-top:32px;padding-top:24px;border-top:0.5px solid #e0e3e8}
+.mb-family-meta-num{font-size:24px;font-weight:700;color:#46435D;letter-spacing:-0.02em;line-height:1;margin-bottom:6px}
+.mb-family-meta-label{font-size:11px;color:#888;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+.mb-nav-card{background:white;border-radius:18px;box-shadow:0 12px 36px rgba(0,0,0,0.08),0 2px 8px rgba(0,0,0,0.04);overflow:hidden;border:0.5px solid #e8e8e8}
+.mb-nav-card-header{padding:18px 24px;background:#f7f8fa;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between}
+.mb-nav-card-title{font-size:11px;font-weight:700;color:#666;letter-spacing:0.12em;text-transform:uppercase}
+.mb-nav-card-count{font-size:11px;font-weight:700;color:#bbb}
+.mb-nav-row{display:flex;align-items:center;gap:18px;padding:20px 24px;border-bottom:0.5px solid #f0f0f0;text-decoration:none;color:inherit;cursor:pointer;position:relative;transition:background 0.15s,padding-left 0.18s ease;overflow:hidden}
+.mb-nav-row:last-child{border-bottom:none}
+.mb-nav-row:hover{background:#fafbfc;padding-left:30px}
+.mb-nav-row-stripe{position:absolute;left:0;top:0;bottom:0;width:5px}
+.mb-nav-row-stripe.amplify{background:#46435D}
+.mb-nav-row-stripe.parishsoft{background:#8b6f47}
+.mb-nav-row-stripe.donordirect{background:#2a6e5a}
+.mb-nav-row-stripe.protect{background:#a14040}
+.mb-nav-row-mark{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:15px;flex-shrink:0;transition:transform 0.18s ease}
+.mb-nav-row-mark.amplify{background:#46435D}
+.mb-nav-row-mark.parishsoft{background:#8b6f47}
+.mb-nav-row-mark.donordirect{background:#2a6e5a}
+.mb-nav-row-mark.protect{background:#a14040}
+.mb-nav-row:hover .mb-nav-row-mark{transform:scale(1.06)}
+.mb-nav-row-body{flex:1;min-width:0}
+.mb-nav-row-name{font-size:16px;font-weight:700;color:#1a1a1a;letter-spacing:-0.01em;margin-bottom:2px}
+.mb-nav-row-tag{font-size:12px;color:#888;font-weight:500}
+.mb-nav-row-arrow{font-size:16px;color:#c0c0c8;transition:transform 0.18s,color 0.18s}
+.mb-nav-row:hover .mb-nav-row-arrow{color:#46435D;transform:translateX(4px)}
+
+/* ===== HCH TEASER ===== */
+.mb-hch{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.mb-hch-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mb-hch-card{background:white;border:0.5px solid #e8e8e8;border-radius:12px;padding:18px;cursor:pointer;transition:all 0.15s;text-decoration:none;color:inherit;display:block}
+.mb-hch-card:hover{border-color:#46435D;transform:translateY(-2px)}
+.mb-hch-card-type{font-size:10px;font-weight:700;color:#888;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
+.mb-hch-card-title{font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.4}
+
+/* ===== LATEST NEWS ===== */
+.mb-news{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.mb-news-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:all 0.15s;display:flex;flex-direction:column;cursor:pointer}
+.mb-news-card:hover{border-color:#46435D;transform:translateY(-2px);box-shadow:0 6px 20px rgba(70,67,93,0.06)}
+.mb-news-card-img{aspect-ratio:16/10;background:linear-gradient(135deg,#46435D 0%,#46435D 100%)}
+.mb-news-card-img.alt{background:linear-gradient(135deg,#46435D 0%,#8b6f47 100%)}
+.mb-news-card-img.alt2{background:linear-gradient(135deg,#2a6e5a 0%,#46435D 100%)}
+.mb-news-card-body{padding:22px 22px 24px}
+.mb-news-card-topic{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#46435D;margin-bottom:10px}
+.mb-news-card-title{font-size:16px;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:10px;letter-spacing:-0.01em}
+.mb-news-card-date{font-size:12px;color:#999}
+
+/* ===== FOOTER ===== */
+footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 32px}
+.mb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.mb-footer-brand{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px;margin-top:14px}
+.mb-footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
+.mb-footer-col-link{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;transition:color 0.12s}
+.mb-footer-col-link:hover{color:white}
+.mb-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:0.5px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35)}
+
+/* ===== ANNOTATION SYSTEM (consistent with rest of project) ===== */
+.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);max-width:380px;pointer-events:auto}
 .anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
 .anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}
 .anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
@@ -151,511 +381,563 @@ body.anno-hidden .anno-legend{display:none}
 .anno-toggle:hover{background:#5a576e}
 body.anno-hidden .anno{display:none}
 </style>
-
-<!-- PASSWORD GATE REMOVED FOR LOCAL DEV -->
-
-<!-- SITE CONTENT -->
-<div id="site">
-
-<div class="utility-bar">
-  <div class="util-left">
-    <a href="mb-home.html" class="util-link">Company</a><a href="hq.html" class="util-link">Amplify+ HQ</a>
+</head>
+<body>
+<nav class="spired-nav" id="spiredNav">
+  <div class="sn-inner">
+    <a href="home.html" class="sn-logo">
+      <span class="sn-logo-mark">s</span>
+      <span class="sn-logo-wordmark">spired</span>
+    </a>
+    <div class="sn-links">
+      <a class="sn-link" data-sn-key="churches" href="churches.html" onmouseenter="snOpen('churches',this)">Churches <span class="sn-chev">▾</span></a>
+      <a class="sn-link" href="#parishes" onmouseenter="snClose()">Parishes</a>
+      <a class="sn-link" href="#protection" onmouseenter="snClose()">Protection</a>
+      <a class="sn-link" href="#non-profit" onmouseenter="snClose()">Non-Profit</a>
+    </div>
+    <div class="sn-right">
+      <a href="request-demo.html" class="sn-cta">Request Demo</a>
+      <a href="login.html" class="sn-utility">Login</a>
+      <div class="sn-about-wrap" id="snAboutWrap">
+        <button class="sn-utility" onclick="snToggleAbout(event)">About <span class="sn-chev">▾</span></button>
+        <div class="sn-about-drop">
+          <a href="mb-company.html">About Us</a>
+          <a href="mb-meet-team.html">Meet the Team</a>
+          <a href="mb-careers.html">Careers</a>
+          <a href="mb-press.html">Press / Newsroom</a>
+          <a href="mb-contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="util-center">
-    <svg width="32" height="32" viewBox="0 0 32 32"><rect width="16" height="16" fill="#c8c8c8"/><rect x="16" width="16" height="16" fill="#e4e4e4"/><rect y="16" width="16" height="16" fill="#e4e4e4"/><rect x="16" y="16" width="16" height="16" fill="#c8c8c8"/></svg>
-    <span class="logo-wordmark">Amplify</span>
+  <div class="sn-mega" id="snMega"></div>
+</nav>
+
+
+<!-- ============ MB NAV ============ -->
+<!-- ============ HERO ============ -->
+<section class="mb-hero">
+  <div class="mb-hero-bg"></div>
+  <div class="w mb-hero-content">
+    <div class="mb-hero-eyebrow">Ministry Brands</div>
+    <h1 class="mb-hero-h1">Empowering communities. Amplifying generosity.</h1>
+    <p class="mb-hero-sub">A family of software platforms built for churches, parishes, nonprofits, and the missions that hold them together. 90,000+ organizations run on Ministry Brands.</p>
+    <div class="mb-hero-ctas">
+      <a href="#brands" class="btn btn-white">Explore our Brands</a>
+    </div>
   </div>
-  <div class="util-right">
-    <a href="search-results.html" class="search-field" style="text-decoration:none"><span class="search-icon">⌕</span><span class="search-placeholder">Search</span></a>
-    <span class="util-sep">|</span>
-    <a href="login.html" class="util-link" style="text-decoration:none">Login</a>
+</section>
+
+<div class="anno anno-page"><strong>Hero Strategy:</strong> Corporate tagline echoes Spired for Churches's "amplifying generosity" while positioning Ministry Brands as the family of platforms. Stat (90K+ orgs) builds immediate credibility. Two clear paths: demo for high-intent, brands for research-mode.</div>
+
+<!-- ============ LOGO REEL ============ -->
+<div class="mb-logos">
+  <div class="mb-logos-label">Trusted by 90,000+ organizations across North America</div>
+  <div class="mb-logos-row">
+    <div class="mb-logo-placeholder">CHURCH&nbsp;A</div>
+    <div class="mb-logo-placeholder">DIOCESE&nbsp;B</div>
+    <div class="mb-logo-placeholder">MISSION&nbsp;C</div>
+    <div class="mb-logo-placeholder">FOUNDATION&nbsp;D</div>
+    <div class="mb-logo-placeholder">PARISH&nbsp;E</div>
+    <div class="mb-logo-placeholder">MINISTRY&nbsp;F</div>
+    <div class="mb-logo-placeholder">NONPROFIT&nbsp;G</div>
   </div>
 </div>
 
-<div class="nav-stage">
-  <div class="nav-group">
-    <div class="island" id="primaryNav">
-      <button class="nav-btn" onmouseenter="openMenu('who',this)" onclick="openMenu('who',this)">Who We Serve <span class="chevron">▾</span></button>
-      <button class="nav-btn" onmouseenter="openMenu('solutions',this)" onclick="window.location.href='platform-overview.html'">Solutions <span class="chevron">▾</span></button>
-      <button class="nav-btn" onmouseenter="openMenu('services',this)" onclick="window.location.href='services-overview.html'">Services <span class="chevron">▾</span></button>
-      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='healthy-church-hub.html'">Healthy Church Hub</button>
-      <button class="nav-btn" onmouseenter="closeMenu()" onclick="window.location.href='partners.html'">Partners</button>
-    </div>
-    <a href="request-demo.html" class="demo-island" style="text-decoration:none"><span class="demo-label">Request Demo</span></a>
-    <div class="mega" id="megaMenu"></div>
-  </div>
+<!-- ============ STAT STRIP ============ -->
+<div class="mb-stats">
+  <div class="mb-stat"><div class="mb-stat-value">90,000+</div><div class="mb-stat-label">Organizations served</div></div>
+  <div class="mb-stat"><div class="mb-stat-value">$6.5B+</div><div class="mb-stat-label">In giving managed</div></div>
+  <div class="mb-stat"><div class="mb-stat-value">42K</div><div class="mb-stat-label">Websites powered</div></div>
+  <div class="mb-stat"><div class="mb-stat-value">1.7M</div><div class="mb-stat-label">Background checks run</div></div>
 </div>
 
-<!-- ============================================ -->
-<!-- PROMO BANNER PLACEHOLDER (dismissible) -->
-<!-- ============================================ -->
-<div id="promoBanner" style="background:#f0eef7;color:#46435D;position:relative;border-bottom:0.5px solid #e0dbf0">
-  <div style="max-width:1280px;margin:0 auto;padding:18px 56px 18px 32px;display:flex;align-items:center;justify-content:center;gap:12px">
-    <span style="font-size:13px;font-weight:600;color:#46435D;letter-spacing:0.04em;text-transform:uppercase">Placeholder banner</span>
-  </div>
-  <button onclick="document.getElementById('promoBanner').style.display='none'" aria-label="Dismiss" style="position:absolute;top:50%;right:16px;transform:translateY(-50%);background:rgba(70,67,93,0.08);border:none;width:26px;height:26px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#46435D;font-size:14px;line-height:1;padding:0;transition:background 0.12s" onmouseover="this.style.background='rgba(70,67,93,0.16)'" onmouseout="this.style.background='rgba(70,67,93,0.08)'">&times;</button>
-</div>
+<!-- Anchor target for the "Explore our Brands" hero CTA -->
+<div id="brands"></div>
 
-<!-- ============================================ -->
-<!-- HERO -->
-<!-- ============================================ -->
-<div style="margin-top:0">
-  <div style="background:#46435D;padding:80px 0 64px">
-    <div class="w">
-      <div style="text-align:center;max-width:760px;margin:0 auto 48px">
-        <div style="font-size:48px;font-weight:700;color:white;letter-spacing:-0.025em;line-height:1.08;margin-bottom:16px">Run your church.<br>Not the other way around.</div>
-        <div style="font-size:17px;color:rgba(255,255,255,0.6);line-height:1.65;margin-bottom:32px">One platform to manage people, giving, worship, communications, and operations — built for churches that want to thrive.</div>
-        <div style="display:flex;gap:12px;justify-content:center">
-          <a href="request-demo.html" class="btn btn-white">Request a Demo</a>
-          <a href="platform-overview.html" class="btn btn-ghost">Explore the Platform</a>
-        </div>
-      </div>
-      <div style="max-width:820px;margin:0 auto;background:rgba(255,255,255,0.07);border-radius:16px;border:0.5px solid rgba(255,255,255,0.12);padding:48px 0;display:flex;align-items:center;justify-content:center;min-height:320px">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
-          <div style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:24px;color:white;border:0.5px solid rgba(255,255,255,0.2)">▶</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.35);letter-spacing:0.06em;text-transform:uppercase;font-weight:600">Watch the overview</div>
-        </div>
-      </div>
-      <div class="anno anno-page" style="border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.75)"><strong>Hero Strategy:</strong> Establishes the core brand promise — "Run your church, not the other way around" — and immediately offers two clear paths: demo (high intent) and platform exploration (research mode). Video placeholder gives the hero visual weight and a passive engagement option.</div>
-    </div>
-  </div>
-
-  <!-- LOGO STRIP -->
-  <div class="section" style="padding:48px 0">
-    <div class="w">
-      <div style="font-size:12px;color:#bbb;text-align:center;margin-bottom:16px;letter-spacing:0.04em">Trusted by 55,000+ ministries across North America</div>
-      <div style="display:flex;align-items:center;justify-content:center">
-        <div style="height:20px;border-radius:3px;background:#e8e8e8;margin:0 20px;width:110px"></div>
-        <div style="height:20px;border-radius:3px;background:#e8e8e8;margin:0 20px;width:90px"></div>
-        <div style="height:20px;border-radius:3px;background:#e8e8e8;margin:0 20px;width:130px"></div>
-        <div style="height:20px;border-radius:3px;background:#e8e8e8;margin:0 20px;width:100px"></div>
-        <div style="height:20px;border-radius:3px;background:#e8e8e8;margin:0 20px;width:120px"></div>
-        <div style="height:20px;border-radius:3px;background:#e8e8e8;margin:0 20px;width:95px"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============================================ -->
-  <!-- WHO WE ARE — NARRATIVE -->
-  <!-- ============================================ -->
-  <div class="section" style="padding:80px 0 72px">
-    <div class="w">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
-        <div>
-          <div class="section-eyebrow">Who we are</div>
-          <div style="font-size:36px;font-weight:700;color:#1a1a1a;line-height:1.12;letter-spacing:-0.025em;margin-bottom:16px">The church management platform built by people who understand ministry.</div>
-          <div style="font-size:16px;color:#888;line-height:1.7;margin-bottom:24px">Amplify isn't a generic SaaS tool adapted for churches. It was built from the ground up by church leaders, for church leaders — combining 10 purpose-built tools into one connected system that handles everything from giving to group management to service planning.</div>
-          <div style="font-size:16px;color:#888;line-height:1.7;margin-bottom:32px">Your staff shouldn't have to be IT experts. Your volunteers shouldn't need three logins. Your data shouldn't live in five different places. Amplify fixes all of that.</div>
-          <a href="platform-overview.html" class="btn btn-dark">See How It Works</a>
-        </div>
-        <div style="background:#e0dfe8;border-radius:16px;height:400px;display:flex;align-items:center;justify-content:center">
-          <div style="text-align:center">
-            <div style="font-size:48px;font-weight:700;color:#46435D;margin-bottom:4px">55,000+</div>
-            <div style="font-size:14px;color:#888">ministries trust Amplify</div>
-          </div>
-        </div>
-      </div>
-      <div class="anno anno-page"><strong>Narrative Strategy:</strong> Establishes the "who we are" narrative without heavy product detail. Positions Amplify as purpose-built (not adapted), addresses the pain of tool fragmentation, and lets platform-overview.html handle the deep product walk-through.</div>
-    </div>
-  </div>
-
-  <!-- ============================================ -->
-  <!-- 5 PILLARS — RESTRUCTURED -->
-  <!-- ============================================ -->
-  <div class="section alt" style="padding:80px 0">
-    <div class="w">
-      <div class="section-center">
-        <div class="section-eyebrow">Our foundation</div>
-        <div class="section-h2">Built Around the 5 Pillars of a Healthy Church</div>
-        <div class="section-sub">Every feature in Amplify maps back to one of five pillars that define a thriving ministry. This isn't a feature list — it's a philosophy.</div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px">
-        <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px 24px;text-align:center;transition:all 0.15s;cursor:pointer" onmouseover="this.style.borderColor='#c0bdd4';this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 24px rgba(70,67,93,0.08)'" onmouseout="this.style.borderColor='#e8e8e8';this.style.transform='none';this.style.boxShadow='none'">
-          <div style="width:52px;height:52px;border-radius:12px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px">🤝</div>
-          <div style="font-size:15px;font-weight:700;color:#46435D;margin-bottom:8px;line-height:1.25">Community &amp; Discipleship</div>
-          <div style="font-size:13px;color:#aaa;line-height:1.6">Invest in spiritual growth and create a culture of discipleship that transforms lives.</div>
-        </div>
-        <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px 24px;text-align:center;transition:all 0.15s;cursor:pointer" onmouseover="this.style.borderColor='#c0bdd4';this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 24px rgba(70,67,93,0.08)'" onmouseout="this.style.borderColor='#e8e8e8';this.style.transform='none';this.style.boxShadow='none'">
-          <div style="width:52px;height:52px;border-radius:12px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px">💬</div>
-          <div style="font-size:15px;font-weight:700;color:#46435D;margin-bottom:8px;line-height:1.25">Communication &amp; Engagement</div>
-          <div style="font-size:13px;color:#aaa;line-height:1.6">Foster a culture of trust, inclusion, and connection through every channel.</div>
-        </div>
-        <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px 24px;text-align:center;transition:all 0.15s;cursor:pointer" onmouseover="this.style.borderColor='#c0bdd4';this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 24px rgba(70,67,93,0.08)'" onmouseout="this.style.borderColor='#e8e8e8';this.style.transform='none';this.style.boxShadow='none'">
-          <div style="width:52px;height:52px;border-radius:12px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px">💰</div>
-          <div style="font-size:15px;font-weight:700;color:#46435D;margin-bottom:8px;line-height:1.25">Financial Stewardship</div>
-          <div style="font-size:13px;color:#aaa;line-height:1.6">Build transparency and accountability, ensuring church funds are managed well.</div>
-        </div>
-        <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px 24px;text-align:center;transition:all 0.15s;cursor:pointer" onmouseover="this.style.borderColor='#c0bdd4';this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 24px rgba(70,67,93,0.08)'" onmouseout="this.style.borderColor='#e8e8e8';this.style.transform='none';this.style.boxShadow='none'">
-          <div style="width:52px;height:52px;border-radius:12px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px">🙋</div>
-          <div style="font-size:15px;font-weight:700;color:#46435D;margin-bottom:8px;line-height:1.25">Staff &amp; Volunteer Effectiveness</div>
-          <div style="font-size:13px;color:#aaa;line-height:1.6">Equip your team to carry out their roles effectively and without burnout.</div>
-        </div>
-        <div style="background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:28px 24px;text-align:center;transition:all 0.15s;cursor:pointer" onmouseover="this.style.borderColor='#c0bdd4';this.style.transform='translateY(-3px)';this.style.boxShadow='0 6px 24px rgba(70,67,93,0.08)'" onmouseout="this.style.borderColor='#e8e8e8';this.style.transform='none';this.style.boxShadow='none'">
-          <div style="width:52px;height:52px;border-radius:12px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 16px">🛡</div>
-          <div style="font-size:15px;font-weight:700;color:#46435D;margin-bottom:8px;line-height:1.25">Safe Environments</div>
-          <div style="font-size:13px;color:#aaa;line-height:1.6">Keep people safe with background checks, real-time monitoring, and secure check-in.</div>
-        </div>
-      </div>
-      <div class="anno"><strong>Pillars Restructured:</strong> Changed from horizontal image + text layout into a 5-card grid. Each pillar is now a self-contained card with icon, title, and description — easier to scan and visually balanced. Pillar language preserved verbatim.</div>
-    </div>
-  </div>
-
-  <!-- ============================================ -->
-  <!-- PLATFORM TEASER — MINIMAL -->
-  <!-- ============================================ -->
-  <div class="section" style="padding:80px 0">
-    <div class="w">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
-        <div style="background:#46435D;border-radius:16px;padding:48px 40px;min-height:380px;display:flex;flex-direction:column;justify-content:center">
-          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px">10 tools. 1 platform.</div>
-          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
-            <a href="giving.html" style="text-decoration:none;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 8px;text-align:center;transition:all 0.12s;display:block" onmouseover="this.style.background='rgba(255,255,255,0.18)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.transform='none'">
-              <div style="font-size:18px;margin-bottom:6px">$</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.7);font-weight:500">Giving</div>
-            </a>
-            <a href="accounting.html" style="text-decoration:none;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 8px;text-align:center;transition:all 0.12s;display:block" onmouseover="this.style.background='rgba(255,255,255,0.18)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.transform='none'">
-              <div style="font-size:18px;margin-bottom:6px">=</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.7);font-weight:500">Accounting</div>
-            </a>
-            <a href="people.html" style="text-decoration:none;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 8px;text-align:center;transition:all 0.12s;display:block" onmouseover="this.style.background='rgba(255,255,255,0.18)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.transform='none'">
-              <div style="font-size:18px;margin-bottom:6px">P</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.7);font-weight:500">People</div>
-            </a>
-            <a href="websites.html" style="text-decoration:none;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 8px;text-align:center;transition:all 0.12s;display:block" onmouseover="this.style.background='rgba(255,255,255,0.18)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.transform='none'">
-              <div style="font-size:18px;margin-bottom:6px">W</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.7);font-weight:500">Websites</div>
-            </a>
-            <a href="mobile-app.html" style="text-decoration:none;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 8px;text-align:center;transition:all 0.12s;display:block" onmouseover="this.style.background='rgba(255,255,255,0.18)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.transform='none'">
-              <div style="font-size:18px;margin-bottom:6px">M</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.7);font-weight:500">Mobile</div>
-            </a>
-            <a href="communications.html" style="text-decoration:none;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 8px;text-align:center;transition:all 0.12s;display:block" onmouseover="this.style.background='rgba(255,255,255,0.18)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.transform='none'">
-              <div style="font-size:18px;margin-bottom:6px">@</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.7);font-weight:500">Comms</div>
-            </a>
-            <a href="streaming.html" style="text-decoration:none;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 8px;text-align:center;transition:all 0.12s;display:block" onmouseover="this.style.background='rgba(255,255,255,0.18)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.transform='none'">
-              <div style="font-size:18px;margin-bottom:6px">▶</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.7);font-weight:500">Streaming</div>
-            </a>
-            <a href="service-planning.html" style="text-decoration:none;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 8px;text-align:center;transition:all 0.12s;display:block" onmouseover="this.style.background='rgba(255,255,255,0.18)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.transform='none'">
-              <div style="font-size:18px;margin-bottom:6px">✓</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.7);font-weight:500">Planning</div>
-            </a>
-            <a href="media.html" style="text-decoration:none;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 8px;text-align:center;transition:all 0.12s;display:block" onmouseover="this.style.background='rgba(255,255,255,0.18)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.transform='none'">
-              <div style="font-size:18px;margin-bottom:6px">◉</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.7);font-weight:500">Media</div>
-            </a>
-            <a href="safety.html" style="text-decoration:none;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 8px;text-align:center;transition:all 0.12s;display:block" onmouseover="this.style.background='rgba(255,255,255,0.18)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.transform='none'">
-              <div style="font-size:18px;margin-bottom:6px">S</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.7);font-weight:500">Safety</div>
-            </a>
-          </div>
-        </div>
-        <div>
-          <div class="section-eyebrow">The platform</div>
-          <div style="font-size:36px;font-weight:700;color:#1a1a1a;line-height:1.12;letter-spacing:-0.025em;margin-bottom:16px">Everything your church needs. Nothing it doesn't.</div>
-          <div style="font-size:16px;color:#888;line-height:1.7;margin-bottom:24px">From online giving and accounting to websites, streaming, and safety — Amplify connects every tool your team uses into a single platform with one login, one database, and one support team.</div>
-          <div style="font-size:16px;color:#888;line-height:1.7;margin-bottom:32px">Start with what you need today. Add more as you grow. Every tool works together out of the box.</div>
-          <a href="platform-overview.html" class="btn btn-dark">Explore the Full Platform →</a>
-        </div>
-      </div>
-      <div class="anno"><strong>Minimal Product Exposure:</strong> Keeps the product/bundle exposure minimal per brief — a compact 5&times;2 icon grid gives a visual sense of platform breadth without detailed descriptions. Each icon links to its product page. The real product deep-dive lives on platform-overview.html.</div>
-    </div>
-  </div>
-
-  <!-- ============================================ -->
-  <!-- WHO WE SERVE -->
-  <!-- ============================================ -->
-  <div class="section alt" style="padding:80px 0">
-    <div class="w">
-      <div class="section-center">
-        <div class="section-eyebrow">Who we serve</div>
-        <div class="section-h2">Built for Every Kind of Church</div>
-        <div class="section-sub">Whether you're a church plant with 50 people or a multi-site ministry with thousands, Amplify is designed to meet you exactly where you are.</div>
-      </div>
-
-      <!-- By Role -->
-      <div style="margin-bottom:48px">
-        <div style="font-size:11px;font-weight:700;color:#bbb;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;text-align:center">By Role</div>
-        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px">
-          <a href="senior-pastor.html" class="card" style="text-align:center;padding:24px 16px">
-            <div style="width:44px;height:44px;border-radius:50%;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 12px">👤</div>
-            <div class="card-title" style="font-size:14px">Senior Pastor</div>
-            <div class="card-body" style="font-size:12px">Vision, oversight, and church health</div>
-          </a>
-          <a href="associate-pastor.html" class="card" style="text-align:center;padding:24px 16px">
-            <div style="width:44px;height:44px;border-radius:50%;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 12px">🙏</div>
-            <div class="card-title" style="font-size:14px">Associate Pastor</div>
-            <div class="card-body" style="font-size:12px">Day-to-day ministry operations</div>
-          </a>
-          <a href="finance-treasurer.html" class="card" style="text-align:center;padding:24px 16px">
-            <div style="width:44px;height:44px;border-radius:50%;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 12px">📊</div>
-            <div class="card-title" style="font-size:14px">Finance Leader</div>
-            <div class="card-body" style="font-size:12px">Giving, accounting, and stewardship</div>
-          </a>
-          <a href="communications-director.html" class="card" style="text-align:center;padding:24px 16px">
-            <div style="width:44px;height:44px;border-radius:50%;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 12px">📣</div>
-            <div class="card-title" style="font-size:14px">Comms Director</div>
-            <div class="card-body" style="font-size:12px">Email, social, and outreach</div>
-          </a>
-          <a href="worship-pastor.html" class="card" style="text-align:center;padding:24px 16px">
-            <div style="width:44px;height:44px;border-radius:50%;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 12px">🎵</div>
-            <div class="card-title" style="font-size:14px">Worship Pastor</div>
-            <div class="card-body" style="font-size:12px">Service planning and media</div>
-          </a>
-        </div>
-      </div>
-
-      <!-- By Church Type -->
+<!-- ============ ONE FAMILY, MANY SOLUTIONS — intro / brand navigator ============ -->
+<section class="section alt" style="padding:88px 0">
+  <div class="w">
+    <div class="mb-family">
       <div>
-        <div style="font-size:11px;font-weight:700;color:#bbb;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;text-align:center">By Church Type</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
-          <a href="multi-site.html" class="card" style="padding:20px;display:flex;align-items:center;gap:14px">
-            <div style="width:40px;height:40px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🏛</div>
-            <div><div class="card-title" style="font-size:14px;margin-bottom:2px">Multi-site</div><div class="card-body" style="font-size:12px">Campuses in sync</div></div>
-          </a>
-          <a href="large-churches.html" class="card" style="padding:20px;display:flex;align-items:center;gap:14px">
-            <div style="width:40px;height:40px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">⛪</div>
-            <div><div class="card-title" style="font-size:14px;margin-bottom:2px">Large Churches</div><div class="card-body" style="font-size:12px">Scale with confidence</div></div>
-          </a>
-          <a href="growing-churches.html" class="card" style="padding:20px;display:flex;align-items:center;gap:14px">
-            <div style="width:40px;height:40px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">📈</div>
-            <div><div class="card-title" style="font-size:14px;margin-bottom:2px">Growing Churches</div><div class="card-body" style="font-size:12px">Tools that grow with you</div></div>
-          </a>
-          <a href="small-churches.html" class="card" style="padding:20px;display:flex;align-items:center;gap:14px">
-            <div style="width:40px;height:40px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🏠</div>
-            <div><div class="card-title" style="font-size:14px;margin-bottom:2px">Small Churches</div><div class="card-body" style="font-size:12px">Big impact, small team</div></div>
-          </a>
-          <a href="church-plants.html" class="card" style="padding:20px;display:flex;align-items:center;gap:14px">
-            <div style="width:40px;height:40px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🌱</div>
-            <div><div class="card-title" style="font-size:14px;margin-bottom:2px">Church Plants</div><div class="card-body" style="font-size:12px">Start strong from day one</div></div>
-          </a>
-          <a href="denominations.html" class="card" style="padding:20px;display:flex;align-items:center;gap:14px">
-            <div style="width:40px;height:40px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🔗</div>
-            <div><div class="card-title" style="font-size:14px;margin-bottom:2px">Denominations</div><div class="card-body" style="font-size:12px">Network-wide visibility</div></div>
-          </a>
-          <a href="digital-churches.html" class="card" style="padding:20px;display:flex;align-items:center;gap:14px">
-            <div style="width:40px;height:40px;border-radius:10px;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">💻</div>
-            <div><div class="card-title" style="font-size:14px;margin-bottom:2px">Digital Churches</div><div class="card-body" style="font-size:12px">Online-first ministry</div></div>
-          </a>
-          <div style="background:white;border:0.5px solid #c0bdd4;border-radius:16px;padding:20px;display:flex;align-items:center;gap:14px;cursor:pointer" onclick="window.location.href='request-demo.html'">
-            <div style="width:40px;height:40px;border-radius:10px;background:#46435D;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;color:white">→</div>
-            <div><div style="font-size:14px;font-weight:700;color:#46435D;margin-bottom:2px">Not sure?</div><div style="font-size:12px;color:#888">Talk to our team</div></div>
+        <div class="section-eyebrow">One Family, Many Solutions</div>
+        <h2 class="mb-family-h2">Four platforms.<br>One purpose.</h2>
+        <p class="mb-family-desc">Ministry Brands brings together four purpose-built software platforms under one parent — each engineered for a specific kind of mission, all sharing a foundation of security, support, and stewardship.</p>
+        <a href="mb-company.html" class="btn btn-navy">Learn About Ministry Brands →</a>
+        <div class="mb-family-meta">
+          <div>
+            <div class="mb-family-meta-num">40+ yrs</div>
+            <div class="mb-family-meta-label">In ministry tech</div>
+          </div>
+          <div>
+            <div class="mb-family-meta-num">4</div>
+            <div class="mb-family-meta-label">Purpose-built brands</div>
+          </div>
+          <div>
+            <div class="mb-family-meta-num">90K+</div>
+            <div class="mb-family-meta-label">Organizations served</div>
           </div>
         </div>
       </div>
-      <div class="anno anno-persona"><strong>Audience Pathways:</strong> Surfaces all 12 audience pages (5 roles + 7 church types) directly on the homepage. Every card links to the dedicated audience page. The 8th church-type slot becomes a "Not sure?" CTA — captures visitors who don't self-select into a category.</div>
-    </div>
-  </div>
-
-  <!-- ============================================ -->
-  <!-- HOW IT WORKS -->
-  <!-- ============================================ -->
-  <div class="section">
-    <div class="w">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
-        <div>
-          <div class="section-eyebrow">How it works</div>
-          <div class="section-h2" style="margin-bottom:16px">One platform. End-to-end.</div>
-          <div class="section-sub" style="margin-bottom:32px">Amplify replaces the patchwork of disconnected tools with a single system your whole team can rely on — from check-in to giving reports.</div>
-          <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px">
-            <div style="display:flex;align-items:flex-start;gap:14px"><div style="width:30px;height:30px;border-radius:50%;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#46435D;flex-shrink:0">1</div><div><div style="font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:3px">Connect your data</div><div style="font-size:14px;color:#aaa;line-height:1.5">People, giving, attendance — all in one place, updated in real time.</div></div></div>
-            <div style="display:flex;align-items:flex-start;gap:14px"><div style="width:30px;height:30px;border-radius:50%;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#46435D;flex-shrink:0">2</div><div><div style="font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:3px">Empower your team</div><div style="font-size:14px;color:#aaa;line-height:1.5">Role-based dashboards so everyone sees exactly what they need.</div></div></div>
-            <div style="display:flex;align-items:flex-start;gap:14px"><div style="width:30px;height:30px;border-radius:50%;background:#eeedf4;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#46435D;flex-shrink:0">3</div><div><div style="font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:3px">Make better decisions</div><div style="font-size:14px;color:#aaa;line-height:1.5">Data-informed insights so you lead proactively, not reactively.</div></div></div>
+      <div class="mb-nav-card">
+        <div class="mb-nav-card-header">
+          <span class="mb-nav-card-title">Jump to a brand</span>
+          <span class="mb-nav-card-count">4 platforms</span>
+        </div>
+        <a href="#brand-amplify" class="mb-nav-row">
+          <span class="mb-nav-row-stripe amplify"></span>
+          <div class="mb-nav-row-mark amplify">A</div>
+          <div class="mb-nav-row-body">
+            <div class="mb-nav-row-name">Spired for Churches</div>
+            <div class="mb-nav-row-tag">For Churches</div>
           </div>
-          <a href="request-demo.html" class="btn btn-dark">See a Live Demo</a>
-        </div>
-        <div style="background:#e0dfe8;border-radius:14px;height:360px"></div>
+          <span class="mb-nav-row-arrow">↓</span>
+        </a>
+        <a href="#brand-parishsoft" class="mb-nav-row">
+          <span class="mb-nav-row-stripe parishsoft"></span>
+          <div class="mb-nav-row-mark parishsoft">P</div>
+          <div class="mb-nav-row-body">
+            <div class="mb-nav-row-name">ParishSOFT</div>
+            <div class="mb-nav-row-tag">For Parishes &amp; Dioceses</div>
+          </div>
+          <span class="mb-nav-row-arrow">↓</span>
+        </a>
+        <a href="#brand-donordirect" class="mb-nav-row">
+          <span class="mb-nav-row-stripe donordirect"></span>
+          <div class="mb-nav-row-mark donordirect">D</div>
+          <div class="mb-nav-row-body">
+            <div class="mb-nav-row-name">DonorDirect</div>
+            <div class="mb-nav-row-tag">For Nonprofits</div>
+          </div>
+          <span class="mb-nav-row-arrow">↓</span>
+        </a>
+        <a href="#brand-protect" class="mb-nav-row">
+          <span class="mb-nav-row-stripe protect"></span>
+          <div class="mb-nav-row-mark protect">P</div>
+          <div class="mb-nav-row-body">
+            <div class="mb-nav-row-name">Protect My Ministry</div>
+            <div class="mb-nav-row-tag">For Ministry Safety</div>
+          </div>
+          <span class="mb-nav-row-arrow">↓</span>
+        </a>
       </div>
-      <div class="anno"><strong>How It Works:</strong> Retained from original — the 3-step narrative is clean and effective. Only change: CTA button now links to request-demo.html instead of being a dead button.</div>
     </div>
+    <div class="anno anno-page"><strong>Family Intro Strategy:</strong> Positioned as the first thing visitors see after the stats strip. The right-side navigator card lets visitors jump straight to the brand they care about, doubling as a visual preview of all four. Each row's left-edge stripe color matches that brand's section below.</div>
   </div>
+</section>
 
-  <!-- ============================================ -->
-  <!-- SERVICES TEASER -->
-  <!-- ============================================ -->
-  <div class="section alt">
-    <div class="w">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
-        <div style="background:#e0dfe8;border-radius:16px;height:300px;display:flex;align-items:center;justify-content:center">
-          <div style="text-align:center;color:#888">
-            <div style="font-size:40px;margin-bottom:8px">🤝</div>
-            <div style="font-size:13px;font-weight:500">Dedicated support team</div>
+<!-- ============ AMPLIFY DEEP-DIVE ============ -->
+<section class="mb-brand-section" id="brand-amplify">
+  <div class="mb-brand-header">
+    <div class="mb-brand-header-left">
+      <div class="mb-brand-header-logo">
+        <div class="mb-brand-section-mark amplify">A</div>
+        <span class="mb-brand-header-name">Spired for Churches</span>
+      </div>
+      <div class="mb-brand-header-audience">For Churches</div>
+    </div>
+    <a href="home.html" class="mb-brand-section-cta amplify mb-brand-header-cta">Explore Spired for Churches →</a>
+  </div>
+  <div class="mb-brand-section-inner">
+    <div>
+      <h2>Run your church. Not the other way around.</h2>
+      <p class="mb-brand-section-desc">An end-to-end church management platform built for congregations of every size. Replace fragmented tools with one connected system for giving, people, communications, websites, and service planning.</p>
+      <ul class="mb-brand-section-features">
+        <li><span class="mb-brand-section-check amplify">✓</span><span><strong>Giving &amp; finance</strong> — online giving, recurring gifts, fund accounting, and donor stewardship</span></li>
+        <li><span class="mb-brand-section-check amplify">✓</span><span><strong>People &amp; engagement</strong> — member records, groups, attendance, and communications</span></li>
+        <li><span class="mb-brand-section-check amplify">✓</span><span><strong>Worship operations</strong> — service planning, volunteer scheduling, and check-in</span></li>
+        <li><span class="mb-brand-section-check amplify">✓</span><span><strong>Digital presence</strong> — church website, mobile app, and live streaming</span></li>
+      </ul>
+    </div>
+    <div class="mb-brand-visual amplify">
+      <div class="amp-mock">
+        <!-- Main dashboard card (back-left, larger) -->
+        <div class="amp-mock-card main">
+          <div class="amp-mock-header">
+            <div class="amp-mock-title">Spired for Churches · Dashboard</div>
+            <div class="amp-mock-dots"><div class="amp-mock-dot"></div><div class="amp-mock-dot"></div><div class="amp-mock-dot"></div></div>
+          </div>
+          <div class="amp-mock-body">
+            <div class="amp-mock-statrow">
+              <div class="amp-mock-statbox"><div class="amp-mock-statlabel">Giving</div><div class="amp-mock-statbar" style="--w:75%"></div></div>
+              <div class="amp-mock-statbox"><div class="amp-mock-statlabel">People</div><div class="amp-mock-statbar" style="--w:60%"></div></div>
+              <div class="amp-mock-statbox"><div class="amp-mock-statlabel">Engage</div><div class="amp-mock-statbar" style="--w:45%"></div></div>
+            </div>
+            <div class="amp-mock-chart">
+              <div class="amp-mock-bar" style="height:38%"></div>
+              <div class="amp-mock-bar" style="height:52%"></div>
+              <div class="amp-mock-bar" style="height:68%"></div>
+              <div class="amp-mock-bar" style="height:48%"></div>
+              <div class="amp-mock-bar" style="height:82%"></div>
+              <div class="amp-mock-bar" style="height:64%"></div>
+              <div class="amp-mock-bar" style="height:90%"></div>
+            </div>
           </div>
         </div>
-        <div>
-          <div class="section-eyebrow">Services &amp; support</div>
-          <div style="font-size:32px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.02em;margin-bottom:16px">We don't just sell software.<br>We help you succeed with it.</div>
-          <div style="font-size:16px;color:#888;line-height:1.7;margin-bottom:24px">From implementation and data migration to ongoing strategy consulting and training — our services team walks alongside your church every step of the way.</div>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px">
-            <span style="font-size:12px;font-weight:600;color:#46435D;background:#eeedf4;padding:6px 14px;border-radius:999px">Implementation</span>
-            <span style="font-size:12px;font-weight:600;color:#46435D;background:#eeedf4;padding:6px 14px;border-radius:999px">Strategy & Consulting</span>
-            <span style="font-size:12px;font-weight:600;color:#46435D;background:#eeedf4;padding:6px 14px;border-radius:999px">Data Migration</span>
-            <span style="font-size:12px;font-weight:600;color:#46435D;background:#eeedf4;padding:6px 14px;border-radius:999px">Support & Training</span>
+        <!-- Stat card (front-right top) -->
+        <div class="amp-mock-card stat">
+          <div>
+            <div class="amp-mock-smallabel">Weekly giving</div>
+            <div class="amp-mock-bignum">$42.6K</div>
           </div>
-          <a href="services-overview.html" class="btn btn-dark">Explore Services →</a>
+          <div class="amp-mock-trend">▲ 12% vs last week</div>
+        </div>
+        <!-- List card (front-right bottom) -->
+        <div class="amp-mock-card list">
+          <div class="amp-mock-smallabel">This Sunday</div>
+          <div class="amp-mock-listitem"><div class="amp-mock-listdot">✓</div><div class="amp-mock-listtext"></div></div>
+          <div class="amp-mock-listitem"><div class="amp-mock-listdot">✓</div><div class="amp-mock-listtext"></div></div>
+          <div class="amp-mock-listitem"><div class="amp-mock-listdot">✓</div><div class="amp-mock-listtext"></div></div>
+          <div class="amp-mock-listitem"><div class="amp-mock-listdot" style="background:#f4f3f7;color:#bbb">○</div><div class="amp-mock-listtext"></div></div>
         </div>
       </div>
-      <div class="anno anno-page"><strong>Services Teaser:</strong> New section — the sitemap has a full services path (overview + detail pages) that was completely absent from the homepage. This teaser establishes that Amplify is a service + software company, not just a product vendor. Links to services-overview.html for the deep dive.</div>
     </div>
   </div>
+</section>
 
-  <!-- ============================================ -->
-  <!-- ASSESSMENT CALLOUT -->
-  <!-- ============================================ -->
-  <div class="section">
-    <div class="w">
-      <div style="background:#eeedf4;border-radius:16px;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px">
-        <div><div style="font-size:22px;font-weight:700;color:#46435D;margin-bottom:8px">Not sure where to start?</div><div style="font-size:15px;color:#777;line-height:1.6;max-width:480px">Take our free Healthy Church Assessment and get a personalized report on where your church has the biggest opportunities to grow.</div></div>
-        <a href="request-demo.html" class="btn btn-dark" style="flex-shrink:0">Take the Assessment →</a>
+<div class="anno anno-persona"><strong>Audience-Routing per Section:</strong> Each brand gets a dedicated full-width section (rather than equal-weight cards) so visitors can self-identify and explore deeply. Alternating left/right layout creates rhythm and equal visual weight across the 4 brands.</div>
+
+<div class="anno"><strong>Distinct product-mock per brand:</strong> Rather than the same 2&times;2 tile composition four times, each brand visual is shaped like the artifact that brand produces &mdash; Spired for Churches gets a multi-module dashboard, ParishSOFT a sacramental record card, DonorDirect a donor profile + giving chart, Protect a background-check report with shield badge. Reinforces &ldquo;these are different products&rdquo; without needing real screenshots.</div>
+
+<!-- ============ PARISHSOFT DEEP-DIVE ============ -->
+<section class="mb-brand-section alt reverse" id="brand-parishsoft">
+  <div class="mb-brand-header">
+    <div class="mb-brand-header-left">
+      <div class="mb-brand-header-logo">
+        <div class="mb-brand-section-mark parishsoft">P</div>
+        <span class="mb-brand-header-name">ParishSOFT</span>
       </div>
-      <div class="anno anno-gap"><strong>Missing Page:</strong> Assessment page does not yet exist. CTA currently routes to request-demo.html as a fallback. If an assessment.html page is created, this link should be updated.</div>
+      <div class="mb-brand-header-audience">For Parishes &amp; Dioceses</div>
     </div>
+    <a href="#" class="mb-brand-section-cta parishsoft mb-brand-header-cta">Explore ParishSOFT →</a>
   </div>
-
-  <!-- ============================================ -->
-  <!-- TESTIMONIALS -->
-  <!-- ============================================ -->
-  <div class="section alt">
-    <div class="w">
-      <div class="section-center">
-        <div class="section-eyebrow">What churches say</div>
-        <div class="section-h2">Built by church leaders, for church leaders</div>
-      </div>
-      <div class="grid-3">
-        <div class="tcard"><div class="tquote">"We went from three disconnected systems to one. Our admin time dropped by 40% in the first month."</div><div style="display:flex;align-items:center;gap:12px"><div class="tavatar"></div><div><div class="tname">Pastor David R.</div><div class="trole">Executive Pastor · 800-member church</div></div></div><a href="customer-story.html" style="display:block;margin-top:16px;font-size:12px;color:#46435D;font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4">Read their story →</a></div>
-        <div class="tcard"><div class="tquote">"Volunteer scheduling used to take me half a day. Now it's automated. My team actually shows up prepared."</div><div style="display:flex;align-items:center;gap:12px"><div class="tavatar"></div><div><div class="tname">Sarah M.</div><div class="trole">Worship Pastor · Multi-site church</div></div></div><a href="customer-story.html" style="display:block;margin-top:16px;font-size:12px;color:#46435D;font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4">Read their story →</a></div>
-        <div class="tcard"><div class="tquote">"Our giving increased 22% after switching. Easier for donors, easier for our team to track and report on."</div><div style="display:flex;align-items:center;gap:12px"><div class="tavatar"></div><div><div class="tname">James T.</div><div class="trole">Finance Treasurer · Growing congregation</div></div></div><a href="customer-story.html" style="display:block;margin-top:16px;font-size:12px;color:#46435D;font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#c0bdd4">Read their story →</a></div>
-      </div>
-      <div class="anno"><strong>Testimonials:</strong> Each testimonial card now includes a "Read their story" link to customer-story.html. When individual story pages are built, these should point to distinct URLs.</div>
+  <div class="mb-brand-section-inner">
+    <div>
+      <h2>Trusted by the Catholic church for 30+ years.</h2>
+      <p class="mb-brand-section-desc">Census, sacramental records, contributions, and diocesan reporting — all in one platform designed specifically for Catholic parishes and the dioceses they belong to.</p>
+      <ul class="mb-brand-section-features">
+        <li><span class="mb-brand-section-check parishsoft">✓</span><span><strong>Family census &amp; sacramental records</strong> — baptism, confirmation, marriage tracking</span></li>
+        <li><span class="mb-brand-section-check parishsoft">✓</span><span><strong>Online giving &amp; contributions</strong> — recurring offering, capital campaigns, e-statements</span></li>
+        <li><span class="mb-brand-section-check parishsoft">✓</span><span><strong>Diocesan-level reporting</strong> — roll-up reporting across all parishes in the diocese</span></li>
+        <li><span class="mb-brand-section-check parishsoft">✓</span><span><strong>Parish websites &amp; communications</strong> — bulletins, email, mobile-ready websites</span></li>
+      </ul>
     </div>
-  </div>
-
-  <!-- ============================================ -->
-  <!-- HEALTHY CHURCH HUB PREVIEW -->
-  <!-- ============================================ -->
-  <div class="section">
-    <div class="w">
-      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px">
-        <div>
-          <div class="section-eyebrow">Healthy Church Hub</div>
-          <div class="section-h2" style="margin-bottom:8px">Resources to help your church thrive</div>
-          <div class="section-sub" style="max-width:480px">Guides, webinars, podcasts, and research — curated for church leaders navigating real challenges.</div>
+    <div class="mb-brand-visual parishsoft">
+      <div class="par-mock">
+        <!-- Main family / sacramental record card -->
+        <div class="par-mock-card main">
+          <div class="par-mock-header">
+            <div class="par-mock-title">Family Record</div>
+            <div class="par-mock-id">#F-04287</div>
+          </div>
+          <div class="par-mock-family">
+            <div class="par-mock-avatar"></div>
+            <div class="par-mock-name-stack">
+              <div class="par-mock-name"></div>
+              <div class="par-mock-meta"></div>
+            </div>
+          </div>
+          <div class="par-mock-section">
+            <div class="par-mock-section-label">Family</div>
+            <div class="par-mock-field"><span class="par-mock-fieldlabel">Members</span><span class="par-mock-fieldvalue filled" style="max-width:18%"></span></div>
+            <div class="par-mock-field"><span class="par-mock-fieldlabel">Joined</span><span class="par-mock-fieldvalue" style="max-width:50%"></span></div>
+          </div>
+          <div class="par-mock-section">
+            <div class="par-mock-section-label">Sacraments</div>
+            <div class="par-mock-field"><span class="par-mock-fieldlabel">Baptism</span><span class="par-mock-fieldvalue" style="max-width:55%"></span></div>
+            <div class="par-mock-field"><span class="par-mock-fieldlabel">Confirmation</span><span class="par-mock-fieldvalue" style="max-width:55%"></span></div>
+            <div class="par-mock-field"><span class="par-mock-fieldlabel">Marriage</span><span class="par-mock-fieldvalue filled" style="max-width:55%"></span></div>
+          </div>
+          <div class="par-mock-section">
+            <div class="par-mock-section-label">Contributions YTD</div>
+            <div class="par-mock-field"><span class="par-mock-fieldlabel">Total</span><span class="par-mock-fieldvalue filled" style="max-width:65%"></span></div>
+          </div>
         </div>
-        <a href="healthy-church-hub.html" class="btn btn-outline" style="flex-shrink:0;margin-bottom:4px">Explore the Hub →</a>
-      </div>
-      <div style="display:flex;gap:8px;margin-bottom:24px">
-        <div style="padding:6px 16px;border-radius:999px;background:#46435D;color:white;font-size:12px;font-weight:600;cursor:pointer">Webinars</div>
-        <div style="padding:6px 16px;border-radius:999px;background:white;border:0.5px solid #e0e0e0;color:#666;font-size:12px;cursor:pointer">eBooks</div>
-        <div style="padding:6px 16px;border-radius:999px;background:white;border:0.5px solid #e0e0e0;color:#666;font-size:12px;cursor:pointer">Podcasts</div>
-        <div style="padding:6px 16px;border-radius:999px;background:white;border:0.5px solid #e0e0e0;color:#666;font-size:12px;cursor:pointer">Blog</div>
-      </div>
-      <div class="grid-4">
-        <a href="webinar-registration.html" class="card" style="padding:0;overflow:hidden;text-decoration:none"><div style="background:#d4d2de;height:140px;display:flex;align-items:center;justify-content:center"><div style="width:40px;height:40px;border-radius:50%;background:rgba(70,67,93,0.3);display:flex;align-items:center;justify-content:center;font-size:14px;color:white">▶</div></div><div style="padding:16px"><div style="font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Webinar</div><div style="font-size:14px;font-weight:600;color:#1a1a1a;line-height:1.3;margin-bottom:8px">How to Build a Culture of Generosity in Your Church</div><div style="font-size:12px;color:#aaa">45 min · On demand</div></div></a>
-        <a href="ebook-landing.html" class="card" style="padding:0;overflow:hidden;text-decoration:none"><div style="background:#e0dfe8;height:140px;display:flex;align-items:center;justify-content:center"><div style="width:56px;height:72px;background:white;border-radius:4px;box-shadow:2px 2px 8px rgba(0,0,0,0.1)"></div></div><div style="padding:16px"><div style="font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">eBook</div><div style="font-size:14px;font-weight:600;color:#1a1a1a;line-height:1.3;margin-bottom:8px">The 2026 Annual Church Giving Report</div><div style="font-size:12px;color:#aaa">Free download · 24 pages</div></div></a>
-        <a href="podcast-episode.html" class="card" style="padding:0;overflow:hidden;text-decoration:none"><div style="background:#cccad8;height:140px;display:flex;align-items:center;justify-content:center"><div style="font-size:32px">🎙</div></div><div style="padding:16px"><div style="font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Podcast</div><div style="font-size:14px;font-weight:600;color:#1a1a1a;line-height:1.3;margin-bottom:8px">Leading Through Change: Lessons from 5 Senior Pastors</div><div style="font-size:12px;color:#aaa">Ep. 42 · 38 min</div></div></a>
-        <a href="blog-post.html" class="card" style="padding:0;overflow:hidden;text-decoration:none"><div style="background:#d8d6e4;height:140px;display:flex;align-items:flex-end;padding:16px"><div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);letter-spacing:0.06em;text-transform:uppercase">Featured post</div></div><div style="padding:16px"><div style="font-size:10px;font-weight:700;color:#bbb;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Blog</div><div style="font-size:14px;font-weight:600;color:#1a1a1a;line-height:1.3;margin-bottom:8px">5 Signs Your Church Tech Stack Is Holding You Back</div><div style="font-size:12px;color:#aaa">6 min read</div></div></a>
-      </div>
-      <div class="anno"><strong>HCH Preview:</strong> All 4 resource cards now link to their respective template pages (webinar-registration, ebook-landing, podcast-episode, blog-post). "Explore the Hub" button links to healthy-church-hub.html.</div>
-    </div>
-  </div>
-
-  <!-- ============================================ -->
-  <!-- FINAL CTA -->
-  <!-- ============================================ -->
-  <div class="section dark">
-    <div class="w" style="text-align:center">
-      <div style="font-size:38px;font-weight:700;color:white;letter-spacing:-0.02em;margin-bottom:12px">Ready to see Amplify in action?</div>
-      <div style="font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto">Join 55,000+ ministries already running on Amplify. Book a personalized demo with our team.</div>
-      <div style="display:flex;gap:12px;justify-content:center">
-        <a href="request-demo.html" class="btn btn-white">Book a Demo</a>
-        <a href="platform-overview.html" class="btn btn-ghost">Explore the Platform</a>
+        <!-- Event notification -->
+        <div class="par-mock-card event">
+          <div class="par-mock-eventbadge">New Sacrament</div>
+          <div class="par-mock-eventtitle">Baptism Recorded</div>
+          <div class="par-mock-eventsub">Sun, March 24 · Fr. Murphy</div>
+        </div>
+        <!-- Recent activity timeline -->
+        <div class="par-mock-card history">
+          <div class="par-mock-section-label">Recent Activity</div>
+          <div class="par-mock-timeline">
+            <div class="par-mock-tlitem"><div class="par-mock-tldot"></div><div class="par-mock-tllabel"></div><div class="par-mock-tldate">Mar 24</div></div>
+            <div class="par-mock-tlitem"><div class="par-mock-tldot"></div><div class="par-mock-tllabel"></div><div class="par-mock-tldate">Mar 18</div></div>
+            <div class="par-mock-tlitem"><div class="par-mock-tldot"></div><div class="par-mock-tllabel"></div><div class="par-mock-tldate">Feb 09</div></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- ============================================ -->
-  <!-- FOOTER -->
-  <!-- ============================================ -->
-  <footer style="background:#1a1a1a;padding:64px 0 32px">
-    <div class="w">
-      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
-        <!-- Brand -->
+<!-- ============ DONORDIRECT DEEP-DIVE ============ -->
+<section class="mb-brand-section" id="brand-donordirect">
+  <div class="mb-brand-header">
+    <div class="mb-brand-header-left">
+      <div class="mb-brand-header-logo">
+        <div class="mb-brand-section-mark donordirect">D</div>
+        <span class="mb-brand-header-name">DonorDirect</span>
+      </div>
+      <div class="mb-brand-header-audience">For Nonprofits</div>
+    </div>
+    <a href="#" class="mb-brand-section-cta donordirect mb-brand-header-cta">Explore DonorDirect →</a>
+  </div>
+  <div class="mb-brand-section-inner">
+    <div>
+      <h2>Built for the donor relationships that change lives.</h2>
+      <p class="mb-brand-section-desc">Mission-driven nonprofits need more than a database. DonorDirect is a complete donor relationship management platform built for the complex stewardship workflows that healthy nonprofits depend on.</p>
+      <ul class="mb-brand-section-features">
+        <li><span class="mb-brand-section-check donordirect">✓</span><span><strong>Donor 360°</strong> — gifts, communications, engagement, and lifetime value in one record</span></li>
+        <li><span class="mb-brand-section-check donordirect">✓</span><span><strong>Major-donor stewardship</strong> — moves management, cultivation pipelines, planned giving</span></li>
+        <li><span class="mb-brand-section-check donordirect">✓</span><span><strong>Campaign &amp; appeal tracking</strong> — multi-channel attribution and ROI reporting</span></li>
+        <li><span class="mb-brand-section-check donordirect">✓</span><span><strong>Integrations</strong> — connect with email, accounting, and outreach tools you already use</span></li>
+      </ul>
+    </div>
+    <div class="mb-brand-visual donordirect">
+      <div class="dd-mock">
+        <!-- Left pane: donor profile -->
+        <div class="dd-mock-card">
+          <div class="dd-mock-profile-header">
+            <div class="dd-mock-title">Donor Profile</div>
+            <div class="dd-mock-status">●&nbsp;Major</div>
+          </div>
+          <div class="dd-mock-profile-body">
+            <div class="dd-mock-pavatar"></div>
+            <div class="dd-mock-pname-block">
+              <div class="dd-mock-pname"></div>
+              <div class="dd-mock-pemail"></div>
+            </div>
+            <div class="dd-mock-pstats">
+              <div class="dd-mock-pstat"><div class="dd-mock-pstat-value">$42K</div><div class="dd-mock-pstat-label">Lifetime</div></div>
+              <div class="dd-mock-pstat"><div class="dd-mock-pstat-value">28</div><div class="dd-mock-pstat-label">Gifts</div></div>
+              <div class="dd-mock-pstat"><div class="dd-mock-pstat-value">5y</div><div class="dd-mock-pstat-label">Donor</div></div>
+            </div>
+          </div>
+          <div class="dd-mock-footer">
+            <span>Next touch</span><span class="dd-mock-footer-num">Apr 22</span>
+          </div>
+        </div>
+        <!-- Right pane: giving timeline -->
+        <div class="dd-mock-card">
+          <div class="dd-mock-timeline-header">
+            <div class="dd-mock-tlinetitle">Giving over time</div>
+            <div class="dd-mock-tlinetag">Last 6 mo</div>
+          </div>
+          <div class="dd-mock-tlines">
+            <div class="dd-mock-tlbar-wrap"><div class="dd-mock-tlbar" style="height:30%"></div><div class="dd-mock-tlmonth">NOV</div></div>
+            <div class="dd-mock-tlbar-wrap"><div class="dd-mock-tlbar" style="height:48%"></div><div class="dd-mock-tlmonth">DEC</div></div>
+            <div class="dd-mock-tlbar-wrap"><div class="dd-mock-tlbar" style="height:88%"></div><div class="dd-mock-tlmonth">JAN</div></div>
+            <div class="dd-mock-tlbar-wrap"><div class="dd-mock-tlbar" style="height:35%"></div><div class="dd-mock-tlmonth">FEB</div></div>
+            <div class="dd-mock-tlbar-wrap"><div class="dd-mock-tlbar" style="height:62%"></div><div class="dd-mock-tlmonth">MAR</div></div>
+            <div class="dd-mock-tlbar-wrap"><div class="dd-mock-tlbar" style="height:74%"></div><div class="dd-mock-tlmonth">APR</div></div>
+          </div>
+          <div class="dd-mock-footer">
+            <span>Total this period</span><span class="dd-mock-footer-num">$8,420</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROTECT MY MINISTRY DEEP-DIVE ============ -->
+<section class="mb-brand-section alt reverse" id="brand-protect">
+  <div class="mb-brand-header">
+    <div class="mb-brand-header-left">
+      <div class="mb-brand-header-logo">
+        <div class="mb-brand-section-mark protect">P</div>
+        <span class="mb-brand-header-name">Protect My Ministry</span>
+      </div>
+      <div class="mb-brand-header-audience">For Ministry Safety</div>
+    </div>
+    <a href="#" class="mb-brand-section-cta protect mb-brand-header-cta">Explore Protection →</a>
+  </div>
+  <div class="mb-brand-section-inner">
+    <div>
+      <h2>Keep the people in your care safe.</h2>
+      <p class="mb-brand-section-desc">Background checks, ongoing monitoring, and safety training built for the unique requirements of ministry settings. Trusted by churches, parishes, and nonprofits to protect the children, volunteers, and staff they serve.</p>
+      <ul class="mb-brand-section-features">
+        <li><span class="mb-brand-section-check protect">✓</span><span><strong>Background screening</strong> — criminal, sex offender, motor vehicle, and credit reports</span></li>
+        <li><span class="mb-brand-section-check protect">✓</span><span><strong>Ongoing monitoring</strong> — alerts on new offenses for your active volunteers</span></li>
+        <li><span class="mb-brand-section-check protect">✓</span><span><strong>Child &amp; volunteer safety training</strong> — abuse prevention, mandatory reporting</span></li>
+        <li><span class="mb-brand-section-check protect">✓</span><span><strong>Check-in &amp; access control</strong> — secure room check-in for kids and youth programs</span></li>
+      </ul>
+    </div>
+    <div class="mb-brand-visual protect">
+      <div class="pm-mock">
+        <!-- Main check report card -->
+        <div class="pm-mock-card main">
+          <div class="pm-mock-header">
+            <div class="pm-mock-title">Background Check</div>
+            <div class="pm-mock-id">#PC-9382</div>
+          </div>
+          <div class="pm-mock-volunteer">
+            <div class="pm-mock-vavatar"></div>
+            <div class="pm-mock-vname-stack">
+              <div class="pm-mock-vname"></div>
+              <div class="pm-mock-vmeta"></div>
+            </div>
+          </div>
+          <div class="pm-mock-statusbanner">
+            <div class="pm-mock-statustext">✓ Cleared</div>
+            <div class="pm-mock-statusdate">Apr 14</div>
+          </div>
+          <div class="pm-mock-checks">
+            <div class="pm-mock-check"><div class="pm-mock-check-icon">✓</div><div class="pm-mock-check-label">Criminal History</div><div class="pm-mock-check-status">CLEAR</div></div>
+            <div class="pm-mock-check"><div class="pm-mock-check-icon">✓</div><div class="pm-mock-check-label">Sex Offender Registry</div><div class="pm-mock-check-status">CLEAR</div></div>
+            <div class="pm-mock-check"><div class="pm-mock-check-icon">✓</div><div class="pm-mock-check-label">Motor Vehicle Record</div><div class="pm-mock-check-status">CLEAR</div></div>
+            <div class="pm-mock-check"><div class="pm-mock-check-icon">✓</div><div class="pm-mock-check-label">Credit Report</div><div class="pm-mock-check-status">CLEAR</div></div>
+          </div>
+        </div>
+        <!-- Shield badge card -->
+        <div class="pm-mock-card shield">
+          <div class="pm-mock-shield-icon">✓</div>
+          <div class="pm-mock-shield-label">Approved Volunteer</div>
+          <div class="pm-mock-shield-sub">Active</div>
+        </div>
+        <!-- Active monitoring card -->
+        <div class="pm-mock-card monitor">
+          <div class="pm-mock-monitor-label">Active Monitoring</div>
+          <div class="pm-mock-monitor-row"><div class="pm-mock-monitor-dot"></div><span>Last check 2 days ago</span></div>
+          <div class="pm-mock-monitor-row"><div class="pm-mock-monitor-dot"></div><span>No new alerts</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HCH TEASER ============ -->
+<section class="section">
+  <div class="w">
+    <div class="mb-hch">
+      <div>
+        <div class="section-eyebrow">Healthy Church Hub</div>
+        <div class="section-h2" style="margin-bottom:14px">Resources for healthier ministries</div>
+        <p class="section-sub" style="margin-bottom:28px">Practical research, webinars, and stories from the field — curated for the leaders building thriving communities.</p>
+        <a href="healthy-church-hub.html" class="btn btn-ghost">Explore the Hub →</a>
+      </div>
+      <div class="mb-hch-cards">
+        <a href="ebook-landing.html" class="mb-hch-card">
+          <div class="mb-hch-card-type">eBook</div>
+          <div class="mb-hch-card-title">2026 Annual Church Giving Report</div>
+        </a>
+        <a href="webinar-registration.html" class="mb-hch-card">
+          <div class="mb-hch-card-type">Webinar</div>
+          <div class="mb-hch-card-title">Spired for Churches Your Church's Digital Reach</div>
+        </a>
+        <a href="podcast-episode.html" class="mb-hch-card">
+          <div class="mb-hch-card-type">Podcast</div>
+          <div class="mb-hch-card-title">Leading Through Change</div>
+        </a>
+        <a href="blog-post.html" class="mb-hch-card">
+          <div class="mb-hch-card-type">Blog</div>
+          <div class="mb-hch-card-title">5 Signs Your Tech Stack is Holding You Back</div>
+        </a>
+      </div>
+    </div>
+    <div class="anno anno-move"><strong>Shared content:</strong> The Healthy Church Hub is shared between MB.com and Spired for Churches (it lives under the Spired for Churches brand but features content relevant to all customers). MB pages link out to existing Spired for Churches HCH pages — no duplication.</div>
+  </div>
+</section>
+
+<!-- ============ LATEST NEWS ============ -->
+<section class="section alt">
+  <div class="w">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px">
+      <div>
+        <div class="section-eyebrow">News &amp; Press</div>
+        <div class="section-h2">Latest from Ministry Brands</div>
+      </div>
+      <a href="mb-press.html" class="btn btn-ghost">View All News →</a>
+    </div>
+    <div class="mb-news">
+      <a href="mb-news-article.html" class="mb-news-card">
+        <div class="mb-news-card-img"></div>
+        <div class="mb-news-card-body">
+          <div class="mb-news-card-topic">Industry Insights</div>
+          <div class="mb-news-card-title">Innovation in Church Software Means Measurable Ministry</div>
+          <div class="mb-news-card-date">April 8, 2026</div>
+        </div>
+      </a>
+      <a href="mb-news-article.html" class="mb-news-card">
+        <div class="mb-news-card-img alt"></div>
+        <div class="mb-news-card-body">
+          <div class="mb-news-card-topic">Safety</div>
+          <div class="mb-news-card-title">Hiring Is a Safety Practice: Building a Culture That Starts With Your People</div>
+          <div class="mb-news-card-date">March 22, 2026</div>
+        </div>
+      </a>
+      <a href="mb-news-article.html" class="mb-news-card">
+        <div class="mb-news-card-img alt2"></div>
+        <div class="mb-news-card-body">
+          <div class="mb-news-card-topic">Giving</div>
+          <div class="mb-news-card-title">2024 State of Church Giving: Digital Platforms Drive Recurring Generosity</div>
+          <div class="mb-news-card-date">March 4, 2026</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer style="background:#1a1a1a;padding:64px 0 32px">
+    <div style="max-width:1200px;margin:0 auto;padding:0 48px">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+        <!-- Brand + search + socials -->
         <div>
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-            <svg width="28" height="28" viewBox="0 0 32 32"><rect width="16" height="16" fill="rgba(255,255,255,0.4)"/><rect x="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect y="16" width="16" height="16" fill="rgba(255,255,255,0.2)"/><rect x="16" y="16" width="16" height="16" fill="rgba(255,255,255,0.4)"/></svg>
-            <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">Amplify</span>
+            <span style="width:28px;height:28px;border-radius:50%;background:#46435D;display:inline-flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700">s</span>
+            <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">spired</span>
           </div>
-          <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:240px">Church management software built to help 55,000+ ministries thrive.</div>
-          <div style="display:flex;gap:12px;margin-top:20px">
-            <div style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
-            </div>
-            <div style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            </div>
-            <div style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
-            </div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:260px;margin-bottom:20px">Software for churches, parishes, protection, and non-profit organizations &mdash; trusted by 90,000+ ministries.</div>
+          <form action="search-results.html" method="get" style="max-width:280px;margin-bottom:20px;position:relative">
+            <input type="search" name="q" placeholder="Search&hellip;" style="width:100%;padding:10px 40px 10px 14px;font-family:inherit;font-size:13px;color:white;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:8px;outline:none;transition:border-color 0.15s" onfocus="this.style.borderColor='rgba(255,255,255,0.35)'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+            <button type="submit" aria-label="Search" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:rgba(255,255,255,0.5);width:28px;height:28px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">&#x2315;</button>
+          </form>
+          <div style="display:flex;gap:12px">
+            <a href="#" aria-label="Twitter" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            <a href="#" aria-label="LinkedIn" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="#" aria-label="YouTube" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
           </div>
         </div>
-
         <!-- Solutions -->
         <div>
           <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Solutions</div>
           <div style="display:flex;flex-direction:column;gap:10px">
-            <a href="platform-overview.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;transition:color 0.1s;text-decoration:none">Platform Overview</a>
-            <a href="giving.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Giving</a>
-            <a href="accounting.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Accounting</a>
-            <a href="people.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">People (ChMS)</a>
-            <a href="websites.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Websites</a>
-            <a href="streaming.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Streaming</a>
+            <a href="platform-overview.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Platform Overview</a>
+            <a href="hq.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Headquarters Complete Bundle</a>
+            <a href="complete-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Complete Bundle</a>
+            <a href="generosity-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Generosity Bundle</a>
+            <a href="financial-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Financial Bundle</a>
+            <a href="digital-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Digital Bundle</a>
           </div>
         </div>
-
-        <!-- More Products + Services -->
-        <div>
-          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">More</div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <a href="mobile-app.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Mobile App</a>
-            <a href="communications.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Communications</a>
-            <a href="service-planning.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Service Planning</a>
-            <a href="media.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Media</a>
-            <a href="safety.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Safety</a>
-            <a href="services-overview.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Services</a>
-          </div>
-        </div>
-
         <!-- Resources -->
         <div>
           <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Resources</div>
           <div style="display:flex;flex-direction:column;gap:10px">
-            <a href="healthy-church-hub.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Healthy Church Hub</a>
-            <a href="webinar-registration.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Webinars</a>
-            <a href="ebook-landing.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">eBooks</a>
-            <a href="podcast-episode.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Podcasts</a>
-            <a href="blog-post.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Blog</a>
-            <a href="customer-story.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Customer Stories</a>
+            <a href="healthy-church-hub.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Healthy Church Hub</a>
+            <a href="services-overview.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Services</a>
+            <a href="partners.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Partners</a>
+            <a href="#" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Ministry Brands Academy</a>
+            <a href="#" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Church Plant Program</a>
           </div>
         </div>
-
         <!-- Company -->
         <div>
           <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Company</div>
           <div style="display:flex;flex-direction:column;gap:10px">
-            <a href="mb-company.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">About</a>
-            <a href="mb-careers.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Careers</a>
-            <a href="mb-press.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Press</a>
-            <a href="mb-partners.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Partners</a>
-            <a href="mb-contact.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Contact</a>
-            <a href="hq.html" style="font-size:13px;color:rgba(255,255,255,0.55);cursor:pointer;text-decoration:none">Amplify+ HQ</a>
+            <a href="mb-company.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">About</a>
+            <a href="mb-careers.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Careers</a>
+            <a href="mb-press.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Press</a>
+            <a href="mb-contact.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Contact</a>
           </div>
         </div>
       </div>
-
-      <!-- Bottom bar -->
-      <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between">
-        <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Ministry Brands. All rights reserved.</div>
+      <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Spired. All rights reserved.</div>
         <div style="display:flex;gap:24px">
           <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Privacy Policy</span>
           <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Terms of Service</span>
@@ -664,9 +946,7 @@ body.anno-hidden .anno{display:none}
       </div>
     </div>
   </footer>
-</div>
 
-</div><!-- end #site -->
 
 <!-- ANNOTATION LEGEND + TOGGLE -->
 <div class="anno-legend-wrap">
@@ -686,46 +966,171 @@ body.anno-hidden .anno{display:none}
 
 <script>
 document.body.classList.add("anno-hidden");
-function togglePw(){var i=document.getElementById('gate-input');i.type=i.type==='password'?'text':'password';}
-function tryPass(){
-  var v=document.getElementById('gate-input').value;
-  if(v==='wbamplify2026'){
-    document.getElementById('gate').style.display='none';
-    document.getElementById('site').style.display='block';
+
+// Dropdown: hover-to-open, click-to-pin, outside-click closes
+function toggleDropdown(e, id){
+  var btn = document.getElementById(id);
+  // If click came from inside the dropdown (a menu item), let it pass through
+  var dd = btn.querySelector('.mb-nav-dropdown');
+  if (dd && dd.contains(e.target)) return;
+  e.stopPropagation();
+  e.preventDefault();
+  var wasPinned = btn.dataset.pinned === '1';
+  document.querySelectorAll('.mb-nav-link.open').forEach(function(el){
+    if(el !== btn){ el.classList.remove('open'); delete el.dataset.pinned; }
+  });
+  if(wasPinned){
+    btn.classList.remove('open');
+    delete btn.dataset.pinned;
   } else {
-    document.getElementById('gate-err').style.display='block';
-    document.getElementById('gate-input').value='';
-    document.getElementById('gate-input').focus();
+    btn.classList.add('open');
+    btn.dataset.pinned = '1';
   }
 }
-
-var icons={"Giving":"$","Accounting":"=","People (ChMS)":"P","Websites":"W","Mobile App":"M","Communications":"@","Streaming":"▶","Service Planning":"✓","Media":"◉","Safety":"S"};
-var allProducts=[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"People (ChMS)",desc:"Member records & group management"},{name:"Websites",desc:"Your digital front door"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Media",desc:"Sermon content & distribution"},{name:"Safety",desc:"Check-in, background checks & protocols"}];
-var productUrls={"Giving":"giving.html","Accounting":"accounting.html","People (ChMS)":"people.html","Websites":"websites.html","Mobile App":"mobile-app.html","Communications":"communications.html","Streaming":"streaming.html","Service Planning":"service-planning.html","Media":"media.html","Safety":"safety.html"};
-var bundleUrls={"Complete Bundle":"complete-bundle.html","Generosity Bundle":"generosity-bundle.html","Financial Bundle":"financial-bundle.html","Digital Bundle":"digital-bundle.html"};
-var outcomes={
-  all:{desc:"The full Amplify platform — every tool working together as one connected system.",products:allProducts,gridClass:"all-grid",bundle:{name:"Complete Bundle",tagline:"Every tool, one price — the full Amplify platform for your entire church.",cta:"Explore the Complete Bundle →"}},
-  giving:{desc:"Tools that invite generosity and give your finance team full visibility.",products:[{name:"Giving",desc:"Online, text & recurring giving"},{name:"Accounting",desc:"Fund accounting built for churches"},{name:"Mobile App",desc:"Give from anywhere, anytime"},{name:"Communications",desc:"Generosity campaigns & appeals"}],bundle:{name:"Generosity Bundle",tagline:"All the giving & finance tools your church needs — packaged together.",cta:"Explore the Generosity Bundle →"}},
-  engage:{desc:"Keep your congregation connected and actively participating between Sundays.",products:[{name:"People (ChMS)",desc:"Member records & group management"},{name:"Communications",desc:"Email, text & push notifications"},{name:"Mobile App",desc:"Church in their pocket"},{name:"Websites",desc:"Your digital front door"}]},
-  grow:{desc:"Expand your reach, convert first-time visitors, and retain the people who find you.",products:[{name:"Websites",desc:"First impression that converts"},{name:"Streaming",desc:"Live & on-demand services"},{name:"Media",desc:"Sermon content & distribution"},{name:"Mobile App",desc:"Retain & re-engage members"}]},
-  streamline:{desc:"Replace fragmented tools with one connected system so nothing falls through the cracks.",products:[{name:"People (ChMS)",desc:"One database for your whole church"},{name:"Service Planning",desc:"Plan & coordinate every service"},{name:"Safety",desc:"Check-in & safety protocols"},{name:"Communications",desc:"Automated workflows & scheduling"}]},
-  financial:{desc:"Accurate books, clean audits, and board-ready reporting — without the late nights.",products:[{name:"Accounting",desc:"Fund accounting & compliance"},{name:"Giving",desc:"Donor management & statements"}],bundle:{name:"Financial Bundle",tagline:"Accounting, giving, and reporting — everything for financial stewardship.",cta:"Explore the Financial Bundle →"}},
-  volunteer:{desc:"Your team shows up prepared, on time, knowing exactly what's expected.",products:[{name:"Service Planning",desc:"Scheduling & role assignment"},{name:"People (ChMS)",desc:"Volunteer profiles & history"},{name:"Communications",desc:"Automated reminders & confirmations"},{name:"Mobile App",desc:"Volunteers manage availability on the go"}]},
-  digital:{desc:"Meet your congregation — and reach new ones — wherever they spend their time.",products:[{name:"Streaming",desc:"Broadcast live or on-demand"},{name:"Websites",desc:"A site that works as hard as you do"},{name:"Mobile App",desc:"Your branded church app"},{name:"Media",desc:"Manage & distribute content at scale"}],bundle:{name:"Digital Bundle",tagline:"Streaming, websites, app, and media — launch your digital ministry.",cta:"Explore the Digital Bundle →"}}
-};
-var simpleMenus={
-  who:{sections:[{icon:"👤",label:"By Role",items:[{n:"Executive / Senior Pastor",h:"senior-pastor.html"},{n:"Associate Pastor",h:"associate-pastor.html"},{n:"Finance Leader / Treasurer",h:"finance-treasurer.html"},{n:"Communications Director",h:"communications-director.html"},{n:"Worship Pastor",h:"worship-pastor.html"}]},{icon:"⛪",label:"By Church Type",items:[{n:"Multi-site Churches",h:"multi-site.html"},{n:"Denominations & Networks",h:"denominations.html"},{n:"Large Churches",h:"large-churches.html"},{n:"Growing Churches",h:"growing-churches.html"},{n:"Small Churches",h:"small-churches.html"},{n:"Church Plants",h:"church-plants.html"},{n:"Digital / Online Churches",h:"digital-churches.html"}]}]},
-  services:{sections:[{icon:"🛠",label:"Support & Delivery",items:[{n:"Services Overview",h:"services-overview.html"},{n:"Implementation & Onboarding",h:"service-detail.html"},{n:"Strategy & Consulting",h:"service-detail.html"},{n:"Data Migration",h:"service-detail.html"},{n:"Support & Training",h:"service-detail.html"}]}]}
-};
-function renderRight(k){var o=outcomes[k],gc=o.gridClass||'';var cards=o.products.map(function(p){return'<a href="'+(productUrls[p.name]||'#')+'" class="product-card" style="text-decoration:none;color:inherit"><div class="product-icon">'+(icons[p.name]||'\u00B7')+'</div><div class="product-name">'+p.name+'</div><div class="product-desc">'+p.desc+'</div></a>';}).join('');var bh='';if(o.bundle){bh='<a href="'+(bundleUrls[o.bundle.name]||'#')+'" class="bundle-banner" style="text-decoration:none;color:inherit"><div class="bundle-icon">\u2B21</div><div class="bundle-body"><div class="bundle-name">'+o.bundle.name+'</div><div class="bundle-tagline">'+o.bundle.tagline+'</div></div><span class="bundle-cta">'+o.bundle.cta+'</span></a>';}var rh=k==='all'?'':'<div class="right-header">Relevant tools</div>';document.getElementById('rPanel').innerHTML=rh+'<div class="outcome-desc">'+o.desc+'</div>'+bh+'<div class="products-grid '+gc+'">'+cards+'</div><div class="right-footer"><span class="rf-label">Not sure where to start?</span><span class="rf-link">Take the Healthy Church Assessment \u2192</span></div>';}
-function buildSolutions(){var defs=[{k:'all',label:'All Solutions'},{k:'giving',label:'Increase Giving & Generosity'},{k:'engage',label:'Engage Your Church Community'},{k:'grow',label:'Grow Attendance & Reach'},{k:'streamline',label:'Streamline Church Operations'},{k:'financial',label:'Improve Financial Stewardship'},{k:'volunteer',label:'Strengthen Volunteer & Staff Effectiveness'},{k:'digital',label:'Launch & Scale Digital Ministry'}];var rows=defs.map(function(d,i){return'<div class="outcome-item'+(i===0?' active':'')+'" data-k="'+d.k+'">'+d.label+' <span class="arr">\u203A</span></div>';}).join('');return'<div class="mega-inner"><div class="left-panel"><div class="left-label">What do you want to do?</div>'+rows+'<div class="left-divider"></div><a href="platform-overview.html" class="platform-btn" style="text-decoration:none;color:inherit"><span class="platform-btn-label">Platform Overview \u2192</span><span class="platform-btn-sub">How Amplify works as one system</span></a></div><div class="right-panel" id="rPanel"></div></div>';}
-function buildSimple(k){return'<div class="simple-panel">'+simpleMenus[k].sections.map(function(s){return'<div class="s-section"><div class="s-category"><div class="s-cat-icon">'+s.icon+'</div><span class="s-cat-label">'+s.label+'</span></div>'+s.items.map(function(i){return'<a href="'+i.h+'" class="s-item">'+i.n+'</a>';}).join('')+'</div>';}).join('')+'</div>';}
-var cur=null,curBtn=null;
-function closeMenu(){if(curBtn)curBtn.classList.remove('open');var m=document.getElementById('megaMenu');if(m)m.classList.remove('show');cur=null;curBtn=null;}
-function openMenu(key,btn){closeMenu();cur=key;curBtn=btn;btn.classList.add('open');var m=document.getElementById('megaMenu');if(key==='solutions'){m.innerHTML=buildSolutions();m.querySelectorAll('.outcome-item').forEach(function(el){el.addEventListener('mouseenter',function(){m.querySelectorAll('.outcome-item').forEach(function(i){i.classList.remove('active')});this.classList.add('active');renderRight(this.dataset.k);});});renderRight('all');}else{m.innerHTML=buildSimple(key);}m.classList.add('show');}
-document.addEventListener('click',function(e){if(!e.target.closest('#primaryNav')&&!e.target.closest('.utility-bar'))closeMenu();});
+document.addEventListener('click', function(){
+  document.querySelectorAll('.mb-nav-link.open').forEach(function(el){
+    el.classList.remove('open');
+    delete el.dataset.pinned;
+  });
+});
 </script>
-
-<!-- KEY PAGE BADGE -->
-<script>(function(){var b=document.createElement('div');b.id='__wb_keypage_badge';b.setAttribute('style','position:fixed;top:130px;left:16px;z-index:10000;background:#fce88a;color:#6b520d;padding:6px 12px 6px 10px;border-radius:999px;font-family:\'DM Sans\',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,0.15);border:0.5px solid #eac95b;pointer-events:none');b.innerHTML='<span style="font-size:13px;line-height:1;color:#c88f1a">\u2605</span>Key page';function attach(){(document.body||document.documentElement).appendChild(b);}if(document.body){attach()}else{document.addEventListener('DOMContentLoaded',attach)}})();</script>
-
+</body>
+</html>
+<script>
+/* SPIRED NAV — mega menu behavior */
+(function(){
+  var megaEl = document.getElementById('snMega');
+  var curBtn = null, curSub = 'who';
+  var MEGA_ITEMS = [
+    {k:'who', label:'Who We Serve'},
+    {k:'solutions', label:'Solutions'},
+    {k:'hq', label:'Churches HQ'},
+    {k:'hch', label:'Healthy Church Hub'}
+  ];
+  var PRODUCTS = [
+    {name:'Giving', url:'giving.html'},
+    {name:'Accounting', url:'accounting.html'},
+    {name:'People (CHMS)', url:'people.html'},
+    {name:'Websites', url:'websites.html'},
+    {name:'Mobile App', url:'mobile-app.html'},
+    {name:'Communications', url:'communications.html'},
+    {name:'Streaming', url:'streaming.html'},
+    {name:'Service Planning', url:'service-planning.html'},
+    {name:'Media', url:'media.html'},
+    {name:'Safety', url:'safety.html'},
+    {name:'Equip', url:'#', badge:'NEW'}
+  ];
+  function buildLeft(active){
+    return '<div class="sn-mega-left">' + MEGA_ITEMS.map(function(i){
+      return '<button class="sn-mega-item'+(i.k===active?' active':'')+'" data-sub="'+i.k+'">'+i.label+' <span class="sn-arr">\u203A</span></button>';
+    }).join('') + '</div>';
+  }
+  function buildWho(){
+    var types = [
+      ['Multi-Site Churches','multi-site.html'],
+      ['Denominations & Networks','denominations.html'],
+      ['Large Churches','large-churches.html'],
+      ['Growing Churches','growing-churches.html'],
+      ['Small Churches','small-churches.html'],
+      ['Church Plants','church-plants.html'],
+      ['Digital / Online Churches','digital-churches.html']
+    ];
+    var roles = [
+      ['Executive Or Senior Pastor','senior-pastor.html'],
+      ['Associate Pastor','associate-pastor.html'],
+      ['Finance Leader Or Treasurer','finance-treasurer.html'],
+      ['Communications Director','communications-director.html'],
+      ['Worship Pastor','worship-pastor.html']
+    ];
+    return '<div class="sn-mega-two-col">' +
+      '<div><div class="sn-mega-title-block" style="margin-bottom:14px"><div class="sn-mega-title-icon">\u26EA</div><div><div class="sn-mega-col-title" style="margin-bottom:2px">Church Types We Serve</div><div class="sn-mega-sub">Explore how Spired supports every kind of church.</div></div></div><ul class="sn-mega-col-list">' +
+        types.map(function(t){return '<li><a href="'+t[1]+'">'+t[0]+'</a></li>';}).join('') +
+      '</ul></div>' +
+      '<div><div class="sn-mega-title-block" style="margin-bottom:14px"><div class="sn-mega-title-icon">\u2032</div><div><div class="sn-mega-col-title" style="margin-bottom:2px">Roles We Serve</div><div class="sn-mega-sub">Solutions tailored to the people who lead a church.</div></div></div><ul class="sn-mega-col-list">' +
+        roles.map(function(r){return '<li><a href="'+r[1]+'">'+r[0]+'</a></li>';}).join('') +
+      '</ul></div>' +
+    '</div>';
+  }
+  function buildSolutions(){
+    var prods = PRODUCTS.map(function(p){
+      return '<a href="'+p.url+'" class="sn-mega-product"><span class="sn-mega-product-icon">\u26A1</span>'+p.name+(p.badge?'<span class="sn-mega-product-badge">'+p.badge+'</span>':'')+'</a>';
+    }).join('');
+    return '<div class="sn-mega-topbar"><div class="sn-mega-title-block"><div><div class="sn-mega-title">Platform Overview</div><div class="sn-mega-sub">One Connected Platform for Your Entire Church</div></div></div><div class="sn-mega-actions"><a href="#" class="sn-mega-action">Not Sure Where To Start?</a><a href="platform-overview.html" class="sn-mega-action solid">See The Full Ecosystem</a></div></div>' +
+      '<div class="sn-mega-solutions">' +
+        '<div class="sn-mega-products">'+prods+'</div>' +
+        '<div class="sn-mega-bundles">' +
+          '<div class="sn-mega-bundles-title"><div class="sn-mega-bundles-icon">\u25C6</div><h4>Bundles</h4></div>' +
+          '<p>Bundle the tools your church needs into one plan, one price.</p>' +
+          '<a href="complete-bundle.html">Complete Bundle</a>' +
+          '<a href="generosity-bundle.html">Generosity Bundle</a>' +
+          '<a href="digital-bundle.html">Digital Bundle</a>' +
+          '<a href="financial-bundle.html">Financial Bundle</a>' +
+        '</div>' +
+      '</div>';
+  }
+  function buildHq(){
+    var cards = [
+      ['Headquarters Complete','hq.html','Everything in one bundle \u2014 the full HQ stack.'],
+      ['Headquarters Financials','hq-financials.html','Giving, accounting, and financial oversight.'],
+      ['Headquarters Donor','hq-donor.html','Donor engagement and stewardship tools.'],
+      ['Headquarters Arena','hq-arena.html','The command center for multi-site operations.']
+    ];
+    return '<div class="sn-mega-topbar"><div class="sn-mega-title-block"><div><div class="sn-mega-title">Bundles Optimized For Your Church Headquarters</div><div class="sn-mega-sub">Pre-configured suites for the operational core of your organization.</div></div></div></div>' +
+      '<div class="sn-mega-hq">' + cards.map(function(c){
+        return '<a href="'+c[1]+'" class="sn-mega-hq-card"><div class="sn-mega-hq-icon">\u25C6</div><div><div class="sn-mega-hq-name">'+c[0]+'</div><div class="sn-mega-hq-desc">'+c[2]+'</div></div></a>';
+      }).join('') + '</div>';
+  }
+  function buildHch(){
+    var features = [
+      ['Upcoming Webinar',"Grow Your Church's Digital Reach in 2026",'Live discussion on reaching congregants beyond the sanctuary.','webinar-registration.html'],
+      ['Free eBook','The Ultimate Easter Planning Guide for Churches','Checklists, timelines, and outreach ideas — start planning today.','ebook-landing.html'],
+      ['Podcast \u00b7 Ep. 166','Toby Walters: Balancing Church Tech With Sacred Spaces','On faithful adoption of technology inside worship spaces.','podcast-episode.html']
+    ];
+    var items = [
+      ['Managed Services','Expert help for setup, migration & growth. Real people who understand ministry.','services-overview.html'],
+      ['Ministry Brands Academy','Free, practical training for today\u2019s ministry leaders.','#'],
+      ['Partners','Trusted partners extending what Spired can do.','partners.html'],
+      ['Church Plant Program','Helping church plants flourish, fulfill, and lead.','#']
+    ];
+    return '<div class="sn-mega-topbar"><div class="sn-mega-title-block"><div class="sn-mega-title-icon">\u26EA</div><div><div class="sn-mega-title">Healthy Church Hub</div><div class="sn-mega-sub">Explore blogs, podcasts, webinars, eBooks and customer stories designed to help your church thrive \u2014 all in one place.</div></div></div><div class="sn-mega-actions"><a href="healthy-church-hub.html" class="sn-mega-action">Take Me To The Healthy Church Hub</a></div></div>' +
+      '<div class="sn-mega-hch-features">' + features.map(function(f){
+        return '<a href="'+f[3]+'" class="sn-mega-hch-card"><div class="sn-mega-hch-thumb"></div><div class="sn-mega-hch-eyebrow">'+f[0]+'</div><div class="sn-mega-hch-title">'+f[1]+'</div><div class="sn-mega-hch-desc">'+f[2]+'</div></a>';
+      }).join('') + '</div>' +
+      '<div class="sn-mega-hch-list">' + items.map(function(it){
+        return '<a href="'+it[2]+'" class="sn-mega-hch-item"><div class="sn-mega-hch-item-icon">\u26A1</div><div><div class="sn-mega-hch-item-name">'+it[0]+'</div><div class="sn-mega-hch-item-desc">'+it[1]+'</div></div></a>';
+      }).join('') + '</div>';
+  }
+  var BUILDERS = {who:buildWho, solutions:buildSolutions, hq:buildHq, hch:buildHch};
+  function renderMega(sub){
+    curSub = sub;
+    megaEl.innerHTML = '<div class="sn-mega-grid">' + buildLeft(sub) + '<div class="sn-mega-right">' + BUILDERS[sub]() + '</div></div>';
+    megaEl.querySelectorAll('.sn-mega-item').forEach(function(btn){
+      btn.addEventListener('mouseenter', function(){ renderMega(btn.dataset.sub); });
+      btn.addEventListener('click', function(e){ e.stopPropagation(); renderMega(btn.dataset.sub); });
+    });
+  }
+  window.snOpen = function(key, btn){
+    document.querySelectorAll('.sn-link').forEach(function(b){ b.classList.remove('open'); });
+    btn.classList.add('open');
+    curBtn = btn;
+    renderMega(curSub);
+    megaEl.classList.add('show');
+  };
+  window.snClose = function(){
+    if(curBtn) curBtn.classList.remove('open');
+    megaEl.classList.remove('show');
+    curBtn = null;
+  };
+  window.snToggleAbout = function(e){
+    e.stopPropagation();
+    document.getElementById('snAboutWrap').classList.toggle('open');
+  };
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('.spired-nav')){ if(window.snClose) snClose(); var w=document.getElementById('snAboutWrap'); if(w) w.classList.remove('open'); }
+  });
+  document.querySelector('.spired-nav').addEventListener('mouseleave', function(e){
+    var to = e.relatedTarget;
+    if(!to || !to.closest || !to.closest('.sn-mega')) snClose();
+  });
+})();
+</script>

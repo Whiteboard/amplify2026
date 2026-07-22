@@ -9,43 +9,110 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
 body{background:white;min-height:100vh;color:#1a1a1a}
-.mb-nav{position:sticky;top:0;z-index:200;background:white;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px}
-.mb-nav-left{display:flex;align-items:center;gap:10px}.mb-nav-mark svg{display:block;color:#1E3A5F}
-.mb-nav-brand{font-size:16px;font-weight:700;color:#1E3A5F;letter-spacing:-0.01em}
-.mb-nav-links{display:flex;align-items:center;gap:6px;margin:0 auto}
-.mb-nav-link{position:relative;padding:9px 14px;font-size:14px;font-weight:500;color:#444;cursor:pointer;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;font-family:inherit;transition:color 0.12s,background 0.12s}
-.mb-nav-link:hover{color:#1E3A5F;background:#f4f5f8}.mb-nav-link.active{color:#1E3A5F;font-weight:600}
-.mb-nav-chevron{font-size:8px;color:#bbb;transition:transform 0.15s}.mb-nav-link.open .mb-nav-chevron{transform:rotate(180deg)}
-.mb-nav-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:100}
-.mb-nav-link.open .mb-nav-dropdown::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px}
-.mb-nav-link.open .mb-nav-dropdown{display:block}
-.mb-nav-dropdown a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}.mb-nav-dropdown a:hover{background:#f4f5f8;color:#1E3A5F}
-.mb-nav-right{display:flex;align-items:center;gap:14px}
-.mb-nav-login{font-size:13px;color:#666;text-decoration:none;font-weight:500;padding:8px 12px}.mb-nav-login:hover{color:#1E3A5F}
-.mb-nav-cta{background:#1E3A5F;color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s}.mb-nav-cta:hover{background:#2a4a73}
+
+/* SPIRED NAV */
+.spired-nav{position:sticky;top:0;z-index:300;background:white;border-bottom:0.5px solid #e8e8e8;height:64px;padding:0 32px}
+.sn-inner{display:flex;align-items:center;width:100%;height:100%;max-width:1400px;margin:0 auto;gap:32px}
+.sn-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.sn-logo-mark{width:28px;height:28px;border-radius:50%;background:#46435D;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700}
+.sn-logo-wordmark{font-size:20px;font-weight:600;color:#1a1a1a;letter-spacing:-0.02em}
+.sn-links{display:flex;align-items:center;gap:0;flex:1}
+.sn-link{background:none;border:none;padding:9px 16px;font-family:inherit;font-size:14px;font-weight:500;color:#444;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;border-radius:6px;transition:color 0.12s,background 0.12s;white-space:nowrap}
+.sn-link:hover,.sn-link.open{color:#46435D;background:#f5f4f8}
+.sn-chev{font-size:9px;color:#bbb;transition:transform 0.15s}
+.sn-link.open .sn-chev{transform:rotate(180deg)}
+.sn-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.sn-cta{background:#46435D;color:white;border:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s;display:inline-block}
+.sn-cta:hover{background:#5a576e}
+.sn-utility{font-size:14px;color:#666;text-decoration:none;font-weight:500;padding:8px 6px;transition:color 0.12s;background:none;border:none;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.sn-utility:hover{color:#46435D}
+.sn-about-wrap{position:relative}
+.sn-about-drop{display:none;position:absolute;top:calc(100% + 6px);right:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:310}
+.sn-about-wrap.open .sn-about-drop{display:block}
+.sn-about-drop a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}
+.sn-about-drop a:hover{background:#f5f4f8;color:#46435D}
+
+/* SPIRED MEGA MENU */
+.sn-mega{display:none;position:absolute;top:64px;left:0;right:0;background:white;border-top:0.5px solid #e8e8e8;border-bottom:0.5px solid #e8e8e8;box-shadow:0 12px 40px rgba(0,0,0,0.08);z-index:290;overflow:hidden}
+.sn-mega.show{display:block}
+.sn-mega-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:260px 1fr;min-height:380px}
+.sn-mega-left{background:#f7f8fa;border-right:0.5px solid #ebeef2;padding:0}
+.sn-mega-item{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;cursor:pointer;font-size:14px;font-weight:500;color:#555;background:transparent;border:none;width:100%;text-align:left;font-family:inherit;transition:all 0.12s;border-left:3px solid transparent;min-height:95px}
+.sn-mega-item:hover{color:#46435D;background:#eeedf4}
+.sn-mega-item.active{color:#46435D;background:white;border-left-color:#46435D;font-weight:600}
+.sn-mega-item .sn-arr{font-size:12px;color:#ccc;transition:transform 0.12s}
+.sn-mega-item.active .sn-arr{color:#46435D;transform:translateX(3px)}
+.sn-mega-right{padding:32px 44px;display:flex;flex-direction:column}
+.sn-mega-topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:26px}
+.sn-mega-title-block{display:flex;gap:14px;align-items:flex-start}
+.sn-mega-title-icon{width:28px;height:28px;border-radius:50%;background:#eeedf4;color:#46435D;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:2px}
+.sn-mega-title{font-size:16px;font-weight:600;color:#1a1a1a;margin-bottom:4px;letter-spacing:-0.01em}
+.sn-mega-sub{font-size:12px;color:#888;line-height:1.5;max-width:540px}
+.sn-mega-actions{display:flex;gap:10px;flex-shrink:0}
+.sn-mega-action{padding:8px 16px;border:0.5px solid #d0d0d5;background:white;color:#46435D;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;transition:all 0.12s;font-family:inherit;cursor:pointer;white-space:nowrap}
+.sn-mega-action:hover{border-color:#46435D;background:#f5f4f8}
+.sn-mega-action.solid{background:#46435D;color:white;border-color:#46435D}
+.sn-mega-action.solid:hover{background:#5a576e}
+.sn-mega-two-col{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding-top:8px}
+.sn-mega-col-title{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:14px}
+.sn-mega-col-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.sn-mega-col-list a{padding:7px 0;font-size:14px;color:#555;text-decoration:none;transition:color 0.12s;display:block}
+.sn-mega-col-list a:hover{color:#46435D}
+.sn-mega-solutions{display:grid;grid-template-columns:2fr 1fr;gap:44px;padding-top:8px}
+.sn-mega-products{display:grid;grid-template-columns:1fr 1fr;gap:2px 24px}
+.sn-mega-product{display:flex;align-items:center;gap:10px;padding:9px 6px;text-decoration:none;color:#333;font-size:14px;font-weight:500;border-radius:6px;transition:background 0.12s}
+.sn-mega-product:hover{background:#f5f4f8;color:#46435D}
+.sn-mega-product-icon{width:22px;height:22px;color:#46435D;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.sn-mega-product-badge{background:#46435D;color:white;font-size:9px;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:999px;margin-left:6px;text-transform:uppercase}
+.sn-mega-bundles{display:flex;flex-direction:column;padding-left:28px;border-left:0.5px solid #ebeef2}
+.sn-mega-bundles-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sn-mega-bundles-icon{width:26px;height:26px;border-radius:6px;background:#eeedf4;color:#46435D;display:flex;align-items:center;justify-content:center;font-size:12px}
+.sn-mega-bundles-title h4{font-size:15px;font-weight:600;color:#1a1a1a;letter-spacing:-0.01em}
+.sn-mega-bundles p{font-size:11px;color:#888;line-height:1.5;margin-bottom:14px;max-width:220px}
+.sn-mega-bundles a{padding:9px 0;font-size:14px;color:#555;text-decoration:none;transition:color 0.12s;display:block;border-bottom:0.5px solid #f0f0f0}
+.sn-mega-bundles a:last-child{border-bottom:none}
+.sn-mega-bundles a:hover{color:#46435D}
+.sn-mega-hq{display:grid;grid-template-columns:1fr 1fr;gap:14px 44px;padding-top:8px}
+.sn-mega-hq-card{display:flex;gap:14px;padding:14px;text-decoration:none;color:inherit;border-radius:10px;transition:background 0.12s}
+.sn-mega-hq-card:hover{background:#f5f4f8}
+.sn-mega-hq-icon{width:32px;height:32px;border-radius:8px;background:#eeedf4;color:#46435D;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px}
+.sn-mega-hq-name{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:4px}
+.sn-mega-hq-desc{font-size:11px;color:#888;line-height:1.5}
+.sn-mega-hch-features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px;padding-top:8px}
+.sn-mega-hch-card{background:#f7f8fa;border:0.5px solid #ebeef2;border-radius:10px;padding:12px;text-decoration:none;color:inherit;transition:all 0.12s;display:flex;flex-direction:column;gap:10px}
+.sn-mega-hch-card:hover{border-color:#46435D;background:#f5f4f8}
+.sn-mega-hch-thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#46435D 0%,#2d2a44 100%);border-radius:6px}
+.sn-mega-hch-eyebrow{font-size:9px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase}
+.sn-mega-hch-title{font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.3}
+.sn-mega-hch-desc{font-size:11px;color:#888;line-height:1.4}
+.sn-mega-hch-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 44px}
+.sn-mega-hch-item{display:flex;gap:12px;text-decoration:none;color:inherit;padding:8px 0}
+.sn-mega-hch-item-icon{width:24px;color:#46435D;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.sn-mega-hch-item-name{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:3px}
+.sn-mega-hch-item-desc{font-size:11px;color:#888;line-height:1.5}
 
 .w{max-width:1200px;margin:0 auto;padding:0 48px}
 .section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
 .section.alt{background:#f7f8fa}
-.section-eyebrow{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.section-eyebrow{font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
 .section-h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px}
 .section-sub{font-size:17px;color:#777;line-height:1.6;max-width:560px}
 .section-center{text-align:center;max-width:680px;margin:0 auto 56px}.section-center .section-sub{margin:0 auto}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
-.btn-navy{background:#1E3A5F;color:white}.btn-navy:hover{background:#2a4a73}
-.btn-white{background:white;color:#1E3A5F}.btn-white:hover{background:#f0f0f0}
-.btn-ghost{background:transparent;color:#1E3A5F;border:1px solid #1E3A5F}.btn-ghost:hover{background:#1E3A5F;color:white}
+.btn-navy{background:#46435D;color:white}.btn-navy:hover{background:#5a576e}
+.btn-white{background:white;color:#46435D}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:#46435D;border:1px solid #46435D}.btn-ghost:hover{background:#46435D;color:white}
 .btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
-.mb-page-hero{background:linear-gradient(180deg,#1E3A5F 0%,#162d4a 100%);color:white;padding:96px 0 88px;text-align:center}
+.mb-page-hero{background:linear-gradient(180deg,#46435D 0%,#2d2a44 100%);color:white;padding:96px 0 88px;text-align:center}
 .mb-page-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px}
 .mb-page-hero h1{font-size:54px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:20px}
 .mb-page-hero p{font-size:17px;color:rgba(255,255,255,0.78);line-height:1.65;max-width:640px;margin:0 auto 32px}
 .mb-page-hero-ctas{display:flex;gap:12px;justify-content:center}
 .mb-breadcrumb{padding:18px 0;background:#fafbfc;border-bottom:0.5px solid #f0f0f0}
 .mb-breadcrumb-inner{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
-.mb-breadcrumb a{color:#888;text-decoration:none}.mb-breadcrumb a:hover{color:#1E3A5F}
+.mb-breadcrumb a{color:#888;text-decoration:none}.mb-breadcrumb a:hover{color:#46435D}
 
-.mb-cta-strip{background:#1E3A5F;color:white;border-radius:16px;padding:48px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.mb-cta-strip{background:#46435D;color:white;border-radius:16px;padding:48px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px}
 .mb-cta-strip h3{font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
 .mb-cta-strip p{color:rgba(255,255,255,0.7);font-size:15px;max-width:520px}
 
@@ -56,11 +123,11 @@ body{background:white;min-height:100vh;color:#1a1a1a}
 .commit-intro p{font-size:17px;color:#666;line-height:1.7}
 .commit-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:0 auto}
 .commit-card{background:#f7f8fa;border:0.5px solid #e6e8ec;border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;transition:all 0.18s}
-.commit-card:hover{border-color:#1E3A5F;transform:translateY(-3px);box-shadow:0 8px 28px rgba(30,58,95,0.08)}
-.commit-card-quote-mark{font-family:Georgia,serif;font-size:48px;color:#1E3A5F;line-height:0.6;margin-bottom:18px;opacity:0.4}
+.commit-card:hover{border-color:#46435D;transform:translateY(-3px);box-shadow:0 8px 28px rgba(70,67,93,0.08)}
+.commit-card-quote-mark{font-family:Georgia,serif;font-size:48px;color:#46435D;line-height:0.6;margin-bottom:18px;opacity:0.4}
 .commit-card-quote{font-size:15px;color:#333;line-height:1.65;margin-bottom:24px;flex:1;font-weight:500}
 .commit-card-author{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:0.5px solid #e6e8ec}
-.commit-card-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);flex-shrink:0}
+.commit-card-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#46435D 0%,#46435D 100%);flex-shrink:0}
 .commit-card-name{font-size:14px;font-weight:700;color:#1a1a1a;letter-spacing:-0.005em}
 .commit-card-role{font-size:12px;color:#777;font-weight:500;margin-top:2px}
 
@@ -78,16 +145,16 @@ body{background:white;min-height:100vh;color:#1a1a1a}
 .culture-photo.tall{height:380px}
 .culture-photo.short{height:183px}
 .culture-photo.amp{background:linear-gradient(135deg,#46435D 0%,#2d2a44 100%)}
-.culture-photo.navy{background:linear-gradient(135deg,#1E3A5F 0%,#162d4a 100%)}
+.culture-photo.navy{background:linear-gradient(135deg,#46435D 0%,#2d2a44 100%)}
 .culture-photo.par{background:linear-gradient(135deg,#8b6f47 0%,#5d4730 100%)}
 .culture-photo.dd{background:linear-gradient(135deg,#2a6e5a 0%,#1c4a3d 100%)}
 .culture-photo.pm{background:linear-gradient(135deg,#a14040 0%,#6f2a2a 100%)}
-.culture-photo.mix1{background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%)}
-.culture-photo.mix2{background:linear-gradient(135deg,#1E3A5F 0%,#2a6e5a 100%)}
-.culture-photo.mix3{background:linear-gradient(135deg,#8b6f47 0%,#1E3A5F 100%)}
+.culture-photo.mix1{background:linear-gradient(135deg,#46435D 0%,#46435D 100%)}
+.culture-photo.mix2{background:linear-gradient(135deg,#46435D 0%,#2a6e5a 100%)}
+.culture-photo.mix3{background:linear-gradient(135deg,#8b6f47 0%,#46435D 100%)}
 
 /* D&I */
-.di-card{background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);color:white;border-radius:16px;padding:56px 64px;text-align:center;max-width:880px;margin:0 auto}
+.di-card{background:linear-gradient(135deg,#46435D 0%,#46435D 100%);color:white;border-radius:16px;padding:56px 64px;text-align:center;max-width:880px;margin:0 auto}
 .di-card h3{font-size:32px;font-weight:700;letter-spacing:-0.02em;margin-bottom:16px}
 .di-card p{font-size:16px;line-height:1.7;color:rgba(255,255,255,0.85);max-width:640px;margin:0 auto 24px}
 .di-card-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);padding:8px 16px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase}
@@ -105,10 +172,10 @@ body{background:white;min-height:100vh;color:#1a1a1a}
 .award-feature-title{font-size:24px;font-weight:700;color:#1a1a1a;letter-spacing:-0.02em;line-height:1.2;margin-bottom:12px}
 .award-feature-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#c98e3c 0%,#a06c20 100%);color:white;padding:5px 12px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;align-self:flex-start;margin-bottom:18px}
 .award-feature-desc{font-size:15px;color:#555;line-height:1.65;margin-bottom:22px}
-.award-feature-list-label{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;margin-top:8px}
+.award-feature-list-label{font-size:11px;font-weight:700;color:#46435D;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;margin-top:8px}
 .award-feature-list{list-style:none;padding:0;margin:0 0 22px 0;display:flex;flex-direction:column;gap:10px}
 .award-feature-list li{display:flex;align-items:center;gap:10px;font-size:14px;color:#333;font-weight:500}
-.award-feature-list-check{width:20px;height:20px;border-radius:50%;background:#e5f0ff;color:#1E3A5F;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.award-feature-list-check{width:20px;height:20px;border-radius:50%;background:#e5f0ff;color:#46435D;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
 
 /* Comparably hero score */
 .comp-score-hero{display:flex;align-items:center;gap:18px;margin-bottom:20px;padding:18px;background:linear-gradient(135deg,#f5fafd 0%,#eaf5fa 100%);border-radius:14px}
@@ -128,7 +195,7 @@ body{background:white;min-height:100vh;color:#1a1a1a}
 .comp-score-extra-value{color:#10b981;font-weight:700}
 
 /* Employee quote pullout */
-.award-quote{background:linear-gradient(135deg,#1E3A5F 0%,#162d4a 100%);color:white;border-radius:18px;padding:48px 56px;text-align:center;max-width:980px;margin:0 auto}
+.award-quote{background:linear-gradient(135deg,#46435D 0%,#2d2a44 100%);color:white;border-radius:18px;padding:48px 56px;text-align:center;max-width:980px;margin:0 auto}
 .award-quote-mark{font-family:Georgia,serif;font-size:64px;color:rgba(255,255,255,0.3);line-height:0.6;margin-bottom:12px}
 .award-quote-prompt{font-size:13px;color:rgba(255,255,255,0.55);font-weight:500;margin-bottom:14px}
 .award-quote-text{font-size:24px;font-weight:600;color:white;line-height:1.4;letter-spacing:-0.015em;margin-bottom:20px;max-width:780px;margin-left:auto;margin-right:auto}
@@ -137,14 +204,14 @@ body{background:white;min-height:100vh;color:#1a1a1a}
 
 /* Galway callout */
 .galway-strip{background:white;border:0.5px solid #e8e8e8;border-radius:16px;padding:40px 48px;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
-.galway-strip-flag{display:inline-flex;align-items:center;gap:10px;background:#eaf0f7;color:#1E3A5F;padding:6px 14px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px}
+.galway-strip-flag{display:inline-flex;align-items:center;gap:10px;background:#eeedf4;color:#46435D;padding:6px 14px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px}
 .galway-strip h3{font-size:24px;font-weight:700;letter-spacing:-0.02em;color:#1a1a1a;margin-bottom:8px}
 .galway-strip p{font-size:15px;color:#777;line-height:1.55;max-width:520px}
 
 /* Team spotlights — single carousel (slimmed) */
 .spotlight-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
 .spotlight-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:24px 20px;text-align:center}
-.spotlight-photo{aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);margin-bottom:16px}
+.spotlight-photo{aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#46435D 0%,#46435D 100%);margin-bottom:16px}
 .spotlight-name{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
 .spotlight-role{font-size:12px;color:#888}
 
@@ -168,21 +235,42 @@ footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 
 .anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
 .anno-legend-label{font-size:11px;color:#555;font-weight:500}
 body.anno-hidden .anno-legend{display:none}
-.anno-toggle{background:#1E3A5F;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
-.anno-toggle:hover{background:#2a4a73}
+.anno-toggle{background:#46435D;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(70,67,93,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#5a576e}
 body.anno-hidden .anno{display:none}
 </style>
 </head>
 <body>
-
-<nav class="mb-nav">
-  <div class="mb-nav-left"><span class="mb-nav-mark"><svg width="32" height="14" viewBox="0 0 48 20" fill="none"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg></span><a href="mb-home.html" style="text-decoration:none"><span class="mb-nav-brand">Ministry Brands</span></a></div>
-  <div class="mb-nav-links">
-    <a href="home.html" class="mb-nav-link">Churches</a><a href="#" class="mb-nav-link">Parishes</a><a href="#" class="mb-nav-link">Nonprofits</a><a href="#" class="mb-nav-link">Protection</a>
-    <button class="mb-nav-link active" id="navCompany" onclick="toggleDropdown(event,'navCompany')">Company <span class="mb-nav-chevron">▾</span><div class="mb-nav-dropdown"><a href="mb-company.html">About</a><a href="mb-meet-team.html">Meet the Team</a><a href="mb-careers.html">Careers</a><a href="mb-press.html">Press</a><a href="mb-partners.html">Partners</a></div></button>
+<nav class="spired-nav" id="spiredNav">
+  <div class="sn-inner">
+    <a href="home.html" class="sn-logo">
+      <span class="sn-logo-mark">s</span>
+      <span class="sn-logo-wordmark">spired</span>
+    </a>
+    <div class="sn-links">
+      <a class="sn-link" data-sn-key="churches" href="churches.html" onmouseenter="snOpen('churches',this)">Churches <span class="sn-chev">▾</span></a>
+      <a class="sn-link" href="#parishes" onmouseenter="snClose()">Parishes</a>
+      <a class="sn-link" href="#protection" onmouseenter="snClose()">Protection</a>
+      <a class="sn-link" href="#non-profit" onmouseenter="snClose()">Non-Profit</a>
+    </div>
+    <div class="sn-right">
+      <a href="request-demo.html" class="sn-cta">Request Demo</a>
+      <a href="login.html" class="sn-utility">Login</a>
+      <div class="sn-about-wrap" id="snAboutWrap">
+        <button class="sn-utility" onclick="snToggleAbout(event)">About <span class="sn-chev">▾</span></button>
+        <div class="sn-about-drop">
+          <a href="mb-company.html">About Us</a>
+          <a href="mb-meet-team.html">Meet the Team</a>
+          <a href="mb-careers.html">Careers</a>
+          <a href="mb-press.html">Press / Newsroom</a>
+          <a href="mb-contact.html">Contact</a>
+        </div>
       </div>
-  <div class="mb-nav-right"><a href="login.html" class="mb-nav-login">Login</a><a href="mb-contact.html" class="mb-nav-cta">Contact Us</a></div>
+    </div>
+  </div>
+  <div class="sn-mega" id="snMega"></div>
 </nav>
+
 
 <div class="mb-breadcrumb"><div class="w mb-breadcrumb-inner"><a href="mb-home.html">Home</a> <span>›</span> <a href="mb-company.html">Company</a> <span>›</span> <span>Careers</span></div></div>
 
@@ -391,18 +479,71 @@ body.anno-hidden .anno{display:none}
   </div>
 </section>
 
-<footer class="mb-footer">
-  <div class="w">
-    <div class="mb-footer-grid">
-      <div><div style="display:flex;align-items:center;gap:10px"><svg width="32" height="14" viewBox="0 0 48 20" fill="none" style="color:rgba(255,255,255,0.75)"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg><span style="font-size:15px;font-weight:700;color:white">Ministry Brands</span></div><p class="mb-footer-brand">Technology built for the missions that hold communities together.</p></div>
-      <div><div class="mb-footer-col-title">Brands</div><a href="home.html" class="mb-footer-col-link">Amplify</a><a href="#" class="mb-footer-col-link">ParishSOFT</a><a href="#" class="mb-footer-col-link">DonorDirect</a><a href="#" class="mb-footer-col-link">Protect My Ministry</a></div>
-      <div><div class="mb-footer-col-title">Company</div><a href="mb-company.html" class="mb-footer-col-link">About</a><a href="mb-meet-team.html" class="mb-footer-col-link">Meet the Team</a><a href="mb-careers.html" class="mb-footer-col-link">Careers</a><a href="mb-press.html" class="mb-footer-col-link">Press</a></div>
-      <div><div class="mb-footer-col-title">Resources</div><a href="healthy-church-hub.html" class="mb-footer-col-link">Healthy Church Hub</a><a href="mb-partners.html" class="mb-footer-col-link">Partners</a><a href="mb-press.html" class="mb-footer-col-link">News</a></div>
-      <div><div class="mb-footer-col-title">Connect</div><a href="mb-contact.html" class="mb-footer-col-link">Contact</a><a href="login.html" class="mb-footer-col-link">Login</a></div>
+<footer style="background:#1a1a1a;padding:64px 0 32px">
+    <div style="max-width:1200px;margin:0 auto;padding:0 48px">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px">
+        <!-- Brand + search + socials -->
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+            <span style="width:28px;height:28px;border-radius:50%;background:#46435D;display:inline-flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700">s</span>
+            <span style="font-size:18px;font-weight:700;color:white;letter-spacing:-0.02em">spired</span>
+          </div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:260px;margin-bottom:20px">Software for churches, parishes, protection, and non-profit organizations &mdash; trusted by 90,000+ ministries.</div>
+          <form action="search-results.html" method="get" style="max-width:280px;margin-bottom:20px;position:relative">
+            <input type="search" name="q" placeholder="Search&hellip;" style="width:100%;padding:10px 40px 10px 14px;font-family:inherit;font-size:13px;color:white;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:8px;outline:none;transition:border-color 0.15s" onfocus="this.style.borderColor='rgba(255,255,255,0.35)'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'">
+            <button type="submit" aria-label="Search" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:rgba(255,255,255,0.5);width:28px;height:28px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">&#x2315;</button>
+          </form>
+          <div style="display:flex;gap:12px">
+            <a href="#" aria-label="Twitter" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+            <a href="#" aria-label="LinkedIn" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="#" aria-label="YouTube" style="width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+          </div>
+        </div>
+        <!-- Solutions -->
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Solutions</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="platform-overview.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Platform Overview</a>
+            <a href="hq.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Headquarters Complete Bundle</a>
+            <a href="complete-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Complete Bundle</a>
+            <a href="generosity-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Generosity Bundle</a>
+            <a href="financial-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Financial Bundle</a>
+            <a href="digital-bundle.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Digital Bundle</a>
+          </div>
+        </div>
+        <!-- Resources -->
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Resources</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="healthy-church-hub.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Healthy Church Hub</a>
+            <a href="services-overview.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Services</a>
+            <a href="partners.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Partners</a>
+            <a href="#" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Ministry Brands Academy</a>
+            <a href="#" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Church Plant Program</a>
+          </div>
+        </div>
+        <!-- Company -->
+        <div>
+          <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px">Company</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="mb-company.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">About</a>
+            <a href="mb-careers.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Careers</a>
+            <a href="mb-press.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Press</a>
+            <a href="mb-contact.html" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:0.5px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div style="font-size:12px;color:rgba(255,255,255,0.25)">&copy; 2026 Spired. All rights reserved.</div>
+        <div style="display:flex;gap:24px">
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Privacy Policy</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Terms of Service</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer">Cookie Settings</span>
+        </div>
+      </div>
     </div>
-    <div class="mb-footer-bottom"><span>© 2026 Ministry Brands. All rights reserved.</span><span style="display:flex;gap:24px"><a href="#" class="mb-footer-col-link" style="margin:0">Privacy</a><a href="#" class="mb-footer-col-link" style="margin:0">Terms</a><a href="#" class="mb-footer-col-link" style="margin:0">Cookies</a></span></div>
-  </div>
-</footer>
+  </footer>
+
 
 <div class="anno-legend-wrap">
   <div class="anno-legend"><div class="anno-legend-title">Annotation Legend</div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div></div>
@@ -413,11 +554,146 @@ body.anno-hidden .anno{display:none}
 document.body.classList.add("anno-hidden");
 function toggleDropdown(e,id){var btn=document.getElementById(id);var dd=btn.querySelector('.mb-nav-dropdown');if(dd&&dd.contains(e.target))return;e.stopPropagation();e.preventDefault();var wasPinned=btn.dataset.pinned==='1';document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==btn){el.classList.remove('open');delete el.dataset.pinned}});if(wasPinned){btn.classList.remove('open');delete btn.dataset.pinned}else{btn.classList.add('open');btn.dataset.pinned='1'}}
 document.addEventListener('click',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open');delete el.dataset.pinned})});
-document.querySelectorAll('.mb-nav-link').forEach(function(link){if(link.querySelector('.mb-nav-dropdown')){link.addEventListener('mouseenter',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==link)el.classList.remove('open')});link.classList.add('open')});link.addEventListener('mouseleave',function(){if(!link.dataset.pinned)link.classList.remove('open')})}});
 </script>
 </body>
 </html>
-
-<!-- KEY PAGE BADGE -->
-<script>(function(){var b=document.createElement('div');b.id='__wb_keypage_badge';b.setAttribute('style','position:fixed;top:80px;left:16px;z-index:10000;background:#fce88a;color:#6b520d;padding:6px 12px 6px 10px;border-radius:999px;font-family:\'DM Sans\',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,0.15);border:0.5px solid #eac95b;pointer-events:none');b.innerHTML='<span style="font-size:13px;line-height:1;color:#c88f1a">\u2605</span>Key page';function attach(){(document.body||document.documentElement).appendChild(b);}if(document.body){attach()}else{document.addEventListener('DOMContentLoaded',attach)}})();</script>
-
+<script>
+/* SPIRED NAV — mega menu behavior */
+(function(){
+  var megaEl = document.getElementById('snMega');
+  var curBtn = null, curSub = 'who';
+  var MEGA_ITEMS = [
+    {k:'who', label:'Who We Serve'},
+    {k:'solutions', label:'Solutions'},
+    {k:'hq', label:'Churches HQ'},
+    {k:'hch', label:'Healthy Church Hub'}
+  ];
+  var PRODUCTS = [
+    {name:'Giving', url:'giving.html'},
+    {name:'Accounting', url:'accounting.html'},
+    {name:'People (CHMS)', url:'people.html'},
+    {name:'Websites', url:'websites.html'},
+    {name:'Mobile App', url:'mobile-app.html'},
+    {name:'Communications', url:'communications.html'},
+    {name:'Streaming', url:'streaming.html'},
+    {name:'Service Planning', url:'service-planning.html'},
+    {name:'Media', url:'media.html'},
+    {name:'Safety', url:'safety.html'},
+    {name:'Equip', url:'#', badge:'NEW'}
+  ];
+  function buildLeft(active){
+    return '<div class="sn-mega-left">' + MEGA_ITEMS.map(function(i){
+      return '<button class="sn-mega-item'+(i.k===active?' active':'')+'" data-sub="'+i.k+'">'+i.label+' <span class="sn-arr">\u203A</span></button>';
+    }).join('') + '</div>';
+  }
+  function buildWho(){
+    var types = [
+      ['Multi-Site Churches','multi-site.html'],
+      ['Denominations & Networks','denominations.html'],
+      ['Large Churches','large-churches.html'],
+      ['Growing Churches','growing-churches.html'],
+      ['Small Churches','small-churches.html'],
+      ['Church Plants','church-plants.html'],
+      ['Digital / Online Churches','digital-churches.html']
+    ];
+    var roles = [
+      ['Executive Or Senior Pastor','senior-pastor.html'],
+      ['Associate Pastor','associate-pastor.html'],
+      ['Finance Leader Or Treasurer','finance-treasurer.html'],
+      ['Communications Director','communications-director.html'],
+      ['Worship Pastor','worship-pastor.html']
+    ];
+    return '<div class="sn-mega-two-col">' +
+      '<div><div class="sn-mega-title-block" style="margin-bottom:14px"><div class="sn-mega-title-icon">\u26EA</div><div><div class="sn-mega-col-title" style="margin-bottom:2px">Church Types We Serve</div><div class="sn-mega-sub">Explore how Spired supports every kind of church.</div></div></div><ul class="sn-mega-col-list">' +
+        types.map(function(t){return '<li><a href="'+t[1]+'">'+t[0]+'</a></li>';}).join('') +
+      '</ul></div>' +
+      '<div><div class="sn-mega-title-block" style="margin-bottom:14px"><div class="sn-mega-title-icon">\u2032</div><div><div class="sn-mega-col-title" style="margin-bottom:2px">Roles We Serve</div><div class="sn-mega-sub">Solutions tailored to the people who lead a church.</div></div></div><ul class="sn-mega-col-list">' +
+        roles.map(function(r){return '<li><a href="'+r[1]+'">'+r[0]+'</a></li>';}).join('') +
+      '</ul></div>' +
+    '</div>';
+  }
+  function buildSolutions(){
+    var prods = PRODUCTS.map(function(p){
+      return '<a href="'+p.url+'" class="sn-mega-product"><span class="sn-mega-product-icon">\u26A1</span>'+p.name+(p.badge?'<span class="sn-mega-product-badge">'+p.badge+'</span>':'')+'</a>';
+    }).join('');
+    return '<div class="sn-mega-topbar"><div class="sn-mega-title-block"><div><div class="sn-mega-title">Platform Overview</div><div class="sn-mega-sub">One Connected Platform for Your Entire Church</div></div></div><div class="sn-mega-actions"><a href="#" class="sn-mega-action">Not Sure Where To Start?</a><a href="platform-overview.html" class="sn-mega-action solid">See The Full Ecosystem</a></div></div>' +
+      '<div class="sn-mega-solutions">' +
+        '<div class="sn-mega-products">'+prods+'</div>' +
+        '<div class="sn-mega-bundles">' +
+          '<div class="sn-mega-bundles-title"><div class="sn-mega-bundles-icon">\u25C6</div><h4>Bundles</h4></div>' +
+          '<p>Bundle the tools your church needs into one plan, one price.</p>' +
+          '<a href="complete-bundle.html">Complete Bundle</a>' +
+          '<a href="generosity-bundle.html">Generosity Bundle</a>' +
+          '<a href="digital-bundle.html">Digital Bundle</a>' +
+          '<a href="financial-bundle.html">Financial Bundle</a>' +
+        '</div>' +
+      '</div>';
+  }
+  function buildHq(){
+    var cards = [
+      ['Headquarters Complete','hq.html','Everything in one bundle \u2014 the full HQ stack.'],
+      ['Headquarters Financials','hq-financials.html','Giving, accounting, and financial oversight.'],
+      ['Headquarters Donor','hq-donor.html','Donor engagement and stewardship tools.'],
+      ['Headquarters Arena','hq-arena.html','The command center for multi-site operations.']
+    ];
+    return '<div class="sn-mega-topbar"><div class="sn-mega-title-block"><div><div class="sn-mega-title">Bundles Optimized For Your Church Headquarters</div><div class="sn-mega-sub">Pre-configured suites for the operational core of your organization.</div></div></div></div>' +
+      '<div class="sn-mega-hq">' + cards.map(function(c){
+        return '<a href="'+c[1]+'" class="sn-mega-hq-card"><div class="sn-mega-hq-icon">\u25C6</div><div><div class="sn-mega-hq-name">'+c[0]+'</div><div class="sn-mega-hq-desc">'+c[2]+'</div></div></a>';
+      }).join('') + '</div>';
+  }
+  function buildHch(){
+    var features = [
+      ['Upcoming Webinar',"Grow Your Church's Digital Reach in 2026",'Live discussion on reaching congregants beyond the sanctuary.','webinar-registration.html'],
+      ['Free eBook','The Ultimate Easter Planning Guide for Churches','Checklists, timelines, and outreach ideas — start planning today.','ebook-landing.html'],
+      ['Podcast \u00b7 Ep. 166','Toby Walters: Balancing Church Tech With Sacred Spaces','On faithful adoption of technology inside worship spaces.','podcast-episode.html']
+    ];
+    var items = [
+      ['Managed Services','Expert help for setup, migration & growth. Real people who understand ministry.','services-overview.html'],
+      ['Ministry Brands Academy','Free, practical training for today\u2019s ministry leaders.','#'],
+      ['Partners','Trusted partners extending what Spired can do.','partners.html'],
+      ['Church Plant Program','Helping church plants flourish, fulfill, and lead.','#']
+    ];
+    return '<div class="sn-mega-topbar"><div class="sn-mega-title-block"><div class="sn-mega-title-icon">\u26EA</div><div><div class="sn-mega-title">Healthy Church Hub</div><div class="sn-mega-sub">Explore blogs, podcasts, webinars, eBooks and customer stories designed to help your church thrive \u2014 all in one place.</div></div></div><div class="sn-mega-actions"><a href="healthy-church-hub.html" class="sn-mega-action">Take Me To The Healthy Church Hub</a></div></div>' +
+      '<div class="sn-mega-hch-features">' + features.map(function(f){
+        return '<a href="'+f[3]+'" class="sn-mega-hch-card"><div class="sn-mega-hch-thumb"></div><div class="sn-mega-hch-eyebrow">'+f[0]+'</div><div class="sn-mega-hch-title">'+f[1]+'</div><div class="sn-mega-hch-desc">'+f[2]+'</div></a>';
+      }).join('') + '</div>' +
+      '<div class="sn-mega-hch-list">' + items.map(function(it){
+        return '<a href="'+it[2]+'" class="sn-mega-hch-item"><div class="sn-mega-hch-item-icon">\u26A1</div><div><div class="sn-mega-hch-item-name">'+it[0]+'</div><div class="sn-mega-hch-item-desc">'+it[1]+'</div></div></a>';
+      }).join('') + '</div>';
+  }
+  var BUILDERS = {who:buildWho, solutions:buildSolutions, hq:buildHq, hch:buildHch};
+  function renderMega(sub){
+    curSub = sub;
+    megaEl.innerHTML = '<div class="sn-mega-grid">' + buildLeft(sub) + '<div class="sn-mega-right">' + BUILDERS[sub]() + '</div></div>';
+    megaEl.querySelectorAll('.sn-mega-item').forEach(function(btn){
+      btn.addEventListener('mouseenter', function(){ renderMega(btn.dataset.sub); });
+      btn.addEventListener('click', function(e){ e.stopPropagation(); renderMega(btn.dataset.sub); });
+    });
+  }
+  window.snOpen = function(key, btn){
+    document.querySelectorAll('.sn-link').forEach(function(b){ b.classList.remove('open'); });
+    btn.classList.add('open');
+    curBtn = btn;
+    renderMega(curSub);
+    megaEl.classList.add('show');
+  };
+  window.snClose = function(){
+    if(curBtn) curBtn.classList.remove('open');
+    megaEl.classList.remove('show');
+    curBtn = null;
+  };
+  window.snToggleAbout = function(e){
+    e.stopPropagation();
+    document.getElementById('snAboutWrap').classList.toggle('open');
+  };
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('.spired-nav')){ if(window.snClose) snClose(); var w=document.getElementById('snAboutWrap'); if(w) w.classList.remove('open'); }
+  });
+  document.querySelector('.spired-nav').addEventListener('mouseleave', function(e){
+    var to = e.relatedTarget;
+    if(!to || !to.closest || !to.closest('.sn-mega')) snClose();
+  });
+})();
+</script>
+<!-- WB PAGE BADGE -->
+<script>(function(){var d=document.createElement('div');d.id='__wb_page_badge';d.setAttribute('data-group','standard');d.setAttribute('style','position:fixed;top:80px;left:16px;z-index:250;background:#e5e7ec;color:#3f4657;padding:6px 12px 6px 10px;border-radius:999px;font-family:\'DM Sans\',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,0.15);border:0.5px solid #c9ced9;pointer-events:none');d.innerHTML='<span style="font-size:13px;line-height:1;color:#5b6478">\u25CF</span>Standard';function attach(){(document.body||document.documentElement).appendChild(d);}if(document.body){attach()}else{document.addEventListener('DOMContentLoaded',attach)}})();</script>

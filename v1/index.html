@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Amplify 2026 Wireframes — Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'Apris';
+  src:url('fonts/Apris-LightItalic.otf') format('opentype');
+  font-weight:300;
+  font-style:italic;
+  font-display:swap;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',system-ui,sans-serif}
+html,body{height:100%;overflow:hidden}
+body{background:#3D3D3D;color:#1a1a1a}
+
+/* ======================================= */
+/* SHELL LAYOUT                            */
+/* ======================================= */
+#shell{display:flex;flex-direction:column;height:100vh;width:100vw}
+
+/* ======================================= */
+/* TOP CHROME                              */
+/* ======================================= */
+#chrome{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:56px;background:#2a2a2a;border-bottom:0.5px solid #1a1a1a;color:white;flex-shrink:0;z-index:100;position:relative}
+.chrome-left{display:flex;align-items:center;gap:14px;min-width:0}
+.chrome-logo{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.chrome-logo svg{display:block}
+.chrome-brand{font-size:13px;font-weight:700;color:white;letter-spacing:-0.01em}
+.chrome-divider{width:1px;height:18px;background:rgba(255,255,255,0.15)}
+.chrome-project{font-size:13px;color:rgba(255,255,255,0.8);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chrome-page-sep{color:rgba(255,255,255,0.3);margin:0 6px;font-size:11px}
+.chrome-page{font-size:13px;color:rgba(255,255,255,0.55);font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chrome-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.chrome-btn{background:transparent;border:0.5px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.85);font-family:inherit;font-size:12px;font-weight:500;padding:7px 12px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all 0.12s;white-space:nowrap}
+.chrome-btn:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.3);color:white}
+.chrome-btn.active{background:#46435D;border-color:#46435D;color:white}
+.chrome-btn .count{background:rgba(255,255,255,0.2);padding:1px 6px;border-radius:999px;font-size:10px;font-weight:700;margin-left:2px}
+.chrome-btn-icon{width:32px;height:32px;padding:0;justify-content:center;font-size:13px}
+
+/* ======================================= */
+/* DOCUMENT VIEWER                         */
+/* ======================================= */
+#viewer{flex:1;position:relative;overflow:hidden;background:#3D3D3D;padding:20px;transition:padding 0.25s ease}
+body.fs #viewer{padding:0}
+#doc-frame{position:relative;width:100%;height:100%;max-width:1400px;margin:0 auto;background:white;border-radius:6px;overflow:hidden;box-shadow:0 50px 140px rgba(0,0,0,0.55),0 20px 50px rgba(0,0,0,0.35),0 6px 16px rgba(0,0,0,0.2);transition:border-radius 0.25s ease,max-width 0.25s ease}
+body.fs #doc-frame{border-radius:0;max-width:none;box-shadow:none}
+#doc{width:100%;height:100%;border:none;display:block}
+#doc-overlay{position:absolute;inset:0;pointer-events:none;z-index:10}
+body.comment-mode #doc-overlay{pointer-events:none}
+body.comment-mode #doc-frame{outline:2px solid #46435D;outline-offset:-2px}
+
+/* Comment mode banner */
+#cm-banner{position:absolute;top:20px;left:50%;transform:translateX(-50%);background:#46435D;color:white;padding:10px 20px;border-radius:999px;font-size:13px;font-weight:500;box-shadow:0 6px 20px rgba(70,67,93,0.35);display:none;align-items:center;gap:10px;z-index:50;animation:slideDown 0.2s ease}
+body.comment-mode #cm-banner{display:flex}
+#cm-banner kbd{background:rgba(255,255,255,0.2);padding:2px 7px;border-radius:4px;font-family:inherit;font-size:11px;font-weight:600}
+@keyframes slideDown{from{transform:translate(-50%,-30px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+
+/* ======================================= */
+/* INSTRUCTIONS OVERLAY — drawer             */
+/* ======================================= */
+#instructions{position:fixed;inset:0;background:#1a1a1a;display:none;z-index:500;cursor:pointer;overflow:hidden;transform:translateY(0);transition:transform 0.55s cubic-bezier(0.7,0,0.3,1),box-shadow 0.55s ease;box-shadow:0 0 0 rgba(0,0,0,0)}
+#instructions.show{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 64px;animation:drawerDown 0.55s cubic-bezier(0.2,0.8,0.25,1)}
+#instructions.closing{transform:translateY(-100%);box-shadow:0 30px 80px rgba(0,0,0,0.5)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes drawerDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.ins-inner{width:100%;max-width:1080px;display:flex;flex-direction:column;align-items:center;animation:slideUp 0.7s cubic-bezier(0.2,0.8,0.25,1) 0.15s both;flex:1;justify-content:center}
+.ins-mark{display:flex;align-items:center;justify-content:center;margin-bottom:48px;opacity:0.9}
+.ins-mark svg{display:block}
+.ins-welcome{font-family:'Apris','Instrument Serif',Georgia,serif;font-style:italic;font-weight:300;font-size:160px;line-height:0.95;letter-spacing:-0.02em;color:#ffffff;margin:0 0 8px;text-align:center}
+.ins-toyour{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.45);text-align:center;margin-bottom:20px}
+.ins-title{font-family:'Apris','Instrument Serif',Georgia,serif;font-style:italic;font-weight:300;font-size:64px;line-height:1.05;letter-spacing:-0.01em;color:#ffffff;text-align:center;margin:0 0 72px}
+.ins-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px 80px;width:100%;max-width:900px;margin:0 auto 80px}
+.ins-item{display:flex;gap:18px;align-items:flex-start}
+.ins-item-icon{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,0.35);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ins-item-icon svg{display:block;color:rgba(255,255,255,0.85)}
+.ins-item-body{flex:1;min-width:0}
+.ins-item-label{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;line-height:1.3}
+.ins-item-desc{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;line-height:1.55;color:rgba(255,255,255,0.82);max-width:280px}
+.ins-foot{width:100%;text-align:center;display:flex;flex-direction:column;gap:6px;padding-bottom:8px}
+.ins-foot-project{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.45)}
+.ins-foot-agency{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.22)}
+.ins-hint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.1em;color:rgba(255,255,255,0.3);animation:hintPulse 2.4s ease-in-out infinite}
+@keyframes hintPulse{0%,100%{opacity:0.3}50%{opacity:0.7}}
+@media (max-width:860px){
+  #instructions.show{padding:32px 24px}
+  .ins-welcome{font-size:88px}
+  .ins-title{font-size:36px;margin-bottom:48px}
+  .ins-grid{grid-template-columns:1fr;gap:28px;margin-bottom:48px}
+  .ins-item-desc{max-width:none}
+  .ins-mark{margin-bottom:32px}
+}
+
+/* ======================================= */
+/* COMMENT MODAL                           */
+/* ======================================= */
+#cmodal{position:fixed;inset:0;background:rgba(26,25,40,0.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:600;padding:24px}
+#cmodal.show{display:flex;animation:fadeIn 0.2s ease}
+.cmodal-card{background:white;border-radius:16px;max-width:480px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,0.4);animation:slideUp 0.25s ease;overflow:hidden}
+.cmodal-head{padding:22px 24px 16px;border-bottom:0.5px solid #eee;display:flex;align-items:center;justify-content:space-between}
+.cmodal-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.cmodal-pin-loc{font-size:12px;color:#888;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px}
+.cmodal-close{background:transparent;border:none;font-size:20px;color:#999;cursor:pointer;padding:4px;line-height:1;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center}
+.cmodal-close:hover{background:#f4f3f7;color:#1a1a1a}
+.cmodal-body{padding:20px 24px}
+.cm-field{margin-bottom:18px}
+.cm-field:last-child{margin-bottom:0}
+.cm-label{display:block;font-size:11px;font-weight:700;color:#888;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px}
+.cm-types{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.cm-type{padding:12px 8px;border:0.5px solid #e0e0e0;border-radius:10px;background:white;cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;color:#666;display:flex;flex-direction:column;align-items:center;gap:5px;transition:all 0.12s}
+.cm-type:hover{border-color:#c0bdd4}
+.cm-type.active{border-color:#46435D;background:#eeedf4;color:#46435D}
+.cm-type-ico{font-size:18px}
+.cm-input,.cm-textarea{width:100%;padding:11px 14px;border:0.5px solid #e0e0e0;border-radius:10px;font-family:inherit;font-size:14px;color:#1a1a1a;outline:none;transition:border-color 0.12s;background:white}
+.cm-input:focus,.cm-textarea:focus{border-color:#46435D}
+.cm-textarea{resize:vertical;min-height:90px;line-height:1.5}
+.cm-hint{font-size:11px;color:#aaa;margin-top:6px}
+.cmodal-foot{padding:16px 24px 22px;display:flex;justify-content:flex-end;gap:8px;background:#fafafa;border-top:0.5px solid #eee}
+.cm-btn{padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all 0.12s}
+.cm-btn-cancel{background:white;color:#666;border:0.5px solid #ddd}
+.cm-btn-cancel:hover{background:#f4f3f7;color:#1a1a1a}
+.cm-btn-submit{background:#46435D;color:white}
+.cm-btn-submit:hover{background:#5a576e}
+.cm-btn-submit:disabled{background:#bbb;cursor:not-allowed}
+
+/* ======================================= */
+/* COMMENTS PANEL                          */
+/* ======================================= */
+#cpanel{position:fixed;top:56px;right:0;bottom:0;width:380px;background:white;border-left:0.5px solid #e0e0e0;box-shadow:-8px 0 40px rgba(0,0,0,0.12);display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.25s ease;z-index:80}
+#cpanel.show{transform:translateX(0)}
+.cp-head{padding:18px 20px;border-bottom:0.5px solid #eee;flex-shrink:0}
+.cp-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.cp-title{font-size:16px;font-weight:700;color:#1a1a1a}
+.cp-close{background:transparent;border:none;font-size:18px;color:#999;cursor:pointer;padding:4px;line-height:1;width:26px;height:26px;border-radius:6px}
+.cp-close:hover{background:#f4f3f7;color:#1a1a1a}
+.cp-filters{display:flex;gap:6px;flex-wrap:wrap}
+.cp-filter{padding:5px 10px;border:0.5px solid #e0e0e0;border-radius:999px;background:white;font-family:inherit;font-size:11px;font-weight:600;color:#666;cursor:pointer;transition:all 0.12s}
+.cp-filter:hover{border-color:#c0bdd4}
+.cp-filter.active{border-color:#46435D;background:#46435D;color:white}
+.cp-filter .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.cp-phase-tabs{display:flex;gap:0;margin:0 -20px 14px;padding:0 20px 0;border-bottom:0.5px solid #eee}
+.cp-phase-tab{flex:1;background:transparent;border:none;border-bottom:2px solid transparent;padding:10px 12px;font-family:inherit;font-size:12px;font-weight:600;color:#888;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all 0.12s;margin-bottom:-1px}
+.cp-phase-tab:hover{color:#46435D}
+.cp-phase-tab.active{color:#46435D;border-bottom-color:#46435D}
+.cp-phase-tab-count{font-size:10px;font-weight:700;color:#aaa;background:#f4f3f7;padding:1px 7px;border-radius:999px;transition:all 0.12s}
+.cp-phase-tab.active .cp-phase-tab-count{background:#eeedf4;color:#46435D}
+.cp-list{flex:1;overflow-y:auto;padding:12px 16px}
+.cp-empty{text-align:center;padding:40px 20px;color:#aaa;font-size:13px;line-height:1.6}
+.cp-empty-icon{font-size:32px;margin-bottom:12px;opacity:0.4}
+.cp-group{margin-bottom:18px}
+.cp-group:last-child{margin-bottom:0}
+.cp-group-head{display:flex;align-items:center;justify-content:space-between;padding:10px 4px 8px;border-bottom:0.5px solid #eee;margin-bottom:10px;position:sticky;top:0;background:white;z-index:1}
+.cp-group-name{font-size:12px;font-weight:700;color:#46435D;letter-spacing:-0.01em;display:flex;align-items:center;gap:8px}
+.cp-group-current{font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#2E7D32;background:#e8f5e9;padding:2px 6px;border-radius:4px}
+.cp-group-count{font-size:11px;font-weight:700;color:#aaa;background:#f4f3f7;padding:2px 8px;border-radius:999px}
+.cp-item{padding:14px;border:0.5px solid #eee;border-radius:12px;margin-bottom:10px;cursor:pointer;transition:all 0.12s;background:white;position:relative;overflow:hidden}
+.cp-item:hover{border-color:#c0bdd4;box-shadow:0 2px 8px rgba(70,67,93,0.06)}
+.cp-item:hover .cp-item-delete{opacity:1}
+.cp-item-delete{position:absolute;top:10px;right:10px;background:transparent;border:none;cursor:pointer;width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#c0c0c0;opacity:0;transition:all 0.12s;padding:0;font-family:inherit;z-index:2}
+.cp-item-delete:hover{background:#fdf0f0;color:#d9534f}
+.cp-item-delete svg{display:block;pointer-events:none}
+.cp-item-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;padding-right:28px}
+.cp-item-confirm{position:absolute;inset:0;background:white;border-radius:12px;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:14px;text-align:center;z-index:3;cursor:default;animation:confirmIn 0.15s ease}
+@keyframes confirmIn{from{opacity:0}to{opacity:1}}
+.cp-item.confirming{cursor:default;border-color:#f0c8c6;box-shadow:0 2px 8px rgba(217,83,79,0.12)}
+.cp-item.confirming .cp-item-confirm{display:flex}
+.cp-item.confirming .cp-item-delete{display:none}
+.cp-item-confirm-msg{font-size:13px;font-weight:600;color:#1a1a1a;line-height:1.45}
+.cp-item-confirm-sub{font-size:11px;color:#999;margin-top:-8px}
+.cp-item-confirm-btns{display:flex;gap:6px;margin-top:4px}
+.cp-item-confirm-btn{padding:7px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:0.5px solid #e0e0e0;background:white;color:#666;font-family:inherit;transition:all 0.12s}
+.cp-item-confirm-btn:hover{border-color:#bbb;color:#1a1a1a;background:#fafafa}
+.cp-item-confirm-btn.danger{background:#d9534f;color:white;border-color:#d9534f}
+.cp-item-confirm-btn.danger:hover{background:#c9433e;border-color:#c9433e;color:white}
+.cp-item-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
+.cp-item-badge.design{background:#e8eaf6;color:#3949AB}
+.cp-item-badge.content{background:#fff3e0;color:#E65100}
+.cp-item-badge.functionality{background:#e8f5e9;color:#2E7D32}
+.cp-item-badge.general{background:#eeedf4;color:#46435D}
+.cp-item-num{font-size:11px;font-weight:700;color:#aaa}
+.cp-item-text{font-size:13px;color:#333;line-height:1.55;margin-bottom:8px;white-space:pre-wrap;word-break:break-word}
+.cp-item-meta{font-size:11px;color:#999;display:flex;align-items:center;gap:6px}
+.cp-item-name{font-weight:600;color:#666}
+
+/* ======================================= */
+/* PINS (injected into iframe)             */
+/* ======================================= */
+/* Defined via injection — see script      */
+
+/* ======================================= */
+/* LOADING                                 */
+/* ======================================= */
+#loader{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#f7f7f6;z-index:5;color:#aaa;font-size:13px}
+#loader.hide{display:none}
+.loader-spin{width:28px;height:28px;border:2px solid #e0e0e0;border-top-color:#46435D;border-radius:50%;animation:spin 0.8s linear infinite;margin-right:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ======================================= */
+/* PAGE INDEX DRAWER                       */
+/* ======================================= */
+#pageDrawer{position:fixed;top:56px;left:0;right:0;background:#1c1b28;color:white;border-bottom:0.5px solid #2a2a2a;z-index:150;max-height:0;overflow:hidden;transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
+#pageDrawer.open{max-height:calc(100vh - 56px)}
+/* When drawer is open, disable comment-related chrome buttons */
+body.pd-open #btn-comments,body.pd-open #btn-comment-mode{opacity:0.35;pointer-events:none;cursor:not-allowed}
+body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.3);color:white}
+.pd-inner{max-width:1480px;margin:0 auto;padding:22px 32px 32px;max-height:calc(100vh - 56px);overflow-y:auto}
+.pd-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:0.5px solid rgba(255,255,255,0.08);margin-bottom:24px}
+.pd-title{font-size:12px;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.12em;text-transform:uppercase}
+.pd-title strong{color:white;margin-right:8px}
+.pd-search{flex:1;max-width:380px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px 14px;font-size:13px;outline:none;font-family:inherit;color:white}
+.pd-search::placeholder{color:rgba(255,255,255,0.45)}
+.pd-search:focus{border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.1)}
+.pd-close{background:transparent;border:0.5px solid rgba(255,255,255,0.18);border-radius:8px;padding:9px 14px;cursor:pointer;font-size:12px;color:rgba(255,255,255,0.7);font-family:inherit;transition:all 0.12s}
+.pd-close:hover{background:rgba(255,255,255,0.06);color:white}
+.pd-section{margin-bottom:36px}
+.pd-section:last-child{margin-bottom:0}
+.pd-section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:6px 0 8px;border-bottom:0.5px solid rgba(255,255,255,0.06);cursor:pointer;background:transparent;border-top:none;border-left:none;border-right:none;width:100%;font-family:inherit;text-align:left;color:inherit;user-select:none}
+.pd-section-head:hover{border-bottom-color:rgba(255,255,255,0.15)}
+.pd-section-name{font-size:13px;font-weight:700;color:white;letter-spacing:0.06em;text-transform:uppercase}
+.pd-section-count{font-size:11px;color:rgba(255,255,255,0.4);font-weight:500;flex:1}
+.pd-section-chevron{font-size:10px;color:rgba(255,255,255,0.5);transition:transform 0.18s ease}
+.pd-section[data-collapsed="true"] .pd-section-chevron{transform:rotate(-90deg)}
+.pd-section[data-collapsed="true"] .pd-section-body{display:none}
+.pd-cat-wrap{margin-bottom:8px}
+.pd-cat{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase;margin:18px 0 12px;cursor:pointer;background:transparent;border:none;padding:6px 0;width:100%;font-family:inherit;text-align:left;user-select:none}
+.pd-cat:hover{color:rgba(255,255,255,0.8)}
+.pd-cat-chevron{font-size:9px;color:rgba(255,255,255,0.4);transition:transform 0.18s ease}
+.pd-cat-wrap[data-collapsed="true"] .pd-cat-chevron{transform:rotate(-90deg)}
+.pd-cat-wrap[data-collapsed="true"] .pd-grid{display:none}
+/* Search overrides collapsed state so matches stay visible */
+#pd-body[data-searching="true"] .pd-section[data-collapsed="true"] .pd-section-body{display:block}
+#pd-body[data-searching="true"] .pd-cat-wrap[data-collapsed="true"] .pd-grid{display:grid}
+.pd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.pd-card{background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;cursor:pointer;text-decoration:none;color:inherit;transition:all 0.15s;display:flex;flex-direction:column}
+.pd-card:hover{border-color:rgba(255,255,255,0.45);transform:translateY(-2px);background:rgba(255,255,255,0.07)}
+.pd-card.current{border-color:#5a576e;background:rgba(70,67,93,0.25);border-width:1.5px}
+.pd-card-thumb-wrap{aspect-ratio:16/10;background:#0f0e15;overflow:hidden;position:relative}
+.pd-card-thumb{position:absolute;top:0;left:0;width:500%;height:500%;border:none;transform:scale(0.2);transform-origin:0 0;pointer-events:none;background:white}
+.pd-card-thumb-placeholder{position:absolute;inset:0;background:linear-gradient(135deg,#2a2a35 0%,#1a1a22 100%);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+.pd-card-body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:3px;flex:1}
+.pd-card-name{font-size:13px;font-weight:600;color:white;line-height:1.3;letter-spacing:-0.005em}
+.pd-card-slug{font-size:11px;color:rgba(255,255,255,0.4);font-family:'SF Mono',Consolas,monospace}
+.pd-card-current-tag{display:inline-flex;align-items:center;font-size:9px;font-weight:700;color:#7BC47F;background:rgba(123,196,127,0.15);padding:2px 6px;border-radius:4px;letter-spacing:0.06em;text-transform:uppercase;align-self:flex-start;margin-top:2px}
+.pd-empty{padding:32px;text-align:center;color:rgba(255,255,255,0.4);font-size:13px}
+
+/* ======================================= */
+/* RESPONSIVE                              */
+/* ======================================= */
+@media (max-width:720px){
+  .chrome-project,.chrome-page-sep,.chrome-page{display:none}
+  .chrome-btn span:not(.count){display:none}
+  .chrome-btn{padding:7px 10px}
+  #cpanel{width:100%}
+  #viewer{padding:12px}
+  .pd-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="shell">
+
+  <!-- ============ TOP CHROME ============ -->
+  <header id="chrome">
+    <div class="chrome-left">
+      <div class="chrome-logo">
+        <svg width="34" height="14" viewBox="0 0 48 20" fill="none" aria-label="Whiteboard" style="color:white">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/>
+        </svg>
+        <span class="chrome-brand">Whiteboard</span>
+      </div>
+      <div class="chrome-divider"></div>
+      <span class="chrome-project">Amplify 2026 Wireframes</span>
+      <span class="chrome-page-sep" id="page-sep" style="display:none">/</span>
+      <span class="chrome-page" id="page-title"></span>
+    </div>
+    <div class="chrome-right">
+      <button class="chrome-btn" id="btn-help" title="How to review this document">
+        <span>?</span>
+      </button>
+      <button class="chrome-btn" id="btn-pages" title="Browse all wireframe pages">
+        <span style="font-size:14px;line-height:1">☰</span>
+        <span>All Pages</span>
+      </button>
+      <button class="chrome-btn" id="btn-comments" title="Open comments panel">
+        <span>💬 Comments</span>
+        <span class="count" id="comment-count">0</span>
+      </button>
+      <button class="chrome-btn" id="btn-comment-mode" title="Click-to-pin a comment">
+        <span>+ Add Comment</span>
+      </button>
+      <button class="chrome-btn" id="btn-fs" title="Toggle full-screen (F)">
+        <span id="fs-ico">⛶</span>
+        <span id="fs-label">Full Screen</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ VIEWER ============ -->
+  <main id="viewer">
+    <div id="doc-frame">
+      <div id="loader"><div class="loader-spin"></div>Loading wireframe…</div>
+      <div id="cm-banner">
+        <span>Comment mode — click anywhere on the wireframe to drop a pin</span>
+        <kbd>Esc</kbd>
+      </div>
+      <iframe id="doc" src="home.html" title="Amplify Wireframe" referrerpolicy="no-referrer"></iframe>
+      <div id="doc-overlay"></div>
+    </div>
+  </main>
+
+</div>
+
+<!-- ============ PAGE INDEX DRAWER ============ -->
+<div id="pageDrawer">
+  <div class="pd-inner">
+    <div class="pd-header">
+      <div class="pd-title"><strong>All pages</strong><span id="pd-count"></span></div>
+      <input type="text" class="pd-search" id="pdSearch" placeholder="Search pages…" autocomplete="off">
+      <button class="pd-close" id="pdClose">Close ✕</button>
+    </div>
+    <div id="pd-body"></div>
+  </div>
+</div>
+
+<!-- ============ INSTRUCTIONS OVERLAY ============ -->
+<div id="instructions">
+  <div class="ins-inner">
+    <div class="ins-mark">
+      <svg width="96" height="40" viewBox="0 0 48 20" fill="none" aria-label="Whiteboard" style="color:white">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/>
+      </svg>
+    </div>
+    <h1 class="ins-welcome">Welcome</h1>
+    <div class="ins-toyour">To your</div>
+    <h2 class="ins-title">Amplify 2026 Wireframes feedback</h2>
+
+    <div class="ins-grid">
+      <div class="ins-item">
+        <div class="ins-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="14.5 9.5 9.5 14.5 11 11"/></svg>
+        </div>
+        <div class="ins-item-body">
+          <div class="ins-item-label">Navigate like a real site</div>
+          <div class="ins-item-desc">Click the top navigation, buttons, and links — every page is fully clickable. The header above always shows where you are.</div>
+        </div>
+      </div>
+
+      <div class="ins-item">
+        <div class="ins-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="ins-item-body">
+          <div class="ins-item-label">Leave feedback anywhere</div>
+          <div class="ins-item-desc">Click + Add Comment, then click the section you want to comment on. Tag it as Design, Content, or Functionality — we'll get a notification.</div>
+        </div>
+      </div>
+
+      <div class="ins-item">
+        <div class="ins-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="14.5 9.5 9.5 14.5 11 11"/></svg>
+        </div>
+        <div class="ins-item-body">
+          <div class="ins-item-label">Strategic annotations</div>
+          <div class="ins-item-desc">Inside each wireframe, the Show Annotations button (bottom-right) reveals design notes, page strategy, persona focus, and gaps — our reasoning for each decision.</div>
+        </div>
+      </div>
+
+      <div class="ins-item">
+        <div class="ins-item-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4"/><path d="M20 9V5a1 1 0 0 0-1-1h-4"/><path d="M4 15v4a1 1 0 0 0 1 1h4"/><path d="M20 15v4a1 1 0 0 1-1 1h-4"/></svg>
+        </div>
+        <div class="ins-item-body">
+          <div class="ins-item-label">Go full-screen</div>
+          <div class="ins-item-desc">Click the Full Screen button in the top-right to hide this chrome and view the wireframe as a real website.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ins-foot">
+      <div class="ins-foot-project">Web Strategy &nbsp;|&nbsp; April 2026</div>
+      <div class="ins-foot-agency">Whiteboard</div>
+    </div>
+  </div>
+  <div class="ins-hint">Click anywhere to begin →</div>
+</div>
+
+<!-- ============ COMMENT MODAL ============ -->
+<div id="cmodal">
+  <form class="cmodal-card" id="cmodal-form" autocomplete="off">
+    <div class="cmodal-head">
+      <div>
+        <div class="cmodal-title">Leave a comment</div>
+        <div class="cmodal-pin-loc" id="cmodal-pin-loc"></div>
+      </div>
+      <button type="button" class="cmodal-close" id="cmodal-close" aria-label="Close">×</button>
+    </div>
+    <div class="cmodal-body">
+      <div class="cm-field">
+        <label class="cm-label">Type <span style="font-weight:400;color:#bbb;text-transform:none;letter-spacing:0">(optional)</span></label>
+        <div class="cm-types" id="cm-types">
+          <button type="button" class="cm-type" data-type="design"><span class="cm-type-ico">🎨</span>Design</button>
+          <button type="button" class="cm-type" data-type="content"><span class="cm-type-ico">✍️</span>Content</button>
+          <button type="button" class="cm-type" data-type="functionality"><span class="cm-type-ico">⚙️</span>Functionality</button>
+        </div>
+      </div>
+      <div class="cm-field">
+        <label class="cm-label">Comment</label>
+        <textarea class="cm-textarea" id="cm-text" placeholder="What's your feedback?" required></textarea>
+      </div>
+      <div class="cm-field">
+        <label class="cm-label">Your name <span style="font-weight:400;color:#bbb;text-transform:none;letter-spacing:0">(optional)</span></label>
+        <input type="text" class="cm-input" id="cm-name" placeholder="e.g. Sarah">
+      </div>
+    </div>
+    <div class="cmodal-foot">
+      <button type="button" class="cm-btn cm-btn-cancel" id="cm-cancel">Cancel</button>
+      <button type="submit" class="cm-btn cm-btn-submit" id="cm-submit" disabled>Submit comment</button>
+    </div>
+  </form>
+</div>
+
+<!-- ============ COMMENTS PANEL ============ -->
+<aside id="cpanel">
+  <div class="cp-head">
+    <div class="cp-title-row">
+      <div class="cp-title">All comments</div>
+      <button class="cp-close" id="cp-close" aria-label="Close">×</button>
+    </div>
+    <div class="cp-phase-tabs">
+      <button class="cp-phase-tab active" data-phase="1">Phase 1 <span class="cp-phase-tab-count" id="phase1Count">0</span></button>
+      <button class="cp-phase-tab" data-phase="2">Phase 2 <span class="cp-phase-tab-count" id="phase2Count">0</span></button>
+    </div>
+    <div class="cp-filters">
+      <button class="cp-filter active" data-f="all">All</button>
+      <button class="cp-filter" data-f="design"><span class="dot" style="background:#3949AB"></span>Design</button>
+      <button class="cp-filter" data-f="content"><span class="dot" style="background:#E65100"></span>Content</button>
+      <button class="cp-filter" data-f="functionality"><span class="dot" style="background:#2E7D32"></span>Functionality</button>
+    </div>
+  </div>
+  <div class="cp-list" id="cp-list"></div>
+</aside>
+
+<script>
+/* ==============================================================
+   CONFIG
+   ============================================================== */
+// Formspree form ID — comments POST to https://formspree.io/f/<FORMSPREE_ID>
+// Notifications email to the address configured on the Formspree form.
+var FORMSPREE_ID = 'mvzdaroe';
+
+// Google Apps Script web app endpoint — shared comments store.
+// Every browser POSTs new comments here and GETs all comments on load,
+// so all reviewers see all pins. Paste the deployed script URL.
+var SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxZq7Fh4bzMZu86jlaEIrzLnf1u-JPyqyamXlNuSKM9zUo2dx2_q_yI-1pxTLjoFH0W/exec';
+
+/* ==============================================================
+   STATE
+   ============================================================== */
+var state = {
+  commentMode: false,
+  pendingPin: null,         // { page, selector, xInEl, yInEl, clientX, clientY }
+  allComments: loadComments(),
+  filter: 'all',
+  phase: '1',               // 'Phase 1' (existing comments) or 'Phase 2' (new comments)
+  currentPage: 'home.html',
+  pendingType: null,
+  deepLinkPin: null,        // pin from URL params, if any
+  pendingScrollTo: null     // queued {comment} to scroll to after iframe navigates
+};
+
+/* ==============================================================
+   DOM REFS
+   ============================================================== */
+var iframe = document.getElementById('doc');
+var loader = document.getElementById('loader');
+var pageTitleEl = document.getElementById('page-title');
+var pageSepEl = document.getElementById('page-sep');
+var countEl = document.getElementById('comment-count');
+var btnHelp = document.getElementById('btn-help');
+var btnComments = document.getElementById('btn-comments');
+var btnCommentMode = document.getElementById('btn-comment-mode');
+var btnFs = document.getElementById('btn-fs');
+var instructions = document.getElementById('instructions');
+var cmodal = document.getElementById('cmodal');
+var cmForm = document.getElementById('cmodal-form');
+var cmClose = document.getElementById('cmodal-close');
+var cmCancel = document.getElementById('cm-cancel');
+var cmSubmit = document.getElementById('cm-submit');
+var cmTypes = document.getElementById('cm-types');
+var cmText = document.getElementById('cm-text');
+var cmName = document.getElementById('cm-name');
+var cmPinLoc = document.getElementById('cmodal-pin-loc');
+var cpanel = document.getElementById('cpanel');
+var cpClose = document.getElementById('cp-close');
+var cpList = document.getElementById('cp-list');
+var cpFilters = document.querySelectorAll('.cp-filter');
+
+/* ==============================================================
+   UTILITIES
+   ============================================================== */
+function $(sel, root){return (root||document).querySelector(sel)}
+function loadComments(){
+  try{return JSON.parse(localStorage.getItem('wb-comments')||'{}')}
+  catch(e){return {}}
+}
+function saveComments(){
+  try{localStorage.setItem('wb-comments',JSON.stringify(state.allComments))}
+  catch(e){}
+}
+function normalizePage(p){
+  // Ensure the page key always ends in `.html` so it matches comment storage
+  // keys across URL variants (`/home`, `/home.html`, `/home/`).
+  if(!p) return 'home.html';
+  p = String(p).replace(/\/$/,'');
+  if(!p) return 'home.html';
+  if(!/\.html?$/i.test(p)) p = p + '.html';
+  return p;
+}
+function getPageUrl(){
+  // Prefer contentWindow.location — reflects current page even after
+  // internal iframe navigation. Fall back to iframe.src if cross-origin.
+  try{
+    var path = iframe.contentWindow.location.pathname;
+    var page = path.split('/').pop();
+    return normalizePage(page);
+  }catch(e){}
+  try{
+    var u = new URL(iframe.src);
+    return normalizePage(u.pathname.split('/').pop());
+  }catch(e){}
+  return 'home.html';
+}
+function friendlyPageName(url){
+  return url.replace(/\.html$/,'').replace(/-/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase()});
+}
+function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]})}
+
+/* Build a CSS selector path from root to element */
+function computeSelector(el){
+  if(!el||el.nodeType!==1)return '';
+  var path=[];
+  var max=10;
+  while(el && el.tagName && el.tagName.toLowerCase()!=='body' && max-- > 0){
+    var seg = el.tagName.toLowerCase();
+    if(el.id && /^[a-zA-Z][\w-]*$/.test(el.id)){
+      path.unshift(seg+'#'+el.id);
+      break;
+    }
+    var parent = el.parentNode;
+    if(parent){
+      var siblings = Array.prototype.filter.call(parent.children,function(c){return c.tagName===el.tagName});
+      if(siblings.length>1){
+        seg += ':nth-of-type('+(siblings.indexOf(el)+1)+')';
+      }
+    }
+    path.unshift(seg);
+    el = parent;
+  }
+  return 'body>'+path.join('>');
+}
+
+/* ==============================================================
+   IFRAME LOAD
+   ============================================================== */
+iframe.addEventListener('load', onIframeLoad);
+// If the iframe already finished loading before the listener attached
+// (e.g. from cache), fire the handler manually so pins/title/loader update.
+try{
+  if(iframe.contentDocument && iframe.contentDocument.readyState === 'complete'){
+    setTimeout(onIframeLoad, 0);
+  }
+}catch(e){}
+function onIframeLoad(){
+  loader.classList.add('hide');
+  var pageUrl = getPageUrl();
+  state.currentPage = pageUrl;
+
+  // Dynamic project label — MB pages (mb-*.html) vs Amplify pages
+  var isMB = /^mb-/.test(pageUrl);
+  var projectEl = document.querySelector('.chrome-project');
+  if(projectEl){
+    projectEl.textContent = isMB ? 'Ministry Brands 2026 Wireframes' : 'Amplify 2026 Wireframes';
+  }
+
+  // Update chrome page title (the section after the project label)
+  var iframeTitle = '';
+  try{iframeTitle = iframe.contentDocument.title}catch(e){}
+  if(!iframeTitle){
+    iframeTitle = friendlyPageName(pageUrl);
+  } else {
+    // Strip " — Amplify" / " — Ministry Brands" suffix if present
+    iframeTitle = iframeTitle.replace(/\s*[—–-]\s*(Amplify|Ministry Brands).*$/i,'');
+  }
+  pageTitleEl.textContent = iframeTitle;
+  pageSepEl.style.display = iframeTitle ? '' : 'none';
+
+  // Inject pin styles + render pins
+  injectPinStyles();
+  renderPins();
+
+  // Update count
+  updateCommentCount();
+  renderPanel();
+
+  // If comment mode is on, re-arm click capture
+  if(state.commentMode){
+    armClickCapture();
+  }
+
+  // If deep-link pin, render highlighted pin
+  if(state.deepLinkPin && state.deepLinkPin.page === pageUrl){
+    setTimeout(renderDeepLinkPin, 120);
+  }
+
+  // If there's a pending scroll-to-comment from panel click, execute it
+  if(state.pendingScrollTo && state.pendingScrollTo.page === pageUrl){
+    var target = state.pendingScrollTo;
+    state.pendingScrollTo = null;
+    setTimeout(function(){ scrollToPin(target); }, 200);
+  }
+
+  // First iframe load — pull the shared comments from the sheet
+  if(!state.sheetLoaded){
+    state.sheetLoaded = true;
+    loadCommentsFromSheet();
+  }
+}
+
+/* ==============================================================
+   INJECT PIN STYLES INTO IFRAME
+   ============================================================== */
+function injectPinStyles(){
+  var doc;
+  try{doc = iframe.contentDocument}catch(e){return}
+  if(!doc || doc.getElementById('__wb_pin_styles'))return;
+  var s = doc.createElement('style');
+  s.id = '__wb_pin_styles';
+  s.textContent = [
+    '.__wb_pin{position:absolute;z-index:10000;width:28px;height:28px;border-radius:50% 50% 50% 4px;background:white;border:2px solid #46435D;box-shadow:0 4px 12px rgba(0,0,0,0.25),0 0 0 2px rgba(70,67,93,0.12);display:flex;align-items:center;justify-content:center;font-family:\'DM Sans\',system-ui,sans-serif;font-size:11px;font-weight:700;color:#46435D;cursor:pointer;transition:transform 0.12s;transform:translate(-4px,-100%)}',
+    '.__wb_pin:hover{transform:translate(-4px,-100%) scale(1.15)}',
+    '.__wb_pin.design{border-color:#3949AB;color:#3949AB;background:#E8EAF6}',
+    '.__wb_pin.content{border-color:#E65100;color:#E65100;background:#FFF3E0}',
+    '.__wb_pin.functionality{border-color:#2E7D32;color:#2E7D32;background:#E8F5E9}',
+    '.__wb_pin.general{border-color:#46435D;color:#46435D;background:#eeedf4}',
+    '.__wb_pin.flash{animation:__wb_flash 1.6s ease-in-out infinite}',
+    '@keyframes __wb_flash{0%,100%{transform:translate(-4px,-100%) scale(1);box-shadow:0 4px 12px rgba(0,0,0,0.25),0 0 0 2px rgba(70,67,93,0.12)}50%{transform:translate(-4px,-100%) scale(1.25);box-shadow:0 4px 24px rgba(70,67,93,0.5),0 0 0 8px rgba(70,67,93,0.15)}}',
+    'body.__wb_cm *{cursor:crosshair!important}',
+    'body.__wb_cm a,body.__wb_cm button{pointer-events:none}',
+    'body.__wb_cm .__wb_pin{cursor:pointer!important;pointer-events:auto!important}'
+  ].join('');
+  doc.head.appendChild(s);
+}
+
+/* ==============================================================
+   RENDER PINS
+   ============================================================== */
+function clearPins(){
+  var doc;
+  try{doc = iframe.contentDocument}catch(e){return}
+  if(!doc)return;
+  Array.prototype.forEach.call(doc.querySelectorAll('.__wb_pin'),function(p){p.remove()});
+}
+function renderPins(){
+  clearPins();
+  var comments = state.allComments[state.currentPage] || [];
+  comments.forEach(function(c, i){ renderPin(c, i+1, false) });
+}
+function renderPin(comment, index, flash){
+  var doc;
+  try{doc = iframe.contentDocument}catch(e){return}
+  if(!doc)return;
+  var el = null;
+  try{el = doc.querySelector(comment.selector)}catch(e){}
+  if(!el){
+    // Fallback to body
+    el = doc.body;
+  }
+  var rect = el.getBoundingClientRect();
+  var scrollX = doc.documentElement.scrollLeft || doc.body.scrollLeft || 0;
+  var scrollY = doc.documentElement.scrollTop || doc.body.scrollTop || 0;
+  var x = rect.left + scrollX + rect.width * (comment.xInEl || 0.5);
+  var y = rect.top + scrollY + rect.height * (comment.yInEl || 0.1);
+
+  var pin = doc.createElement('div');
+  pin.className = '__wb_pin ' + (comment.type || 'design') + (flash ? ' flash' : '');
+  pin.style.left = x + 'px';
+  pin.style.top = y + 'px';
+  pin.textContent = index;
+  pin.dataset.commentId = comment.id || '';
+  pin.title = (comment.type || 'comment') + ': ' + (comment.text || '').slice(0,80);
+  pin.addEventListener('click', function(e){
+    e.preventDefault(); e.stopPropagation();
+    openPanel();
+    highlightPanelItem(comment.id);
+  });
+  doc.body.appendChild(pin);
+  return pin;
+}
+
+/* ==============================================================
+   COMMENT MODE
+   ============================================================== */
+function enterCommentMode(){
+  state.commentMode = true;
+  document.body.classList.add('comment-mode');
+  btnCommentMode.classList.add('active');
+  btnCommentMode.innerHTML = '<span>✕ Cancel</span>';
+  armClickCapture();
+}
+function exitCommentMode(){
+  state.commentMode = false;
+  document.body.classList.remove('comment-mode');
+  btnCommentMode.classList.remove('active');
+  btnCommentMode.innerHTML = '<span>+ Add Comment</span>';
+  disarmClickCapture();
+}
+function armClickCapture(){
+  var doc;
+  try{doc = iframe.contentDocument}catch(e){return}
+  if(!doc)return;
+  doc.body.classList.add('__wb_cm');
+  doc.addEventListener('click', handleIframeClick, true);
+}
+function disarmClickCapture(){
+  var doc;
+  try{doc = iframe.contentDocument}catch(e){return}
+  if(!doc)return;
+  doc.body.classList.remove('__wb_cm');
+  doc.removeEventListener('click', handleIframeClick, true);
+}
+function handleIframeClick(e){
+  // Don't capture clicks on existing pins
+  if(e.target && e.target.classList && e.target.classList.contains('__wb_pin')) return;
+  e.preventDefault();
+  e.stopPropagation();
+  e.stopImmediatePropagation();
+
+  var el = e.target;
+  var rect = el.getBoundingClientRect();
+  var xInEl = Math.max(0, Math.min(1, (e.clientX - rect.left) / Math.max(rect.width, 1)));
+  var yInEl = Math.max(0, Math.min(1, (e.clientY - rect.top) / Math.max(rect.height, 1)));
+  var selector = computeSelector(el);
+
+  state.pendingPin = {
+    page: state.currentPage,
+    selector: selector,
+    xInEl: xInEl,
+    yInEl: yInEl
+  };
+  exitCommentMode();
+  openModal();
+}
+
+/* ==============================================================
+   COMMENT MODAL
+   ============================================================== */
+function openModal(){
+  // Reset form
+  cmForm.reset();
+  state.pendingType = null;
+  cmTypes.querySelectorAll('.cm-type').forEach(function(b){b.classList.remove('active')});
+  cmSubmit.disabled = true;
+  // Show pin location
+  var loc = state.pendingPin ? (friendlyPageName(state.pendingPin.page) + ' · ' + shortSelector(state.pendingPin.selector)) : '';
+  cmPinLoc.textContent = loc;
+  cmodal.classList.add('show');
+  setTimeout(function(){cmText.focus()}, 100);
+}
+function closeModal(){
+  cmodal.classList.remove('show');
+  state.pendingPin = null;
+  state.pendingType = null;
+}
+function shortSelector(s){
+  if(!s)return '';
+  // Show just the last 2 segments
+  var parts = s.split('>');
+  return parts.slice(-2).join(' > ');
+}
+cmTypes.addEventListener('click', function(e){
+  var btn = e.target.closest('.cm-type');
+  if(!btn)return;
+  cmTypes.querySelectorAll('.cm-type').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  state.pendingType = btn.dataset.type;
+  updateSubmitState();
+});
+cmText.addEventListener('input', updateSubmitState);
+function updateSubmitState(){
+  // Only the comment text is required. Type is optional (defaults to "general" on submit).
+  cmSubmit.disabled = !cmText.value.trim().length;
+}
+cmClose.addEventListener('click', closeModal);
+cmCancel.addEventListener('click', closeModal);
+cmodal.addEventListener('click', function(e){
+  if(e.target === cmodal) closeModal();
+});
+
+/* ==============================================================
+   SUBMIT COMMENT
+   ============================================================== */
+cmForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  if(!state.pendingPin || !cmText.value.trim().length) return;
+  var comment = {
+    id: 'c_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+    page: state.pendingPin.page,
+    selector: state.pendingPin.selector,
+    xInEl: state.pendingPin.xInEl,
+    yInEl: state.pendingPin.yInEl,
+    type: state.pendingType || 'general',
+    text: cmText.value.trim(),
+    name: cmName.value.trim(),
+    phase: '2',
+    created: new Date().toISOString()
+  };
+
+  // Save locally
+  if(!state.allComments[comment.page]) state.allComments[comment.page] = [];
+  state.allComments[comment.page].push(comment);
+  saveComments();
+
+  // Switch to Phase 2 so the user sees the new comment they just created
+  setActivePhase('2');
+
+  // Re-render
+  renderPins();
+  updateCommentCount();
+  renderPanel();
+
+  // POST to Formspree (email notification) + Google Sheets (shared store)
+  submitToFormspree(comment);
+  submitToSheet(comment);
+
+  closeModal();
+});
+
+function submitToFormspree(comment){
+  if(!FORMSPREE_ID || FORMSPREE_ID === 'REPLACE_WITH_FORMSPREE_ID'){
+    console.info('[WB Review] Formspree not configured — comment saved locally only.', comment);
+    return;
+  }
+  var deepLink = buildDeepLink(comment);
+  var body = {
+    _subject: '[Amplify 2026 · Phase ' + (commentPhase(comment)) + '] ' + comment.type.toUpperCase() + ' comment on ' + friendlyPageName(comment.page),
+    phase: 'Phase ' + commentPhase(comment),
+    page: comment.page,
+    page_name: friendlyPageName(comment.page),
+    type: comment.type,
+    comment: comment.text,
+    from: comment.name || '(anonymous)',
+    selector: comment.selector,
+    position: 'x:' + comment.xInEl.toFixed(3) + ' y:' + comment.yInEl.toFixed(3),
+    created: comment.created,
+    view_in_context: deepLink
+  };
+  fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json', 'Accept':'application/json'},
+    body: JSON.stringify(body)
+  }).catch(function(err){
+    console.warn('[WB Review] Formspree submit failed:', err);
+  });
+}
+
+/* ==============================================================
+   GOOGLE SHEETS SYNC — shared comments store
+   ============================================================== */
+// Apps Script requires a "simple request" (no CORS preflight), so POSTs
+// use Content-Type: text/plain and send the JSON body as a raw string.
+function submitToSheet(comment){
+  if(!SHEETS_ENDPOINT) return;
+  fetch(SHEETS_ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({
+      id: comment.id,
+      page: comment.page,
+      type: comment.type,
+      text: comment.text,
+      name: comment.name || '',
+      selector: comment.selector,
+      xInEl: comment.xInEl,
+      yInEl: comment.yInEl,
+      phase: commentPhase(comment),
+      created: comment.created
+    }),
+    redirect: 'follow'
+  }).catch(function(err){
+    console.warn('[WB Review] Sheet submit failed:', err);
+  });
+}
+
+function deleteFromSheet(id){
+  if(!SHEETS_ENDPOINT || !id) return;
+  fetch(SHEETS_ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({action:'delete', id: id}),
+    redirect: 'follow'
+  }).catch(function(err){
+    console.warn('[WB Review] Sheet delete failed:', err);
+  });
+}
+
+function loadCommentsFromSheet(){
+  if(!SHEETS_ENDPOINT) return Promise.resolve();
+  return fetch(SHEETS_ENDPOINT, {method:'GET', redirect:'follow'})
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var list = (data && data.comments) || [];
+      var grouped = {};
+      list.forEach(function(c){
+        if(!c || !c.page) return;
+        if(!grouped[c.page]) grouped[c.page] = [];
+        grouped[c.page].push(c);
+      });
+      // Sheet is source of truth — replace local state
+      state.allComments = grouped;
+      saveComments();
+      renderPins();
+      updateCommentCount();
+      renderPanel();
+    })
+    .catch(function(err){
+      console.warn('[WB Review] Sheet load failed, falling back to localStorage:', err);
+    });
+}
+
+function buildDeepLink(comment){
+  var base = window.location.origin + window.location.pathname;
+  var params = new URLSearchParams({
+    page: comment.page,
+    pin: comment.selector,
+    x: String(comment.xInEl.toFixed(3)),
+    y: String(comment.yInEl.toFixed(3)),
+    type: comment.type,
+    text: comment.text,
+    from: comment.name || '',
+    id: comment.id
+  });
+  return base + '?' + params.toString();
+}
+
+/* ==============================================================
+   COMMENT COUNT + PANEL
+   ============================================================== */
+function commentPhase(c){
+  // Comments without a phase field default to Phase 1 (pre-tabs era)
+  return (c && c.phase && String(c.phase) === '2') ? '2' : '1';
+}
+function totalCommentCount(){
+  var n = 0;
+  Object.keys(state.allComments).forEach(function(p){
+    n += (state.allComments[p] || []).length;
+  });
+  return n;
+}
+function phaseCommentCount(phase){
+  var n = 0;
+  Object.keys(state.allComments).forEach(function(p){
+    (state.allComments[p] || []).forEach(function(c){
+      if(commentPhase(c) === phase) n++;
+    });
+  });
+  return n;
+}
+function updateCommentCount(){
+  countEl.textContent = totalCommentCount();
+  var p1 = document.getElementById('phase1Count');
+  var p2 = document.getElementById('phase2Count');
+  if(p1) p1.textContent = phaseCommentCount('1');
+  if(p2) p2.textContent = phaseCommentCount('2');
+}
+
+function renderPanel(){
+  // Collect all pages with comments
+  var pages = Object.keys(state.allComments).filter(function(p){
+    return (state.allComments[p] || []).length > 0;
+  });
+
+  // Apply phase + filter
+  var filteredByPage = {};
+  pages.forEach(function(p){
+    var list = state.allComments[p].slice();
+    // Filter by active phase
+    list = list.filter(function(c){return commentPhase(c) === state.phase});
+    if(state.filter !== 'all'){
+      list = list.filter(function(c){return c.type === state.filter});
+    }
+    if(list.length) filteredByPage[p] = list;
+  });
+  var filteredPages = Object.keys(filteredByPage);
+
+  if(!filteredPages.length){
+    var emptyMsg;
+    if(totalCommentCount() === 0){
+      emptyMsg = 'No comments yet.<br>Click <strong>+ Add Comment</strong> to leave one.';
+    } else if(phaseCommentCount(state.phase) === 0){
+      emptyMsg = 'No comments in <strong>Phase '+esc(state.phase)+'</strong> yet.' + (state.phase === '2' ? '<br>New comments will land here.' : '');
+    } else {
+      emptyMsg = 'No comments match the <strong>'+esc(state.filter)+'</strong> filter in <strong>Phase '+esc(state.phase)+'</strong>.';
+    }
+    cpList.innerHTML = '<div class="cp-empty"><div class="cp-empty-icon">💭</div><div>'+emptyMsg+'</div></div>';
+    return;
+  }
+
+  // Sort: current page first, then by most recent activity
+  filteredPages.sort(function(a,b){
+    if(a === state.currentPage) return -1;
+    if(b === state.currentPage) return 1;
+    var aLatest = Math.max.apply(null, filteredByPage[a].map(function(c){return new Date(c.created).getTime()}));
+    var bLatest = Math.max.apply(null, filteredByPage[b].map(function(c){return new Date(c.created).getTime()}));
+    return bLatest - aLatest;
+  });
+
+  // Build HTML: grouped by page
+  var html = '';
+  filteredPages.forEach(function(pageUrl){
+    var list = filteredByPage[pageUrl];
+    var isCurrent = pageUrl === state.currentPage;
+    html += '<div class="cp-group">';
+    html += '<div class="cp-group-head">'+
+      '<span class="cp-group-name">'+esc(friendlyPageName(pageUrl))+(isCurrent ? ' <span class="cp-group-current">current</span>' : '')+'</span>'+
+      '<span class="cp-group-count">'+list.length+'</span>'+
+    '</div>';
+    list.forEach(function(c, i){
+      var when = new Date(c.created);
+      var timeStr = when.toLocaleDateString('en-US',{month:'short',day:'numeric'}) + ' · ' + when.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+      var nameStr = c.name ? '<span class="cp-item-name">' + esc(c.name) + '</span> · ' : '';
+      html += '<div class="cp-item" data-id="'+esc(c.id)+'" data-page="'+esc(pageUrl)+'">'+
+        '<button class="cp-item-delete" data-id="'+esc(c.id)+'" data-page="'+esc(pageUrl)+'" aria-label="Delete comment" title="Delete comment">'+
+          '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>'+
+        '</button>'+
+        '<div class="cp-item-head"><span class="cp-item-badge '+esc(c.type)+'">'+esc(c.type)+'</span><span class="cp-item-num">#'+(i+1)+'</span></div>'+
+        '<div class="cp-item-text">'+esc(c.text)+'</div>'+
+        '<div class="cp-item-meta">'+nameStr+esc(timeStr)+'</div>'+
+        '<div class="cp-item-confirm">'+
+          '<div class="cp-item-confirm-msg">Delete this comment?</div>'+
+          '<div class="cp-item-confirm-sub">This can\u2019t be undone.</div>'+
+          '<div class="cp-item-confirm-btns">'+
+            '<button class="cp-item-confirm-btn cp-cancel" type="button">Cancel</button>'+
+            '<button class="cp-item-confirm-btn danger cp-confirm" type="button" data-id="'+esc(c.id)+'" data-page="'+esc(pageUrl)+'">Delete</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    });
+    html += '</div>';
+  });
+  cpList.innerHTML = html;
+
+  // Trash icon → enters confirm state on the card (stops propagation so card doesn't scroll)
+  Array.prototype.forEach.call(cpList.querySelectorAll('.cp-item-delete'), function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      // Close any other open confirmation first
+      Array.prototype.forEach.call(cpList.querySelectorAll('.cp-item.confirming'), function(i){i.classList.remove('confirming')});
+      var item = btn.closest('.cp-item');
+      if(item) item.classList.add('confirming');
+    });
+  });
+
+  // Cancel button in confirm UI
+  Array.prototype.forEach.call(cpList.querySelectorAll('.cp-cancel'), function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var item = btn.closest('.cp-item');
+      if(item) item.classList.remove('confirming');
+    });
+  });
+
+  // Confirm (Delete) button in confirm UI
+  Array.prototype.forEach.call(cpList.querySelectorAll('.cp-confirm'), function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var id = btn.dataset.id;
+      var page = btn.dataset.page;
+      deleteComment(page, id);
+    });
+  });
+
+  // Card click (scroll to pin / navigate) — ignored when in confirming state
+  Array.prototype.forEach.call(cpList.querySelectorAll('.cp-item'), function(item){
+    item.addEventListener('click', function(e){
+      if(item.classList.contains('confirming')) return;
+      var id = item.dataset.id;
+      var page = item.dataset.page;
+      var list = state.allComments[page] || [];
+      var comment = list.find(function(c){return c.id === id});
+      if(!comment) return;
+      goToComment(comment);
+    });
+  });
+}
+
+function deleteComment(page, id){
+  if(!state.allComments[page]) return;
+  state.allComments[page] = state.allComments[page].filter(function(c){return c.id !== id});
+  if(state.allComments[page].length === 0) delete state.allComments[page];
+  saveComments();
+  renderPins();
+  updateCommentCount();
+  renderPanel();
+  // Also remove from shared sheet
+  deleteFromSheet(id);
+}
+
+function goToComment(comment){
+  if(comment.page === state.currentPage){
+    // Same page — just scroll
+    scrollToPin(comment);
+  } else {
+    // Different page — queue the scroll, then navigate
+    state.pendingScrollTo = comment;
+    try{
+      iframe.contentWindow.location.href = comment.page;
+    }catch(e){
+      iframe.src = comment.page;
+    }
+  }
+}
+
+function scrollToPin(comment){
+  var doc;
+  try{doc = iframe.contentDocument}catch(e){return}
+  if(!doc)return;
+
+  // Prefer scrolling to the pin itself — it's absolutely positioned at the
+  // exact click location, so multiple pins on the same parent element don't
+  // all collapse to the same scroll target.
+  var pin = Array.prototype.find.call(doc.querySelectorAll('.__wb_pin'), function(p){return p.dataset.commentId === comment.id});
+  if(pin){
+    pin.scrollIntoView({behavior:'smooth', block:'center'});
+    pin.classList.add('flash');
+    setTimeout(function(){pin.classList.remove('flash')}, 2400);
+    return;
+  }
+
+  // Fallback: scroll to anchor element
+  var el = null;
+  try{el = doc.querySelector(comment.selector)}catch(e){}
+  if(!el){el = doc.body}
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function highlightPanelItem(id){
+  var item = cpList.querySelector('.cp-item[data-id="'+id+'"]');
+  if(item){
+    item.scrollIntoView({behavior:'smooth', block:'center'});
+    item.style.borderColor = '#46435D';
+    item.style.boxShadow = '0 4px 16px rgba(70,67,93,0.15)';
+    setTimeout(function(){
+      item.style.borderColor = '';
+      item.style.boxShadow = '';
+    }, 1600);
+  }
+}
+
+/* Panel open/close */
+function openPanel(){cpanel.classList.add('show'); loadCommentsFromSheet();}
+function closePanel(){cpanel.classList.remove('show')}
+cpClose.addEventListener('click', closePanel);
+
+/* Filter */
+cpFilters.forEach(function(btn){
+  btn.addEventListener('click', function(){
+    cpFilters.forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    state.filter = btn.dataset.f;
+    renderPanel();
+  });
+});
+
+/* Phase tabs */
+var cpPhaseTabs = document.querySelectorAll('.cp-phase-tab');
+cpPhaseTabs.forEach(function(btn){
+  btn.addEventListener('click', function(){
+    cpPhaseTabs.forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    state.phase = btn.dataset.phase;
+    renderPanel();
+  });
+});
+function setActivePhase(phase){
+  state.phase = String(phase);
+  cpPhaseTabs.forEach(function(b){
+    b.classList.toggle('active', b.dataset.phase === state.phase);
+  });
+}
+
+/* ==============================================================
+   CHROME BUTTONS
+   ============================================================== */
+btnComments.addEventListener('click', function(){
+  if(cpanel.classList.contains('show')) closePanel();
+  else openPanel();
+});
+btnCommentMode.addEventListener('click', function(){
+  if(state.commentMode) exitCommentMode();
+  else enterCommentMode();
+});
+btnHelp.addEventListener('click', function(){
+  instructions.classList.add('show');
+});
+btnFs.addEventListener('click', toggleFs);
+
+/* ==============================================================
+   PAGE INDEX DRAWER
+   ============================================================== */
+var pageIndex = {
+  'Ministry Brands': {
+    pages: [
+      {name:'Home', slug:'mb-home.html'},
+      {name:'Company / About', slug:'mb-company.html'},
+      {name:'Meet the Team', slug:'mb-meet-team.html'},
+      {name:'Careers', slug:'mb-careers.html'},
+      {name:'Galway, Ireland', slug:'mb-galway.html'},
+      {name:'Press / Newsroom', slug:'mb-press.html'},
+      {name:'News Article', slug:'mb-news-article.html'},
+      {name:'Partners Directory', slug:'mb-partners.html'},
+      {name:'Become a Partner', slug:'mb-become-partner.html'},
+      {name:'Contact', slug:'mb-contact.html'}
+    ]
+  },
+  'Amplify': {
+    categories: {
+      'Platform': [
+        {name:'Home', slug:'home.html'},
+        {name:'Platform Overview', slug:'platform-overview.html'}
+      ],
+      'Products': [
+        {name:'Giving', slug:'giving.html'},
+        {name:'Accounting', slug:'accounting.html'},
+        {name:'People (ChMS)', slug:'people.html'},
+        {name:'Websites', slug:'websites.html'},
+        {name:'Mobile App', slug:'mobile-app.html'},
+        {name:'Communications', slug:'communications.html'},
+        {name:'Streaming', slug:'streaming.html'},
+        {name:'Service Planning', slug:'service-planning.html'},
+        {name:'Media', slug:'media.html'},
+        {name:'Safety', slug:'safety.html'}
+      ],
+      'Bundles': [
+        {name:'Complete Bundle', slug:'complete-bundle.html'},
+        {name:'Generosity Bundle', slug:'generosity-bundle.html'},
+        {name:'Financial Bundle', slug:'financial-bundle.html'},
+        {name:'Digital Bundle', slug:'digital-bundle.html'}
+      ],
+      'Who We Serve — By Role': [
+        {name:'Senior Pastor', slug:'senior-pastor.html'},
+        {name:'Associate Pastor', slug:'associate-pastor.html'},
+        {name:'Finance / Treasurer', slug:'finance-treasurer.html'},
+        {name:'Communications Director', slug:'communications-director.html'},
+        {name:'Worship Pastor', slug:'worship-pastor.html'}
+      ],
+      'Who We Serve — By Church Type': [
+        {name:'Multi-site', slug:'multi-site.html'},
+        {name:'Large Churches', slug:'large-churches.html'},
+        {name:'Growing Churches', slug:'growing-churches.html'},
+        {name:'Small Churches', slug:'small-churches.html'},
+        {name:'Church Plants', slug:'church-plants.html'},
+        {name:'Denominations', slug:'denominations.html'},
+        {name:'Digital Churches', slug:'digital-churches.html'}
+      ],
+      'Services': [
+        {name:'Services Overview', slug:'services-overview.html'},
+        {name:'Service Detail', slug:'service-detail.html'}
+      ],
+      'Healthy Church Hub': [
+        {name:'Hub Home', slug:'healthy-church-hub.html'},
+        {name:'Blog Post', slug:'blog-post.html'},
+        {name:'Podcast Episode', slug:'podcast-episode.html'},
+        {name:'eBook Landing', slug:'ebook-landing.html'},
+        {name:'Webinar Registration', slug:'webinar-registration.html'},
+        {name:'Customer Story', slug:'customer-story.html'}
+      ],
+      'Partners': [
+        {name:'Partners Directory', slug:'partners.html'},
+        {name:'Partner Detail', slug:'partner-detail.html'}
+      ],
+      'Amplify+ HQ': [
+        {name:'HQ Dashboard', slug:'hq.html'},
+        {name:'HQ Donor', slug:'hq-donor.html'},
+        {name:'HQ Financials', slug:'hq-financials.html'},
+        {name:'HQ Arena', slug:'hq-arena.html'}
+      ],
+      'Utility': [
+        {name:'Login', slug:'login.html'},
+        {name:'Search Results', slug:'search-results.html'},
+        {name:'Request Demo', slug:'request-demo.html'}
+      ]
+    }
+  }
+};
+
+var pageDrawerEl = document.getElementById('pageDrawer');
+var pdBody = document.getElementById('pd-body');
+var pdCountEl = document.getElementById('pd-count');
+var pdSearch = document.getElementById('pdSearch');
+var pdClose = document.getElementById('pdClose');
+var btnPages = document.getElementById('btn-pages');
+var pdIntersectionObs = null;
+var pdRendered = false;
+
+function totalPageCount(){
+  var n = 0;
+  Object.keys(pageIndex).forEach(function(site){
+    var s = pageIndex[site];
+    if(s.pages) n += s.pages.length;
+    if(s.categories) Object.keys(s.categories).forEach(function(cat){ n += s.categories[cat].length });
+  });
+  return n;
+}
+
+function buildCardHtml(p){
+  var cur = (p.slug === state.currentPage) ? ' current' : '';
+  return '<a href="javascript:void(0)" class="pd-card'+cur+'" data-slug="'+p.slug+'" data-name="'+esc(p.name).toLowerCase()+'">'+
+    '<div class="pd-card-thumb-wrap">'+
+      '<div class="pd-card-thumb-placeholder">Loading…</div>'+
+      '<iframe class="pd-card-thumb" data-src="'+p.slug+'" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-same-origin"></iframe>'+
+    '</div>'+
+    '<div class="pd-card-body">'+
+      '<span class="pd-card-name">'+esc(p.name)+'</span>'+
+      '<span class="pd-card-slug">'+esc(p.slug)+'</span>'+
+      (cur ? '<span class="pd-card-current-tag">● Current</span>' : '')+
+    '</div>'+
+  '</a>';
+}
+
+function renderPageDrawer(){
+  var html = '';
+  Object.keys(pageIndex).forEach(function(site){
+    var s = pageIndex[site];
+    var count = 0;
+    if(s.pages) count += s.pages.length;
+    if(s.categories) Object.keys(s.categories).forEach(function(c){ count += s.categories[c].length });
+    html += '<div class="pd-section" data-collapsed="false">'+
+      '<button class="pd-section-head" type="button" data-toggle="section">'+
+        '<span class="pd-section-name">'+site+'</span>'+
+        '<span class="pd-section-count">'+count+' pages</span>'+
+        '<span class="pd-section-chevron">▾</span>'+
+      '</button>'+
+      '<div class="pd-section-body">';
+    if(s.pages){
+      html += '<div class="pd-grid">';
+      s.pages.forEach(function(p){ html += buildCardHtml(p); });
+      html += '</div>';
+    }
+    if(s.categories){
+      Object.keys(s.categories).forEach(function(cat){
+        html += '<div class="pd-cat-wrap" data-collapsed="false">'+
+          '<button class="pd-cat" type="button" data-toggle="cat">'+
+            '<span class="pd-cat-chevron">▾</span>'+
+            cat+' <span style="color:rgba(255,255,255,0.3);font-weight:500">'+s.categories[cat].length+'</span>'+
+          '</button>'+
+          '<div class="pd-grid">';
+        s.categories[cat].forEach(function(p){ html += buildCardHtml(p); });
+        html += '</div></div>';
+      });
+    }
+    html += '</div></div>';
+  });
+  pdBody.innerHTML = html;
+  pdCountEl.textContent = ' · ' + totalPageCount() + ' total';
+
+  // Wire section/cat collapse toggles
+  Array.prototype.forEach.call(pdBody.querySelectorAll('[data-toggle="section"]'), function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var sec = btn.closest('.pd-section');
+      sec.dataset.collapsed = sec.dataset.collapsed === 'true' ? 'false' : 'true';
+    });
+  });
+  Array.prototype.forEach.call(pdBody.querySelectorAll('[data-toggle="cat"]'), function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var wrap = btn.closest('.pd-cat-wrap');
+      wrap.dataset.collapsed = wrap.dataset.collapsed === 'true' ? 'false' : 'true';
+    });
+  });
+
+  // Wire card clicks
+  Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-card'), function(card){
+    card.addEventListener('click', function(e){
+      e.preventDefault();
+      var slug = card.dataset.slug;
+      try{ iframe.contentWindow.location.href = slug; }catch(err){ iframe.src = slug; }
+      closePageDrawer();
+    });
+  });
+
+  // Lazy-load thumbnail iframes when scrolled into view
+  if(pdIntersectionObs){ pdIntersectionObs.disconnect(); }
+  pdIntersectionObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var f = entry.target;
+        if(f.dataset.src && !f.src){
+          f.src = f.dataset.src;
+          // hide placeholder + scrub annotations from the thumbnail
+          f.addEventListener('load', function(){
+            var ph = f.parentNode.querySelector('.pd-card-thumb-placeholder');
+            if(ph) ph.style.display='none';
+            // Strip annotations + toggle from the rendered preview
+            try {
+              var doc = f.contentDocument;
+              if(doc){
+                // Inject CSS that hides every annotation artifact
+                var s = doc.createElement('style');
+                s.textContent = '.anno,.anno-toggle,.anno-legend,.anno-legend-wrap,.__wb_pin{display:none!important}';
+                doc.head.appendChild(s);
+                // Belt-and-suspenders: ensure body has anno-hidden class (some pages rely on it)
+                doc.body.classList.add('anno-hidden');
+              }
+            } catch(err){}
+          }, {once:true});
+        }
+        pdIntersectionObs.unobserve(f);
+      }
+    });
+  }, {root: pdBody, rootMargin:'200px'});
+  Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-card-thumb'), function(f){ pdIntersectionObs.observe(f); });
+}
+
+function openPageDrawer(){
+  if(!pdRendered){
+    renderPageDrawer();
+    pdRendered = true;
+  } else {
+    // refresh current-page highlight on re-open
+    Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-card'), function(card){
+      var isCurrent = card.dataset.slug === state.currentPage;
+      card.classList.toggle('current', isCurrent);
+      var tag = card.querySelector('.pd-card-current-tag');
+      if(isCurrent && !tag){
+        var t = document.createElement('span');
+        t.className = 'pd-card-current-tag';
+        t.textContent = '● Current';
+        card.querySelector('.pd-card-body').appendChild(t);
+      } else if(!isCurrent && tag){
+        tag.remove();
+      }
+    });
+  }
+  pageDrawerEl.classList.add('open');
+  document.body.classList.add('pd-open');
+  setTimeout(function(){ pdSearch.focus(); }, 200);
+}
+
+function closePageDrawer(){
+  pageDrawerEl.classList.remove('open');
+  document.body.classList.remove('pd-open');
+  pdSearch.value = '';
+  filterCards('');
+}
+
+function filterCards(q){
+  q = q.trim().toLowerCase();
+  pdBody.dataset.searching = q ? 'true' : 'false';
+  var anyVisible = false;
+  Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-card'), function(card){
+    var matches = !q || card.dataset.name.indexOf(q) > -1 || card.dataset.slug.toLowerCase().indexOf(q) > -1;
+    card.style.display = matches ? '' : 'none';
+    if(matches) anyVisible = true;
+  });
+  // Hide empty section heads when filtering
+  Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-section'), function(sec){
+    var visibleCards = sec.querySelectorAll('.pd-card');
+    var anyShown = false;
+    Array.prototype.forEach.call(visibleCards, function(c){ if(c.style.display !== 'none') anyShown = true });
+    sec.style.display = anyShown ? '' : 'none';
+  });
+  // Hide empty category heads
+  Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-cat'), function(cat){
+    var next = cat.nextElementSibling;
+    if(next && next.classList.contains('pd-grid')){
+      var anyShown = false;
+      Array.prototype.forEach.call(next.querySelectorAll('.pd-card'), function(c){
+        if(c.style.display !== 'none') anyShown = true;
+      });
+      cat.style.display = anyShown ? '' : 'none';
+      next.style.display = anyShown ? '' : 'none';
+    }
+  });
+}
+
+btnPages.addEventListener('click', function(e){
+  e.stopPropagation();
+  if(pageDrawerEl.classList.contains('open')) closePageDrawer();
+  else openPageDrawer();
+});
+pdClose.addEventListener('click', closePageDrawer);
+pdSearch.addEventListener('input', function(){ filterCards(pdSearch.value); });
+
+// Close on outside-click (when drawer is open and click is outside)
+document.addEventListener('click', function(e){
+  if(!pageDrawerEl.classList.contains('open')) return;
+  if(pageDrawerEl.contains(e.target)) return;
+  if(btnPages.contains(e.target)) return;
+  closePageDrawer();
+});
+
+// Esc closes drawer too (in addition to existing keydown handlers below)
+
+/* ==============================================================
+   FULL-SCREEN
+   ============================================================== */
+function toggleFs(){
+  document.body.classList.toggle('fs');
+  var isFs = document.body.classList.contains('fs');
+  document.getElementById('fs-ico').textContent = isFs ? '⤢' : '⛶';
+  document.getElementById('fs-label').textContent = isFs ? 'Exit Full Screen' : 'Full Screen';
+}
+
+/* ==============================================================
+   INSTRUCTIONS — drawer open/close
+   ============================================================== */
+var insClosing = false;
+function dismissInstructions(){
+  if(insClosing || !instructions.classList.contains('show')) return;
+  insClosing = true;
+  instructions.classList.add('closing');
+  try{localStorage.setItem('wb-instructions-seen','1')}catch(e){}
+  setTimeout(function(){
+    instructions.classList.remove('show');
+    instructions.classList.remove('closing');
+    insClosing = false;
+  }, 560);
+}
+// Click anywhere on the overlay dismisses (drawer slides up)
+instructions.addEventListener('click', dismissInstructions);
+
+/* First-visit show */
+var seen;
+try{seen = localStorage.getItem('wb-instructions-seen')}catch(e){}
+if(!seen){
+  setTimeout(function(){instructions.classList.add('show')}, 300);
+}
+
+/* ==============================================================
+   KEYBOARD
+   ============================================================== */
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    if(pageDrawerEl.classList.contains('open')){ closePageDrawer(); return; }
+    if(state.commentMode){ exitCommentMode(); return; }
+    if(cmodal.classList.contains('show')){ closeModal(); return; }
+    if(instructions.classList.contains('show')){
+      dismissInstructions();
+      return;
+    }
+    if(cpanel.classList.contains('show')){ closePanel(); return; }
+    if(document.body.classList.contains('fs')){ toggleFs(); return; }
+  }
+  if((e.key === 'f' || e.key === 'F') && !isTypingInField(e.target)){
+    toggleFs();
+  }
+});
+function isTypingInField(el){
+  if(!el)return false;
+  var t = (el.tagName||'').toUpperCase();
+  return t === 'INPUT' || t === 'TEXTAREA';
+}
+
+/* Resize — re-position pins */
+window.addEventListener('resize', debounce(renderPins, 120));
+function debounce(fn, ms){
+  var t;
+  return function(){
+    clearTimeout(t);
+    var a = arguments, c = this;
+    t = setTimeout(function(){fn.apply(c,a)}, ms);
+  };
+}
+
+/* ==============================================================
+   DEEP-LINK PARAMS
+   ============================================================== */
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var page = params.get('page');
+  var pin = params.get('pin');
+  if(page){
+    // Navigate iframe to the requested page
+    iframe.src = page;
+    if(pin){
+      state.deepLinkPin = {
+        page: page,
+        selector: pin,
+        xInEl: parseFloat(params.get('x'))||0.5,
+        yInEl: parseFloat(params.get('y'))||0.1,
+        type: params.get('type') || 'design',
+        text: params.get('text') || '',
+        name: params.get('from') || '',
+        id: params.get('id') || 'deeplink'
+      };
+    }
+  }
+})();
+
+function renderDeepLinkPin(){
+  if(!state.deepLinkPin) return;
+  var c = state.deepLinkPin;
+  var doc;
+  try{doc = iframe.contentDocument}catch(e){return}
+  if(!doc)return;
+  var el = null;
+  try{el = doc.querySelector(c.selector)}catch(e){}
+  if(!el)el = doc.body;
+  el.scrollIntoView({behavior:'smooth', block:'center'});
+  setTimeout(function(){
+    renderPin(c, '★', true);
+  }, 500);
+  // Clear so it only renders once per load
+  state.deepLinkPin = null;
+}
+
+</script>
+</body>
+</html>
