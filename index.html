@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Amplify 2026 Wireframes — Review</title>
+<title>Spired for Churches 2026 Wireframes — Review</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -294,7 +294,7 @@ body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,
         <span class="chrome-brand">Whiteboard</span>
       </div>
       <div class="chrome-divider"></div>
-      <span class="chrome-project">Amplify 2026 Wireframes</span>
+      <span class="chrome-project">Spired for Churches 2026 Wireframes</span>
       <span class="chrome-page-sep" id="page-sep" style="display:none">/</span>
       <span class="chrome-page" id="page-title"></span>
     </div>
@@ -328,7 +328,7 @@ body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,
         <span>Comment mode — click anywhere on the wireframe to drop a pin</span>
         <kbd>Esc</kbd>
       </div>
-      <iframe id="doc" src="home.html" title="Amplify Wireframe" referrerpolicy="no-referrer"></iframe>
+      <iframe id="doc" src="home.html" title="Spired for Churches Wireframe" referrerpolicy="no-referrer"></iframe>
       <div id="doc-overlay"></div>
     </div>
   </main>
@@ -366,7 +366,7 @@ body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,
     </div>
     <h1 class="ins-welcome">Welcome</h1>
     <div class="ins-toyour">To your</div>
-    <h2 class="ins-title">Amplify 2026 Wireframes feedback</h2>
+    <h2 class="ins-title">Spired for Churches 2026 Wireframes feedback</h2>
 
     <div class="ins-grid">
       <div class="ins-item">
@@ -609,11 +609,11 @@ function onIframeLoad(){
   var pageUrl = getPageUrl();
   state.currentPage = pageUrl;
 
-  // Dynamic project label — MB pages (mb-*.html) vs Amplify pages
+  // Dynamic project label — MB pages (mb-*.html) vs Spired for Churches pages
   var isMB = /^mb-/.test(pageUrl);
   var projectEl = document.querySelector('.chrome-project');
   if(projectEl){
-    projectEl.textContent = isMB ? 'Ministry Brands 2026 Wireframes' : 'Amplify 2026 Wireframes';
+    projectEl.textContent = isMB ? 'Ministry Brands 2026 Wireframes' : 'Spired for Churches 2026 Wireframes';
   }
 
   // Update chrome page title (the section after the project label)
@@ -622,8 +622,8 @@ function onIframeLoad(){
   if(!iframeTitle){
     iframeTitle = friendlyPageName(pageUrl);
   } else {
-    // Strip " — Amplify" / " — Ministry Brands" suffix if present
-    iframeTitle = iframeTitle.replace(/\s*[—–-]\s*(Amplify|Ministry Brands).*$/i,'');
+    // Strip " — Spired for Churches" / " — Ministry Brands" suffix if present
+    iframeTitle = iframeTitle.replace(/\s*[—–-]\s*(Spired for Churches|Ministry Brands).*$/i,'');
   }
   pageTitleEl.textContent = iframeTitle;
   pageSepEl.style.display = iframeTitle ? '' : 'none';
@@ -876,7 +876,7 @@ function submitToFormspree(comment){
   }
   var deepLink = buildDeepLink(comment);
   var body = {
-    _subject: '[Amplify 2026 · Phase ' + (commentPhase(comment)) + '] ' + comment.type.toUpperCase() + ' comment on ' + friendlyPageName(comment.page),
+    _subject: '[Spired for Churches 2026 · Phase ' + (commentPhase(comment)) + '] ' + comment.type.toUpperCase() + ' comment on ' + friendlyPageName(comment.page),
     phase: 'Phase ' + commentPhase(comment),
     page: comment.page,
     page_name: friendlyPageName(comment.page),
@@ -1259,7 +1259,7 @@ var pageIndex = {
       {name:'Contact', slug:'mb-contact.html'}
     ]
   },
-  'Amplify': {
+  'Spired for Churches': {
     categories: {
       'Platform': [
         {name:'Home', slug:'home.html'},
@@ -1315,7 +1315,7 @@ var pageIndex = {
         {name:'Partners Directory', slug:'partners.html'},
         {name:'Partner Detail', slug:'partner-detail.html'}
       ],
-      'Amplify+ HQ': [
+      'Spired for Churches+ HQ': [
         {name:'HQ Dashboard', slug:'hq.html'},
         {name:'HQ Donor', slug:'hq-donor.html'},
         {name:'HQ Financials', slug:'hq-financials.html'},
