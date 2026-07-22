@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>News &amp; Press — Ministry Brands</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:white;min-height:100vh;color:#1a1a1a}
+.mb-nav{position:sticky;top:0;z-index:200;background:white;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px}
+.mb-nav-left{display:flex;align-items:center;gap:10px}.mb-nav-mark svg{display:block;color:#1E3A5F}
+.mb-nav-brand{font-size:16px;font-weight:700;color:#1E3A5F;letter-spacing:-0.01em}
+.mb-nav-links{display:flex;align-items:center;gap:6px;margin:0 auto}
+.mb-nav-link{position:relative;padding:9px 14px;font-size:14px;font-weight:500;color:#444;cursor:pointer;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;font-family:inherit;transition:color 0.12s,background 0.12s}
+.mb-nav-link:hover{color:#1E3A5F;background:#f4f5f8}.mb-nav-link.active{color:#1E3A5F;font-weight:600}
+.mb-nav-chevron{font-size:8px;color:#bbb;transition:transform 0.15s}.mb-nav-link.open .mb-nav-chevron{transform:rotate(180deg)}
+.mb-nav-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:100}
+.mb-nav-link.open .mb-nav-dropdown::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px}
+.mb-nav-link.open .mb-nav-dropdown{display:block}
+.mb-nav-dropdown a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}.mb-nav-dropdown a:hover{background:#f4f5f8;color:#1E3A5F}
+.mb-nav-right{display:flex;align-items:center;gap:14px}
+.mb-nav-login{font-size:13px;color:#666;text-decoration:none;font-weight:500;padding:8px 12px}.mb-nav-login:hover{color:#1E3A5F}
+.mb-nav-cta{background:#1E3A5F;color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s}.mb-nav-cta:hover{background:#2a4a73}
+
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f8fa}
+.section-eyebrow{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.section-h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px}
+.section-sub{font-size:17px;color:#777;line-height:1.6;max-width:560px}
+.section-center{text-align:center;max-width:680px;margin:0 auto 56px}.section-center .section-sub{margin:0 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
+.btn-navy{background:#1E3A5F;color:white}.btn-navy:hover{background:#2a4a73}
+.btn-white{background:white;color:#1E3A5F}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:#1E3A5F;border:1px solid #1E3A5F}.btn-ghost:hover{background:#1E3A5F;color:white}
+.btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
+.mb-page-hero{background:linear-gradient(180deg,#1E3A5F 0%,#162d4a 100%);color:white;padding:96px 0 88px;text-align:center}
+.mb-page-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px}
+.mb-page-hero h1{font-size:54px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:20px}
+.mb-page-hero p{font-size:17px;color:rgba(255,255,255,0.78);line-height:1.65;max-width:640px;margin:0 auto 32px}
+.mb-page-hero-ctas{display:flex;gap:12px;justify-content:center}
+.mb-breadcrumb{padding:18px 0;background:#fafbfc;border-bottom:0.5px solid #f0f0f0}
+.mb-breadcrumb-inner{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
+.mb-breadcrumb a{color:#888;text-decoration:none}.mb-breadcrumb a:hover{color:#1E3A5F}
+
+.mb-cta-strip{background:#1E3A5F;color:white;border-radius:16px;padding:48px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.mb-cta-strip h3{font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
+.mb-cta-strip p{color:rgba(255,255,255,0.7);font-size:15px;max-width:520px}
+
+/* Featured article */
+.featured-card{display:grid;grid-template-columns:1.1fr 1fr;background:white;border:0.5px solid #e8e8e8;border-radius:16px;overflow:hidden}
+.featured-image{background:linear-gradient(135deg,#1E3A5F,#46435D);min-height:380px}
+.featured-body{padding:48px}
+.featured-chip{display:inline-flex;align-items:center;background:#eaf0f7;color:#1E3A5F;padding:5px 12px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:18px}
+.featured-date{font-size:13px;color:#888;margin-bottom:14px}
+.featured-headline{font-size:32px;font-weight:700;letter-spacing:-0.02em;line-height:1.2;color:#1a1a1a;margin-bottom:16px}
+.featured-lede{font-size:16px;color:#555;line-height:1.65;margin-bottom:24px}
+.featured-link{color:#1E3A5F;font-weight:600;font-size:14px;text-decoration:none}.featured-link:hover{text-decoration:underline}
+
+/* Filter chips */
+.filter-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:48px}
+.filter-chip{padding:9px 16px;border-radius:999px;font-size:13px;font-weight:500;background:#f4f5f8;color:#666;border:none;cursor:pointer;font-family:inherit;transition:all 0.12s}
+.filter-chip:hover{background:#e8eaf0}
+.filter-chip.active{background:#1E3A5F;color:white;font-weight:600}
+
+/* News grid */
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.news-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s}
+.news-card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+.news-card-img{aspect-ratio:16/10}
+.news-card-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+.news-card-chip{display:inline-flex;align-self:flex-start;background:#eaf0f7;color:#1E3A5F;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px}
+.news-card-headline{font-size:17px;font-weight:700;color:#1a1a1a;line-height:1.35;letter-spacing:-0.01em;margin-bottom:10px}
+.news-card-excerpt{font-size:13px;color:#777;line-height:1.55;margin-bottom:16px;flex:1}
+.news-card-date{font-size:12px;color:#999;font-weight:500}
+.news-card-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:14px;border-top:0.5px solid #f0f0f0;margin-top:auto}
+.news-card-source{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.04em;color:#1E3A5F;text-transform:uppercase;white-space:nowrap}
+.news-card-source.external::after{content:'↗';font-size:13px;font-weight:600}
+.news-card-source.internal::after{content:'→';font-size:13px;font-weight:600}
+.news-card-source-name{color:#777;text-transform:none;letter-spacing:0;font-weight:500;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Pagination */
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:56px}
+.pagination a{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:40px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:600;color:#666;text-decoration:none;border:0.5px solid #e0e0e0;background:white;transition:all 0.12s}
+.pagination a:hover{border-color:#1E3A5F;color:#1E3A5F}
+.pagination a.active{background:#1E3A5F;color:white;border-color:#1E3A5F}
+
+footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 32px}
+.mb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.mb-footer-brand{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px;margin-top:14px}
+.mb-footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
+.mb-footer-col-link{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;transition:color 0.12s}.mb-footer-col-link:hover{color:white}
+.mb-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:0.5px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35)}
+
+/* Annotations */
+.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12);max-width:380px;pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-move{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}.anno-move::before{content:'✅ SECTION MOVED';color:#2E7D32}
+.anno strong{font-weight:700}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#1E3A5F;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#2a4a73}
+body.anno-hidden .anno{display:none}
+</style>
+</head>
+<body>
+
+<nav class="mb-nav">
+  <div class="mb-nav-left"><span class="mb-nav-mark"><svg width="32" height="14" viewBox="0 0 48 20" fill="none"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg></span><a href="mb-home.html" style="text-decoration:none"><span class="mb-nav-brand">Ministry Brands</span></a></div>
+  <div class="mb-nav-links">
+    <a href="home.html" class="mb-nav-link">Churches</a><a href="#" class="mb-nav-link">Parishes</a><a href="#" class="mb-nav-link">Nonprofits</a><a href="#" class="mb-nav-link">Protection</a>
+    <button class="mb-nav-link active" id="navCompany" onclick="toggleDropdown(event,'navCompany')">Company <span class="mb-nav-chevron">▾</span><div class="mb-nav-dropdown"><a href="mb-company.html">About</a><a href="mb-meet-team.html">Meet the Team</a><a href="mb-careers.html">Careers</a><a href="mb-press.html">Press</a><a href="mb-partners.html">Partners</a></div></button>
+      </div>
+  <div class="mb-nav-right"><a href="login.html" class="mb-nav-login">Login</a><a href="mb-contact.html" class="mb-nav-cta">Contact Us</a></div>
+</nav>
+
+<div class="mb-breadcrumb"><div class="w mb-breadcrumb-inner"><a href="mb-home.html">Home</a> <span>›</span> <span>Press</span></div></div>
+
+<section class="mb-page-hero">
+  <div class="w">
+    <div class="mb-page-hero-eyebrow">Newsroom</div>
+    <h1>News &amp; press</h1>
+    <p>Industry analysis, product news, and the stories shaping ministry technology.</p>
+    <div class="mb-page-hero-ctas"><a href="#featured" class="btn btn-white">Latest stories</a><a href="#contact" class="btn btn-ghost-light">Press inquiries</a></div>
+  </div>
+</section>
+
+<div class="anno anno-page"><strong>Press hub strategy:</strong> Two card types in the grid. <strong>Internal cards</strong> (footer shows &ldquo;Read on MB&rdquo;) link to our own article template &mdash; reserved for MB-authored thought leadership. <strong>External cards</strong> (footer shows source + outbound arrow) are press mentions and pickups; clicking opens the publication in a new tab. Most releases live externally on PR wires or industry pubs, so this card grid mirrors that reality instead of pretending everything is hosted on MB.</div>
+
+<!-- FEATURED ARTICLE -->
+<section class="section" id="featured">
+  <div class="w">
+    <div class="section-eyebrow" style="margin-bottom:24px">Featured</div>
+    <a href="mb-news-article.html" style="text-decoration:none;color:inherit">
+      <div class="featured-card">
+        <div class="featured-image"></div>
+        <div class="featured-body">
+          <span class="featured-chip">Industry Insights</span>
+          <div class="featured-date">April 8, 2026</div>
+          <h2 class="featured-headline">Innovation in Church Software Means Measurable Ministry</h2>
+          <p class="featured-lede">For too long, &ldquo;innovation&rdquo; in ministry tech has meant new features. The next chapter is different: tools that show pastors and finance teams the outcomes their work is creating, not just the actions logged.</p>
+          <span class="featured-link">Read more &rarr;</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FILTER + NEWS GRID -->
+<section class="section alt">
+  <div class="w">
+    <div class="section-eyebrow">All Stories</div>
+    <div class="section-h2" style="margin-bottom:32px">Browse by topic</div>
+
+    <div class="anno"><strong>Filter behavior:</strong> Chips are visual-only in this wireframe. Live build: client-side filter that updates the grid + URL hash so a topic view is shareable. &ldquo;All&rdquo; default; active state uses brand navy.</div>
+
+    <div class="filter-row">
+      <button class="filter-chip active">All</button>
+      <button class="filter-chip">Accounting</button>
+      <button class="filter-chip">AI</button>
+      <button class="filter-chip">Analytics</button>
+      <button class="filter-chip">Children&rsquo;s Ministry</button>
+      <button class="filter-chip">Giving</button>
+      <button class="filter-chip">Safety</button>
+      <button class="filter-chip">Worship</button>
+      <button class="filter-chip">Awards</button>
+      <button class="filter-chip">Partnerships</button>
+    </div>
+
+    <div class="news-grid">
+      <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#a14040,#46435D)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Safety</span><h3 class="news-card-headline">Hiring Is a Safety Practice: Building a Culture That Starts With Your People</h3><p class="news-card-excerpt">Background checks are step one. The real safeguard is a hiring process that screens for trust as carefully as it screens for skill.</p><div class="news-card-meta"><span class="news-card-date">April 2, 2026</span><span class="news-card-source internal">Read on MB</span></div></div>
+      </a>
+      <a href="mb-news-article.html" class="news-card" style="text-decoration:none;color:inherit">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#2a6e5a,#1E3A5F)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Accounting</span><h3 class="news-card-headline">Accounting for mission: How churches use automation to strengthen trust</h3><p class="news-card-excerpt">When finance teams close the books faster, leaders spend less time reconciling and more time stewarding.</p><div class="news-card-meta"><span class="news-card-date">March 27, 2026</span><span class="news-card-source internal">Read on MB</span></div></div>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#1E3A5F,#46435D)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Giving</span><h3 class="news-card-headline">2024 State of Church Giving Report: Digital Platforms Drive Recurring Generosity</h3><p class="news-card-excerpt">Our annual report on giving behavior, with a deep look at recurring donor growth and channel mix.</p><div class="news-card-meta"><span class="news-card-date">March 18, 2026</span><span class="news-card-source external"><span class="news-card-source-name">Christianity Today</span></span></div></div>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#46435D,#1E3A5F)"></div>
+        <div class="news-card-body"><span class="news-card-chip">AI</span><h3 class="news-card-headline">AI in Ministry: Practical Use Cases for Today&rsquo;s Church Staff</h3><p class="news-card-excerpt">Not chatbots in the sanctuary. Quiet wins in sermon prep, follow-up, and admin time.</p><div class="news-card-meta"><span class="news-card-date">March 11, 2026</span><span class="news-card-source external"><span class="news-card-source-name">ChurchTechToday</span></span></div></div>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#8b6f47,#a14040)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Children&rsquo;s Ministry</span><h3 class="news-card-headline">Children&rsquo;s Ministry Check-In: New Safety Standards for 2026</h3><p class="news-card-excerpt">Updated guidance on volunteer screening, secure pickup, and the new digital paper trail every parent wants.</p><div class="news-card-meta"><span class="news-card-date">March 4, 2026</span><span class="news-card-source external"><span class="news-card-source-name">MinistryWatch</span></span></div></div>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#1E3A5F,#2a6e5a)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Partnerships</span><h3 class="news-card-headline">Ministry Brands Announces Strategic Partnership with PushPay</h3><p class="news-card-excerpt">A new integration brings deeper giving insights to ParishSOFT and DonorDirect customers.</p><div class="news-card-meta"><span class="news-card-date">February 26, 2026</span><span class="news-card-source external"><span class="news-card-source-name">PR Newswire</span></span></div></div>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#8b6f47,#46435D)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Awards</span><h3 class="news-card-headline">Cigna Recognizes Ministry Brands for Workplace Wellness</h3><p class="news-card-excerpt">Bronze-level Healthy Workforce Designation for our employee mental-health programs and culture work.</p><div class="news-card-meta"><span class="news-card-date">February 18, 2026</span><span class="news-card-source external"><span class="news-card-source-name">HR Dive</span></span></div></div>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#46435D,#a14040)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Worship</span><h3 class="news-card-headline">From Sundays to Streaming: The Hybrid Worship Playbook</h3><p class="news-card-excerpt">Practical guidance for the in-person + online services that are now the default, not the exception.</p><div class="news-card-meta"><span class="news-card-date">February 11, 2026</span><span class="news-card-source external"><span class="news-card-source-name">Outreach Magazine</span></span></div></div>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#2a6e5a,#46435D)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Analytics</span><h3 class="news-card-headline">Analytics That Matter: 5 Metrics Every Church Should Track</h3><p class="news-card-excerpt">Attendance is a starting point. These five measures tell you how discipleship is actually moving.</p><div class="news-card-meta"><span class="news-card-date">February 4, 2026</span><span class="news-card-source external"><span class="news-card-source-name">Church Executive</span></span></div></div>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#1E3A5F,#8b6f47)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Accounting</span><h3 class="news-card-headline">Building Trust Through Transparency: New Reporting Tools</h3><p class="news-card-excerpt">A look at the new reporting suite that puts donor-ready statements one click away.</p><div class="news-card-meta"><span class="news-card-date">January 28, 2026</span><span class="news-card-source external"><span class="news-card-source-name">Nonprofit Quarterly</span></span></div></div>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#a14040,#1E3A5F)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Giving</span><h3 class="news-card-headline">The Annual Giving Pulse: Q1 2026 Trends</h3><p class="news-card-excerpt">Recurring giving is up. Cash is down. What the first quarter tells us about the year ahead.</p><div class="news-card-meta"><span class="news-card-date">January 21, 2026</span><span class="news-card-source external"><span class="news-card-source-name">Christianity Today</span></span></div></div>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="news-card" style="text-decoration:none;color:inherit">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#46435D,#2a6e5a)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Safety</span><h3 class="news-card-headline">Safer Sundays: Background Checks Done Right</h3><p class="news-card-excerpt">The most common mistakes churches make in volunteer screening &mdash; and how to fix them this quarter.</p><div class="news-card-meta"><span class="news-card-date">January 14, 2026</span><span class="news-card-source external"><span class="news-card-source-name">Faith &amp; Leadership</span></span></div></div>
+      </a>
+    </div>
+
+    <div class="pagination">
+      <a href="#" class="active">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">Next &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS INQUIRY CTA -->
+<section class="section" id="contact">
+  <div class="w">
+    <div class="mb-cta-strip">
+      <div><h3>Press inquiries</h3><p>For interviews, executive bios, brand assets, or comment on industry topics, reach our communications team.</p></div>
+      <a href="mb-contact.html" class="btn btn-white">Contact press team &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer class="mb-footer">
+  <div class="w">
+    <div class="mb-footer-grid">
+      <div><div style="display:flex;align-items:center;gap:10px"><svg width="32" height="14" viewBox="0 0 48 20" fill="none" style="color:rgba(255,255,255,0.75)"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg><span style="font-size:15px;font-weight:700;color:white">Ministry Brands</span></div><p class="mb-footer-brand">Technology built for the missions that hold communities together.</p></div>
+      <div><div class="mb-footer-col-title">Brands</div><a href="home.html" class="mb-footer-col-link">Amplify</a><a href="#" class="mb-footer-col-link">ParishSOFT</a><a href="#" class="mb-footer-col-link">DonorDirect</a><a href="#" class="mb-footer-col-link">Protect My Ministry</a></div>
+      <div><div class="mb-footer-col-title">Company</div><a href="mb-company.html" class="mb-footer-col-link">About</a><a href="mb-meet-team.html" class="mb-footer-col-link">Meet the Team</a><a href="mb-careers.html" class="mb-footer-col-link">Careers</a><a href="mb-press.html" class="mb-footer-col-link">Press</a></div>
+      <div><div class="mb-footer-col-title">Resources</div><a href="healthy-church-hub.html" class="mb-footer-col-link">Healthy Church Hub</a><a href="mb-partners.html" class="mb-footer-col-link">Partners</a><a href="mb-press.html" class="mb-footer-col-link">News</a></div>
+      <div><div class="mb-footer-col-title">Connect</div><a href="mb-contact.html" class="mb-footer-col-link">Contact</a><a href="login.html" class="mb-footer-col-link">Login</a></div>
+    </div>
+    <div class="mb-footer-bottom"><span>© 2026 Ministry Brands. All rights reserved.</span><span style="display:flex;gap:24px"><a href="#" class="mb-footer-col-link" style="margin:0">Privacy</a><a href="#" class="mb-footer-col-link" style="margin:0">Terms</a><a href="#" class="mb-footer-col-link" style="margin:0">Cookies</a></span></div>
+  </div>
+</footer>
+
+<div class="anno-legend-wrap">
+  <div class="anno-legend"><div class="anno-legend-title">Annotation Legend</div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div></div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'"><span style="font-size:16px">&#x1F4DD;</span><span class="anno-label">Show Annotations</span></button>
+</div>
+
+<script>
+document.body.classList.add("anno-hidden");
+function toggleDropdown(e,id){var btn=document.getElementById(id);var dd=btn.querySelector('.mb-nav-dropdown');if(dd&&dd.contains(e.target))return;e.stopPropagation();e.preventDefault();var wasPinned=btn.dataset.pinned==='1';document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==btn){el.classList.remove('open');delete el.dataset.pinned}});if(wasPinned){btn.classList.remove('open');delete btn.dataset.pinned}else{btn.classList.add('open');btn.dataset.pinned='1'}}
+document.addEventListener('click',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open');delete el.dataset.pinned})});
+document.querySelectorAll('.mb-nav-link').forEach(function(link){if(link.querySelector('.mb-nav-dropdown')){link.addEventListener('mouseenter',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==link)el.classList.remove('open')});link.classList.add('open')});link.addEventListener('mouseleave',function(){if(!link.dataset.pinned)link.classList.remove('open')})}});
+</script>
+</body>
+</html>

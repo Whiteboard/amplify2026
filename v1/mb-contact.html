@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contact — Ministry Brands</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:white;min-height:100vh;color:#1a1a1a}
+.mb-nav{position:sticky;top:0;z-index:200;background:white;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px}
+.mb-nav-left{display:flex;align-items:center;gap:10px}.mb-nav-mark svg{display:block;color:#1E3A5F}
+.mb-nav-brand{font-size:16px;font-weight:700;color:#1E3A5F;letter-spacing:-0.01em}
+.mb-nav-links{display:flex;align-items:center;gap:6px;margin:0 auto}
+.mb-nav-link{position:relative;padding:9px 14px;font-size:14px;font-weight:500;color:#444;cursor:pointer;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;font-family:inherit;transition:color 0.12s,background 0.12s}
+.mb-nav-link:hover{color:#1E3A5F;background:#f4f5f8}.mb-nav-link.active{color:#1E3A5F;font-weight:600}
+.mb-nav-chevron{font-size:8px;color:#bbb;transition:transform 0.15s}.mb-nav-link.open .mb-nav-chevron{transform:rotate(180deg)}
+.mb-nav-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:100}
+.mb-nav-link.open .mb-nav-dropdown::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px}
+.mb-nav-link.open .mb-nav-dropdown{display:block}
+.mb-nav-dropdown a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}.mb-nav-dropdown a:hover{background:#f4f5f8;color:#1E3A5F}
+.mb-nav-right{display:flex;align-items:center;gap:14px}
+.mb-nav-login{font-size:13px;color:#666;text-decoration:none;font-weight:500;padding:8px 12px}.mb-nav-login:hover{color:#1E3A5F}
+.mb-nav-cta{background:#1E3A5F;color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s}.mb-nav-cta:hover{background:#2a4a73}
+
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f8fa}
+.section-eyebrow{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.section-h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px}
+.section-sub{font-size:17px;color:#777;line-height:1.6;max-width:560px}
+.section-center{text-align:center;max-width:680px;margin:0 auto 56px}.section-center .section-sub{margin:0 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
+.btn-navy{background:#1E3A5F;color:white}.btn-navy:hover{background:#2a4a73}
+.btn-white{background:white;color:#1E3A5F}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:#1E3A5F;border:1px solid #1E3A5F}.btn-ghost:hover{background:#1E3A5F;color:white}
+.btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
+.mb-page-hero{background:linear-gradient(180deg,#1E3A5F 0%,#162d4a 100%);color:white;padding:96px 0 88px;text-align:center}
+.mb-page-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px}
+.mb-page-hero h1{font-size:54px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:20px}
+.mb-page-hero p{font-size:17px;color:rgba(255,255,255,0.78);line-height:1.65;max-width:640px;margin:0 auto 32px}
+.mb-breadcrumb{padding:18px 0;background:#fafbfc;border-bottom:0.5px solid #f0f0f0}
+.mb-breadcrumb-inner{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
+.mb-breadcrumb a{color:#888;text-decoration:none}.mb-breadcrumb a:hover{color:#1E3A5F}
+
+/* Routing tabs */
+.route-tabs{display:flex;border:0.5px solid #e0e0e0;border-radius:10px;overflow:hidden;margin-bottom:48px}
+.route-tab{flex:1;background:white;color:#666;border:none;border-right:0.5px solid #e0e0e0;padding:20px 16px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:-0.01em;transition:background 0.12s,color 0.12s}
+.route-tab:last-child{border-right:none}
+.route-tab:hover{background:#f7f8fa;color:#1E3A5F}
+.route-tab.active{background:#1E3A5F;color:white}
+.route-panel{display:none;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.route-panel.active{display:grid}
+.route-panel h2{font-size:30px;font-weight:700;color:#1a1a1a;letter-spacing:-0.02em;line-height:1.2;margin-bottom:14px}
+.route-panel p{font-size:15px;color:#777;line-height:1.65;margin-bottom:24px}
+.route-panel-ctas{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+
+/* Forms */
+.form{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:32px}
+.form-row{margin-bottom:16px}
+.form-row label{display:block;font-size:11px;font-weight:700;color:#444;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px}
+.form-row input,.form-row textarea,.form-row select{width:100%;background:white;border:0.5px solid #e0e0e0;border-radius:8px;padding:11px 14px;font-size:14px;font-family:inherit;color:#1a1a1a;transition:border-color 0.12s}
+.form-row input:focus,.form-row textarea:focus,.form-row select:focus{outline:none;border-color:#1E3A5F}
+.form-row textarea{min-height:110px;resize:vertical}
+.radio-group{display:flex;flex-direction:column;gap:8px}
+.radio-opt{display:flex;align-items:center;gap:10px;padding:10px 12px;border:0.5px solid #e0e0e0;border-radius:8px;cursor:pointer;font-size:13px;color:#444;transition:border-color 0.12s,background 0.12s}
+.radio-opt:hover{border-color:#1E3A5F;background:#fafbfc}
+.radio-opt input{width:auto;margin:0}
+
+/* Info card */
+.info-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:28px 32px}
+.info-card-row{padding:16px 0;border-bottom:0.5px solid #f0f0f0;display:flex;flex-direction:column;gap:4px}
+.info-card-row:last-child{border-bottom:none}
+.info-card-row:first-child{padding-top:0}
+.info-card-label{font-size:11px;font-weight:700;color:#888;letter-spacing:0.08em;text-transform:uppercase}
+.info-card-value{font-size:16px;font-weight:600;color:#1a1a1a}
+.info-card-value a{color:#1E3A5F;text-decoration:none}
+.info-card-value a:hover{text-decoration:underline}
+
+/* Coverage list */
+.coverage-list{list-style:none;margin-top:18px}
+.coverage-list li{padding:12px 0;border-bottom:0.5px solid #f0f0f0;font-size:14px}
+.coverage-list li:last-child{border-bottom:none}
+.coverage-source{font-size:11px;color:#888;letter-spacing:0.06em;text-transform:uppercase;font-weight:700;margin-bottom:3px}
+.coverage-list a{color:#1a1a1a;text-decoration:none;font-weight:500}
+.coverage-list a:hover{color:#1E3A5F}
+
+/* Office cards */
+.offices-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+
+/* WHO WE ARE section */
+.who-we-are{padding:88px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.who-we-are-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:80px;align-items:center}
+.who-we-are-h{font-size:56px;font-weight:700;color:#1E3A5F;line-height:1.02;letter-spacing:-0.03em;margin:14px 0 32px}
+.who-we-are-p{font-size:18px;color:#555;line-height:1.6;margin-bottom:24px}
+.who-we-are-p:last-child{margin-bottom:0}
+.who-we-are-imagery{position:relative;aspect-ratio:1;width:100%;max-width:480px;margin-left:auto;min-height:480px}
+.who-img{position:absolute;border-radius:18px;box-shadow:0 16px 40px rgba(0,0,0,0.12),0 4px 12px rgba(0,0,0,0.06);overflow:hidden}
+.who-img-1{top:0;left:0;width:62%;aspect-ratio:4/5;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);transform:rotate(-3deg);z-index:2}
+.who-img-2{top:18%;right:0;width:55%;aspect-ratio:4/3;background:linear-gradient(135deg,#2a6e5a 0%,#1E3A5F 100%);transform:rotate(4deg);z-index:1}
+.who-img-3{bottom:0;left:18%;width:60%;aspect-ratio:5/4;background:linear-gradient(135deg,#8b6f47 0%,#46435D 100%);transform:rotate(-2deg);z-index:3}
+
+/* Support Ticket Modal */
+.support-modal{position:fixed;inset:0;background:rgba(20,20,30,0.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:1000;padding:24px;animation:smFadeIn 0.2s ease}
+.support-modal.show{display:flex}
+@keyframes smFadeIn{from{opacity:0}to{opacity:1}}
+.support-modal-card{background:#f4f5f7;border-radius:20px;max-width:560px;width:100%;padding:48px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.3);animation:smSlideUp 0.25s ease}
+@keyframes smSlideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.support-modal-close{position:absolute;top:18px;right:18px;background:transparent;border:none;font-size:24px;color:#999;cursor:pointer;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0;line-height:1}
+.support-modal-close:hover{background:rgba(0,0,0,0.06);color:#1a1a1a}
+.support-modal-icon{width:64px;height:64px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;color:#1E3A5F;font-size:26px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.support-modal-title{font-size:26px;font-weight:700;color:#1E3A5F;letter-spacing:-0.02em;line-height:1.1;margin-bottom:14px}
+.support-modal-sub{font-size:18px;color:#333;font-weight:500;margin-bottom:28px}
+.support-modal form{display:flex;flex-direction:column;gap:14px}
+.support-modal-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.support-modal input,.support-modal select,.support-modal textarea{width:100%;padding:18px 20px;border:0.5px solid #e0e3e8;border-radius:8px;font-family:inherit;font-size:15px;color:#1a1a1a;background:white;outline:none;transition:border-color 0.12s}
+.support-modal input:focus,.support-modal select:focus,.support-modal textarea:focus{border-color:#1E3A5F}
+.support-modal textarea{min-height:120px;resize:vertical;line-height:1.5}
+.support-modal-captcha{display:flex;align-items:center;justify-content:space-between;background:#4285F4;color:white;padding:10px 16px;border-radius:8px;font-size:11px;font-weight:500;line-height:1.4;margin-top:6px;gap:12px}
+.support-modal-captcha-text strong{font-size:13px;font-weight:700;display:block;margin-bottom:2px}
+.support-modal-captcha-text a{color:white;text-decoration:underline}
+.support-modal-captcha-icon{flex-shrink:0;width:52px;height:42px;background:white;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#4285F4;font-size:24px}
+.support-modal-submit{margin-top:8px;background:#1E3A5F;color:white;border:none;padding:18px;border-radius:8px;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;transition:background 0.12s}
+.support-modal-submit:hover{background:#2a4a73}
+.office-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;overflow:hidden}
+.office-map{aspect-ratio:4/3;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);position:relative;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600}
+.office-body{padding:28px 32px}
+.office-tag{display:inline-block;background:#eaf0f7;color:#1E3A5F;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+.office-name{font-size:22px;font-weight:700;color:#1a1a1a;letter-spacing:-0.02em;margin-bottom:6px}
+.office-addr{font-size:14px;color:#777;line-height:1.55;margin-bottom:16px}
+.office-link{font-size:14px;font-weight:600;color:#1E3A5F;text-decoration:none}
+.office-link:hover{text-decoration:underline}
+
+/* Direct contacts strip */
+.direct-strip{background:#1E3A5F;color:white;padding:48px 0}
+.direct-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.direct-col-label{font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px}
+.direct-col-row{font-size:15px;color:white;margin-bottom:4px}
+.direct-col-row a{color:white;text-decoration:none}
+.direct-col-row a:hover{text-decoration:underline}
+
+footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 32px}
+.mb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.mb-footer-brand{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px;margin-top:14px}
+.mb-footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
+.mb-footer-col-link{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;transition:color 0.12s}.mb-footer-col-link:hover{color:white}
+.mb-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:0.5px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35)}
+
+/* Annotations */
+.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12);max-width:380px;pointer-events:auto}
+.anno::before{content:'\1F4CC DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}.anno-page::before{content:'\1F5FA\FE0F PAGE STRATEGY';color:#3949AB}
+.anno strong{font-weight:700}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#1E3A5F;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#2a4a73}
+body.anno-hidden .anno{display:none}
+</style>
+</head>
+<body>
+
+<nav class="mb-nav">
+  <div class="mb-nav-left"><span class="mb-nav-mark"><svg width="32" height="14" viewBox="0 0 48 20" fill="none"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg></span><a href="mb-home.html" style="text-decoration:none"><span class="mb-nav-brand">Ministry Brands</span></a></div>
+  <div class="mb-nav-links">
+    <a href="home.html" class="mb-nav-link">Churches</a><a href="#" class="mb-nav-link">Parishes</a><a href="#" class="mb-nav-link">Nonprofits</a><a href="#" class="mb-nav-link">Protection</a>
+    <button class="mb-nav-link" id="navCompany" onclick="toggleDropdown(event,'navCompany')">Company <span class="mb-nav-chevron">&#x25BE;</span><div class="mb-nav-dropdown"><a href="mb-company.html">About</a><a href="mb-meet-team.html">Meet the Team</a><a href="mb-careers.html">Careers</a><a href="mb-press.html">Press</a><a href="mb-partners.html">Partners</a></div></button>
+    <a href="mb-contact.html" class="mb-nav-link active">Contact</a>
+  </div>
+  <div class="mb-nav-right"><a href="login.html" class="mb-nav-login">Login</a><a href="mb-contact.html" class="mb-nav-cta">Contact Us</a></div>
+</nav>
+
+<div class="mb-breadcrumb"><div class="w mb-breadcrumb-inner"><a href="mb-home.html">Home</a> <span>&rsaquo;</span> <span>Contact</span></div></div>
+
+<section class="mb-page-hero">
+  <div class="w">
+    <div class="mb-page-hero-eyebrow">Get in touch</div>
+    <h1>We&rsquo;re here to help</h1>
+    <p>Whether you&rsquo;re exploring our platforms, need support, or want to talk to our press team&mdash;pick the right path below.</p>
+  </div>
+</section>
+
+<div class="anno anno-page"><strong>Routing-first contact:</strong> The live site pushes every visitor through a single &ldquo;contact us&rdquo; form, which means sales reps triage support tickets and PR queries. This pattern segments the four primary intents up front so each one lands in the right inbox with the right fields&mdash;and reduces friction for repeat customers who just need a phone number.</div>
+
+<!-- ROUTING TABS -->
+<section class="section">
+  <div class="w">
+    <div class="route-tabs" role="tablist">
+      <button class="route-tab active" data-target="general" onclick="showPanel('general',this)">General</button>
+      <button class="route-tab" data-target="sales" onclick="showPanel('sales',this)">Sales</button>
+      <button class="route-tab" data-target="press" onclick="showPanel('press',this)">Press</button>
+      <button class="route-tab" data-target="support" onclick="showPanel('support',this)">Support</button>
+    </div>
+
+    <!-- SALES -->
+    <div class="route-panel" id="panel-sales">
+      <div>
+        <div class="section-eyebrow">Sales</div>
+        <h2>Talk to Sales</h2>
+        <p>See a live walkthrough of the platform that fits your mission. Our team will match you with the right specialist&mdash;whether that&rsquo;s Amplify for churches, ParishSOFT for parishes, DonorDirect for nonprofits, or Protect My Ministry for background checks.</p>
+        <div class="route-panel-ctas">
+          <a href="request-demo.html" class="btn btn-navy">Book a Demo &rarr;</a>
+        </div>
+      </div>
+      <form class="form" onsubmit="event.preventDefault()">
+        <div class="form-row"><label for="s-name">Name</label><input id="s-name" type="text" placeholder="Your full name"></div>
+        <div class="form-row"><label for="s-company">Organization</label><input id="s-company" type="text" placeholder="Church, parish, or nonprofit"></div>
+        <div class="form-row"><label for="s-email">Email</label><input id="s-email" type="email" placeholder="you@organization.org"></div>
+        <div class="form-row"><label for="s-phone">Phone</label><input id="s-phone" type="tel" placeholder="(555) 555-5555"></div>
+        <div class="form-row"><label>Which brand are you interested in?</label>
+          <div class="radio-group">
+            <label class="radio-opt"><input type="radio" name="brand" value="amplify"> Amplify</label>
+            <label class="radio-opt"><input type="radio" name="brand" value="parishsoft"> ParishSOFT</label>
+            <label class="radio-opt"><input type="radio" name="brand" value="donordirect"> DonorDirect</label>
+            <label class="radio-opt"><input type="radio" name="brand" value="protect"> Protect My Ministry</label>
+            <label class="radio-opt"><input type="radio" name="brand" value="unsure"> Not sure yet</label>
+          </div>
+        </div>
+        <div class="form-row"><label for="s-msg">Message</label><textarea id="s-msg" placeholder="Tell us about your organization and what you&rsquo;re looking to solve."></textarea></div>
+        <button type="submit" class="btn btn-navy" style="width:100%">Send Inquiry &rarr;</button>
+      </form>
+    </div>
+
+    <!-- SUPPORT -->
+    <div class="route-panel" id="panel-support">
+      <div>
+        <div class="section-eyebrow">Support</div>
+        <h2>Existing customers</h2>
+        <p>Already using one of our platforms? Our customer support team handles tickets across all four brands. For the fastest answer, submit a ticket through our help center&mdash;our specialists route it to the right product team.</p>
+        <div class="route-panel-ctas">
+          <button type="button" class="btn btn-navy" onclick="openSupportModal()" style="font-family:inherit;border:none;cursor:pointer">Submit a Support Ticket &rarr;</button>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-row"><span class="info-card-label">Support phone</span><span class="info-card-value"><a href="tel:8653296192">865-329-6192</a></span></div>
+        <div class="info-card-row"><span class="info-card-label">Support email</span><span class="info-card-value"><a href="mailto:support@ministrybrands.com">support@ministrybrands.com</a></span></div>
+        <div class="info-card-row"><span class="info-card-label">Hours</span><span class="info-card-value">Mon&ndash;Fri, 8am&ndash;6pm ET</span></div>
+        <div class="info-card-row"><span class="info-card-label">Status</span><span class="info-card-value" style="font-size:14px;color:#2E7D32">&bull; All systems operational</span></div>
+      </div>
+    </div>
+
+    <!-- PRESS -->
+    <div class="route-panel" id="panel-press">
+      <div>
+        <div class="section-eyebrow">Press</div>
+        <h2>Media inquiries</h2>
+        <p>Working on a story about ministry technology, faith-based software, or our acquisitions? Our communications team responds to journalist and analyst queries within one business day.</p>
+        <p style="font-size:13px;color:#999">For investor relations, please reach our parent company directly.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-card-row"><span class="info-card-label">Media email</span><span class="info-card-value"><a href="mailto:media@ministrybrands.com">media@ministrybrands.com</a></span></div>
+        <div class="info-card-row" style="border-bottom:none">
+          <span class="info-card-label">Recent coverage</span>
+          <ul class="coverage-list">
+            <li><div class="coverage-source">TechCrunch &middot; Mar 2026</div><a href="#">Ministry Brands acquires Amplify to expand church-tech footprint</a></li>
+            <li><div class="coverage-source">Inc. Magazine &middot; Jan 2026</div><a href="#">How a unified platform is changing the back office of faith</a></li>
+            <li><div class="coverage-source">Built In &middot; Nov 2025</div><a href="#">Inside the Galway engineering team building for 95,000 customers</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- GENERAL -->
+    <div class="route-panel active" id="panel-general">
+      <div>
+        <div class="section-eyebrow">General</div>
+        <h2>Looking for more information?</h2>
+        <p>Partnership ideas, vendor outreach, careers questions, or something else? Use the form and we&rsquo;ll point your message to the right team.</p>
+        <p style="font-size:13px;color:#999">Looking for careers? Visit our <a href="mb-careers.html" style="color:#1E3A5F;font-weight:600">careers page</a>.</p>
+      </div>
+      <form class="form" onsubmit="event.preventDefault()">
+        <div class="form-row"><label for="g-name">Name</label><input id="g-name" type="text" placeholder="Your full name"></div>
+        <div class="form-row"><label for="g-email">Email</label><input id="g-email" type="email" placeholder="you@organization.org"></div>
+        <div class="form-row"><label for="g-subject">Subject</label><input id="g-subject" type="text" placeholder="What&rsquo;s this about?"></div>
+        <div class="form-row"><label for="g-msg">Message</label><textarea id="g-msg" placeholder="Tell us what you need."></textarea></div>
+        <button type="submit" class="btn btn-navy" style="width:100%">Send Message &rarr;</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="anno"><strong>Default tab = General:</strong> Tab order is General &rarr; Sales &rarr; Press &rarr; Support. General leads as the catch-all entry point so unsure visitors aren&rsquo;t forced to self-categorize before getting help. The other three sit in order of typical conversion intent.</div>
+
+<div class="anno"><strong>Support ticket as a modal, not a separate page:</strong> Clicking &ldquo;Submit a Support Ticket&rdquo; opens an in-page modal containing the live MB ticket-submission fields (name, email, brand select, issue). Keeps the support flow self-contained on the contact page; no second-tab context loss; closer to how a real support help-center widget usually works.</div>
+
+<!-- WHO WE ARE -->
+<section class="who-we-are">
+  <div class="w">
+    <div class="who-we-are-grid">
+      <div>
+        <div class="section-eyebrow">Who we are</div>
+        <h2 class="who-we-are-h">Your mission is our #1 mission</h2>
+        <p class="who-we-are-p">Technology for missional organizations was falling short. So we raised the bar. Ministry Brands has helped over 90,000 organizations grow and amplify their impact on the world.</p>
+        <p class="who-we-are-p">Our solutions give organizational leaders seamless, integrated tools to cover giving, people management, communications, streaming, safety, and more. And together, our 650+ associates help teams transform how they operate, freeing them up to spend their time where it matters most.</p>
+      </div>
+      <div class="who-we-are-imagery">
+        <div class="who-img who-img-1"></div>
+        <div class="who-img who-img-2"></div>
+        <div class="who-img who-img-3"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="anno anno-move"><strong>Mission narrative on a contact page:</strong> Most contact pages are utility &mdash; form, phone, address, done. Inserting the &ldquo;Your mission is our #1 mission&rdquo; block above the offices reframes the page from transactional to relational. It also gives organic shape to a section that would otherwise be just a form + a map.</div>
+
+<!-- OFFICES -->
+<section class="section alt">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Where to find us</div>
+      <div class="section-h2">Our offices</div>
+    </div>
+    <div class="offices-grid">
+      <div class="office-card">
+        <div class="office-map">Map &mdash; Knoxville, TN</div>
+        <div class="office-body">
+          <span class="office-tag">Headquarters</span>
+          <div class="office-name">Knoxville, TN</div>
+          <div class="office-addr">10 W Broadway<br>Knoxville, TN 37902<br>United States</div>
+          <a href="#" class="office-link">Get directions &rarr;</a>
+        </div>
+      </div>
+      <div class="office-card">
+        <div class="office-map">Map &mdash; Galway, Ireland</div>
+        <div class="office-body">
+          <span class="office-tag">R&amp;D Centre</span>
+          <div class="office-name">Galway, Ireland</div>
+          <div class="office-addr">Lough Atalia Rd<br>Galway H91 T2HW<br>Ireland</div>
+          <a href="mb-galway.html" class="office-link">Visit our Galway page &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECT CONTACTS STRIP -->
+<section class="direct-strip">
+  <div class="w">
+    <div class="direct-grid">
+      <div>
+        <div class="direct-col-label">Subscriptions</div>
+        <div class="direct-col-row"><a href="tel:8653296192">865-329-6192</a></div>
+        <div class="direct-col-row"><a href="mailto:info@ministrybrands.com">info@ministrybrands.com</a></div>
+      </div>
+      <div>
+        <div class="direct-col-label">Support</div>
+        <div class="direct-col-row"><a href="mailto:support@ministrybrands.com">support@ministrybrands.com</a></div>
+      </div>
+      <div>
+        <div class="direct-col-label">Media</div>
+        <div class="direct-col-row"><a href="mailto:media@ministrybrands.com">media@ministrybrands.com</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="mb-footer">
+  <div class="w">
+    <div class="mb-footer-grid">
+      <div><div style="display:flex;align-items:center;gap:10px"><svg width="32" height="14" viewBox="0 0 48 20" fill="none" style="color:rgba(255,255,255,0.75)"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg><span style="font-size:15px;font-weight:700;color:white">Ministry Brands</span></div><p class="mb-footer-brand">Technology built for the missions that hold communities together.</p></div>
+      <div><div class="mb-footer-col-title">Brands</div><a href="home.html" class="mb-footer-col-link">Amplify</a><a href="#" class="mb-footer-col-link">ParishSOFT</a><a href="#" class="mb-footer-col-link">DonorDirect</a><a href="#" class="mb-footer-col-link">Protect My Ministry</a></div>
+      <div><div class="mb-footer-col-title">Company</div><a href="mb-company.html" class="mb-footer-col-link">About</a><a href="mb-meet-team.html" class="mb-footer-col-link">Meet the Team</a><a href="mb-careers.html" class="mb-footer-col-link">Careers</a><a href="mb-press.html" class="mb-footer-col-link">Press</a></div>
+      <div><div class="mb-footer-col-title">Resources</div><a href="healthy-church-hub.html" class="mb-footer-col-link">Healthy Church Hub</a><a href="mb-partners.html" class="mb-footer-col-link">Partners</a><a href="mb-press.html" class="mb-footer-col-link">News</a></div>
+      <div><div class="mb-footer-col-title">Connect</div><a href="mb-contact.html" class="mb-footer-col-link">Contact</a><a href="login.html" class="mb-footer-col-link">Login</a></div>
+    </div>
+    <div class="mb-footer-bottom"><span>&copy; 2026 Ministry Brands. All rights reserved.</span><span style="display:flex;gap:24px"><a href="#" class="mb-footer-col-link" style="margin:0">Privacy</a><a href="#" class="mb-footer-col-link" style="margin:0">Terms</a><a href="#" class="mb-footer-col-link" style="margin:0">Cookies</a></span></div>
+  </div>
+</footer>
+
+<div class="anno-legend-wrap">
+  <div class="anno-legend"><div class="anno-legend-title">Annotation Legend</div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div></div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'"><span style="font-size:16px">&#x1F4DD;</span><span class="anno-label">Show Annotations</span></button>
+</div>
+
+<script>
+document.body.classList.add("anno-hidden");
+function toggleDropdown(e,id){var btn=document.getElementById(id);var dd=btn.querySelector('.mb-nav-dropdown');if(dd&&dd.contains(e.target))return;e.stopPropagation();e.preventDefault();var wasPinned=btn.dataset.pinned==='1';document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==btn){el.classList.remove('open');delete el.dataset.pinned}});if(wasPinned){btn.classList.remove('open');delete btn.dataset.pinned}else{btn.classList.add('open');btn.dataset.pinned='1'}}
+document.addEventListener('click',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open');delete el.dataset.pinned})});
+document.querySelectorAll('.mb-nav-link').forEach(function(link){if(link.querySelector('.mb-nav-dropdown')){link.addEventListener('mouseenter',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==link)el.classList.remove('open')});link.classList.add('open')});link.addEventListener('mouseleave',function(){if(!link.dataset.pinned)link.classList.remove('open')})}});
+function showPanel(target,btn){
+  document.querySelectorAll('.route-tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.route-panel').forEach(function(p){p.classList.remove('active')});
+  btn.classList.add('active');
+  var panel=document.getElementById('panel-'+target);
+  if(panel)panel.classList.add('active');
+}
+function openSupportModal(){document.getElementById('support-modal').classList.add('show')}
+function closeSupportModal(){document.getElementById('support-modal').classList.remove('show')}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSupportModal()});
+</script>
+
+<!-- SUPPORT TICKET MODAL -->
+<div class="support-modal" id="support-modal" onclick="if(event.target===this)closeSupportModal()">
+  <form class="support-modal-card" onsubmit="event.preventDefault();alert('Wireframe — ticket would submit here.');closeSupportModal()">
+    <button type="button" class="support-modal-close" onclick="closeSupportModal()" aria-label="Close">&times;</button>
+    <div class="support-modal-icon">&#9993;</div>
+    <h3 class="support-modal-title">Current Customer Technical Support</h3>
+    <p class="support-modal-sub">We&rsquo;re here to help!</p>
+    <div class="support-modal-row">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email" required>
+    </div>
+    <select required>
+      <option value="">Select Brand</option>
+      <option>Amplify</option>
+      <option>BlueFire</option>
+      <option>BridgeElement</option>
+      <option>Church Office Online</option>
+      <option>Church Motion Graphics</option>
+      <option>ChurchStreaming.TV</option>
+      <option>Clover</option>
+      <option>easyTithe</option>
+      <option>EFTPlus</option>
+      <option>eGive USA</option>
+      <option>eGiving.com</option>
+      <option>Ekklesia360</option>
+      <option>Elexio</option>
+      <option>E-zekiel</option>
+      <option>Faith Direct</option>
+      <option>FaithHighway</option>
+      <option>FellowshipOne</option>
+      <option>Giving Kiosk</option>
+      <option>High Ground Solutions</option>
+      <option>In10sity</option>
+      <option>Kindrid</option>
+      <option>Lifeway</option>
+      <option>MinistryLINQ</option>
+      <option>MoGiv</option>
+      <option>NCS eGiving</option>
+      <option>ParishSoft</option>
+      <option>Rocket</option>
+      <option>ShareFaith</option>
+      <option>Shelby Systems</option>
+      <option>SimpleChurch CRM</option>
+      <option>SimpleGive</option>
+      <option>Site Organic</option>
+      <option>WeShare</option>
+      <option>Worship Planning</option>
+    </select>
+    <textarea placeholder="Include your organization name and a short description of the issue." required></textarea>
+    <div class="support-modal-captcha">
+      <div class="support-modal-captcha-text"><strong>protected by reCAPTCHA</strong>reCAPTCHA is changing its terms of service. <a href="#">Take action.</a></div>
+      <div class="support-modal-captcha-icon">&#x21BB;</div>
+    </div>
+    <button type="submit" class="support-modal-submit">Submit</button>
+  </form>
+</div>
+
+</body>
+</html>

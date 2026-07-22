@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>About — Ministry Brands</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:white;min-height:100vh;color:#1a1a1a}
+
+/* MB Nav */
+.mb-nav{position:sticky;top:0;z-index:200;background:white;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px}
+.mb-nav-left{display:flex;align-items:center;gap:10px}
+.mb-nav-mark svg{display:block;color:#1E3A5F}
+.mb-nav-brand{font-size:16px;font-weight:700;color:#1E3A5F;letter-spacing:-0.01em}
+.mb-nav-links{display:flex;align-items:center;gap:6px;margin:0 auto}
+.mb-nav-link{position:relative;padding:9px 14px;font-size:14px;font-weight:500;color:#444;cursor:pointer;border-radius:6px;transition:color 0.12s,background 0.12s;text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;font-family:inherit}
+.mb-nav-link:hover{color:#1E3A5F;background:#f4f5f8}
+.mb-nav-link.active{color:#1E3A5F;font-weight:600}
+.mb-nav-chevron{font-size:8px;color:#bbb;transition:transform 0.15s}
+.mb-nav-link.open .mb-nav-chevron{transform:rotate(180deg)}
+.mb-nav-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:100}
+.mb-nav-link.open .mb-nav-dropdown::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px}
+.mb-nav-link.open .mb-nav-dropdown{display:block}
+.mb-nav-dropdown a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}
+.mb-nav-dropdown a:hover{background:#f4f5f8;color:#1E3A5F}
+.mb-nav-right{display:flex;align-items:center;gap:14px}
+.mb-nav-login{font-size:13px;color:#666;text-decoration:none;font-weight:500;padding:8px 12px}
+.mb-nav-login:hover{color:#1E3A5F}
+.mb-nav-cta{background:#1E3A5F;color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s}
+.mb-nav-cta:hover{background:#2a4a73}
+
+/* Layout */
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f8fa}
+.section-eyebrow{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.section-h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px}
+.section-sub{font-size:17px;color:#777;line-height:1.6;max-width:560px}
+.section-center{text-align:center;max-width:680px;margin:0 auto 56px}
+.section-center .section-sub{margin:0 auto}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
+.btn-navy{background:#1E3A5F;color:white}.btn-navy:hover{background:#2a4a73}
+.btn-ghost{background:transparent;color:#1E3A5F;border:1px solid #1E3A5F}.btn-ghost:hover{background:#1E3A5F;color:white}
+.btn-white{background:white;color:#1E3A5F}.btn-white:hover{background:#f0f0f0}
+.btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
+
+/* Hero */
+.mb-page-hero{background:linear-gradient(180deg,#1E3A5F 0%,#162d4a 100%);color:white;padding:96px 0 88px;text-align:center;position:relative;overflow:hidden}
+.mb-page-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px}
+.mb-page-hero h1{font-size:54px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:20px}
+.mb-page-hero p{font-size:17px;color:rgba(255,255,255,0.78);line-height:1.65;max-width:640px;margin:0 auto}
+
+/* Team grid */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:36px}
+.team-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:28px 24px;text-align:center}
+.team-avatar{width:100px;height:100px;border-radius:50%;background:#e0dfe8;margin:0 auto 18px;background-image:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%)}
+.team-name{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.team-title{font-size:13px;color:#888;font-weight:500}
+
+/* OUR TEAM — character-led */
+.who-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:80px;align-items:center}
+.who-h{font-size:56px;font-weight:700;color:#1E3A5F;line-height:1.02;letter-spacing:-0.03em;margin:14px 0 32px}
+.who-p{font-size:18px;color:#555;line-height:1.6;margin-bottom:24px}
+.who-p:last-of-type{margin-bottom:32px}
+.who-imagery{position:relative;aspect-ratio:1;width:100%;max-width:480px;margin-left:auto;min-height:480px}
+.who-img{position:absolute;border-radius:18px;box-shadow:0 16px 40px rgba(0,0,0,0.12),0 4px 12px rgba(0,0,0,0.06);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.who-img-1{top:0;left:0;width:62%;aspect-ratio:4/5;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);transform:rotate(-3deg);z-index:2}
+.who-img-2{top:18%;right:0;width:55%;aspect-ratio:4/3;background:linear-gradient(135deg,#2a6e5a 0%,#1E3A5F 100%);transform:rotate(4deg);z-index:1}
+.who-img-3{bottom:0;left:18%;width:60%;aspect-ratio:5/4;background:linear-gradient(135deg,#8b6f47 0%,#46435D 100%);transform:rotate(-2deg);z-index:3}
+.who-img-stat{color:white;text-align:center;padding:18px;transform:rotate(3deg)}
+.who-img-stat-num{font-size:38px;font-weight:700;letter-spacing:-0.025em;line-height:1;margin-bottom:6px}
+.who-img-stat-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;opacity:0.85}
+
+/* PURPOSE — copy-led + bite-sized principles */
+.purpose-intro{max-width:880px;margin:0 auto 56px}
+.purpose-h{font-size:48px;font-weight:700;color:#1E3A5F;letter-spacing:-0.03em;line-height:1.05;margin:14px 0 0}
+.purpose-prose{max-width:760px;margin:0 auto 64px;padding-top:32px;border-top:0.5px solid #e0e3e8}
+.purpose-prose h3{font-size:22px;font-weight:700;color:#1a1a1a;letter-spacing:-0.015em;margin-bottom:18px}
+.purpose-prose p{font-size:17px;color:#555;line-height:1.7;margin-bottom:22px}
+.purpose-prose p:last-child{margin-bottom:0}
+.purpose-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px}
+.purpose-pillar{background:white;border:0.5px solid #e6e8ec;border-radius:16px;padding:32px 28px;transition:all 0.18s}
+.purpose-pillar:hover{border-color:#1E3A5F;transform:translateY(-3px);box-shadow:0 8px 28px rgba(30,58,95,0.06)}
+.purpose-pillar-eyebrow{display:inline-block;background:#eaf0f7;color:#1E3A5F;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:18px}
+.purpose-pillar h4{font-size:20px;font-weight:700;color:#1a1a1a;letter-spacing:-0.02em;line-height:1.22;margin-bottom:14px}
+.purpose-pillar p{font-size:14px;color:#666;line-height:1.65}
+.purpose-pillar-quote{font-size:13px;color:#1E3A5F;font-style:italic;margin-top:14px;padding-top:14px;border-top:0.5px solid #f0f0f0;font-weight:500}
+
+/* Legacy — keep for footer link, etc. */
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+
+/* PARTNERS — strip + CTA */
+.partners-strip-section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.partners-strip-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:center}
+.partners-strip-grid h2{font-size:34px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.02em;margin-bottom:14px}
+.partners-strip-grid p{font-size:16px;color:#666;line-height:1.65;margin-bottom:24px}
+.partners-logos{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.partners-logo{aspect-ratio:5/3;background:#f7f8fa;border:0.5px solid #e6e8ec;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#999;font-weight:600;font-size:12px;letter-spacing:0.04em;text-transform:uppercase;transition:all 0.18s}
+.partners-logo:hover{background:white;border-color:#1E3A5F;color:#1E3A5F}
+
+/* NEWS CAROUSEL */
+.news-carousel-section{padding:80px 0;background:#f7f8fa;border-bottom:0.5px solid #e6e8ec}
+.news-carousel-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px;gap:24px}
+.news-carousel-header h2{font-size:34px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.02em;margin-bottom:6px}
+.news-carousel-header p{font-size:15px;color:#777}
+.news-carousel-track{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.news-carousel-card{background:white;border:0.5px solid #e6e8ec;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:all 0.18s;cursor:pointer}
+.news-carousel-card:hover{border-color:#1E3A5F;transform:translateY(-3px);box-shadow:0 8px 24px rgba(30,58,95,0.08)}
+.news-carousel-card-img{aspect-ratio:16/9}
+.news-carousel-card-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+.news-carousel-card-chip{display:inline-flex;align-self:flex-start;background:#eaf0f7;color:#1E3A5F;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px}
+.news-carousel-card-title{font-size:16px;font-weight:700;color:#1a1a1a;letter-spacing:-0.01em;line-height:1.35;margin-bottom:12px;flex:1}
+.news-carousel-card-meta{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#999;padding-top:14px;border-top:0.5px solid #f0f0f0;margin-top:auto}
+.news-carousel-card-source{font-weight:700;letter-spacing:0.04em;color:#1E3A5F;text-transform:uppercase}
+
+/* PRODUCT — stacked horizontal rows (matches live MB.com pattern) */
+.product-rows{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.product-row{background:#fafbfc;border:0.5px solid #e6e8ec;border-radius:14px;padding:32px 40px;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:40px;text-decoration:none;color:inherit;transition:all 0.18s}
+.product-row:hover{background:white;border-color:#1E3A5F;box-shadow:0 4px 16px rgba(30,58,95,0.06);transform:translateY(-1px)}
+.product-row-content h3{font-size:30px;font-weight:600;color:#1a1a1a;letter-spacing:-0.025em;line-height:1.15;margin-bottom:6px}
+.product-row-content p{font-size:15px;color:#777;font-weight:500;line-height:1.5}
+.product-row-wordmark{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0;min-width:160px}
+.product-row-wordmark-name{font-size:20px;font-weight:700;letter-spacing:-0.01em;color:#1a1a1a;line-height:1}
+.product-row-wordmark-sub{font-size:10px;color:#999;font-weight:500;letter-spacing:0.02em}
+.product-row-wordmark-name.amplify{color:#46435D;letter-spacing:0.06em;text-transform:uppercase;font-weight:300;font-size:22px}
+.product-row-wordmark-name.donordirect{color:#1a1a1a;text-transform:lowercase;font-weight:600;letter-spacing:-0.005em}
+.product-row-wordmark-name.parishsoft{color:#1a1a1a;font-weight:500}
+.product-row-wordmark-name.protect{color:#1a1a1a;text-transform:uppercase;font-weight:500;letter-spacing:0.1em;font-size:18px}
+.product-row-cta{background:#1E3A5F;color:white;padding:11px 24px;border-radius:8px;font-size:13px;font-weight:600;border:none;font-family:inherit;flex-shrink:0;transition:background 0.12s}
+.product-row:hover .product-row-cta{background:#2a4a73}
+.value-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:30px 24px;transition:all 0.15s}
+.value-card:hover{border-color:#1E3A5F;transform:translateY(-2px)}
+.value-icon{width:42px;height:42px;border-radius:10px;background:#eaf0f7;color:#1E3A5F;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:18px}
+.value-title{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:8px}
+.value-desc{font-size:13px;color:#777;line-height:1.55}
+
+/* 4-brand cards */
+.mb-brands{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.mb-brand-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:28px 24px;text-decoration:none;color:inherit;transition:all 0.15s;cursor:pointer}
+.mb-brand-card:hover{border-color:#1E3A5F;transform:translateY(-3px);box-shadow:0 8px 24px rgba(30,58,95,0.08)}
+.mb-brand-logo{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;margin-bottom:16px}
+.mb-brand-logo.amplify{background:#46435D}.mb-brand-logo.parishsoft{background:#8b6f47}
+.mb-brand-logo.donordirect{background:#2a6e5a}.mb-brand-logo.protect{background:#a14040}
+.mb-brand-name{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.mb-brand-tag{font-size:11px;font-weight:600;color:#999;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:12px}
+.mb-brand-desc{font-size:13px;color:#666;line-height:1.55;margin-bottom:16px}
+.mb-brand-link{font-size:12px;font-weight:600;color:#1E3A5F;text-decoration:none}
+
+/* CTA callout */
+.mb-cta-strip{background:#1E3A5F;color:white;border-radius:16px;padding:48px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.mb-cta-strip h3{font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
+.mb-cta-strip p{color:rgba(255,255,255,0.7);font-size:15px;max-width:520px}
+
+/* Testimonials */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.test-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:28px}
+.test-quote{font-size:15px;color:#444;line-height:1.65;margin-bottom:20px;font-style:italic}
+.test-author{display:flex;align-items:center;gap:12px}
+.test-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);flex-shrink:0}
+.test-name{font-size:14px;font-weight:600;color:#1a1a1a}
+.test-role{font-size:12px;color:#999;margin-top:2px}
+
+/* Footer */
+footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 32px}
+.mb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.mb-footer-brand{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px;margin-top:14px}
+.mb-footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
+.mb-footer-col-link{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;transition:color 0.12s}
+.mb-footer-col-link:hover{color:white}
+.mb-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:0.5px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35)}
+
+/* Breadcrumb */
+.mb-breadcrumb{padding:18px 0;background:#fafbfc;border-bottom:0.5px solid #f0f0f0}
+.mb-breadcrumb-inner{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
+.mb-breadcrumb a{color:#888;text-decoration:none}
+.mb-breadcrumb a:hover{color:#1E3A5F}
+
+/* Annotations */
+.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);max-width:380px;pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}
+.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-persona{background:#F3E5F5;border-color:#CE93D8;color:#4A148C}
+.anno-persona::before{content:'👤 PERSONA FOCUS';color:#7B1FA2}
+.anno-gap{background:#FFF3E0;border-color:#FFB74D;color:#E65100}
+.anno-gap::before{content:'⚠️ GAP IDENTIFIED';color:#E65100}
+.anno strong{font-weight:700}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.06);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#1E3A5F;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#2a4a73}
+body.anno-hidden .anno{display:none}
+</style>
+</head>
+<body>
+
+<!-- MB NAV -->
+<nav class="mb-nav">
+  <div class="mb-nav-left">
+    <span class="mb-nav-mark"><svg width="32" height="14" viewBox="0 0 48 20" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg></span>
+    <a href="mb-home.html" style="text-decoration:none"><span class="mb-nav-brand">Ministry Brands</span></a>
+  </div>
+  <div class="mb-nav-links">
+    <a href="home.html" class="mb-nav-link">Churches</a>
+    <a href="#" class="mb-nav-link">Parishes</a>
+    <a href="#" class="mb-nav-link">Nonprofits</a>
+    <a href="#" class="mb-nav-link">Protection</a>
+    <button class="mb-nav-link active open" id="navCompany" onclick="toggleDropdown(event,'navCompany')">Company <span class="mb-nav-chevron">▾</span>
+      <div class="mb-nav-dropdown">
+        <a href="mb-company.html">About</a>
+        <a href="mb-meet-team.html">Meet the Team</a>
+        <a href="mb-careers.html">Careers</a>
+        <a href="mb-press.html">Press</a>
+        <a href="mb-partners.html">Partners</a>
+      </div>
+    </button>
+      </div>
+  <div class="mb-nav-right">
+    <a href="login.html" class="mb-nav-login">Login</a>
+    <a href="mb-contact.html" class="mb-nav-cta">Contact Us</a>
+  </div>
+</nav>
+
+<div class="mb-breadcrumb">
+  <div class="w mb-breadcrumb-inner">
+    <a href="mb-home.html">Home</a> <span>›</span> <span>About</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="mb-page-hero">
+  <div class="w">
+    <div class="mb-page-hero-eyebrow">About Ministry Brands</div>
+    <h1>About us</h1>
+    <p>We provide transformative technology and services that enable mission-focused organizations to grow, protect, and engage their communities.</p>
+  </div>
+</section>
+
+<div class="anno anno-page"><strong>Page strategy:</strong> Anchored to the live `/about` page narrative but restructured into more distinctive sections. Hero copy is verbatim. Flow: hero → Who we are (team character, not C-suite headshots) → Purpose (prose + bite-sized principles) → Product (4-brand stack) → Careers CTA → Testimonials. The page deliberately leads with the team&rsquo;s mission and character before introducing the brands themselves.</div>
+
+<!-- OUR TEAM — character-led, not C-suite cards -->
+<section class="section">
+  <div class="w">
+    <div class="who-grid">
+      <div>
+        <div class="section-eyebrow">Our team</div>
+        <h2 class="who-h">Who we are</h2>
+        <p class="who-p">Technology for missional organizations was falling short. So we raised the bar. Ministry Brands has helped over 90,000 organizations grow and amplify their impact on the world.</p>
+        <p class="who-p">We provide community and organizational leaders with integrated solutions covering people and donor management, digital giving, websites, communications, media, event planning, background screenings, and more. Together, our nearly 700 associates help clients transform how they operate and create real, positive change for the world we live in.</p>
+        <a href="mb-meet-team.html" class="btn btn-ghost">Meet the leadership team →</a>
+      </div>
+      <div class="who-imagery">
+        <div class="who-img who-img-1"></div>
+        <div class="who-img who-img-2">
+          <div class="who-img-stat">
+            <div class="who-img-stat-num">700+</div>
+            <div class="who-img-stat-label">Associates</div>
+          </div>
+        </div>
+        <div class="who-img who-img-3">
+          <div class="who-img-stat">
+            <div class="who-img-stat-num">90K+</div>
+            <div class="who-img-stat-label">Organizations served</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="anno anno-persona"><strong>Pivot from C-suite to character:</strong> The live `/about` opens with six executive headshots. We swap that out for a copy-led treatment that introduces the team&rsquo;s character and mission before any individual face. The named-leadership grid still exists &mdash; one click away on `mb-meet-team.html` &mdash; but the front door now sells the &ldquo;why&rdquo;, not the org chart.</div>
+  </div>
+</section>
+
+<!-- PURPOSE — copy-led with bite-sized principles -->
+<section class="section alt">
+  <div class="w">
+    <div class="purpose-intro" style="text-align:center">
+      <div class="section-eyebrow">Purpose</div>
+      <h2 class="purpose-h">We leverage technology for your mission</h2>
+    </div>
+
+    <div class="purpose-prose">
+      <h3>The world of technology is our element.</h3>
+      <p>Our years of experience have taught us clever ways to streamline processes, strengthen connections, and create secure environments for generosity. But we&rsquo;ll never forget that on both sides of our technology are humans &mdash; working together toward a common goal: your mission.</p>
+    </div>
+
+    <div class="purpose-pillars">
+      <div class="purpose-pillar">
+        <span class="purpose-pillar-eyebrow">Our element</span>
+        <h4>Tech that streamlines, connects, and protects</h4>
+        <p>Years of working alongside missional organizations have taught us how to clear the friction out of process, connection, and security &mdash; without losing the warmth of the work itself.</p>
+      </div>
+      <div class="purpose-pillar">
+        <span class="purpose-pillar-eyebrow">People, not platforms</span>
+        <h4>Humans on both sides of every screen</h4>
+        <p>It would be easy to focus on dashboards and integrations. We never forget that on both sides of our technology are real people &mdash; volunteers, pastors, donors, our own team &mdash; working toward something that matters.</p>
+      </div>
+      <div class="purpose-pillar">
+        <span class="purpose-pillar-eyebrow">Your mission, our purpose</span>
+        <h4>You&rsquo;re the expert in your mission</h4>
+        <p>We&rsquo;re the experts in helping you reach it. That distinction shapes every product decision, every support call, and every line of code &mdash; and it&rsquo;s the reason 90,000+ organizations trust us with theirs.</p>
+      </div>
+    </div>
+    <div class="anno"><strong>Two-tier purpose:</strong> Live `/about` uses a single dense prose block for the purpose statement. We keep the original copy as the lead paragraph but follow it with three bite-sized principles. Lets a skimmer get the gist without reading the prose, while preserving the original voice for those who do.</div>
+  </div>
+</section>
+
+<!-- PRODUCT (4-BRAND) -->
+<section class="section">
+  <div class="w">
+    <div class="section-center" style="max-width:920px">
+      <div class="section-eyebrow">Product</div>
+      <div class="section-h2" style="font-size:48px;line-height:1.08"><span style="color:#5d8ed5">4</span> industries, <span style="color:#5d8ed5">4</span> specialized solutions, <span style="color:#5d8ed5">40</span> years of experience</div>
+      <div class="section-sub">Each brand is purpose-built for a specific kind of mission &mdash; together, they cover the full spectrum of community-led organizations.</div>
+    </div>
+    <div class="product-rows">
+      <a href="home.html" class="product-row">
+        <div class="product-row-content">
+          <h3>Empower your church</h3>
+          <p>Organize your entire church in one platform</p>
+        </div>
+        <div class="product-row-wordmark">
+          <span class="product-row-wordmark-sub">Ministry Brands</span>
+          <span class="product-row-wordmark-name amplify">Amplify</span>
+        </div>
+        <span class="product-row-cta">Learn More</span>
+      </a>
+      <a href="#" class="product-row">
+        <div class="product-row-content">
+          <h3>Grow your nonprofit</h3>
+          <p>Build &amp; seamlessly manage meaningful donor relationships</p>
+        </div>
+        <div class="product-row-wordmark">
+          <span class="product-row-wordmark-name donordirect">donordirect</span>
+          <span class="product-row-wordmark-sub">by Ministry Brands</span>
+        </div>
+        <span class="product-row-cta">Learn More</span>
+      </a>
+      <a href="#" class="product-row">
+        <div class="product-row-content">
+          <h3>Empower your parish</h3>
+          <p>Streamline your ministry&rsquo;s operations and admin tasks</p>
+        </div>
+        <div class="product-row-wordmark">
+          <span class="product-row-wordmark-name parishsoft">ParishSOFT</span>
+          <span class="product-row-wordmark-sub">by Ministry Brands</span>
+        </div>
+        <span class="product-row-cta">Learn More</span>
+      </a>
+      <a href="#" class="product-row">
+        <div class="product-row-content">
+          <h3>Protect your community</h3>
+          <p>Safeguard your communities with peace of mind</p>
+        </div>
+        <div class="product-row-wordmark">
+          <span class="product-row-wordmark-name protect">Protect</span>
+          <span class="product-row-wordmark-sub">My Ministry</span>
+        </div>
+        <span class="product-row-cta">Learn More</span>
+      </a>
+    </div>
+    <div class="anno"><strong>Stacked rows, not 4-up cards:</strong> The mb-home page already gives every brand a full deep-dive section. Repeating that pattern here would feel redundant. Live MB.com&rsquo;s `/about` uses horizontal rows for this same reason &mdash; one tight headline + tagline + wordmark + Learn More per brand. Cadence-wise it also contrasts with the 3-up Purpose cards directly above.</div>
+  </div>
+</section>
+
+<!-- PARTNERS STRIP -->
+<section class="partners-strip-section">
+  <div class="w">
+    <div class="partners-strip-grid">
+      <div>
+        <div class="section-eyebrow">Partners</div>
+        <h2>An ecosystem that extends every brand</h2>
+        <p>100+ integration, services, and solution partners build alongside Ministry Brands &mdash; from payment processors and CRMs to safety vendors and digital agencies. Together, they make every customer outcome a little easier to reach.</p>
+        <a href="mb-partners.html" class="btn btn-ghost">Explore our Partners &rarr;</a>
+      </div>
+      <div class="partners-logos">
+        <div class="partners-logo">Pushpay</div>
+        <div class="partners-logo">PCO</div>
+        <div class="partners-logo">Tithe.ly</div>
+        <div class="partners-logo">Stripe</div>
+        <div class="partners-logo">Mailchimp</div>
+        <div class="partners-logo">Vanco</div>
+        <div class="partners-logo">RealmDev</div>
+        <div class="partners-logo">+ 90 more</div>
+      </div>
+    </div>
+    <div class="anno"><strong>Partners on the company page:</strong> Live MB.com puts the partner ecosystem behind a separate page. We surface a strip of recognizable partner names here as social-proof for the broader ecosystem the company has built &mdash; especially for enterprise buyers evaluating MB&rsquo;s reach. Full directory still lives at <code>mb-partners.html</code>.</div>
+  </div>
+</section>
+
+<!-- CAREERS CTA STRIP -->
+<section class="section alt">
+  <div class="w">
+    <div class="mb-cta-strip">
+      <div>
+        <h3>Join the team building this</h3>
+        <p>Open roles across engineering, product, customer success, sales, and our Galway, Ireland R&amp;D centre.</p>
+      </div>
+      <a href="mb-careers.html" class="btn btn-white">Explore Open Positions →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">What customers say</div>
+      <div class="section-h2">Trusted by 90,000+ organizations</div>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-quote">"Ministry Brands has been a true partner. The platform works, the support is responsive, and the team genuinely cares about our mission."</div>
+        <div class="test-author"><div class="test-avatar"></div><div><div class="test-name">Pastor David R.</div><div class="test-role">Executive Pastor · 800-member church</div></div></div>
+      </div>
+      <div class="test-card">
+        <div class="test-quote">"We moved three disconnected systems onto one platform. Our admin time dropped 40% in the first month."</div>
+        <div class="test-author"><div class="test-avatar"></div><div><div class="test-name">Sarah M.</div><div class="test-role">Communications Director · Multi-site church</div></div></div>
+      </div>
+      <div class="test-card">
+        <div class="test-quote">"Our giving is up 22%. Donor stewardship has never been easier for our small team to manage."</div>
+        <div class="test-author"><div class="test-avatar"></div><div><div class="test-name">James T.</div><div class="test-role">Finance Director · Growing congregation</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST NEWS -->
+<section class="news-carousel-section">
+  <div class="w">
+    <div class="news-carousel-header">
+      <div>
+        <div class="section-eyebrow">Newsroom</div>
+        <h2>Latest from Ministry Brands</h2>
+      </div>
+      <a href="mb-press.html" class="btn btn-ghost">View all news &rarr;</a>
+    </div>
+    <div class="news-carousel-track">
+      <a href="mb-news-article.html" class="news-carousel-card">
+        <div class="news-carousel-card-img" style="background:linear-gradient(135deg,#1E3A5F 0%,#46435D 100%)"></div>
+        <div class="news-carousel-card-body">
+          <span class="news-carousel-card-chip">Industry Insights</span>
+          <h3 class="news-carousel-card-title">Innovation in Church Software Means Measurable Ministry</h3>
+          <div class="news-carousel-card-meta"><span>April 8, 2026</span><span class="news-carousel-card-source">Read on MB</span></div>
+        </div>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="news-carousel-card">
+        <div class="news-carousel-card-img" style="background:linear-gradient(135deg,#46435D 0%,#8b6f47 100%)"></div>
+        <div class="news-carousel-card-body">
+          <span class="news-carousel-card-chip">Partnerships</span>
+          <h3 class="news-carousel-card-title">Ministry Brands Announces Strategic Partnership with PushPay</h3>
+          <div class="news-carousel-card-meta"><span>February 26, 2026</span><span class="news-carousel-card-source">PR Newswire &#8599;</span></div>
+        </div>
+      </a>
+      <a href="#" target="_blank" rel="noopener" class="news-carousel-card">
+        <div class="news-carousel-card-img" style="background:linear-gradient(135deg,#2a6e5a 0%,#1E3A5F 100%)"></div>
+        <div class="news-carousel-card-body">
+          <span class="news-carousel-card-chip">Awards</span>
+          <h3 class="news-carousel-card-title">Cigna Recognizes Ministry Brands for Workplace Wellness</h3>
+          <div class="news-carousel-card-meta"><span>February 18, 2026</span><span class="news-carousel-card-source">HR Dive &#8599;</span></div>
+        </div>
+      </a>
+    </div>
+    <div class="anno"><strong>News teaser on the company page:</strong> Three most-recent items from the press feed (one internal + two external pickups, mirroring the mix on <code>mb-press.html</code>). Closes the page on a note of momentum &mdash; &ldquo;here&rsquo;s what we&rsquo;re doing right now&rdquo; &mdash; before the footer.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="mb-footer">
+  <div class="w">
+    <div class="mb-footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <svg width="32" height="14" viewBox="0 0 48 20" fill="none" style="color:rgba(255,255,255,0.75)"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg>
+          <span style="font-size:15px;font-weight:700;color:white">Ministry Brands</span>
+        </div>
+        <p class="mb-footer-brand">Technology built for the missions that hold communities together.</p>
+      </div>
+      <div><div class="mb-footer-col-title">Brands</div><a href="home.html" class="mb-footer-col-link">Amplify</a><a href="#" class="mb-footer-col-link">ParishSOFT</a><a href="#" class="mb-footer-col-link">DonorDirect</a><a href="#" class="mb-footer-col-link">Protect My Ministry</a></div>
+      <div><div class="mb-footer-col-title">Company</div><a href="mb-company.html" class="mb-footer-col-link">About</a><a href="mb-meet-team.html" class="mb-footer-col-link">Meet the Team</a><a href="mb-careers.html" class="mb-footer-col-link">Careers</a><a href="mb-press.html" class="mb-footer-col-link">Press</a></div>
+      <div><div class="mb-footer-col-title">Resources</div><a href="healthy-church-hub.html" class="mb-footer-col-link">Healthy Church Hub</a><a href="mb-partners.html" class="mb-footer-col-link">Partners</a><a href="mb-press.html" class="mb-footer-col-link">News</a></div>
+      <div><div class="mb-footer-col-title">Connect</div><a href="mb-contact.html" class="mb-footer-col-link">Contact</a><a href="login.html" class="mb-footer-col-link">Login</a></div>
+    </div>
+    <div class="mb-footer-bottom"><span>© 2026 Ministry Brands. All rights reserved.</span><span style="display:flex;gap:24px"><a href="#" class="mb-footer-col-link" style="margin:0">Privacy</a><a href="#" class="mb-footer-col-link" style="margin:0">Terms</a><a href="#" class="mb-footer-col-link" style="margin:0">Cookies</a></span></div>
+  </div>
+</footer>
+
+<div class="anno-legend-wrap">
+  <div class="anno-legend">
+    <div class="anno-legend-title">Annotation Legend</div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div>
+    <div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div>
+  </div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'">
+    <span style="font-size:16px">&#x1F4DD;</span>
+    <span class="anno-label">Show Annotations</span>
+  </button>
+</div>
+
+<script>
+document.body.classList.add("anno-hidden");
+function toggleDropdown(e,id){var btn=document.getElementById(id);var dd=btn.querySelector('.mb-nav-dropdown');if(dd&&dd.contains(e.target))return;e.stopPropagation();e.preventDefault();var wasPinned=btn.dataset.pinned==='1';document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==btn){el.classList.remove('open');delete el.dataset.pinned}});if(wasPinned){btn.classList.remove('open');delete btn.dataset.pinned}else{btn.classList.add('open');btn.dataset.pinned='1'}}
+document.addEventListener('click',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open');delete el.dataset.pinned})});
+document.querySelectorAll('.mb-nav-link').forEach(function(link){if(link.querySelector('.mb-nav-dropdown')){link.addEventListener('mouseenter',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==link)el.classList.remove('open')});link.classList.add('open')});link.addEventListener('mouseleave',function(){if(!link.dataset.pinned)link.classList.remove('open')})}});
+</script>
+</body>
+</html>

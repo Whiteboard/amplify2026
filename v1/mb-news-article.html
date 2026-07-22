@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Innovation in Church Software Means Measurable Ministry — Ministry Brands</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:white;min-height:100vh;color:#1a1a1a}
+.mb-nav{position:sticky;top:0;z-index:200;background:white;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px}
+.mb-nav-left{display:flex;align-items:center;gap:10px}.mb-nav-mark svg{display:block;color:#1E3A5F}
+.mb-nav-brand{font-size:16px;font-weight:700;color:#1E3A5F;letter-spacing:-0.01em}
+.mb-nav-links{display:flex;align-items:center;gap:6px;margin:0 auto}
+.mb-nav-link{position:relative;padding:9px 14px;font-size:14px;font-weight:500;color:#444;cursor:pointer;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;font-family:inherit;transition:color 0.12s,background 0.12s}
+.mb-nav-link:hover{color:#1E3A5F;background:#f4f5f8}.mb-nav-link.active{color:#1E3A5F;font-weight:600}
+.mb-nav-chevron{font-size:8px;color:#bbb;transition:transform 0.15s}.mb-nav-link.open .mb-nav-chevron{transform:rotate(180deg)}
+.mb-nav-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:100}
+.mb-nav-link.open .mb-nav-dropdown::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px}
+.mb-nav-link.open .mb-nav-dropdown{display:block}
+.mb-nav-dropdown a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}.mb-nav-dropdown a:hover{background:#f4f5f8;color:#1E3A5F}
+.mb-nav-right{display:flex;align-items:center;gap:14px}
+.mb-nav-login{font-size:13px;color:#666;text-decoration:none;font-weight:500;padding:8px 12px}.mb-nav-login:hover{color:#1E3A5F}
+.mb-nav-cta{background:#1E3A5F;color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s}.mb-nav-cta:hover{background:#2a4a73}
+
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f8fa}
+.section-eyebrow{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.section-h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px}
+.section-sub{font-size:17px;color:#777;line-height:1.6;max-width:560px}
+.section-center{text-align:center;max-width:680px;margin:0 auto 56px}.section-center .section-sub{margin:0 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
+.btn-navy{background:#1E3A5F;color:white}.btn-navy:hover{background:#2a4a73}
+.btn-white{background:white;color:#1E3A5F}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:#1E3A5F;border:1px solid #1E3A5F}.btn-ghost:hover{background:#1E3A5F;color:white}
+.btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
+.mb-breadcrumb{padding:18px 0;background:#fafbfc;border-bottom:0.5px solid #f0f0f0}
+.mb-breadcrumb-inner{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
+.mb-breadcrumb a{color:#888;text-decoration:none}.mb-breadcrumb a:hover{color:#1E3A5F}
+
+.mb-cta-strip{background:#1E3A5F;color:white;border-radius:16px;padding:48px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.mb-cta-strip h3{font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
+.mb-cta-strip p{color:rgba(255,255,255,0.7);font-size:15px;max-width:520px}
+
+/* Article hero strip */
+.article-hero{max-width:800px;margin:0 auto;padding:64px 48px 0}
+.article-chip{display:inline-flex;align-items:center;background:#eaf0f7;color:#1E3A5F;padding:5px 12px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:20px}
+.article-headline{font-size:44px;font-weight:700;letter-spacing:-0.025em;line-height:1.15;color:#1a1a1a;margin-bottom:20px}
+.article-byline{font-size:14px;color:#777;margin-bottom:36px}
+.article-byline strong{color:#1a1a1a;font-weight:600}
+.article-hero-image{aspect-ratio:16/9;width:100%;background:linear-gradient(135deg,#1E3A5F 0%,#46435D 100%);border-radius:16px;margin-bottom:48px}
+
+/* Article body */
+.article-body{max-width:720px;margin:0 auto;padding:0 48px 64px;font-size:17px;line-height:1.75;color:#333}
+.article-body p{margin-bottom:24px}
+.article-body h2{font-size:28px;font-weight:700;color:#1a1a1a;margin-top:40px;margin-bottom:16px;letter-spacing:-0.02em;line-height:1.25}
+.article-body blockquote{border-left:4px solid #1E3A5F;padding-left:24px;font-style:italic;font-size:22px;color:#444;margin:40px 0;line-height:1.5}
+
+/* Share strip */
+.share-strip{max-width:720px;margin:0 auto;padding:32px 48px;border-top:0.5px solid #e8e8e8;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;gap:18px}
+.share-label{font-size:13px;font-weight:600;color:#666}
+.share-btn{width:36px;height:36px;border-radius:50%;border:1px solid #d8d8d8;background:white;display:inline-flex;align-items:center;justify-content:center;color:#666;cursor:pointer;font-size:14px;font-weight:700;text-decoration:none;transition:all 0.12s}
+.share-btn:hover{border-color:#1E3A5F;color:#1E3A5F}
+
+/* Author bio */
+.author-card{max-width:720px;margin:48px auto 0;padding:0 48px;display:flex;gap:20px;align-items:center}
+.author-card-inner{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:24px;display:flex;gap:20px;align-items:center;width:100%}
+.author-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#1E3A5F 0%,#46435D 100%);flex-shrink:0}
+.author-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#999;margin-bottom:4px}
+.author-name{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
+.author-title{font-size:13px;color:#888;margin-bottom:6px}
+.author-bio{font-size:13px;color:#555;line-height:1.55}
+
+/* Related */
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.news-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;text-decoration:none;color:inherit}
+.news-card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+.news-card-img{aspect-ratio:16/10}
+.news-card-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+.news-card-chip{display:inline-flex;align-self:flex-start;background:#eaf0f7;color:#1E3A5F;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px}
+.news-card-headline{font-size:17px;font-weight:700;color:#1a1a1a;line-height:1.35;letter-spacing:-0.01em;margin-bottom:10px}
+.news-card-excerpt{font-size:13px;color:#777;line-height:1.55;margin-bottom:16px;flex:1}
+.news-card-date{font-size:12px;color:#999;font-weight:500}
+
+footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 32px}
+.mb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.mb-footer-brand{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px;margin-top:14px}
+.mb-footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
+.mb-footer-col-link{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;transition:color 0.12s}.mb-footer-col-link:hover{color:white}
+.mb-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:0.5px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35)}
+
+/* Annotations */
+.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12);max-width:380px;pointer-events:auto}
+.anno::before{content:'📌 DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}.anno-page::before{content:'🗺️ PAGE STRATEGY';color:#3949AB}
+.anno-move{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}.anno-move::before{content:'✅ SECTION MOVED';color:#2E7D32}
+.anno strong{font-weight:700}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#1E3A5F;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#2a4a73}
+body.anno-hidden .anno{display:none}
+</style>
+</head>
+<body>
+
+<nav class="mb-nav">
+  <div class="mb-nav-left"><span class="mb-nav-mark"><svg width="32" height="14" viewBox="0 0 48 20" fill="none"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg></span><a href="mb-home.html" style="text-decoration:none"><span class="mb-nav-brand">Ministry Brands</span></a></div>
+  <div class="mb-nav-links">
+    <a href="home.html" class="mb-nav-link">Churches</a><a href="#" class="mb-nav-link">Parishes</a><a href="#" class="mb-nav-link">Nonprofits</a><a href="#" class="mb-nav-link">Protection</a>
+    <button class="mb-nav-link active" id="navCompany" onclick="toggleDropdown(event,'navCompany')">Company <span class="mb-nav-chevron">▾</span><div class="mb-nav-dropdown"><a href="mb-company.html">About</a><a href="mb-meet-team.html">Meet the Team</a><a href="mb-careers.html">Careers</a><a href="mb-press.html">Press</a><a href="mb-partners.html">Partners</a></div></button>
+      </div>
+  <div class="mb-nav-right"><a href="login.html" class="mb-nav-login">Login</a><a href="mb-contact.html" class="mb-nav-cta">Contact Us</a></div>
+</nav>
+
+<div class="mb-breadcrumb"><div class="w mb-breadcrumb-inner"><a href="mb-home.html">Home</a> <span>›</span> <a href="mb-press.html">Press</a> <span>›</span> <span>Innovation in Church Software&hellip;</span></div></div>
+
+<div class="anno anno-page"><strong>Reusable article template:</strong> This layout serves every press release, industry analysis, and product announcement. Headline + byline + hero image + 720px article column + share + author + related. Topic chip and category drive both navigation and the related-articles query.</div>
+
+<!-- ARTICLE HERO STRIP -->
+<div class="article-hero">
+  <span class="article-chip">Industry Insights</span>
+  <h1 class="article-headline">Innovation in Church Software Means Measurable Ministry</h1>
+  <div class="article-byline">By <strong>Jamshed Patel</strong> &middot; CTO, Ministry Brands &middot; April 8, 2026 &middot; 6 min read</div>
+  <div class="article-hero-image"></div>
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+  <p>For most of the last decade, &ldquo;innovation&rdquo; in church software has meant the same thing it has meant elsewhere in SaaS: more features, faster releases, broader integrations. The product teams I have worked with measured progress in shipped tickets and roadmap velocity. The customers measured progress in how many things their software could do.</p>
+
+  <p>That definition is starting to feel thin. The ministry leaders I speak with each month are not asking for more buttons. They are asking a quieter, harder question: <em>what is any of this actually producing?</em> A pastor who has paid for a giving platform, a check-in system, and a ChMS for three years can tell you exactly what the tools do. Many cannot tell you, with the same confidence, what changed in their congregation because of them.</p>
+
+  <p>That gap &mdash; between activity and outcome &mdash; is where the next wave of innovation has to land. Not flashier dashboards. Not more AI for AI&rsquo;s sake. A shift in what we count as success.</p>
+
+  <h2>The shift from features to outcomes</h2>
+
+  <p>When we redesigned our reporting layer this year, we started by interviewing finance directors and executive pastors who had stopped opening the reports we sent them. The pattern was consistent. The reports told them what had happened: how many people gave, how many checked in, how many emails opened. None of them answered the question the leaders were actually carrying into staff meeting: <em>is the work we are doing producing the change we said we wanted?</em></p>
+
+  <blockquote>The product that wins the next decade in ministry software is not the one with the longest feature list. It is the one that can sit beside a pastor on a Monday morning and help them see what their Sunday is producing.</blockquote>
+
+  <p>The implication for product teams is uncomfortable. Outcomes are slower than features. They require longitudinal data, comparison cohorts, and a willingness to say, sometimes, that the work has not moved the needle. They require us to instrument for the long arc of discipleship, not the short arc of a campaign.</p>
+
+  <h2>What measurable ministry looks like</h2>
+
+  <p>In practice, measurable ministry is not a single metric. It is a small handful of leading indicators a leader can hold in one hand: depth of engagement over time, breadth of participation across life stages, generosity as a discipleship signal rather than a fundraising one, and care delivered to people in transition. Each of those is measurable. None of them is a feature.</p>
+
+  <p>The work for vendors like us is to make those indicators visible without making them invasive. Pastors are not asking for surveillance of their congregations. They are asking for the same clarity any nonprofit board now expects: are we doing what we said we would do, and is it working?</p>
+
+  <p>That is the bar we are setting for ourselves this year. The roadmap is still full of features &mdash; it has to be. But every one of them now has to answer a second question before we ship: what outcome does this make easier to see?</p>
+</article>
+
+<!-- SHARE -->
+<div class="share-strip">
+  <span class="share-label">Share this article</span>
+  <a href="#" class="share-btn" aria-label="Share on X">X</a>
+  <a href="#" class="share-btn" aria-label="Share on LinkedIn">in</a>
+  <a href="#" class="share-btn" aria-label="Share via email">@</a>
+</div>
+
+<!-- AUTHOR -->
+<div class="author-card">
+  <div class="author-card-inner">
+    <div class="author-avatar"></div>
+    <div>
+      <div class="author-label">About the author</div>
+      <div class="author-name">Jamshed Patel</div>
+      <div class="author-title">Chief Technology Officer &middot; Ministry Brands</div>
+      <p class="author-bio">Jamshed leads engineering and product across the Ministry Brands portfolio and writes about the intersection of software, faith, and measurable change.</p>
+    </div>
+  </div>
+</div>
+
+<!-- RELATED -->
+<section class="section alt" style="margin-top:72px">
+  <div class="w">
+    <div class="section-eyebrow">Related reading</div>
+    <div class="section-h2" style="margin-bottom:40px">More from the newsroom</div>
+    <div class="news-grid">
+      <a href="mb-news-article.html" class="news-card">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#46435D,#1E3A5F)"></div>
+        <div class="news-card-body"><span class="news-card-chip">AI</span><h3 class="news-card-headline">AI in Ministry: Practical Use Cases for Today&rsquo;s Church Staff</h3><p class="news-card-excerpt">Not chatbots in the sanctuary. Quiet wins in sermon prep, follow-up, and admin time.</p><span class="news-card-date">March 11, 2026</span></div>
+      </a>
+      <a href="mb-news-article.html" class="news-card">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#2a6e5a,#46435D)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Analytics</span><h3 class="news-card-headline">Analytics That Matter: 5 Metrics Every Church Should Track</h3><p class="news-card-excerpt">Attendance is a starting point. These five measures tell you how discipleship is actually moving.</p><span class="news-card-date">February 4, 2026</span></div>
+      </a>
+      <a href="mb-news-article.html" class="news-card">
+        <div class="news-card-img" style="background:linear-gradient(135deg,#1E3A5F,#8b6f47)"></div>
+        <div class="news-card-body"><span class="news-card-chip">Accounting</span><h3 class="news-card-headline">Building Trust Through Transparency: New Reporting Tools</h3><p class="news-card-excerpt">A look at the new reporting suite that puts donor-ready statements one click away.</p><span class="news-card-date">January 28, 2026</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER CTA — hidden, no newsletter exists yet
+<section class="section">
+  <div class="w">
+    <div class="mb-cta-strip">
+      <div><h3>Stay informed</h3><p>Industry analysis, product news, and the stories shaping ministry technology &mdash; delivered monthly.</p></div>
+      <a href="#" class="btn btn-white">Subscribe to newsletter &rarr;</a>
+    </div>
+  </div>
+</section>
+-->
+
+<footer class="mb-footer">
+  <div class="w">
+    <div class="mb-footer-grid">
+      <div><div style="display:flex;align-items:center;gap:10px"><svg width="32" height="14" viewBox="0 0 48 20" fill="none" style="color:rgba(255,255,255,0.75)"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg><span style="font-size:15px;font-weight:700;color:white">Ministry Brands</span></div><p class="mb-footer-brand">Technology built for the missions that hold communities together.</p></div>
+      <div><div class="mb-footer-col-title">Brands</div><a href="home.html" class="mb-footer-col-link">Amplify</a><a href="#" class="mb-footer-col-link">ParishSOFT</a><a href="#" class="mb-footer-col-link">DonorDirect</a><a href="#" class="mb-footer-col-link">Protect My Ministry</a></div>
+      <div><div class="mb-footer-col-title">Company</div><a href="mb-company.html" class="mb-footer-col-link">About</a><a href="mb-meet-team.html" class="mb-footer-col-link">Meet the Team</a><a href="mb-careers.html" class="mb-footer-col-link">Careers</a><a href="mb-press.html" class="mb-footer-col-link">Press</a></div>
+      <div><div class="mb-footer-col-title">Resources</div><a href="healthy-church-hub.html" class="mb-footer-col-link">Healthy Church Hub</a><a href="mb-partners.html" class="mb-footer-col-link">Partners</a><a href="mb-press.html" class="mb-footer-col-link">News</a></div>
+      <div><div class="mb-footer-col-title">Connect</div><a href="mb-contact.html" class="mb-footer-col-link">Contact</a><a href="login.html" class="mb-footer-col-link">Login</a></div>
+    </div>
+    <div class="mb-footer-bottom"><span>© 2026 Ministry Brands. All rights reserved.</span><span style="display:flex;gap:24px"><a href="#" class="mb-footer-col-link" style="margin:0">Privacy</a><a href="#" class="mb-footer-col-link" style="margin:0">Terms</a><a href="#" class="mb-footer-col-link" style="margin:0">Cookies</a></span></div>
+  </div>
+</footer>
+
+<div class="anno-legend-wrap">
+  <div class="anno-legend"><div class="anno-legend-title">Annotation Legend</div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div></div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'"><span style="font-size:16px">&#x1F4DD;</span><span class="anno-label">Show Annotations</span></button>
+</div>
+
+<script>
+document.body.classList.add("anno-hidden");
+function toggleDropdown(e,id){var btn=document.getElementById(id);var dd=btn.querySelector('.mb-nav-dropdown');if(dd&&dd.contains(e.target))return;e.stopPropagation();e.preventDefault();var wasPinned=btn.dataset.pinned==='1';document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==btn){el.classList.remove('open');delete el.dataset.pinned}});if(wasPinned){btn.classList.remove('open');delete btn.dataset.pinned}else{btn.classList.add('open');btn.dataset.pinned='1'}}
+document.addEventListener('click',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open');delete el.dataset.pinned})});
+document.querySelectorAll('.mb-nav-link').forEach(function(link){if(link.querySelector('.mb-nav-dropdown')){link.addEventListener('mouseenter',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==link)el.classList.remove('open')});link.classList.add('open')});link.addEventListener('mouseleave',function(){if(!link.dataset.pinned)link.classList.remove('open')})}});
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Spired for Churches 2026 Wireframes — Review</title>
+<title>Amplify 2026 Wireframes — Review</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -34,21 +34,6 @@ body{background:#3D3D3D;color:#1a1a1a}
 .chrome-brand{font-size:13px;font-weight:700;color:white;letter-spacing:-0.01em}
 .chrome-divider{width:1px;height:18px;background:rgba(255,255,255,0.15)}
 .chrome-project{font-size:13px;color:rgba(255,255,255,0.8);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chrome-version-wrap{position:relative;display:inline-block;margin-left:6px}
-.chrome-version{background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.85);font-family:inherit;font-size:11px;font-weight:700;padding:3px 8px 3px 10px;border-radius:5px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all 0.12s;letter-spacing:0.06em}
-.chrome-version:hover{background:rgba(255,255,255,0.14);color:white}
-.chrome-version.open{background:rgba(255,255,255,0.14);color:white}
-.chrome-version-chev{font-size:8px;transition:transform 0.15s}
-.chrome-version.open .chrome-version-chev{transform:rotate(180deg)}
-.version-menu{position:absolute;top:calc(100% + 6px);left:0;background:#1c1b28;border:0.5px solid rgba(255,255,255,0.15);border-radius:8px;box-shadow:0 10px 32px rgba(0,0,0,0.4);padding:4px;min-width:220px;z-index:400}
-.version-menu[hidden]{display:none}
-.version-item{width:100%;text-align:left;padding:9px 12px;border-radius:5px;background:transparent;border:none;font-family:inherit;color:rgba(255,255,255,0.6);cursor:pointer;display:flex;flex-direction:column;gap:2px;transition:all 0.12s}
-.version-item:hover{background:rgba(255,255,255,0.06);color:white}
-.version-item.active{background:rgba(70,67,93,0.5);color:white}
-.version-item b{font-size:11px;font-weight:700;color:white;letter-spacing:0.06em;display:flex;align-items:center;justify-content:space-between}
-.version-item b .check{opacity:0;font-size:11px;color:#8AD3B8}
-.version-item.active b .check{opacity:1}
-.version-item span{font-size:11px;color:rgba(255,255,255,0.45);font-weight:400;line-height:1.4}
 .chrome-page-sep{color:rgba(255,255,255,0.3);margin:0 6px;font-size:11px}
 .chrome-page{font-size:13px;color:rgba(255,255,255,0.55);font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chrome-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
@@ -225,22 +210,7 @@ body.comment-mode #cm-banner{display:flex}
 body.pd-open #btn-comments,body.pd-open #btn-comment-mode{opacity:0.35;pointer-events:none;cursor:not-allowed}
 body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.3);color:white}
 .pd-inner{max-width:1480px;margin:0 auto;padding:22px 32px 32px;max-height:calc(100vh - 56px);overflow-y:auto}
-.pd-header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:18px;border-bottom:0.5px solid rgba(255,255,255,0.08);margin-bottom:20px;flex-wrap:wrap}
-.pd-group-filter{display:inline-flex;align-items:center;gap:6px;padding:4px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:10px;height:36px}
-.pd-group-btn{background:transparent;border:0.5px solid transparent;color:rgba(255,255,255,0.62);padding:5px 12px;border-radius:6px;font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:0.02em;display:inline-flex;align-items:center;gap:6px;transition:all 0.15s;white-space:nowrap}
-.pd-group-btn:hover{color:white;background:rgba(255,255,255,0.06)}
-.pd-group-btn .swatch{width:8px;height:8px;border-radius:2px;flex-shrink:0;transition:transform 0.15s}
-.pd-group-btn.active{color:#1c1b28}
-.pd-group-btn[data-group="key"].active{background:#fce88a;border-color:#eac95b}
-.pd-group-btn[data-group="key"] .swatch{background:#fce88a;border:0.5px solid #eac95b}
-.pd-group-btn[data-group="standard"].active{background:#e5e7ec;border-color:#c9ced9}
-.pd-group-btn[data-group="standard"] .swatch{background:#e5e7ec;border:0.5px solid #c9ced9}
-.pd-group-btn[data-group="cms-template"].active{background:#e6dcff;border-color:#c9baf0}
-.pd-group-btn[data-group="cms-template"] .swatch{background:#e6dcff;border:0.5px solid #c9baf0}
-.pd-group-btn[data-group="cms-archive"].active{background:#c9ebe0;border-color:#95d3bf}
-.pd-group-btn[data-group="cms-archive"] .swatch{background:#c9ebe0;border:0.5px solid #95d3bf}
-.pd-group-filter.shake{animation:pdKeyShake 0.45s cubic-bezier(0.36,0.07,0.19,0.97)}
-@keyframes pdKeyShake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-3px)}40%,60%{transform:translateX(3px)}}
+.pd-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:0.5px solid rgba(255,255,255,0.08);margin-bottom:24px}
 .pd-title{font-size:12px;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.12em;text-transform:uppercase}
 .pd-title strong{color:white;margin-right:8px}
 .pd-search{flex:1;max-width:380px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px 14px;font-size:13px;outline:none;font-family:inherit;color:white}
@@ -309,14 +279,7 @@ body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,
         <span class="chrome-brand">Whiteboard</span>
       </div>
       <div class="chrome-divider"></div>
-      <span class="chrome-project">Spired for Churches 2026 Wireframes</span>
-      <div class="chrome-version-wrap">
-        <button class="chrome-version" id="btn-version" type="button" aria-haspopup="menu"><span id="version-label">V2</span> <span class="chrome-version-chev">▾</span></button>
-        <div class="version-menu" id="version-menu" role="menu" hidden>
-          <button class="version-item active" data-v="v2" type="button"><b>V2 <span class="check">✓</span></b><span>Current — Spired rebrand</span></button>
-          <button class="version-item" data-v="v1" type="button"><b>V1 <span class="check">✓</span></b><span>Original — pre-Spired</span></button>
-        </div>
-      </div>
+      <span class="chrome-project">Amplify 2026 Wireframes</span>
       <span class="chrome-page-sep" id="page-sep" style="display:none">/</span>
       <span class="chrome-page" id="page-title"></span>
     </div>
@@ -350,7 +313,7 @@ body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,
         <span>Comment mode — click anywhere on the wireframe to drop a pin</span>
         <kbd>Esc</kbd>
       </div>
-      <iframe id="doc" src="home.html" title="Spired for Churches Wireframe" referrerpolicy="no-referrer"></iframe>
+      <iframe id="doc" src="home.html" title="Amplify Wireframe" referrerpolicy="no-referrer"></iframe>
       <div id="doc-overlay"></div>
     </div>
   </main>
@@ -363,12 +326,6 @@ body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,
     <div class="pd-header">
       <div class="pd-title"><strong>All pages</strong><span id="pd-count"></span></div>
       <input type="text" class="pd-search" id="pdSearch" placeholder="Search pages…" autocomplete="off">
-      <div class="pd-group-filter" id="pdGroupFilter" title="Filter by page classification">
-        <button class="pd-group-btn" type="button" data-group="key"><span class="swatch"></span>Key</button>
-        <button class="pd-group-btn" type="button" data-group="standard"><span class="swatch"></span>Standard</button>
-        <button class="pd-group-btn" type="button" data-group="cms-template"><span class="swatch"></span>CMS Template</button>
-        <button class="pd-group-btn" type="button" data-group="cms-archive"><span class="swatch"></span>CMS Archive</button>
-      </div>
       <button class="pd-close" id="pdClose">Close ✕</button>
     </div>
     <div id="pd-body"></div>
@@ -388,7 +345,7 @@ body.pd-open #btn-pages{background:rgba(255,255,255,0.08);border-color:rgba(255,
     </div>
     <h1 class="ins-welcome">Welcome</h1>
     <div class="ins-toyour">To your</div>
-    <h2 class="ins-title">Spired for Churches 2026 Wireframes feedback</h2>
+    <h2 class="ins-title">Amplify 2026 Wireframes feedback</h2>
 
     <div class="ins-grid">
       <div class="ins-item">
@@ -519,21 +476,10 @@ var state = {
   filter: 'all',
   phase: '1',               // 'Phase 1' (existing comments) or 'Phase 2' (new comments)
   currentPage: 'home.html',
-  version: (function(){ try{ return sessionStorage.getItem('wb-version') === 'v1' ? 'v1' : 'v2'; }catch(e){ return 'v2'; } })(),
   pendingType: null,
   deepLinkPin: null,        // pin from URL params, if any
   pendingScrollTo: null     // queued {comment} to scroll to after iframe navigates
 };
-
-// V1 = pre-Spired original wireframes served from v1/ subfolder.
-// V2 = current Spired-rebranded wireframes at the repo root.
-function pathFor(slug){
-  return state.version === 'v1' ? ('v1/' + slug) : slug;
-}
-function stripVersion(url){
-  // Reduce 'v1/home.html' → 'home.html' for consistent comment keys + current-page comparisons
-  return (url || '').replace(/^v1\//,'');
-}
 
 /* ==============================================================
    DOM REFS
@@ -586,7 +532,6 @@ function normalizePage(p){
 function getPageUrl(){
   // Prefer contentWindow.location — reflects current page even after
   // internal iframe navigation. Fall back to iframe.src if cross-origin.
-  // Strip the v1/ folder prefix so state.currentPage stays version-agnostic.
   try{
     var path = iframe.contentWindow.location.pathname;
     var page = path.split('/').pop();
@@ -643,11 +588,11 @@ function onIframeLoad(){
   var pageUrl = getPageUrl();
   state.currentPage = pageUrl;
 
-  // Dynamic project label — MB pages (mb-*.html) vs Spired for Churches pages
+  // Dynamic project label — MB pages (mb-*.html) vs Amplify pages
   var isMB = /^mb-/.test(pageUrl);
   var projectEl = document.querySelector('.chrome-project');
   if(projectEl){
-    projectEl.textContent = isMB ? 'Ministry Brands 2026 Wireframes' : 'Spired for Churches 2026 Wireframes';
+    projectEl.textContent = isMB ? 'Ministry Brands 2026 Wireframes' : 'Amplify 2026 Wireframes';
   }
 
   // Update chrome page title (the section after the project label)
@@ -656,8 +601,8 @@ function onIframeLoad(){
   if(!iframeTitle){
     iframeTitle = friendlyPageName(pageUrl);
   } else {
-    // Strip " — Spired for Churches" / " — Ministry Brands" suffix if present
-    iframeTitle = iframeTitle.replace(/\s*[—–-]\s*(Spired for Churches|Ministry Brands).*$/i,'');
+    // Strip " — Amplify" / " — Ministry Brands" suffix if present
+    iframeTitle = iframeTitle.replace(/\s*[—–-]\s*(Amplify|Ministry Brands).*$/i,'');
   }
   pageTitleEl.textContent = iframeTitle;
   pageSepEl.style.display = iframeTitle ? '' : 'none';
@@ -910,7 +855,7 @@ function submitToFormspree(comment){
   }
   var deepLink = buildDeepLink(comment);
   var body = {
-    _subject: '[Spired for Churches 2026 · Phase ' + (commentPhase(comment)) + '] ' + comment.type.toUpperCase() + ' comment on ' + friendlyPageName(comment.page),
+    _subject: '[Amplify 2026 · Phase ' + (commentPhase(comment)) + '] ' + comment.type.toUpperCase() + ' comment on ' + friendlyPageName(comment.page),
     phase: 'Phase ' + commentPhase(comment),
     page: comment.page,
     page_name: friendlyPageName(comment.page),
@@ -1293,7 +1238,7 @@ var pageIndex = {
       {name:'Contact', slug:'mb-contact.html'}
     ]
   },
-  'Spired for Churches': {
+  'Amplify': {
     categories: {
       'Platform': [
         {name:'Home', slug:'home.html'},
@@ -1349,7 +1294,7 @@ var pageIndex = {
         {name:'Partners Directory', slug:'partners.html'},
         {name:'Partner Detail', slug:'partner-detail.html'}
       ],
-      'Spired for Churches+ HQ': [
+      'Amplify+ HQ': [
         {name:'HQ Dashboard', slug:'hq.html'},
         {name:'HQ Donor', slug:'hq-donor.html'},
         {name:'HQ Financials', slug:'hq-financials.html'},
@@ -1369,45 +1314,9 @@ var pdBody = document.getElementById('pd-body');
 var pdCountEl = document.getElementById('pd-count');
 var pdSearch = document.getElementById('pdSearch');
 var pdClose = document.getElementById('pdClose');
-var pdGroupFilter = document.getElementById('pdGroupFilter');
-var pdGroupBtns = pdGroupFilter.querySelectorAll('.pd-group-btn');
 var btnPages = document.getElementById('btn-pages');
 var pdIntersectionObs = null;
 var pdRendered = false;
-
-var PAGE_GROUPS = {
-  'home.html':'key',
-  'senior-pastor.html':'key',
-  'platform-overview.html':'key',
-  'complete-bundle.html':'key',
-  'giving.html':'key',
-  'service-detail.html':'key',
-  'request-demo.html':'key',
-  'services-overview.html':'standard',
-  'mb-company.html':'standard',
-  'mb-careers.html':'standard',
-  'blog-post.html':'cms-template',
-  'ebook-landing.html':'cms-template',
-  'webinar-registration.html':'cms-template',
-  'podcast-episode.html':'cms-template',
-  'customer-story.html':'cms-template',
-  'partner-detail.html':'cms-template',
-  'healthy-church-hub.html':'cms-archive',
-  'search-results.html':'cms-archive',
-  'partners.html':'cms-archive'
-};
-var KEY_PAGE_PW = 'shammer';
-var pdActiveGroups = {};
-function pdIsUnlocked(){
-  try { return sessionStorage.getItem('wb-key-unlocked') === '1'; } catch(e){ return false; }
-}
-function pdSetUnlocked(){
-  try { sessionStorage.setItem('wb-key-unlocked','1'); } catch(e){}
-}
-function pdAnyGroupActive(){
-  for(var k in pdActiveGroups){ if(pdActiveGroups[k]) return true; }
-  return false;
-}
 
 function totalPageCount(){
   var n = 0;
@@ -1491,8 +1400,7 @@ function renderPageDrawer(){
     card.addEventListener('click', function(e){
       e.preventDefault();
       var slug = card.dataset.slug;
-      var target = pathFor(slug);
-      try{ iframe.contentWindow.location.href = target; }catch(err){ iframe.src = target; }
+      try{ iframe.contentWindow.location.href = slug; }catch(err){ iframe.src = slug; }
       closePageDrawer();
     });
   });
@@ -1564,13 +1472,10 @@ function closePageDrawer(){
 
 function filterCards(q){
   q = q.trim().toLowerCase();
-  var groupFilterActive = pdAnyGroupActive();
-  pdBody.dataset.searching = (q || groupFilterActive) ? 'true' : 'false';
+  pdBody.dataset.searching = q ? 'true' : 'false';
   var anyVisible = false;
   Array.prototype.forEach.call(pdBody.querySelectorAll('.pd-card'), function(card){
-    var textMatch = !q || card.dataset.name.indexOf(q) > -1 || card.dataset.slug.toLowerCase().indexOf(q) > -1;
-    var groupMatch = !groupFilterActive || !!pdActiveGroups[PAGE_GROUPS[card.dataset.slug] || ''];
-    var matches = textMatch && groupMatch;
+    var matches = !q || card.dataset.name.indexOf(q) > -1 || card.dataset.slug.toLowerCase().indexOf(q) > -1;
     card.style.display = matches ? '' : 'none';
     if(matches) anyVisible = true;
   });
@@ -1602,40 +1507,6 @@ btnPages.addEventListener('click', function(e){
 });
 pdClose.addEventListener('click', closePageDrawer);
 pdSearch.addEventListener('input', function(){ filterCards(pdSearch.value); });
-
-function pdApplyGroupState(){
-  Array.prototype.forEach.call(pdGroupBtns, function(btn){
-    btn.classList.toggle('active', !!pdActiveGroups[btn.dataset.group]);
-  });
-  filterCards(pdSearch.value);
-}
-function pdToggleGroup(group){
-  if(pdActiveGroups[group]){
-    delete pdActiveGroups[group];
-  } else {
-    pdActiveGroups[group] = true;
-  }
-  pdApplyGroupState();
-}
-Array.prototype.forEach.call(pdGroupBtns, function(btn){
-  btn.addEventListener('click', function(e){
-    e.stopPropagation();
-    var group = btn.dataset.group;
-    if(pdIsUnlocked()){
-      pdToggleGroup(group);
-      return;
-    }
-    var pw = window.prompt('Enter password to filter pages by classification:');
-    if(pw === null) return;
-    if(pw === KEY_PAGE_PW){
-      pdSetUnlocked();
-      pdToggleGroup(group);
-    } else {
-      pdGroupFilter.classList.add('shake');
-      setTimeout(function(){ pdGroupFilter.classList.remove('shake'); }, 500);
-    }
-  });
-});
 
 // Close on outside-click (when drawer is open and click is outside)
 document.addEventListener('click', function(e){
@@ -1759,55 +1630,6 @@ function renderDeepLinkPin(){
   // Clear so it only renders once per load
   state.deepLinkPin = null;
 }
-
-/* ==============================================================
-   VERSION TOGGLE (V1 = pre-Spired · V2 = current)
-   ============================================================== */
-(function(){
-  var btnVersion = document.getElementById('btn-version');
-  var versionMenu = document.getElementById('version-menu');
-  var versionLabel = document.getElementById('version-label');
-  var items = versionMenu ? versionMenu.querySelectorAll('.version-item') : [];
-
-  function applyVersionUI(){
-    if(versionLabel) versionLabel.textContent = state.version.toUpperCase();
-    items.forEach(function(it){ it.classList.toggle('active', it.dataset.v === state.version); });
-  }
-  function openMenu(){ versionMenu.hidden = false; btnVersion.classList.add('open'); }
-  function closeMenu(){ versionMenu.hidden = true; btnVersion.classList.remove('open'); }
-  function setVersion(v){
-    if(v !== 'v1' && v !== 'v2') return;
-    if(state.version === v){ closeMenu(); return; }
-    state.version = v;
-    try{ sessionStorage.setItem('wb-version', v); }catch(e){}
-    applyVersionUI();
-    closeMenu();
-    // Reload iframe on the SAME page in the newly-selected version
-    var page = state.currentPage || 'home.html';
-    var target = pathFor(page);
-    try{ iframe.contentWindow.location.href = target; }catch(err){ iframe.src = target; }
-  }
-
-  if(btnVersion){
-    btnVersion.addEventListener('click', function(e){
-      e.stopPropagation();
-      if(versionMenu.hidden) openMenu(); else closeMenu();
-    });
-    items.forEach(function(it){
-      it.addEventListener('click', function(e){ e.stopPropagation(); setVersion(it.dataset.v); });
-    });
-    document.addEventListener('click', function(e){
-      if(!versionMenu.hidden && !versionMenu.contains(e.target) && e.target !== btnVersion){
-        closeMenu();
-      }
-    });
-    applyVersionUI();
-    // On initial load, if V1 was previously selected, redirect the iframe accordingly
-    if(state.version === 'v1'){
-      iframe.src = 'v1/home.html';
-    }
-  }
-})();
 
 </script>
 </body>

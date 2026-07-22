@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Meet the Team — Ministry Brands</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',Arial,Helvetica,sans-serif!important}
+body{background:white;min-height:100vh;color:#1a1a1a}
+.mb-nav{position:sticky;top:0;z-index:200;background:white;border-bottom:0.5px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px}
+.mb-nav-left{display:flex;align-items:center;gap:10px}.mb-nav-mark svg{display:block;color:#1E3A5F}
+.mb-nav-brand{font-size:16px;font-weight:700;color:#1E3A5F;letter-spacing:-0.01em}
+.mb-nav-links{display:flex;align-items:center;gap:6px;margin:0 auto}
+.mb-nav-link{position:relative;padding:9px 14px;font-size:14px;font-weight:500;color:#444;cursor:pointer;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;font-family:inherit;transition:color 0.12s,background 0.12s}
+.mb-nav-link:hover{color:#1E3A5F;background:#f4f5f8}.mb-nav-link.active{color:#1E3A5F;font-weight:600}
+.mb-nav-chevron{font-size:8px;color:#bbb;transition:transform 0.15s}.mb-nav-link.open .mb-nav-chevron{transform:rotate(180deg)}
+.mb-nav-dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:0.5px solid #e0e0e0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,0.1);min-width:200px;padding:8px;z-index:100}
+.mb-nav-link.open .mb-nav-dropdown::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px}
+.mb-nav-link.open .mb-nav-dropdown{display:block}
+.mb-nav-dropdown a{display:block;padding:8px 12px;font-size:13px;color:#444;text-decoration:none;border-radius:6px}.mb-nav-dropdown a:hover{background:#f4f5f8;color:#1E3A5F}
+.mb-nav-right{display:flex;align-items:center;gap:14px}
+.mb-nav-login{font-size:13px;color:#666;text-decoration:none;font-weight:500;padding:8px 12px}.mb-nav-login:hover{color:#1E3A5F}
+.mb-nav-cta{background:#1E3A5F;color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;font-family:inherit;transition:background 0.12s}.mb-nav-cta:hover{background:#2a4a73}
+
+.w{max-width:1200px;margin:0 auto;padding:0 48px}
+.section{padding:80px 0;background:white;border-bottom:0.5px solid #f0f0f0}
+.section.alt{background:#f7f8fa}
+.section-eyebrow{font-size:11px;font-weight:700;color:#1E3A5F;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px}
+.section-h2{font-size:38px;font-weight:700;color:#1a1a1a;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px}
+.section-sub{font-size:17px;color:#777;line-height:1.6;max-width:560px}
+.section-center{text-align:center;max-width:680px;margin:0 auto 56px}.section-center .section-sub{margin:0 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 28px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all 0.15s;font-family:inherit;white-space:nowrap}
+.btn-navy{background:#1E3A5F;color:white}.btn-navy:hover{background:#2a4a73}
+.btn-white{background:white;color:#1E3A5F}.btn-white:hover{background:#f0f0f0}
+.btn-ghost{background:transparent;color:#1E3A5F;border:1px solid #1E3A5F}.btn-ghost:hover{background:#1E3A5F;color:white}
+.btn-ghost-light{background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)}.btn-ghost-light:hover{border-color:white;background:rgba(255,255,255,0.08)}
+.mb-page-hero{background:linear-gradient(180deg,#1E3A5F 0%,#162d4a 100%);color:white;padding:96px 0 88px;text-align:center}
+.mb-page-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px}
+.mb-page-hero h1{font-size:54px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:20px}
+.mb-page-hero p{font-size:17px;color:rgba(255,255,255,0.78);line-height:1.65;max-width:640px;margin:0 auto 32px}
+.mb-page-hero-ctas{display:flex;gap:12px;justify-content:center}
+.mb-breadcrumb{padding:18px 0;background:#fafbfc;border-bottom:0.5px solid #f0f0f0}
+.mb-breadcrumb-inner{display:flex;align-items:center;gap:8px;font-size:13px;color:#888}
+.mb-breadcrumb a{color:#888;text-decoration:none}.mb-breadcrumb a:hover{color:#1E3A5F}
+
+.mb-cta-strip{background:#1E3A5F;color:white;border-radius:16px;padding:48px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.mb-cta-strip h3{font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
+.mb-cta-strip p{color:rgba(255,255,255,0.7);font-size:15px;max-width:520px}
+
+/* Team grid — 4 col */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.team-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:28px 22px;text-align:center}
+.team-avatar{width:100px;height:100px;border-radius:50%;background:#e0dfe8;margin:0 auto 18px;background-image:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%)}
+.team-name{font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.team-title{font-size:12px;color:#1E3A5F;font-weight:600;margin-bottom:12px;letter-spacing:0.02em}
+.team-bio{font-size:13px;color:#666;line-height:1.55;text-align:left}
+
+/* Testimonials */
+.test-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:980px;margin:0 auto}
+.test-card{background:white;border:0.5px solid #e8e8e8;border-radius:14px;padding:32px}
+.test-quote{font-size:16px;color:#333;line-height:1.65;margin-bottom:22px;font-style:italic}
+.test-author{display:flex;align-items:center;gap:12px}
+.test-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#46435D 0%,#1E3A5F 100%);flex-shrink:0}
+.test-name{font-size:14px;font-weight:600;color:#1a1a1a}
+.test-role{font-size:12px;color:#999;margin-top:2px}
+
+footer.mb-footer{background:#0f1a2e;color:rgba(255,255,255,0.65);padding:72px 0 32px}
+.mb-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.mb-footer-brand{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:240px;margin-top:14px}
+.mb-footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px}
+.mb-footer-col-link{display:block;font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;margin-bottom:10px;transition:color 0.12s}.mb-footer-col-link:hover{color:white}
+.mb-footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:0.5px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35)}
+
+/* Annotations */
+.anno{position:relative;z-index:50;margin:16px 48px;padding:14px 18px;background:#FFF9C4;border:1px solid #F9E547;border-radius:12px;font-size:12px;color:#5D4E37;line-height:1.55;box-shadow:0 8px 32px rgba(0,0,0,0.12);max-width:380px;pointer-events:auto}
+.anno::before{content:'\1F4CC DESIGN NOTE';display:block;font-size:9px;font-weight:700;letter-spacing:0.12em;color:#B8860B;margin-bottom:5px}
+.anno-page{background:#E8EAF6;border-color:#7986CB;color:#1A237E;max-width:460px;padding:16px 20px}.anno-page::before{content:'\1F5FA\FE0F PAGE STRATEGY';color:#3949AB}
+.anno-persona{background:#F3E5F5;border-color:#CE93D8;color:#4A148C}.anno-persona::before{content:'\1F464 PERSONA FOCUS';color:#7B1FA2}
+.anno-move{background:#E8F5E9;border-color:#66BB6A;color:#1B5E20}.anno-move::before{content:'\2705 SECTION MOVED';color:#2E7D32}
+.anno strong{font-weight:700}
+.anno-legend-wrap{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.anno-legend{background:white;border:0.5px solid #e0e0e0;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,0.12);font-size:11px;line-height:1;display:flex;flex-direction:column;gap:8px;min-width:180px}
+.anno-legend-title{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.anno-legend-row{display:flex;align-items:center;gap:8px}
+.anno-legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.anno-legend-label{font-size:11px;color:#555;font-weight:500}
+body.anno-hidden .anno-legend{display:none}
+.anno-toggle{background:#1E3A5F;color:white;border:none;border-radius:12px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,0.3);display:flex;align-items:center;gap:8px;transition:background 0.15s}
+.anno-toggle:hover{background:#2a4a73}
+body.anno-hidden .anno{display:none}
+</style>
+</head>
+<body>
+
+<nav class="mb-nav">
+  <div class="mb-nav-left"><span class="mb-nav-mark"><svg width="32" height="14" viewBox="0 0 48 20" fill="none"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg></span><a href="mb-home.html" style="text-decoration:none"><span class="mb-nav-brand">Ministry Brands</span></a></div>
+  <div class="mb-nav-links">
+    <a href="home.html" class="mb-nav-link">Churches</a><a href="#" class="mb-nav-link">Parishes</a><a href="#" class="mb-nav-link">Nonprofits</a><a href="#" class="mb-nav-link">Protection</a>
+    <button class="mb-nav-link active" id="navCompany" onclick="toggleDropdown(event,'navCompany')">Company <span class="mb-nav-chevron">&#9662;</span><div class="mb-nav-dropdown"><a href="mb-company.html">About</a><a href="mb-meet-team.html">Meet the Team</a><a href="mb-careers.html">Careers</a><a href="mb-press.html">Press</a><a href="mb-partners.html">Partners</a></div></button>
+      </div>
+  <div class="mb-nav-right"><a href="login.html" class="mb-nav-login">Login</a><a href="mb-contact.html" class="mb-nav-cta">Contact Us</a></div>
+</nav>
+
+<div class="mb-breadcrumb"><div class="w mb-breadcrumb-inner"><a href="mb-home.html">Home</a> <span>&rsaquo;</span> <a href="mb-company.html">Company</a> <span>&rsaquo;</span> <span>Meet the Team</span></div></div>
+
+<section class="mb-page-hero">
+  <div class="w">
+    <div class="mb-page-hero-eyebrow">Our Team</div>
+    <h1>Meet the team behind Ministry Brands</h1>
+    <p>Forty-plus years of experience building software for ministry. Here are the people leading the work.</p>
+  </div>
+</section>
+
+<div class="anno anno-page"><strong>Why this page exists:</strong> The /company About page only shows six executives. This dedicated team page lets us list the full leadership bench (12+), including brand presidents and functional VPs &mdash; useful for trust signals during demo prep, partnership conversations, and recruiting candidates evaluating the org.</div>
+
+<!-- LEADERSHIP -->
+<section class="section">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">Leadership</div>
+      <div class="section-h2">The people driving the work</div>
+      <p class="section-sub">Our executive team and brand leaders &mdash; with deep backgrounds across enterprise SaaS, ministry tech, and customer success.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card"><div class="team-avatar"></div><div class="team-name">Chris Bacon</div><div class="team-title">Chief Executive Officer</div><p class="team-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation.</p></div>
+      <div class="team-card"><div class="team-avatar"></div><div class="team-name">Christian Greyenbuhl</div><div class="team-title">Chief Financial Officer</div><p class="team-bio">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit voluptate velit.</p></div>
+      <div class="team-card"><div class="team-avatar"></div><div class="team-name">Renee McDonough</div><div class="team-title">General Counsel</div><p class="team-bio">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa.</p></div>
+      <div class="team-card"><div class="team-avatar"></div><div class="team-name">Brandon Sharrett</div><div class="team-title">Chief Revenue Officer</div><p class="team-bio">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum sed ut perspiciatis unde omnis iste natus error.</p></div>
+      <div class="team-card"><div class="team-avatar"></div><div class="team-name">Jamshed Patel</div><div class="team-title">Chief Technology Officer</div><p class="team-bio">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi.</p></div>
+      <div class="team-card"><div class="team-avatar"></div><div class="team-name">Jason Hall</div><div class="team-title">Chief Product Officer</div><p class="team-bio">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt neque porro.</p></div>
+      <div class="team-card"><div class="team-avatar"></div><div class="team-name">Hannah Park</div><div class="team-title">VP, Engineering</div><p class="team-bio">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consectetur adipisci velit sed quia non numquam eius modi tempora incidunt ut labore et dolore.</p></div>
+      <div class="team-card"><div class="team-avatar"></div><div class="team-name">Marcus Lee</div><div class="team-title">VP, Customer Success</div><p class="team-bio">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut aliquid ex ea commodi consequatur quis autem vel eum iure reprehenderit.</p></div>
+      <div class="team-card"><div class="team-avatar"></div><div class="team-name">Elena Rodriguez</div><div class="team-title">VP, Marketing</div><p class="team-bio">Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</p></div>
+      <div class="team-card"><div class="team-avatar"></div><div class="team-name">Aisha Brown</div><div class="team-title">VP, People</div><p class="team-bio">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati.</p></div>
+      <div class="team-card"><div class="team-avatar"></div><div class="team-name">Daniel Cooper</div><div class="team-title">President, Amplify</div><p class="team-bio">Et harum quidem rerum facilis est et expedita distinctio nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod.</p></div>
+      <div class="team-card"><div class="team-avatar"></div><div class="team-name">Margaret O&rsquo;Neill</div><div class="team-title">President, ParishSOFT</div><p class="team-bio">Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae itaque earum rerum hic.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="anno anno-persona"><strong>Persona note:</strong> A senior engineering or product candidate evaluating MB will scan this page for credibility signals &mdash; previous-company logos, tenure, where the CTO is based. Bios are placeholder lorem ipsum here; production copy should call out each leader&rsquo;s prior companies, time at MB, and the Galway R&amp;D centre to anchor those signals.</div>
+
+<!-- OPEN POSITIONS CTA -->
+<section class="section alt">
+  <div class="w">
+    <div class="mb-cta-strip">
+      <div><h3>Ready to join them?</h3><p>We&rsquo;re always hiring across engineering, product, sales, and customer success.</p></div>
+      <a href="https://ministrybrands.wd1.myworkdayjobs.com" class="btn btn-white">See Open Positions &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="w">
+    <div class="section-center">
+      <div class="section-eyebrow">In Their Words</div>
+      <div class="section-h2">What it&rsquo;s like working here</div>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <p class="test-quote">&ldquo;What sold me was the leadership&rsquo;s clarity. We know who we serve, why the work matters, and how my role fits in. I&rsquo;ve worked at five SaaS companies &mdash; this is the first one where that&rsquo;s genuinely true top to bottom.&rdquo;</p>
+        <div class="test-author"><div class="test-avatar"></div><div><div class="test-name">Priya S.</div><div class="test-role">Client Success Manager &middot; 3 years at MB</div></div></div>
+      </div>
+      <div class="test-card">
+        <p class="test-quote">&ldquo;The culture is genuinely collaborative &mdash; not in the slogan way, in the actual day-to-day way. Engineering, product, and CS sit at the table together when we&rsquo;re shaping releases. That&rsquo;s rare.&rdquo;</p>
+        <div class="test-author"><div class="test-avatar"></div><div><div class="test-name">Aoife M.</div><div class="test-role">Engineering Lead, Galway &middot; 4 years at MB</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="mb-footer">
+  <div class="w">
+    <div class="mb-footer-grid">
+      <div><div style="display:flex;align-items:center;gap:10px"><svg width="32" height="14" viewBox="0 0 48 20" fill="none" style="color:rgba(255,255,255,0.75)"><path d="M0 4.99976L4.8882 10L9.77663 4.99976L4.8882 0L0 4.99976Z" fill="currentColor"/><path d="M9.2749 14.6825L14.0897 19.7368L28.0761 5.05414L23.261 0L9.2749 14.6825Z" fill="currentColor"/><path d="M37.3522 5.13158L42.2402 10.2632L47.1288 5.13158L42.2402 0L37.3522 5.13158Z" fill="currentColor"/><path d="M28.0773 15L32.9652 20H32.9657L37.8539 15L32.9655 10L28.0773 15Z" fill="currentColor"/></svg><span style="font-size:15px;font-weight:700;color:white">Ministry Brands</span></div><p class="mb-footer-brand">Technology built for the missions that hold communities together.</p></div>
+      <div><div class="mb-footer-col-title">Brands</div><a href="home.html" class="mb-footer-col-link">Amplify</a><a href="#" class="mb-footer-col-link">ParishSOFT</a><a href="#" class="mb-footer-col-link">DonorDirect</a><a href="#" class="mb-footer-col-link">Protect My Ministry</a></div>
+      <div><div class="mb-footer-col-title">Company</div><a href="mb-company.html" class="mb-footer-col-link">About</a><a href="mb-meet-team.html" class="mb-footer-col-link">Meet the Team</a><a href="mb-careers.html" class="mb-footer-col-link">Careers</a><a href="mb-press.html" class="mb-footer-col-link">Press</a></div>
+      <div><div class="mb-footer-col-title">Resources</div><a href="healthy-church-hub.html" class="mb-footer-col-link">Healthy Church Hub</a><a href="mb-partners.html" class="mb-footer-col-link">Partners</a><a href="mb-press.html" class="mb-footer-col-link">News</a></div>
+      <div><div class="mb-footer-col-title">Connect</div><a href="mb-contact.html" class="mb-footer-col-link">Contact</a><a href="login.html" class="mb-footer-col-link">Login</a></div>
+    </div>
+    <div class="mb-footer-bottom"><span>&copy; 2026 Ministry Brands. All rights reserved.</span><span style="display:flex;gap:24px"><a href="#" class="mb-footer-col-link" style="margin:0">Privacy</a><a href="#" class="mb-footer-col-link" style="margin:0">Terms</a><a href="#" class="mb-footer-col-link" style="margin:0">Cookies</a></span></div>
+  </div>
+</footer>
+
+<div class="anno-legend-wrap">
+  <div class="anno-legend"><div class="anno-legend-title">Annotation Legend</div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF9C4;border:1px solid #F9E547"></div><span class="anno-legend-label">Design Note</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8EAF6;border:1px solid #7986CB"></div><span class="anno-legend-label">Page Strategy</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#F3E5F5;border:1px solid #CE93D8"></div><span class="anno-legend-label">Persona Focus</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#FFF3E0;border:1px solid #FFB74D"></div><span class="anno-legend-label">Gap Identified</span></div><div class="anno-legend-row"><div class="anno-legend-dot" style="background:#E8F5E9;border:1px solid #66BB6A"></div><span class="anno-legend-label">Section Moved</span></div></div>
+  <button class="anno-toggle" onclick="document.body.classList.toggle('anno-hidden');this.querySelector('.anno-label').textContent=document.body.classList.contains('anno-hidden')?'Show Annotations':'Hide Annotations'"><span style="font-size:16px">&#x1F4DD;</span><span class="anno-label">Show Annotations</span></button>
+</div>
+
+<script>
+document.body.classList.add("anno-hidden");
+function toggleDropdown(e,id){var btn=document.getElementById(id);var dd=btn.querySelector('.mb-nav-dropdown');if(dd&&dd.contains(e.target))return;e.stopPropagation();e.preventDefault();var wasPinned=btn.dataset.pinned==='1';document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==btn){el.classList.remove('open');delete el.dataset.pinned}});if(wasPinned){btn.classList.remove('open');delete btn.dataset.pinned}else{btn.classList.add('open');btn.dataset.pinned='1'}}
+document.addEventListener('click',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){el.classList.remove('open');delete el.dataset.pinned})});
+document.querySelectorAll('.mb-nav-link').forEach(function(link){if(link.querySelector('.mb-nav-dropdown')){link.addEventListener('mouseenter',function(){document.querySelectorAll('.mb-nav-link.open').forEach(function(el){if(el!==link)el.classList.remove('open')});link.classList.add('open')});link.addEventListener('mouseleave',function(){if(!link.dataset.pinned)link.classList.remove('open')})}});
+</script>
+</body>
+</html>
