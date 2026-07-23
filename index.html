@@ -730,7 +730,7 @@ function clearPins(){
 }
 function renderPins(){
   clearPins();
-  var comments = state.allComments[state.currentPage] || [];
+  var comments = (state.allComments[state.currentPage] || []).filter(commentInCurrentVersion);
   comments.forEach(function(c, i){ renderPin(c, i+1, false) });
 }
 function renderPin(comment, index, flash){
@@ -880,6 +880,7 @@ cmForm.addEventListener('submit', function(e){
     text: cmText.value.trim(),
     name: cmName.value.trim(),
     phase: '2',
+    version: state.version,
     created: new Date().toISOString()
   };
 
@@ -910,8 +911,9 @@ function submitToFormspree(comment){
   }
   var deepLink = buildDeepLink(comment);
   var body = {
-    _subject: '[Spired for Churches 2026 · Phase ' + (commentPhase(comment)) + '] ' + comment.type.toUpperCase() + ' comment on ' + friendlyPageName(comment.page),
+    _subject: '[Spired for Churches 2026 · ' + commentVersion(comment).toUpperCase() + ' · Phase ' + (commentPhase(comment)) + '] ' + comment.type.toUpperCase() + ' comment on ' + friendlyPageName(comment.page),
     phase: 'Phase ' + commentPhase(comment),
+    version: commentVersion(comment).toUpperCase(),
     page: comment.page,
     page_name: friendlyPageName(comment.page),
     type: comment.type,
@@ -951,6 +953,7 @@ function submitToSheet(comment){
       xInEl: comment.xInEl,
       yInEl: comment.yInEl,
       phase: commentPhase(comment),
+      version: commentVersion(comment),
       created: comment.created
     }),
     redirect: 'follow'
@@ -1017,10 +1020,20 @@ function commentPhase(c){
   // Comments without a phase field default to Phase 1 (pre-tabs era)
   return (c && c.phase && String(c.phase) === '2') ? '2' : '1';
 }
+function commentVersion(c){
+  // Comments without a version field default to v1 (pre-toggle era —
+  // everything before the V1/V2 split was written against the classic wireframes)
+  return (c && c.version === 'v2') ? 'v2' : 'v1';
+}
+function commentInCurrentVersion(c){
+  return commentVersion(c) === state.version;
+}
 function totalCommentCount(){
   var n = 0;
   Object.keys(state.allComments).forEach(function(p){
-    n += (state.allComments[p] || []).length;
+    (state.allComments[p] || []).forEach(function(c){
+      if(commentInCurrentVersion(c)) n++;
+    });
   });
   return n;
 }
@@ -1028,7 +1041,7 @@ function phaseCommentCount(phase){
   var n = 0;
   Object.keys(state.allComments).forEach(function(p){
     (state.allComments[p] || []).forEach(function(c){
-      if(commentPhase(c) === phase) n++;
+      if(commentInCurrentVersion(c) && commentPhase(c) === phase) n++;
     });
   });
   return n;
@@ -1042,15 +1055,17 @@ function updateCommentCount(){
 }
 
 function renderPanel(){
-  // Collect all pages with comments
+  // Collect all pages with comments (any version)
   var pages = Object.keys(state.allComments).filter(function(p){
     return (state.allComments[p] || []).length > 0;
   });
 
-  // Apply phase + filter
+  // Apply version + phase + type filters
   var filteredByPage = {};
   pages.forEach(function(p){
     var list = state.allComments[p].slice();
+    // Only show comments belonging to the current version (V1 vs V2)
+    list = list.filter(commentInCurrentVersion);
     // Filter by active phase
     list = list.filter(function(c){return commentPhase(c) === state.phase});
     if(state.filter !== 'all'){
@@ -1782,6 +1797,10 @@ function renderDeepLinkPin(){
     try{ sessionStorage.setItem('wb-version', v); }catch(e){}
     applyVersionUI();
     closeMenu();
+    // Comment counts + panel + on-page pins all scope to the new version
+    updateCommentCount();
+    if(typeof renderPanel === 'function') renderPanel();
+    if(typeof renderPins === 'function') renderPins();
     // Reload iframe on the SAME page in the newly-selected version
     var page = state.currentPage || 'home.html';
     var target = pathFor(page);
