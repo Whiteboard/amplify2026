@@ -647,7 +647,7 @@ function onIframeLoad(){
   var isMB = /^mb-/.test(pageUrl);
   var projectEl = document.querySelector('.chrome-project');
   if(projectEl){
-    projectEl.textContent = isMB ? 'Ministry Brands 2026 Wireframes' : 'Spired for Churches 2026 Wireframes';
+    projectEl.textContent = isMB ? 'Spired 2026 Wireframes' : 'Spired for Churches 2026 Wireframes';
   }
 
   // Update chrome page title (the section after the project label)
@@ -656,8 +656,8 @@ function onIframeLoad(){
   if(!iframeTitle){
     iframeTitle = friendlyPageName(pageUrl);
   } else {
-    // Strip " — Spired for Churches" / " — Ministry Brands" suffix if present
-    iframeTitle = iframeTitle.replace(/\s*[—–-]\s*(Spired for Churches|Ministry Brands).*$/i,'');
+    // Strip " — Spired for Churches" / " — Spired" suffix if present
+    iframeTitle = iframeTitle.replace(/\s*[—–-]\s*(Spired for Churches|Spired).*$/i,'');
   }
   pageTitleEl.textContent = iframeTitle;
   pageSepEl.style.display = iframeTitle ? '' : 'none';
@@ -1294,7 +1294,7 @@ btnFs.addEventListener('click', toggleFs);
    PAGE INDEX DRAWER
    ============================================================== */
 var pageIndex = {
-  'Ministry Brands': {
+  'Spired': {
     pages: [
       {name:'Home', slug:'mb-home.html'},
       {name:'Company / About', slug:'mb-company.html'},
